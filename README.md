@@ -18,25 +18,26 @@ También se podrá consultar información de los estadios donde se celebren los 
 El usuario sin registrar podrá acceder a la lista de juegos disponibles para apostar, con su respectiva información, así como a la información de los estadios.
 Como es obvio, también podrá registrarse e iniciar sesión.
 Entidades de negocio:
+* Patrocinadores
 * Apuesta
-* Juego
 * Categoría
-* Login
 * Estadio
 * Equipo
-  
+
 **Parte privada**
 Un usuario registrado podrá acceder como usuario sin permisos o como administrador.
 El usuario sin permisos podrá apostar en juegos y consultar su perfil, cartera e historial.
 El administrador tendrá la opción de dar por finalizada una apuesta, declarando el equipo ganador, y de eliminar o añadir nuevos juegos.
 Entidades de negocio:
-* Saldo
 * Usuario
 * Administrador
 * Transacciones
-* Historial
-* Perfil
-* Cuenta
+* Apuesta_usuario
+* Rol
+* Municipio
+* Provincia
+* País
+* Favoritos
 
 **Posibles mejoras**
 De nuevo, es posible ampliar el proyecto añadiendo un mapa integrado de Google Maps (o una alternativa abierta) en la información de los estadios.
