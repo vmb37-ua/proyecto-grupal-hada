@@ -30,7 +30,7 @@ El usuario sin permisos podrá apostar en juegos y consultar su perfil, cartera 
 El administrador tendrá la opción de dar por finalizada una apuesta, declarando el equipo ganador, y de eliminar o añadir nuevos juegos.
 Entidades de negocio:
 * Usuario
-* Administrador
+* Notificaciones
 * Transacciones
 * Apuesta_usuario
 * Rol
