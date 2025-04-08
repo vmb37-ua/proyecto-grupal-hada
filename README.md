@@ -3,8 +3,8 @@
 - Rubén Duro Muñoz 48803149R
 - Víctor Mingorance Boix 74536760Q
 - Andrés Maciá Valero 74443594T
-- Marcos De La Fuente Mesa 48789872H
-- Alexander Veldemar Volkov 55393741N
+- Marcos de la Fuente Mesa 48789872H
+- Alexander Valdemar Volkoff 55393741N
 - Enmanuel Moreno Montes 55178727W
 - Alejandro Villagordo Andreu 49596205V 
 ----
