@@ -21,9 +21,11 @@ Entidades de negocio:
 * Apuesta
 * Juego
 * Categoría
-* Login
 * Estadio
 * Equipo
+* Municipio
+* Provincia
+* País
   
 **Parte privada**
 Un usuario registrado podrá acceder como usuario sin permisos o como administrador.
@@ -34,9 +36,9 @@ Entidades de negocio:
 * Usuario
 * Administrador
 * Transacciones
-* Historial
-* Perfil
-* Cuenta
+* Apuesta_usuario
+* Rol
+
 
 **Posibles mejoras**
 De nuevo, es posible ampliar el proyecto añadiendo un mapa integrado de Google Maps (o una alternativa abierta) en la información de los estadios.
