@@ -45,8 +45,6 @@ Además, planteamos la opción de crear un perfil con imagen o añadir un Captch
 
 ## Entrega nº 2 11/04/2025
 Hecha la primera versión de los ficheros de entidades de negocio (EN y CAD), cada integrante los suyos.
-Todas quedan así de momento, excepto las de Alejandro Villagordo (49596205V), que no se han podido implementar por la incompatibilidad
-de su rama.
 
 El esquema EER de la base de datos propuesta por el momento se encuentra en el directorio raíz del proyecto (el mismo que README.md),
 con el título "EsquemaDB.pdf".
