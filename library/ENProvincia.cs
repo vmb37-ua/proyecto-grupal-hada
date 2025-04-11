@@ -47,7 +47,7 @@ namespace library
 
         public bool Create()
         {
-            CADProvincia provincia = new CADProvincia();    
+            CADProvincia provincia = new CADProvincia();
             return provincia.Create(this);
         }
 
@@ -64,7 +64,7 @@ namespace library
         public List<ENProvincia> ReadAll()
         {
             CADProvincia provincia = new CADProvincia();
-            return provincia.ReadAll();
+            return provincia.ReadAll(this);
         }
         public bool Read()
         {
@@ -73,3 +73,4 @@ namespace library
         }
 
     }
+}
