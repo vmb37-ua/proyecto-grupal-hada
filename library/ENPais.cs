@@ -19,6 +19,36 @@ namespace library
             this.nombrePais = nombre;
         }
 
+        public bool CrearPais()
+        {
+            CADPais cad = new CADPais();
+            return cad.CrearPais(this);
+        }
+
+        public bool EliminarPais()
+        {
+            CADPais cad = new CADPais();
+            return cad.EliminarPais(this);
+        }
+
+        public bool ModificarPais()
+        {
+            CADPais cad = new CADPais();
+            return cad.ModificarPais(this);
+        }
+
+        public bool Read()
+        {
+            CADPais cad = new CADPais();
+            return cad.Read(this);
+        }
+
+        public List<ENPais> ReadAll()
+        {
+            CADPais cad = new CADPais();
+            return cad.ReadAll(this);
+        }
+
 
     }
 }
