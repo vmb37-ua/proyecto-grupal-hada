@@ -1,8 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Class1
+namespace library
 {
-	public Class1()
-	{
-	}
+    public class CADPatrocinador
+    {
+        public bool Create(ENPatrocinador patrocinador)
+        {
+            return true;
+        }
+        public bool Delete(ENPatrocinador patrocinador)
+        {
+            return true;
+        }
+        public bool Update(ENPatrocinador patrocinador)
+        {
+            return true;
+        }
+        public bool Read(ENPatrocinador patrocinador)
+        {
+            return true;
+        }
+        public List<ENPatrocinador> ReadAll(ENPatrocinador patrocinador)
+        {
+            return new List<ENPatrocinador>();
+        }
+    }
 }
