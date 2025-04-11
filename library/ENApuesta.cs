@@ -9,8 +9,6 @@ namespace library
     public class ENApuesta
     {
         int _id_apuesta;
-        int _importe;
-        int _resultado_predicho;
         DateTime _fecha;
         ENEstadio _estadio;
         ENEquipo _equipo1;
@@ -21,16 +19,6 @@ namespace library
         {
             get { return _id_apuesta; }
             set { _id_apuesta = value; }
-        }
-        public int Importe
-        {
-            get { return _importe; }
-            set { _importe = value; }
-        }
-        public int Resultado_predicho
-        {
-            get { return _resultado_predicho; }
-            set { _resultado_predicho = value; }
         }
         public DateTime Fecha
         {
@@ -59,8 +47,6 @@ namespace library
         public ENApuesta()
         {
             _id_apuesta = 0;
-            _importe = 0;
-            _resultado_predicho = 0;
             _fecha = DateTime.Now;
             _estadio = new ENEstadio();
             _equipo1 = new ENEquipo();
@@ -69,8 +55,6 @@ namespace library
         public ENApuesta(int id_apuesta, int importe, int resultado_predicho, DateTime fecha, ENEstadio estadio, ENEquipo equipo1, ENEquipo equipo2)
         {
             _id_apuesta = id_apuesta;
-            _importe = importe;
-            _resultado_predicho = resultado_predicho;
             _fecha = fecha;
             _estadio = estadio;
             _equipo1 = equipo1;
