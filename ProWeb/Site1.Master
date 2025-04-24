@@ -4,6 +4,7 @@
 
 <html>
 <head runat="server">
+<link href="~/Source/Styles/Site1_master.css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -11,10 +12,29 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+    <div class="contenedor">
+    <header id="menu">
+        <asp:Image ImageUrl="~/Source/Images/logo.png" runat="server" CssClass="LogoImagen"/>
+        <asp:Menu ID="mainMenu" Orientation="Horizontal" runat="server" StaticSubMenuIndent="16px" CssClass="menu-tabs">
+            <Items>
+                <asp:MenuItem NavigateUrl="juegos.aspx" Text="Juegos"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="equipos.aspx" Text="Equipos"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="estadios.aspx" Text="Estadios"></asp:MenuItem>
+            </Items>
+        </asp:Menu>
+    
+        <asp:Button id="botonSesion" Text="Iniciar Sesión" runat="server" OnClick="EventoClickSesion" Height="28px" Width="131px" CssClass="ISboton"/>
+    </header>
+    <main class="ContenidoMaster">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </main>
+    <footer runat="server">
+        <div class="ContenidoPie">
+            <asp:Label>Hola mundo</asp:Label>
         </div>
-    </form>
+    </footer>
+        </div>
+        </form>
 </body>
 </html>

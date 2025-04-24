@@ -1,0 +1,98 @@
+﻿html{
+    height:100%;
+}
+
+.contenedor{
+    display: flex;
+}
+
+body {
+    margin:0;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    min-height:100%;
+}
+
+#menu {
+    width: 100%;
+    background-color: black;
+    display: flex;
+}
+
+/* Contenedor del menú */
+.menu-tabs{
+font-family: Arial, sans-serif;
+font-size: 30px;
+width: max-content;
+}
+
+/* Lista principal horizontal */
+.menu-tabs > ul {
+display: flex;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+/* Ítems del menú */
+.menu-tabs > ul > li {
+position: relative;
+padding: 10px 20px;
+background-color: black;
+}
+
+/* Enlaces del menú */
+.menu-tabs > ul > li > a {
+display: inline-block;
+padding: 10px 0;
+/*transition: color 0.3s ease;*/
+color: white;
+}
+
+/* Hover */
+.menu-tabs > ul > li:hover > a {
+    color: #FFD700; /* amarillo dorado */
+    font-weight: 500;
+}
+
+.ISboton {
+    align-self: flex-end;
+    position: absolute;
+    right:0;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    margin:20px;
+    font-family: Arial;
+    border:none;
+}
+
+.ISboton:hover{
+    align-self: flex-end;
+    padding: 10px 20px;
+    color: yellow;
+}
+
+.LogoImagen {
+    height:80px
+}
+
+main{
+    padding:10%;
+    flex-grow:1;
+}
+
+header, main, footer{
+    flex-shrink:0;
+}
+
+footer{
+    width: 100%;
+    background-color: black;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
