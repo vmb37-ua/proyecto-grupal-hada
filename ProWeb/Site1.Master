@@ -31,7 +31,7 @@
     </main>
     <footer runat="server">
         <div class="ContenidoPie">
-            <asp:Label>Todos los derechos reservados ©</asp:Label>
+            <asp:Label runat="server">Todos los derechos reservados ©</asp:Label>
         </div>
     </footer>
         </div>

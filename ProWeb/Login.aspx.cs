@@ -11,7 +11,11 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Emaillogin.Attributes["placeholder"] = "Correo electrónico";
+                Passlogin.Attributes["placeholder"] = "Contraseña";
+            }
         }
     }
 }

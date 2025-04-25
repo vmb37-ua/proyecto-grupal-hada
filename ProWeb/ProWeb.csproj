@@ -73,6 +73,8 @@
     <Content Include="AdminUsuario.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Source\Styles\AdminUsuario.css" />
+    <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
     <Content Include="Web.config" />

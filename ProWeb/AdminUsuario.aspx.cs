@@ -13,5 +13,10 @@ namespace ProWeb
         {
 
         }
+
+        protected void ListaUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
