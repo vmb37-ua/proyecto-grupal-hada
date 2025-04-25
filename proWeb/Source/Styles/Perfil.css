@@ -1,0 +1,64 @@
+#ContentPerfil{
+    display:flex;
+}
+
+#Contenedor1 {
+    display:flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    height: 100%;
+}
+
+#Contenedor2 {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.ImagenPerfil{
+    width:50%
+}
+
+.Botonborrar {
+    border-color: red !important;
+    color: red !important;
+}
+
+.Botonborrar:hover {
+    background-color: red !important;
+    color: white !important;
+}
+
+#Contenedor1 > input{
+    color: black;
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family:Arial;
+    font-size: 20px;
+    margin:0 0 10px 0;
+}
+
+#Contenedor1 > input:hover {
+    color: white;
+    background-color: grey;
+}
+
+.TituloPerfil{
+    font-family: Arial;
+    font-size:25px;
+    font-weight:700;
+    margin: 0.5em 0 0.5em 0;
+}
+
+.CampoPerfil {
+    font-family: Arial;
+    font-size:20px;
+
+}
+
