@@ -1,0 +1,62 @@
+﻿.BotonBorrarUsuario {
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    border-color: red;
+    color: red;
+}
+
+    .BotonBorrarUsuario:hover {
+        background-color: red;
+        color: white;
+    }
+
+.BotonEditarUsuario {
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    border-color: black;
+    color: black;
+}
+
+    .BotonEditarUsuario:hover {
+        background-color: black;
+        color: white;
+    }
+
+select {
+    border: 2px solid black;
+    border-radius: 20px 20px;
+    font-family: Arial;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+}
+
+p {
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+hr {
+    margin: 20px 0px 20px 0px;
+}
+
+.TBArial {
+    font-family: Arial, sans-serif;
+}
+
+#Editor_Usuarios {
+    font-family: Arial, sans-serif;
+}
+

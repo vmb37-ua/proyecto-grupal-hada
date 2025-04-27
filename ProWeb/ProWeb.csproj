@@ -71,9 +71,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminUsuario.aspx" />
+    <Content Include="DBPatrocinadores.aspx" />
+    <Content Include="DBUsuario.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Source\Styles\AdminUsuario.css" />
+    <Content Include="Source\Styles\DBPatrocinadores.css" />
+    <Content Include="Source\Styles\DBUsuario.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
@@ -86,6 +90,20 @@
     </Compile>
     <Compile Include="AdminUsuario.aspx.designer.cs">
       <DependentUpon>AdminUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DBPatrocinadores.aspx.cs">
+      <DependentUpon>DBPatrocinadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBPatrocinadores.aspx.designer.cs">
+      <DependentUpon>DBPatrocinadores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DBUsuario.aspx.cs">
+      <DependentUpon>DBUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBUsuario.aspx.designer.cs">
+      <DependentUpon>DBUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

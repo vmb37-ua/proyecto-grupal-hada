@@ -1,0 +1,68 @@
+﻿.TBGrande {
+    width: 600px;
+    height: 400px;
+    font-size: 16px; 
+    padding: 10px; 
+}
+
+.BotonBorrarPatrocinador {
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    border-color: red;
+    color: red;
+}
+
+.BotonEditarPatrocinador {
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    border-color: black;
+    color: black;
+}
+
+    .BotonBorrarPatrocinador:hover {
+        background-color: red;
+        color: white;
+    }
+
+    .BotonEditarPatrocinador:hover {
+        background-color: black;
+        color: white;
+    }
+
+p {
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+hr {
+    margin: 20px 0px 20px 0px;
+}
+
+select {
+    border: 2px solid black;
+    border-radius: 20px 20px;
+    font-family: Arial;
+    font-size: 15px;
+    padding: 5px 10px 5px 10px;
+}
+
+.TBArial {
+    font-family: Arial, sans-serif;
+}
+
+#Editor_Patrocinadores {
+    font-family: Arial, sans-serif;
+}

@@ -16,7 +16,7 @@ namespace library
             set { _nombre = value; }
         }
 
-        public ENCategoria() 
+        public ENCategoria()
         {
             _nombre = "";
         }
@@ -56,3 +56,4 @@ namespace library
 
         }
     }
+}
