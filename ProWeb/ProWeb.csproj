@@ -70,9 +70,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdministrarRoles.aspx" />
     <Content Include="AdminUsuario.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Source\Styles\AdministrarRoles.css" />
     <Content Include="Source\Styles\AdminUsuario.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
@@ -80,6 +82,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministrarRoles.aspx.cs">
+      <DependentUpon>AdministrarRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarRoles.aspx.designer.cs">
+      <DependentUpon>AdministrarRoles.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminUsuario.aspx.cs">
       <DependentUpon>AdminUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
