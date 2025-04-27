@@ -33,6 +33,15 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox TBid;
 
         /// <summary>
+        /// Control TBcontrasena.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TBcontrasena;
+
+        /// <summary>
         /// Control TBnombre.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TBtelefono;
+
+        /// <summary>
+        /// Control TBimagen.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TBimagen;
 
         /// <summary>
         /// Control BTNagregar_pat.

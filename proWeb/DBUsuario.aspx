@@ -16,6 +16,10 @@
             <asp:TextBox ID="TBid" runat="server"></asp:TextBox>
             <br />
             <br />
+            Contraseña&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="TBcontrasena" runat="server"></asp:TextBox>
+            <br />
+            <br />
             Nombre&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="TBnombre" runat="server"></asp:TextBox>
             <br />
@@ -34,6 +38,10 @@
             <br />
             Teléfono&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="TBtelefono" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            Imagen (.png)&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="TBimagen" runat="server"></asp:TextBox>
             <br />
             <br />
             <asp:Button ID="BTNagregar_pat" runat="server" CssClass="BotonEditarUsuario" Text="Agregar/Editar usuario" />
