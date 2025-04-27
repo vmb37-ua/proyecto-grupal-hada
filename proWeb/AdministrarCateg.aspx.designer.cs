@@ -11,7 +11,7 @@ namespace ProWeb
 {
 
 
-    public partial class AdministrarRoles
+    public partial class WebForm1
     {
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿h1 {
+﻿#Titulo {
     color: #eded4e;
     font-family: Arial;
     font-size: 30px;
@@ -52,7 +52,7 @@
     margin: 0 auto 20px;
 }
 
-.BotonCrear {
+.Boton {
     border: 2px solid;
     color: #eded4e;
     border-radius: 7px;
@@ -68,11 +68,10 @@
     font-weight: bold;
 }
 
-.BotonCrear:hover {
+.Boton:hover {
     border: 2px outset;
     border-color: #fbbd24;
     color: #141610;
     background-color: #f0da16;
-    transform: translateY(-2px);
     box-shadow: 0 0 2px 1px #eded4e;
 }

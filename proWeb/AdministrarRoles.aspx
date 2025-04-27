@@ -15,11 +15,9 @@
         </div>
         <br />
         <br />
-        <asp:Button id="BotonCrearRol" TExt="Crear" runat="server" CssClass="BotonCrear"/>
-        <asp:Button id="BotonActualizarRol" TExt="Actualizar" runat="server" CssClass="BotonCrear"/>
+        <asp:Button id="BotonCrearRol" TExt="Crear" runat="server" CssClass="Boton"/>
+        <asp:Button id="BotonActualizarRol" TExt="Actualizar" runat="server" CssClass="Boton"/>
+        <asp:Button id="BotonEliminarRol" TExt="Eliminar" runat="server" CssClass="Boton"/>
         <hr />
     </div>
-    
-
-
 </asp:Content>
