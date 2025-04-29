@@ -1,0 +1,52 @@
+#Contenedor1{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+#titulo{
+    font-family:Arial;
+    font-size:40px;
+    font-weight:800;
+}
+
+.textoregister{
+    font-family:Arial;
+    margin:15px 0 5px 0;
+}
+
+.Inputregister {
+    border: 1px solid black;
+    border-radius: 5px 0px;
+    padding: 7px;
+    font-family: 'Times New Roman';
+    font-size: 15px;
+}
+
+.Inputregister::placeholder {
+    font-family: Arial;
+    font-size: 15px;
+}
+
+.Inputregister:hover {
+    color: black !important;
+    background-color: white !important;
+}
+
+#Contenedor1 > input {
+    color: black;
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+#Contenedor1 > input:hover {
+    color: white;
+    background-color: grey;
+}
+
