@@ -1,0 +1,76 @@
+﻿body {
+    background-image: url('../Images/estadio.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.Titulo {
+    color: #eded4e;
+    font-family: Georgia;
+    font-size: 30px;
+    text-align: center;
+    border-bottom: 2px solid;
+    border-color: #fbbd24;
+    padding-bottom: 20px;
+}
+
+#Etiqueta {
+    width: 90px;
+    text-align: center;
+    display: inline-block;
+    color: #fcfcf7;
+    font-weight: bold;
+    font-family: Arial;
+    border-right: 2px solid #fcfcf7;
+    padding-right: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+
+.Nombre {
+    color: #eded4e;
+    font-family: Georgia;
+    font-size: 30px;
+}
+
+.Ciudad {
+    color: #fcfcf7;
+    font-family: Arial;
+    text-align: justify;
+}
+
+#Mapa {
+    width: 200x;
+    height: 200px;
+}
+
+
+
+.Holder1 {
+    vertical-align: top;
+    width: 200px;
+    text-align: center;
+    background-color: #141610;
+    border: 1px solid;
+    border-color: #fffb8f;
+    box-shadow: 0 0 5px 2px #fbbd24, inset 0 0 5px 2px #fbbd24;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.Holder2 {
+    vertical-align: top;
+    width: 500px;
+    text-align: center;
+    background-color: #141610;
+    border: 1px solid;
+    border-color: #fffb8f;
+    box-shadow: 0 0 5px 2px #fbbd24, inset 0 0 5px 2px #fbbd24;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}

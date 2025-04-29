@@ -3,8 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link rel="stylesheet" href="Source/Styles/EstiloAdministrar.css" />
-    <div id="Holder">
-        <h1 id="Titulo">Editar Roles</h1>
+    <div class="Holder">
+        <h1 class="Titulo">Editar Roles</h1>
         <div style="display: inline-block; text-align: left;">
             <span id="Etiqueta">Nombre</span>
             <asp:TextBox ID="TBNombreRol" runat="server" placeholder="Introduce un nombre" width=140px CssClass="TextBox"></asp:TextBox>
