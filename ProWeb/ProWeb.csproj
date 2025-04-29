@@ -71,12 +71,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminUsuario.aspx" />
+    <Content Include="ApuestaUsuario.aspx" />
+    <Content Include="ListaEquipos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Source\Images\barcelona.png" />
+    <Content Include="Source\Images\default.jpg" />
+    <Content Include="Source\Images\madrid.png" />
     <Content Include="Source\Styles\AdminUsuario.css" />
+    <Content Include="Source\Styles\ApuestaUsuario.css" />
+    <Content Include="Source\Styles\ListaEquipos.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
+    <Content Include="Source\Styles\Ubicacion.css" />
+    <Content Include="Ubicacion.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +95,20 @@
     </Compile>
     <Compile Include="AdminUsuario.aspx.designer.cs">
       <DependentUpon>AdminUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApuestaUsuario.aspx.cs">
+      <DependentUpon>ApuestaUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApuestaUsuario.aspx.designer.cs">
+      <DependentUpon>ApuestaUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaEquipos.aspx.cs">
+      <DependentUpon>ListaEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaEquipos.aspx.designer.cs">
+      <DependentUpon>ListaEquipos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -109,6 +132,13 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
+    <Compile Include="Ubicacion.aspx.cs">
+      <DependentUpon>Ubicacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ubicacion.aspx.designer.cs">
+      <DependentUpon>Ubicacion.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -120,9 +150,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
