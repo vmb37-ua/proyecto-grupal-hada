@@ -1,0 +1,29 @@
+#ContenedorFavoritos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+h2 {
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.tablaFavoritos {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial;
+    font-size: 15px;
+}
+
+.tablaFavoritos th, .tablaFavoritos td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.tablaFavoritos th {
+    background-color: #f2f2f2;
+}

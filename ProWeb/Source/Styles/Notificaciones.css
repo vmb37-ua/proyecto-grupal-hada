@@ -1,0 +1,19 @@
+#ContenedorNotificaciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+h2 {
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.listaNotificaciones {
+    font-family: Arial;
+    font-size: 15px;
+    margin-top: 20px;
+    list-style-type: disc;
+    text-align: left;
+}
