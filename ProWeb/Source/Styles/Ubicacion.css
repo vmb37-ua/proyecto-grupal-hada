@@ -1,0 +1,99 @@
+﻿/* Contenedor principal */
+#Contenedor {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px; /* Más espacio entre columnas */
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+/* Columnas */
+.Columna {
+    flex: 1;
+    min-width: 0;
+    padding: 25px; /* Más padding para mayor espacio */
+    border: 3px solid black; 
+    border-radius: 10px 0px; 
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    /* Títulos */
+    .Columna h3 {
+        font-family: Arial;
+        font-size: 24px; 
+        font-weight: 800;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
+
+    /* Labels */
+    .Columna label {
+        font-family: Arial;
+        font-size: 18px; 
+        margin: 20px 0 10px 0;
+        width: 100%;
+        font-weight: bold;
+    }
+
+/* Inputs & Dropdowns */
+.InputUbicacion {
+    border: 2px solid black !important; 
+    border-radius: 8px 0px !important;
+    padding: 12px !important; 
+    font-family: 'Times New Roman' !important;
+    font-size: 18px !important; 
+    width: 100% !important;
+    box-sizing: border-box;
+    margin-bottom: 15px !important;
+}
+
+    /* Placeholder */
+    .InputUbicacion::placeholder {
+        font-family: Arial !important;
+        font-size: 16px !important;
+        color: #999;
+    }
+
+/* Botones (Crear) */
+.BotonCrear {
+    color: white !important;
+    background-color: #4CAF50 !important; 
+    border: 2px solid #45a049 !important;
+    border-radius: 25px !important;
+    padding: 12px 25px !important;
+    font-family: Arial !important;
+    font-size: 18px !important;
+    font-weight: bold;
+    margin: 15px 0 !important;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100% !important;
+}
+
+    .BotonCrear:hover {
+        background-color: #45a049 !important;
+    }
+
+/* Botones (Eliminar) */
+.BotonEliminar {
+    color: white !important;
+    background-color: #f44336 !important; 
+    border: 2px solid #d32f2f !important;
+    border-radius: 25px !important;
+    padding: 12px 25px !important;
+    font-family: Arial !important;
+    font-size: 18px !important;
+    font-weight: bold;
+    margin: 15px 0 !important;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100% !important;
+}
+
+    .BotonEliminar:hover {
+        background-color: #d32f2f !important;
+    }
+
