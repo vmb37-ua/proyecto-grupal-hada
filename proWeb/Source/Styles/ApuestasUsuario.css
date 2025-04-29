@@ -1,0 +1,42 @@
+﻿
+#Tabla_apuestas {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+p {
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+hr {
+    margin: 20px 0px 20px 0px;
+}
+
+body {
+    background-image: url(../Images/Patrocinador_1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.table {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .table th {
+        background-color: rgba(255, 255, 255, 0.7);
+    }

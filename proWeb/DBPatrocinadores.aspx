@@ -17,7 +17,7 @@
             <br />
             <br />
             Pago acordado (€)&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBdinero" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TBdinero" runat="server"></asp:TextBox> 
             <br />
             <br />
             Observaciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
