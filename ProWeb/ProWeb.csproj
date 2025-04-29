@@ -70,22 +70,49 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminNotificaciones.aspx" />
     <Content Include="AdminUsuario.aspx" />
+    <Content Include="PanelAdmin.aspx" />
+    <Content Include="Register.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Source\Styles\PanelAdmin.css" />
+    <Content Include="Source\Styles\AdminNotificaciones.css" />
     <Content Include="Source\Styles\AdminUsuario.css" />
+    <Content Include="Source\Styles\Register.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminNotificaciones.aspx.cs">
+      <DependentUpon>AdminNotificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminNotificaciones.aspx.designer.cs">
+      <DependentUpon>AdminNotificaciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminUsuario.aspx.cs">
       <DependentUpon>AdminUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdminUsuario.aspx.designer.cs">
       <DependentUpon>AdminUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PanelAdmin.aspx.cs">
+      <DependentUpon>PanelAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PanelAdmin.aspx.designer.cs">
+      <DependentUpon>PanelAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
