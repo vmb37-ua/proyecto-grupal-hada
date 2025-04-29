@@ -1,0 +1,43 @@
+
+#titulo {
+    font-family: Arial;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+}
+
+p{
+    font-family:Arial;
+    font-size:15px;
+    font-weight:600;
+}
+
+
+.BotonAdmin {
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 12px 24px;
+    font-family: Arial;
+    font-size: 20px;
+
+}
+.BotonAdmin:hover {
+    color: white;
+    background-color: grey;
+}
+
+
+.contenedor-botones {
+    display: grid;
+    grid-template-columns: repeat(4, auto); /* 4 columnas automáticas */
+    gap: 60px;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.centrar-ultimo {
+    grid-column: 2 / span 2; /* empieza en la 2ª columna y ocupa 2 columnas */
+    justify-self: center;
+}
