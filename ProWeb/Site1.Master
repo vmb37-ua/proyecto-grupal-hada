@@ -14,16 +14,27 @@
     <form id="form1" runat="server">
     <div class="contenedor">
     <header id="menu">
-        <asp:Image ImageUrl="~/Source/Images/logo.png" runat="server" CssClass="LogoImagen"/>
-        <asp:Menu ID="mainMenu" Orientation="Horizontal" runat="server" StaticSubMenuIndent="16px" CssClass="menu-tabs">
+        <asp:ImageButton id="botonLogo" OnClick="EventoBotonLogo" ImageUrl="~/Source/Images/logo.png" runat="server" CssClass="LogoImagen"/>
+        <asp:Menu ID="mainMenu" Orientation="Horizontal" runat="server" StaticSubMenuIndent="16px" CssClass="menu-tabs" DynamicMenuItemStyle-CssClass="submenu">
             <Items>
                 <asp:MenuItem NavigateUrl="juegos.aspx" Text="Juegos"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="equipos.aspx" Text="Equipos"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="estadios.aspx" Text="Estadios"></asp:MenuItem>
+
+                <asp:MenuItem NavigateUrl="menuadmin.aspx" Text="Administrar">
+                    <asp:MenuItem NavigateUrl="algo.aspx" Text="Equipos"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="algo.aspx" Text="Estadios"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="algo.aspx" Text="Usuarios"></asp:MenuItem>
+                    
+                </asp:MenuItem>
             </Items>
         </asp:Menu>
     
-        <asp:Button id="botonSesion" Text="Iniciar Sesión" runat="server" OnClick="EventoClickSesion" Height="28px" Width="131px" CssClass="ISboton"/>
+        <!-- <asp:Button id="botonSesion" Text="Iniciar Sesión" runat="server" OnClick="EventoClickSesion" Height="28px" Width="131px" CssClass="ISboton"/> -->
+        
+        <!-- Sesión iniciada (abajo). Sesión no iniciada (arriba) -->
+        
+        <asp:ImageButton ImageUrl="~/Source/Images/DefaultPFP.jpg" runat="server" CssClass="FotoPerfil" id="botonPerfil" OnClick="EventoBotonPerfil"/>
     </header>
     <main class="ContenidoMaster">
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -36,5 +47,6 @@
     </footer>
         </div>
         </form>
+    
 </body>
 </html>

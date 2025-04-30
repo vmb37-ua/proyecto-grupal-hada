@@ -45,18 +45,33 @@ padding: 0;
 }
 
 /* Ítems del menú */
-    .menu-tabs > ul > li {
-        position: relative;
-        padding: 10px 20px;
-        background-color: #141610;
-    }
+.menu-tabs > ul > li {
+    position: relative;
+    padding: 10px 20px;
+    background-color: #141610;
+}
 
+.submenu {
+    color: white;
+    font-size: 25px;
+    padding:5px;
+    background-color: dimgrey;
+    font-family: Arial;
+}
+
+.submenu:hover{
+    color:yellow;
+}
+
+.has-popup:hover {
+    background-color:dimgrey;
+}
 /* Enlaces del menú */
 .menu-tabs > ul > li > a {
-display: inline-block;
-padding: 10px 0;
-/*transition: color 0.3s ease;*/
-color: white;
+    display: inline-block;
+    padding: 10px 0;
+    /*transition: color 0.3s ease;*/
+    color: white;
 }
 
 /* Hover */
@@ -64,6 +79,13 @@ color: white;
         color: #FFD700; /* amarillo dorado */
         font-weight: 500;
     }
+
+.FotoPerfil{
+    align-self: flex-end;
+    position: absolute;
+    right: 0;
+    width: 100px;
+}
 
 .ISboton {
     align-self: flex-end;

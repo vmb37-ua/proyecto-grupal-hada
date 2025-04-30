@@ -18,5 +18,14 @@ namespace ProWeb
         {
             Response.Redirect("Login.aspx");
         }
+
+        protected void EventoBotonPerfil(object sender, EventArgs e)
+        {
+            Response.Redirect("Perfil.aspx");
+        }
+
+        protected void EventoBotonLogo(object sender, EventArgs e) {
+            Response.Redirect("Login.aspx");
+        }
     }
 }
