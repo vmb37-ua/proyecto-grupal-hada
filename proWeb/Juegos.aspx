@@ -27,9 +27,11 @@
                     <p>Categoría: <asp:Label ID="lblCategoria" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Categoria %>'></asp:Label></p>
 
            
+
                 </div>
             </ItemTemplate>
         </asp:Repeater>
     </div>
+
 
 </asp:Content>
