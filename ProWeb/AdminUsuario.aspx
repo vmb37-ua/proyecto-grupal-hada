@@ -20,6 +20,7 @@
         </asp:DropDownList>
         <asp:Button runat="server" CssClass="BotonEditarUsuario" Text="Agregar rol"/>
         <asp:Button runat="server" CssClass="BotonEditarUsuario" Text="Eliminar rol"/>
+
         <br /><br />
         <asp:Button runat="server" CssClass="BotonBorrarUsuario" Text="Eliminar usuario"/>
     </div>
