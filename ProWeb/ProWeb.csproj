@@ -73,6 +73,9 @@
     <Content Include="AdminUsuario.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Source\Styles\AdminApuestas.css" />
+    <Content Include="Source\Styles\AdminEquipos.css" />
+    <Content Include="Source\Styles\AdminEstadios.css" />
     <Content Include="Source\Styles\AdminUsuario.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
