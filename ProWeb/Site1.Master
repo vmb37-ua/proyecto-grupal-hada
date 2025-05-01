@@ -24,7 +24,7 @@
                 <asp:MenuItem NavigateUrl="menuadmin.aspx" Text="Administrar">
                     <asp:MenuItem NavigateUrl="algo.aspx" Text="Equipos"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="algo.aspx" Text="Estadios"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="algo.aspx" Text="Usuarios"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="AdminUsuario.aspx" Text="Usuarios"></asp:MenuItem>
                     
                 </asp:MenuItem>
             </Items>
