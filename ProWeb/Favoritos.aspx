@@ -1,0 +1,17 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Favoritos.aspx.cs" Inherits="ProWeb.Favoritos" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="Source/Styles/Favoritos.css" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div id="ContenedorFavoritos">
+        <h2>Mis Equipos Favoritos</h2>
+        <asp:GridView ID="TablaFavoritos" runat="server" CssClass="tablaFavoritos" AutoGenerateColumns="false">
+            <Columns>
+                <asp:BoundField DataField="NombreEquipo" HeaderText="Equipo" />
+                <asp:BoundField DataField="CiudadEquipo" HeaderText="Ciudad" />
+            </Columns>
+        </asp:GridView>
+    </div>
+</asp:Content>
