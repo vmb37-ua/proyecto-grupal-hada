@@ -1,0 +1,52 @@
+﻿p {
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+hr {
+    margin: 20px 0px 20px 0px;
+}
+
+.BotonAdmin {
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 5px 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 5px;
+}
+
+    .BotonAdmin:hover {
+        background-color: black;
+        color: white;
+    }
+
+.BotonEliminar {
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid black;
+    color: black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 5px;
+}
+
+    .BotonEliminar:hover {
+        background-color: black;
+        color: white;
+    }
+
+select, .InputCampo {
+    border: 2px solid black;
+    border-radius: 20px;
+    font-family: Arial;
+    font-size: 15px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}

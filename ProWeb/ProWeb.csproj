@@ -87,6 +87,9 @@
     <Content Include="Source\Images\barcelona.png" />
     <Content Include="Source\Images\default.jpg" />
     <Content Include="Source\Images\madrid.png" />
+    <Content Include="Source\Styles\AdminApuestas.css" />
+    <Content Include="Source\Styles\AdminEquipos.css" />
+    <Content Include="Source\Styles\AdminEstadios.css" />
     <Content Include="Source\Styles\AdminUsuario.css" />
     <Content Include="Source\Styles\Register.css" />
     <Content Include="Source\Styles\ApuestaUsuario.css" />
@@ -100,6 +103,9 @@
     <Content Include="Web.config" />
     <Content Include="AdministrarCateg.aspx" />
     <Content Include="InformacionEstadio.aspx" />
+    <Content Include="AdminApuestas.aspx" />
+    <Content Include="AdminEstadios.aspx" />
+    <Content Include="AdminEquipos.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminNotificaciones.aspx.cs">
@@ -193,6 +199,27 @@
     </Compile>
     <Compile Include="Ubicacion.aspx.designer.cs">
       <DependentUpon>Ubicacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminApuestas.aspx.cs">
+      <DependentUpon>AdminApuestas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminApuestas.aspx.designer.cs">
+      <DependentUpon>AdminApuestas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminEstadios.aspx.cs">
+      <DependentUpon>AdminEstadios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminEstadios.aspx.designer.cs">
+      <DependentUpon>AdminEstadios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminEquipos.aspx.cs">
+      <DependentUpon>AdminEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminEquipos.aspx.designer.cs">
+      <DependentUpon>AdminEquipos.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
