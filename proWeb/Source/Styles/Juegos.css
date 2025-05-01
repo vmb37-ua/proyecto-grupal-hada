@@ -1,0 +1,100 @@
+﻿#juegos_container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.juegos-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+}
+
+    .juegos-container h1 {
+        color: #fbbd24;
+        font-family: Arial;
+        background-color: #353030;
+        border: 2px solid #fbbd24;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 950px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+.juego {
+    color: #fbbd24;
+    font-family: Arial;
+    background-color: #353030;
+    border: 2px solid #fbbd24;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    max-width:950px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .juego:hover {
+        transform: scale(1.05);
+    }
+
+
+    .juego h2 {
+        color: #fbbd24;
+        font-family: Arial;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+
+    .juego p {
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 1.1em;
+        margin-bottom: 8px;
+    }
+
+p {
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+hr {
+    margin: 20px 0px 20px 0px;
+}
+
+body {
+    background-image: url(../Images/fondo_principal.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.imagen_lateral {
+    width: 200px;
+    height: auto;
+}
+
+.titulo-partido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.titulo-texto {
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+

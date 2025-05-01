@@ -77,6 +77,10 @@
     <Content Include="Register.aspx" />
     <Content Include="ApuestaUsuario.aspx" />
     <Content Include="ListaEquipos.aspx" />
+    <Content Include="DBPatrocinadores.aspx" />
+    <Content Include="DBUsuario.aspx" />
+    <Content Include="ApuestasUsuario.aspx" />
+    <Content Include="Juegos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Source\Styles\PanelAdmin.css" />
@@ -94,6 +98,10 @@
     <Content Include="Source\Styles\Register.css" />
     <Content Include="Source\Styles\ApuestaUsuario.css" />
     <Content Include="Source\Styles\ListaEquipos.css" />
+    <Content Include="Source\Styles\ApuestasUsuario.css" />
+    <Content Include="Source\Styles\DBPatrocinadores.css" />
+    <Content Include="Source\Styles\DBUsuario.css" />
+    <Content Include="Source\Styles\Juegos.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
@@ -156,6 +164,34 @@
     </Compile>
     <Compile Include="ListaEquipos.aspx.designer.cs">
       <DependentUpon>ListaEquipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DBPatrocinadores.aspx.cs">
+      <DependentUpon>DBPatrocinadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBPatrocinadores.aspx.designer.cs">
+      <DependentUpon>DBPatrocinadores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DBUsuario.aspx.cs">
+      <DependentUpon>DBUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DBUsuario.aspx.designer.cs">
+      <DependentUpon>DBUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApuestasUsuario.aspx.cs">
+      <DependentUpon>ApuestasUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApuestasUsuario.aspx.designer.cs">
+      <DependentUpon>ApuestasUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Juegos.aspx.cs">
+      <DependentUpon>Juegos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Juegos.aspx.designer.cs">
+      <DependentUpon>Juegos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

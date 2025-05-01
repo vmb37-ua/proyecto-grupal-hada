@@ -16,9 +16,10 @@
         <asp:DropDownList runat="server" ID="ListaRoles" CssClass="ListaDesplegable">
             <asp:ListItem Text="Opción 1" Value="1" />
             <asp:ListItem Text="Opción 2" Value="2" />
+
         </asp:DropDownList>
-        <asp:Button runat="server" CssClass="BotonAdminUsuario" Text="Agregar rol"/>
-        <asp:Button runat="server" CssClass="BotonAdminUsuario" Text="Eliminar rol"/>
+        <asp:Button runat="server" CssClass="BotonEditarUsuario" Text="Agregar rol"/>
+        <asp:Button runat="server" CssClass="BotonEditarUsuario" Text="Eliminar rol"/>
         <br /><br />
         <asp:Button runat="server" CssClass="BotonBorrarUsuario" Text="Eliminar usuario"/>
     </div>
