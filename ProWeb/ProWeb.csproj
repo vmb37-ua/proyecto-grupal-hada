@@ -75,6 +75,8 @@
     <Content Include="AdminUsuario.aspx" />
     <Content Include="PanelAdmin.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="ApuestaUsuario.aspx" />
+    <Content Include="ListaEquipos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Source\Styles\PanelAdmin.css" />
@@ -82,12 +84,19 @@
     <Content Include="Source\Images\estadio.jpg" />
     <Content Include="Source\Images\fondo_administrar.jpg" />
     <Content Include="Source\Styles\EstiloAdministrar.css" />
+    <Content Include="Source\Images\barcelona.png" />
+    <Content Include="Source\Images\default.jpg" />
+    <Content Include="Source\Images\madrid.png" />
     <Content Include="Source\Styles\AdminUsuario.css" />
     <Content Include="Source\Styles\Register.css" />
+    <Content Include="Source\Styles\ApuestaUsuario.css" />
+    <Content Include="Source\Styles\ListaEquipos.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
     <Content Include="Source\Styles\InformacionEstadio.css" />
+    <Content Include="Source\Styles\Ubicacion.css" />
+    <Content Include="Ubicacion.aspx" />
     <Content Include="Web.config" />
     <Content Include="AdministrarCateg.aspx" />
     <Content Include="InformacionEstadio.aspx" />
@@ -128,6 +137,20 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ApuestaUsuario.aspx.cs">
+      <DependentUpon>ApuestaUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApuestaUsuario.aspx.designer.cs">
+      <DependentUpon>ApuestaUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaEquipos.aspx.cs">
+      <DependentUpon>ListaEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaEquipos.aspx.designer.cs">
+      <DependentUpon>ListaEquipos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -163,6 +186,13 @@
     </Compile>
     <Compile Include="InformacionEstadio.aspx.designer.cs">
       <DependentUpon>InformacionEstadio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ubicacion.aspx.cs">
+      <DependentUpon>Ubicacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ubicacion.aspx.designer.cs">
+      <DependentUpon>Ubicacion.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
