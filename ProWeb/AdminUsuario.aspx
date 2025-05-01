@@ -2,25 +2,30 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link rel="stylesheet" href="Source/Styles/AdminUsuario.css" />
-    <div >
-        <p>Seleccione un usuario: </p>
-        <asp:DropDownList runat="server" ID="ListaUsuarios" CssClass="ListaDesplegable" OnSelectedIndexChanged="ListaUsuarios_SelectedIndexChanged">
-            <asp:ListItem Text="Opción 1" Value="1" />
-            <asp:ListItem Text="Opción 2" Value="2" />
-        </asp:DropDownList>
-    </div>
-    <hr />
-    <div id="contenedor1">
-        <p>Seleccione un rol: </p>
-        <asp:DropDownList runat="server" ID="ListaRoles" CssClass="ListaDesplegable">
-            <asp:ListItem Text="Opción 1" Value="1" />
-            <asp:ListItem Text="Opción 2" Value="2" />
+    <link rel="stylesheet" href="Source/Styles/AdminUsuario.css"/>
+    <div class="Contenedor1">
+        <asp:Label runat="server" CssClass="Titulo">Editar perfil</asp:Label>
 
-        </asp:DropDownList>
-        <asp:Button runat="server" CssClass="BotonEditarUsuario" Text="Agregar rol"/>
-        <asp:Button runat="server" CssClass="BotonEditarUsuario" Text="Eliminar rol"/>
-        <br /><br />
-        <asp:Button runat="server" CssClass="BotonBorrarUsuario" Text="Eliminar usuario"/>
+        <div class="Contenedor2">
+            <asp:Label runat="server" CssClass="Etiqueta">Nombre:</asp:Label>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+
+            <asp:Label runat="server" CssClass="Etiqueta">Num. tarjeta:</asp:Label>
+                <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+
+            <asp:Label runat="server" CssClass="Etiqueta">CVV:</asp:Label>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+
+            <asp:Label runat="server" CssClass="Etiqueta">Fecha cad.:</asp:Label>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+
+            <asp:Label runat="server" CssClass="Etiqueta">Dirección:</asp:Label>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+
+            <asp:Label runat="server" CssClass="Etiqueta">Teléfono:</asp:Label>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+        </div>
+
+        <asp:Button runat="server" CssClass="Boton" Text="Editar el perfil"/>
     </div>
 </asp:Content>

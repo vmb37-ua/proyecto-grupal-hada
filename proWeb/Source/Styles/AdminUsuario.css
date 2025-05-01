@@ -1,52 +1,50 @@
-p{
-    font-family:Arial;
-    font-size:15px;
-    font-weight:600;
+.Contenedor1 {
+    display: flex;
+    flex-direction: column;
 }
 
-hr{
-    margin:20px 0px 20px 0px;
+.Contenedor2 {
+    margin-left: 5%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
-.BotonAdminUsuario {
-    color: black;
-    background-color: white;
-    border-radius: 10px 10px;
-    border: 2px solid black;
-    width: fit-content;
-    padding: 5px 10px 5px 10px;
+.Etiqueta {
     font-family: Arial;
     font-size: 15px;
-    margin: 0 0 10px 10px;
+    font-weight: 600;
 }
 
-.BotonAdminUsuario:hover {
-    color: white;
-    background-color: grey;
-}
-
-.BotonBorrarUsuario {
+.Boton {
+    color: black;
     background-color: white;
     border-radius: 20px 20px;
     border: 2px solid black;
     width: fit-content;
     padding: 10px;
     font-family: Arial;
-    font-size: 15px;
-    margin: 0 0 10px 0;
-    border-color: red;
-    color: red;
+    font-size: 20px;
 }
 
-.BotonBorrarUsuario:hover {
-    background-color: red;
-    color: white;
-}
+    .Boton:hover {
+        color: white;
+        background-color: grey;
+    }
 
-select {
-    border:2px solid black;
-    border-radius:20px 20px;
+.Titulo {
     font-family: Arial;
-    font-size:15px;
-    padding:5px 10px 5px 10px;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.CajaDeTexto {
+    margin: 0 0 10px 0;
+    border: 1px solid black;
+    border-radius: 5px 0px;
+    padding: 7px;
+    font-family: 'Times New Roman';
+    font-size: 15px;
 }

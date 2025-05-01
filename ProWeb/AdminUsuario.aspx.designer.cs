@@ -13,23 +13,5 @@ namespace ProWeb
 
     public partial class AdminUsuario
     {
-
-        /// <summary>
-        /// Control ListaUsuarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListaUsuarios;
-
-        /// <summary>
-        /// Control ListaRoles.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListaRoles;
     }
 }
