@@ -13,5 +13,10 @@ namespace ProWeb
         {
 
         }
+
+        protected void EventoEditarPerfil(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminUsuario.aspx");
+        }
     }
 }

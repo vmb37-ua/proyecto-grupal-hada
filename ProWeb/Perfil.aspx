@@ -8,7 +8,7 @@
             <asp:Image ImageURL="~/Source/Images/DefaultPFP.jpg" CssClass="ImagenPerfil" ID="FotoPerfil" runat="server"/>
             <br />
             <asp:Button ID="BotonFoto" Text="Cambiar foto de perfil" runat="server"></asp:Button>
-            <asp:Button ID="BotonPerfil" Text="Editar perfil" runat="server"></asp:Button>
+            <asp:Button ID="BotonPerfil" Text="Editar perfil" runat="server" OnClick="EventoEditarPerfil"></asp:Button>
             <asp:Button ID="BotonEliminar" Text="Eliminar cuenta" runat="server" CssClass="Botonborrar"></asp:Button>
         </div>
         <div id="Contenedor2">

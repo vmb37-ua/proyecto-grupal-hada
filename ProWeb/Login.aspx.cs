@@ -17,5 +17,15 @@ namespace ProWeb
                 Passlogin.Attributes["placeholder"] = "Contraseña";
             }
         }
+
+        protected void EventoRegistrar(object sender, EventArgs e)
+        {
+            Response.Redirect("Register.aspx");
+        }
+
+        protected void EventoMainPage(object sender, EventArgs e)
+        {
+            Response.Redirect("Juegos.aspx");
+        }
     }
 }

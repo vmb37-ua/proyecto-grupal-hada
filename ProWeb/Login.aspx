@@ -11,7 +11,7 @@
         <asp:TextBox ID="Passlogin" runat="server" CssClass="Inputlogin" TextMode="Password"></asp:TextBox>
         <br />
         <br />
-        <asp:Button runat="server" Text="Entrar" CssClass="botonlogin"/>
-        <asp:Button runat="server" Text="Registrarse" CssClass="botonlogin"/>
+        <asp:Button runat="server" Text="Entrar" CssClass="botonlogin" OnClick="EventoMainPage"/>
+        <asp:Button runat="server" Text="Registrarse" CssClass="botonlogin" OnClick="EventoRegistrar"/>
     </div>
 </asp:Content>

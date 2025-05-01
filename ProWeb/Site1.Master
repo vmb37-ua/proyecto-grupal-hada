@@ -18,13 +18,19 @@
         <asp:Menu ID="mainMenu" Orientation="Horizontal" runat="server" StaticSubMenuIndent="16px" CssClass="menu-tabs" DynamicMenuItemStyle-CssClass="submenu">
             <Items>
                 <asp:MenuItem NavigateUrl="juegos.aspx" Text="Juegos"></asp:MenuItem>
-                <asp:MenuItem NavigateUrl="equipos.aspx" Text="Equipos"></asp:MenuItem>
-                <asp:MenuItem NavigateUrl="estadios.aspx" Text="Estadios"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="listaequipos.aspx" Text="Equipos"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="informacionestadio.aspx" Text="Estadios"></asp:MenuItem>
 
-                <asp:MenuItem NavigateUrl="menuadmin.aspx" Text="Administrar">
-                    <asp:MenuItem NavigateUrl="algo.aspx" Text="Equipos"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="algo.aspx" Text="Estadios"></asp:MenuItem>
-                    <asp:MenuItem NavigateUrl="AdminUsuario.aspx" Text="Usuarios"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="paneladmin.aspx" Text="Administrar">
+                    <asp:MenuItem NavigateUrl="adminequipos.aspx" Text="Equipos"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="adminestadios.aspx" Text="Estadios"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="DBusuario.aspx" Text="Usuarios"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="administrarroles.aspx" Text="Roles"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="ubicacion.aspx" Text="Ubicaciones"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="adminnotificaciones.aspx" Text="Notificaciones"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="adminapuestas.aspx" Text="Apuestas"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="DBPatrocinadores.aspx" Text="Patrocinadores"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="AdministrarCateg.aspx" Text="Categorías"></asp:MenuItem>
                     
                 </asp:MenuItem>
             </Items>
