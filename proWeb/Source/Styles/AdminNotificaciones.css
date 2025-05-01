@@ -1,0 +1,70 @@
+p{
+    font-family:Arial;
+    font-size:15px;
+    font-weight:600;
+}
+
+hr{
+    margin:20px 0px 20px 0px;
+}
+
+.InputNotif {
+    border: 1px solid black;
+    border-radius: 5px 0px;
+    padding: 7px;
+    font-family: 'Times New Roman';
+    font-size: 15px;
+    height: 100px;
+    width: 400px;
+    resize: none;
+}
+
+
+.InputNotif::placeholder {
+    font-family: Arial;
+    font-size: 15px;
+}
+.BotonAdminNotificaciones {
+    color: black;
+    background-color: white;
+    border-radius: 10px 10px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 5px 10px 5px 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 10px 10px;
+}
+
+.BotonAdminNotificaciones:hover {
+    color: white;
+    background-color: grey;
+}
+
+.BotonBorrarNotificaciones {
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    margin: 0 0 10px 0;
+    border-color: red;
+    color: red;
+}
+
+.BotonBorrarNotificaciones:hover {
+    background-color: red;
+    color: white;
+}
+
+
+
+select {
+    border:2px solid black;
+    border-radius:20px 20px;
+    font-family: Arial;
+    font-size:15px;
+    padding:5px 10px 5px 10px;
+}
