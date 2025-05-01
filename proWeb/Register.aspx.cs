@@ -22,5 +22,14 @@ namespace ProWeb
 
             }
         }
+        protected void EventoInicioSesion(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void EventoPaginaPrincipal(object sender, EventArgs e)
+        {
+            Response.Redirect("Juegos.aspx");
+        }
     }
 }
