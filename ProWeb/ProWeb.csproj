@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminNotificaciones.aspx" />
+    <Content Include="AdministrarRoles.aspx" />
     <Content Include="AdminUsuario.aspx" />
     <Content Include="PanelAdmin.aspx" />
     <Content Include="Register.aspx" />
@@ -78,12 +79,18 @@
     <Content Include="Perfil.aspx" />
     <Content Include="Source\Styles\PanelAdmin.css" />
     <Content Include="Source\Styles\AdminNotificaciones.css" />
+    <Content Include="Source\Images\estadio.jpg" />
+    <Content Include="Source\Images\fondo_administrar.jpg" />
+    <Content Include="Source\Styles\EstiloAdministrar.css" />
     <Content Include="Source\Styles\AdminUsuario.css" />
     <Content Include="Source\Styles\Register.css" />
     <Content Include="Source\Styles\Login.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
+    <Content Include="Source\Styles\InformacionEstadio.css" />
     <Content Include="Web.config" />
+    <Content Include="AdministrarCateg.aspx" />
+    <Content Include="InformacionEstadio.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminNotificaciones.aspx.cs">
@@ -92,6 +99,13 @@
     </Compile>
     <Compile Include="AdminNotificaciones.aspx.designer.cs">
       <DependentUpon>AdminNotificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministrarRoles.aspx.cs">
+      <DependentUpon>AdministrarRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarRoles.aspx.designer.cs">
+      <DependentUpon>AdministrarRoles.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminUsuario.aspx.cs">
       <DependentUpon>AdminUsuario.aspx</DependentUpon>
@@ -136,6 +150,20 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
+    <Compile Include="AdministrarCateg.aspx.cs">
+      <DependentUpon>AdministrarCateg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarCateg.aspx.designer.cs">
+      <DependentUpon>AdministrarCateg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InformacionEstadio.aspx.cs">
+      <DependentUpon>InformacionEstadio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InformacionEstadio.aspx.designer.cs">
+      <DependentUpon>InformacionEstadio.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -147,9 +175,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
