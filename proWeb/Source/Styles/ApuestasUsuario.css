@@ -8,6 +8,7 @@ p {
     font-family: Arial;
     font-size: 15px;
     font-weight: 600;
+    color: aliceblue;
 }
 
 hr {
@@ -15,7 +16,7 @@ hr {
 }
 
 body {
-    background-image: url(../Images/Patrocinador_1.png);
+    background-image: url(../Images/fondo_principal.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
