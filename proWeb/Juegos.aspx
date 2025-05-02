@@ -21,6 +21,7 @@
                                 <img src="Source/Images/barca.png" alt="Imagen derecha" class="imagen_lateral" />
                         </div>
 
+
                     <p>Estadio: <asp:Label ID="lblEstadio" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Estadio %>'></asp:Label></p>
                     <p>Fecha: <asp:Label ID="lblFecha" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Fecha.ToString("dd/MM/yyyy") %>'></asp:Label></p>
                     <p>Hora: <asp:Label ID="lblHora" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Hora.ToString(@"hh\:mm") %>'></asp:Label></p>

@@ -21,6 +21,7 @@ namespace ProWeb
 
                 GridViewApuestasUsuario.DataSource = apuestas;
                 GridViewApuestasUsuario.DataBind();
+
             }
         }
 
