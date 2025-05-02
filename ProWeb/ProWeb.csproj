@@ -83,6 +83,8 @@
     <Content Include="Juegos.aspx" />
     <Content Include="Cartera.aspx" />
     <Content Include="Favoritos.aspx" />
+    <Content Include="Cartera.aspx" />
+    <Content Include="Favoritos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Notificaciones.aspx" />
     <Content Include="Perfil.aspx" />
@@ -105,7 +107,10 @@
     <Content Include="Source\Styles\DBPatrocinadores.css" />
     <Content Include="Source\Styles\DBUsuario.css" />
     <Content Include="Source\Styles\Juegos.css" />
+    <Content Include="Source\Styles\Cartera.css" />
+    <Content Include="Source\Styles\Favoritos.css" />
     <Content Include="Source\Styles\Login.css" />
+    <Content Include="Source\Styles\Notificaciones.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
     <Content Include="Source\Styles\InformacionEstadio.css" />
@@ -195,6 +200,20 @@
     </Compile>
     <Compile Include="Juegos.aspx.designer.cs">
       <DependentUpon>Juegos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cartera.aspx.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cartera.aspx.designer.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favoritos.aspx.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Favoritos.aspx.designer.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cartera.aspx.cs">
       <DependentUpon>Cartera.aspx</DependentUpon>
