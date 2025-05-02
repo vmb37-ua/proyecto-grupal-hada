@@ -71,7 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminUsuario.aspx" />
+    <Content Include="Cartera.aspx" />
+    <Content Include="Favoritos.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Notificaciones.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Source\Styles\AdminUsuario.css" />
     <Content Include="Source\Styles\Login.css" />
@@ -87,12 +90,30 @@
     <Compile Include="AdminUsuario.aspx.designer.cs">
       <DependentUpon>AdminUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Cartera.aspx.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cartera.aspx.designer.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favoritos.aspx.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favoritos.aspx.designer.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
