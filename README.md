@@ -48,3 +48,10 @@ Hecha la primera versión de los ficheros de entidades de negocio (EN y CAD), ca
 
 El esquema EER de la base de datos propuesta por el momento se encuentra en el directorio raíz del proyecto (el mismo que README.md),
 con el título "EsquemaDB.pdf".
+
+## Entrega nº 3 02/05/2025
+Hechas todas las interfaces básicas de la página junto a la mayoría de interfaces secundarias. Falta la página de informes.
+Modificada y arreglada la base de datos, además, se ha modificado el esquema en el pdf.
+
+Se puede navegar en este punto por toda la web utilizando los botones. La vista de la página maestra es una mezcla de su versión pública, privada y de administrador
+para probar las funciones. Haciendo click en la foto de perfil se va a la página de perfil, mientras que haciendo click en el logo se va a la página de inicio de sesión.
