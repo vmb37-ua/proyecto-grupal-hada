@@ -55,3 +55,6 @@ Modificada y arreglada la base de datos, además, se ha modificado el esquema en
 
 Se puede navegar en este punto por toda la web utilizando los botones. La vista de la página maestra es una mezcla de su versión pública, privada y de administrador
 para probar las funciones. Haciendo click en la foto de perfil se va a la página de perfil, mientras que haciendo click en el logo se va a la página de inicio de sesión.
+
+El proyecto proWeb se está guardando en dos carpetas diferentes "proWeb" y "ProWeb". No sabemos por qué, pero parece cosa del SO, porque hay
+miembros del grupo que, partiendo del mismo commit, guardan automáticamente los ficheros en una carpeta y otros en otra. El proyecto aun así compila y funciona correctamente.
