@@ -18,7 +18,7 @@
 
         <br />
         <br />
-        <asp:Button runat="server" Text="Crear cuenta" CssClass="botonregister"/>
-        <asp:Button runat="server" Text="Iniciar Sesión" CssClass="botonregister"/>
+        <asp:Button runat="server" Text="Crear cuenta" CssClass="botonregister" OnClick="EventoPaginaPrincipal"/>
+        <asp:Button runat="server" Text="Iniciar Sesión" CssClass="botonregister" OnClick="EventoInicioSesion"/>
     </div>
 </asp:Content>
