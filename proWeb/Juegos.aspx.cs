@@ -35,5 +35,10 @@ namespace ProWeb
             public string Categoria { get; set; }
 
         }
+
+        protected void EventoJuegoClick(object sender, EventArgs e)
+        {
+            Response.Redirect("ApuestaUsuario.aspx");
+        }
     }
 }
