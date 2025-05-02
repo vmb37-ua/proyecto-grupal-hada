@@ -18,5 +18,22 @@ namespace ProWeb
         {
             Response.Redirect("AdminUsuario.aspx");
         }
+
+        protected void EventoBotonSaldo(object sender, EventArgs e)
+        {
+            Response.Redirect("Cartera.aspx");
+        }
+        protected void EventoBotonApuestas(object sender, EventArgs e)
+        {
+            Response.Redirect("ApuestasUsuario.aspx");
+        }
+        protected void EventoBotonFavoritos(object sender, EventArgs e)
+        {
+            Response.Redirect("Favoritos.aspx");
+        }
+        protected void EventoBotonNotificaciones(object sender, EventArgs e)
+        {
+            Response.Redirect("Notificaciones.aspx");
+        }
     }
 }

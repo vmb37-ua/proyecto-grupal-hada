@@ -14,15 +14,20 @@
         <div id="Contenedor2">
             <p class="TituloPerfil">Nombre</p>
             <asp:Label ID="CampoNombre" CssClass="CampoPerfil" runat="server">Name Placeholder</asp:Label>
-            <br />
+            
             <p class="TituloPerfil">Dirección</p>
             <asp:Label ID="CampoDireccion" CssClass="CampoPerfil" runat="server">Name Placeholder</asp:Label>
-            <br />
+            
             <p class="TituloPerfil">Teléfono</p>
             <asp:Label ID="CampoTelefono" CssClass="CampoPerfil" runat="server">Name Placeholder</asp:Label>
-            <br />
+            
             <p class="TituloPerfil">Saldo</p>
             <asp:Label ID="CampoSaldo" CssClass="CampoPerfil" runat="server">Name Placeholder</asp:Label>
+            
+            <asp:Button runat="server" Text="Administrar saldo" OnClick="EventoBotonSaldo"/>
+            <asp:Button runat="server" Text="Apuestas" OnClick="EventoBotonApuestas"/>
+            <asp:Button runat="server" Text="Favoritos" OnClick="EventoBotonFavoritos"/>
+            <asp:Button runat="server" Text="Notificaciones" OnClick="EventoBotonNotificaciones"/>
         </div>
     </div>
 </asp:Content>

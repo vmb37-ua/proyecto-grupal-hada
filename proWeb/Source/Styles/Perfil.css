@@ -49,6 +49,24 @@
     background-color: grey;
 }
 
+#Contenedor2 > input {
+    color: black;
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 20px;
+    margin: 0 50% 10px 0;
+    align-self:center;
+}
+
+#Contenedor2 > input:hover {
+    color: white;
+    background-color: grey;
+}
+
 .TituloPerfil{
     font-family: Arial;
     font-size:25px;
@@ -59,6 +77,6 @@
 .CampoPerfil {
     font-family: Arial;
     font-size:20px;
-
+    margin-bottom: 20px;
 }
 
