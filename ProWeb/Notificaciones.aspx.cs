@@ -13,10 +13,11 @@ namespace ProWeb
         {
             if (!IsPostBack)
             {
-                List<string> notificaciones = new List<string>
+                var notificaciones = new List<string>
                 {
                     "¡Has ganado tu apuesta!",
-                    "Nuevo bono disponible en tu cuenta"
+                    "Tienes un bono disponible en tu cuenta",
+                    "Tu perfil ha sido actualizado correctamente"
                 };
 
                 ListaNotificaciones.DataSource = notificaciones;
@@ -25,3 +26,4 @@ namespace ProWeb
         }
     }
 }
+
