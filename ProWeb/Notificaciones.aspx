@@ -12,6 +12,6 @@
 
         <br /><br />
 
-        <asp:Button ID="BotonVolver" runat="server" Text="Volver al Perfil" PostBackUrl="Perfil.aspx" CssClass="BotonCartera" />
+        <asp:Button ID="BotonVolver" runat="server" Text="Volver al Perfil" CssClass="BotonCartera" OnClick="BotonVolver_Click" />
     </div>
 </asp:Content>

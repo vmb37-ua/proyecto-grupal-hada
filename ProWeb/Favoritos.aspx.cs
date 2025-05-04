@@ -30,7 +30,7 @@ namespace ProWeb
             public string CiudadEquipo { get; set; }
         }
 
-        protected void IrPerfil(object sender, EventArgs e)
+        protected void IrPerfil_Click(object sender, EventArgs e)
         {
             Response.Redirect("Perfil.aspx");
         }

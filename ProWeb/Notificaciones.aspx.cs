@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace ProWeb
 {
-    public partial class Notificaciones : System.Web.UI.Page
+    public partial class Notificaciones : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,6 +20,11 @@ namespace ProWeb
                 ListaNotificaciones.DataSource = notificaciones;
                 ListaNotificaciones.DataBind();
             }
+        }
+
+        protected void BotonVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Perfil.aspx");
         }
     }
 }
