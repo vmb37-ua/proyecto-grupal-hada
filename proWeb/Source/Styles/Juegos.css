@@ -1,4 +1,21 @@
-﻿#juegos_container {
+﻿.juego_boton {
+    background-color: #fbbd24 !important;
+    color: #000000 !important;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    border: 2px solid #fbbd24 !important;
+    border-radius: 5px !important;
+    padding: 10px 20px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s !important;
+}
+
+
+    .juego_boton:hover {
+        background-color: #e69d00;
+    }
+
+#juegos_container {
     font-family: Arial, sans-serif;
     padding: 20px;
 }
@@ -96,5 +113,4 @@ body {
     font-weight: bold;
     white-space: nowrap;
 }
-
 

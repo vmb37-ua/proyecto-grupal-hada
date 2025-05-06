@@ -9,6 +9,7 @@
         <h1>Próximos partidos:</h1>
         <asp:Repeater ID="rptJuegos" runat="server">
             <ItemTemplate>
+                    
                 <div class="juego">
 
                         <div class="titulo-partido">
@@ -27,9 +28,12 @@
                     <p>Hora: <asp:Label ID="lblHora" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Hora.ToString(@"hh\:mm") %>'></asp:Label></p>
                     <p>Categoría: <asp:Label ID="lblCategoria" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Categoria %>'></asp:Label></p>
 
+                    <asp:Button ID="botonJuego" runat="server" Text="Apostar" CssClass="juego_boton" OnClick="EventoJuegoClick" />
+
            
 
                 </div>
+                
             </ItemTemplate>
         </asp:Repeater>
     </div>
