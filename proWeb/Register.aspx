@@ -14,11 +14,20 @@
         
         <asp:TextBox ID="Passregister" runat="server" CssClass="Inputregister" TextMode="Password"></asp:TextBox>
 
-         <asp:TextBox ID="Passrepregister" runat="server" CssClass="Inputregister" TextMode="Password"></asp:TextBox>
+
+    <asp:TextBox ID="Passrepregister" runat="server" CssClass="Inputregister" TextMode="Password"></asp:TextBox>
+
+
+
 
         <br />
+
+         <asp:Label ID="Labelerror" runat="server" CssClass="mensajeError" ForeColor="Red" Visible="false" ></asp:Label>
+
         <br />
+
         <asp:Button runat="server" Text="Crear cuenta" CssClass="botonregister" OnClick="EventoPaginaPrincipal"/>
         <asp:Button runat="server" Text="Iniciar Sesión" CssClass="botonregister" OnClick="EventoInicioSesion"/>
+
     </div>
 </asp:Content>
