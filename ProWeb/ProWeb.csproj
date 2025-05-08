@@ -81,7 +81,12 @@
     <Content Include="DBUsuario.aspx" />
     <Content Include="ApuestasUsuario.aspx" />
     <Content Include="Juegos.aspx" />
+    <Content Include="Cartera.aspx" />
+    <Content Include="Favoritos.aspx" />
+    <Content Include="Cartera.aspx" />
+    <Content Include="Favoritos.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="Notificaciones.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Source\Styles\PanelAdmin.css" />
     <Content Include="Source\Styles\AdminNotificaciones.css" />
@@ -102,7 +107,10 @@
     <Content Include="Source\Styles\DBPatrocinadores.css" />
     <Content Include="Source\Styles\DBUsuario.css" />
     <Content Include="Source\Styles\Juegos.css" />
+    <Content Include="Source\Styles\Cartera.css" />
+    <Content Include="Source\Styles\Favoritos.css" />
     <Content Include="Source\Styles\Login.css" />
+    <Content Include="Source\Styles\Notificaciones.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
     <Content Include="Source\Styles\InformacionEstadio.css" />
@@ -193,12 +201,47 @@
     <Compile Include="Juegos.aspx.designer.cs">
       <DependentUpon>Juegos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Cartera.aspx.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cartera.aspx.designer.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favoritos.aspx.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Favoritos.aspx.designer.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cartera.aspx.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cartera.aspx.designer.cs">
+      <DependentUpon>Cartera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favoritos.aspx.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Favoritos.aspx.designer.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
