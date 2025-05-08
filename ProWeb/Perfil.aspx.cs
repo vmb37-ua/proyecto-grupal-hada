@@ -15,12 +15,19 @@ namespace ProWeb
         {
             if (Session["Login"] == null)
             {
-                Response.Redirect("Juegos.aspx");
+                Response.Redirect("Login.aspx");
             }
 
             ENUsuario usuario = new ENUsuario();
-            usuario.Read();
-            // Poner imagen, nombre, etc...
+            usuario.Telefono = "123456789";
+            usuario.Direccion = "C/ Miguel Hernandez";
+            usuario.Imagen = "Source/Images/default.jpg";
+            //usuario.Read();
+            FotoPerfil.ImageUrl = usuario.Imagen;
+            CampoNombre.Text = usuario.Nombre;
+            CampoDireccion.Text = usuario.Direccion;
+            CampoSaldo.Text = usuario.Saldo.ToString() + " €";
+            CampoTelefono.Text = usuario.Telefono;
         }
 
         protected void EventoEditarPerfil(object sender, EventArgs e)

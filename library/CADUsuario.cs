@@ -22,5 +22,9 @@ namespace library
             return true;
         }
 
+        public bool LoginUsu(ENUsuario usuario) {
+            return true;
+        }
+
     }
 }

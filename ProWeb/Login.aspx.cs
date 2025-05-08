@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using library;
 
 namespace ProWeb
 {
@@ -25,7 +26,23 @@ namespace ProWeb
 
         protected void EventoMainPage(object sender, EventArgs e)
         {
-            Response.Redirect("Juegos.aspx");
+            if (Session["Login"] != null)
+            {
+                // Ya está loggeado
+                Response.Redirect("Juegos.aspx");
+            }
+            else { 
+                ENUsuario usuario = new ENUsuario();
+                if (!usuario.LoginUsu())
+                {
+                    //El usuario existe (contraseña correcta)
+                    Session["Login"] = usuario.ID;
+                    Response.Redirect("Juegos.aspx");
+                }
+                else {
+                    ErrMsg.Text = "Nombre de usuario o contraseña incorrectos";
+                }
+            }
         }
     }
 }

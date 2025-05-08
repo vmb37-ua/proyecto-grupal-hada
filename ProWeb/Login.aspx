@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="Source/Styles/Login.css" />
     <div id="Contenedor1">
         <p id="titulo">INICIAR SESIÓN</p>
-        
+        <asp:Label runat="server" CssClass="MensajeError" ID="ErrMsg"></asp:Label>
         <asp:TextBox ID="Emaillogin" runat="server" CssClass="Inputlogin"></asp:TextBox>
         
         <asp:TextBox ID="Passlogin" runat="server" CssClass="Inputlogin" TextMode="Password"></asp:TextBox>

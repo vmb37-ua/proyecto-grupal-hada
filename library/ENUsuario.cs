@@ -151,5 +151,10 @@ namespace library
             CADUsuario usu = new CADUsuario();
             return usu.Update(this);
         }
+
+        public bool LoginUsu() {
+            CADUsuario usu = new CADUsuario();
+            return usu.LoginUsu(this);
+        }
     }
 }
