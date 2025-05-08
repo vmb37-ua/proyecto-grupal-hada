@@ -10,13 +10,16 @@ namespace library
     public class ENUsuario
     {
         int _id;
+        string _imagen;
         string _nombre;
+        string _correo;
+        string _password;
         float _saldo;
-        string _datos;
+        string _numtar;
+        DateTime _caducidad;
+        string _cvv;
         int _rol;
         string _direccion;
-        int _pais;
-        int _provincia;
         int _municipio;
         string _telefono;
 
@@ -25,10 +28,29 @@ namespace library
             get { return _id; }
             set { _id = value; }
         }
+
+        public string Imagen
+        {
+            get { return _imagen; }
+            set { _imagen = value; }
+        }
+
         public string Nombre
         {
             get { return _nombre; }
             set { _nombre = value; }
+        }
+
+        public string Correo
+        {
+            get { return _correo; }
+            set { _correo = value; }
+        }
+
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; }
         }
 
         public float Saldo
@@ -37,10 +59,22 @@ namespace library
             set { _saldo = value; }
         }
 
-        public string Datos
+        public string NumTar
         {
-            get { return _datos; }
-            set { _datos = value; }
+            get { return _numtar; }
+            set { _numtar = value; }
+        }
+
+        public DateTime Caducidad
+        {
+            get { return _caducidad; }
+            set { _caducidad = value; }
+        }
+
+        public string Cvv
+        {
+            get { return _cvv; }
+            set { _cvv = value; }
         }
 
         public int Rol
@@ -55,18 +89,6 @@ namespace library
             set { _direccion = value; }
         }
 
-        public int Pais
-        {
-            get { return _pais; }
-            set { _pais = value; }
-        }
-
-        public int Provincia
-        {
-            get { return _provincia; }
-            set { _provincia = value; }
-        }
-
         public int Municipio
         {
             get { return _municipio; }
@@ -79,31 +101,38 @@ namespace library
             set { _telefono = value; }
         }
 
-        public ENUsuario() {
+         public ENUsuario()
+        {
             _id = 0;
+            _imagen = "";
             _nombre = "";
+            _correo = "";
+            _password = "";
             _saldo = 0;
-            _datos = "";
+            _numtar = "";
+            _caducidad = DateTime.Now;
+            _cvv = "";
             _rol = 0;
             _direccion = "";
-            _pais = 0;
-            _provincia = 0;
-            _municipio= 0;
+            _municipio = 0;
             _telefono = "";
         }
 
-        public ENUsuario(int id, string nombre, float saldo, string datos, int rol, string direccion, int pais, int provincia, int municipio, string telefono)
+        public ENUsuario(int id, string imagen, string nombre, string correo, string password, float saldo, string numtar, DateTime caducidad, string cvv, int rol, string direccion, int municipio, string telefono)
         {
-            ID = id;
-            Nombre = nombre;
-            Saldo = saldo;
-            Datos = datos;
-            Rol = rol;
-            Direccion = direccion;
-            Pais = pais;
-            Provincia = provincia;
-            Municipio = municipio;
-            Telefono = telefono;
+            _id = id;
+            _imagen = imagen;
+            _nombre = nombre;
+            _correo = correo;
+            _password = password;
+            _saldo = saldo;
+            _numtar = numtar;
+            _caducidad = caducidad;
+            _cvv = cvv;
+            _rol = rol;
+            _direccion = direccion;
+            _municipio = municipio;
+            _telefono = telefono;
         }
 
         public bool Create() {
