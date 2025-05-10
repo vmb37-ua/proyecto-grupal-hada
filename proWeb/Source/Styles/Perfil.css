@@ -80,3 +80,12 @@
     margin-bottom: 20px;
 }
 
+.Botoncerrar {
+    border-color: orangered !important;
+    color: orangered !important;
+}
+
+.Botoncerrar:hover{
+    background-color:orangered !important;
+    color: white !important;
+}
