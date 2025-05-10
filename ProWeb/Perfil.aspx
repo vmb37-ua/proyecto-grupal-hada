@@ -9,7 +9,8 @@
             <br />
             <asp:Button ID="BotonFoto" Text="Cambiar foto de perfil" runat="server"></asp:Button>
             <asp:Button ID="BotonPerfil" Text="Editar perfil" runat="server" OnClick="EventoEditarPerfil"></asp:Button>
-            <asp:Button ID="BotonEliminar" Text="Eliminar cuenta" runat="server" CssClass="Botonborrar"></asp:Button>
+            <asp:Button ID="ButtonCerrar" Text="Cerrar Sesión" runat="server" CssClass="Botoncerrar" OnClick="EventoCerrarSesion"></asp:Button>
+            <asp:Button ID="BotonEliminar" Text="Eliminar cuenta" runat="server" CssClass="Botonborrar"OnClick="EventoEliminarCuenta"></asp:Button>
         </div>
         <div id="Contenedor2">
             <p class="TituloPerfil">Nombre</p>

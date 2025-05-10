@@ -51,5 +51,18 @@ namespace ProWeb
         {
             Response.Redirect("Notificaciones.aspx");
         }
+        protected void EventoCerrarSesion(object sender, EventArgs e)
+        {
+            Session["Login"] = null;
+            Response.Redirect("Juegos.aspx");
+        }
+        protected void EventoEliminarCuenta(object sender, EventArgs e)
+        {
+            ENUsuario usuario = new ENUsuario();
+            usuario.ID = int.Parse(Session["Login"].ToString());
+            usuario.Delete();
+            Session["Login"] = null;
+            Response.Redirect("Juegos.aspx");
+        }
     }
 }
