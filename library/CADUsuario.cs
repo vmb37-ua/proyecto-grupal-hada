@@ -16,8 +16,55 @@ namespace library
         }
         public bool Create(ENUsuario usuario)
         {
-            return true;
+            bool resultado = false;
+            SqlConnection conn = new SqlConnection(conexion);
+
+            try
+            {
+                conn.Open();
+
+                // Creamos la consulta SQL con parámetros
+                string query = @"INSERT INTO usuario
+                        (nombre, telefono, correo, direccion, contrasenya, saldo, numero_tar, caducidad_tar, cvv, id_rol, id_municipio, imagen)
+                        OUTPUT INSERTED.id -- Esto devuelve el ID generado automáticamente por la base de datos
+                        VALUES
+                        (@nombre, @telefono, @correo, @direccion, @contrasenya, @saldo, @numero_tar, @caducidad_tar, @cvv, @id_rol, @id_municipio, @imagen)";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                // Asignamos valores a los parámetros de la consulta
+                cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                cmd.Parameters.AddWithValue("@telefono", usuario.Telefono);
+                cmd.Parameters.AddWithValue("@correo", usuario.Correo);
+                cmd.Parameters.AddWithValue("@direccion", usuario.Direccion);
+                cmd.Parameters.AddWithValue("@contrasenya", usuario.Password);
+                cmd.Parameters.AddWithValue("@saldo", usuario.Saldo);
+                cmd.Parameters.AddWithValue("@numero_tar", usuario.NumTar);
+                cmd.Parameters.AddWithValue("@caducidad_tar", usuario.Caducidad);
+                cmd.Parameters.AddWithValue("@cvv", usuario.Cvv);
+                cmd.Parameters.AddWithValue("@id_rol", usuario.Rol);
+                cmd.Parameters.AddWithValue("@id_municipio", usuario.Municipio);
+                cmd.Parameters.AddWithValue("@imagen", usuario.Imagen);
+
+                // Ejecutamos la consulta y recuperamos el ID insertado
+                int insertedID = (int)cmd.ExecuteScalar();
+                usuario.ID = insertedID;  // Asignamos el ID al objeto usuario
+
+                resultado = true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al crear el usuario: " + ex.Message);
+            }
+
+            finally
+            {
+                conn.Close();
+            }
+
+            return resultado;
         }
+
         public bool Delete(ENUsuario usuario) {
             SqlConnection conn = new SqlConnection(conexion);
             bool resultado = false;
@@ -114,5 +161,32 @@ namespace library
             return resultado;
         }
 
+        public bool ExisteCorreo(string correo)
+        {
+            bool existe = false;
+            SqlConnection cn = new SqlConnection(conexion);
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM usuario WHERE correo = @correo", cn);
+                cmd.Parameters.AddWithValue("@correo", correo);
+                int count = (int)cmd.ExecuteScalar();
+                existe = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                existe = false;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return existe;
+        }
     }
+
 }
+

@@ -1,6 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
-
+using System.Web.UI.WebControls;
+using library;
 namespace ProWeb
 {
     public partial class Register : System.Web.UI.Page
@@ -25,7 +31,7 @@ namespace ProWeb
 
         private bool CamposIncompletos(out string nombre, out string numero, out string correo, out string direccion, out string pass, out string passRep)
         {
-            // Reiniciar clases CSS
+
             Nameregister.CssClass = "Inputregister";
             Numberregister.CssClass = "Inputregister";
             Emailregister.CssClass = "Inputregister";
@@ -33,7 +39,7 @@ namespace ProWeb
             Passregister.CssClass = "Inputregister";
             Passrepregister.CssClass = "Inputregister";
 
-            // Obtener valores
+
             nombre = Nameregister.Text.Trim();
             numero = Numberregister.Text.Trim();
             correo = Emailregister.Text.Trim();
@@ -108,20 +114,48 @@ namespace ProWeb
                 return;
             }
 
-            if (pass.Length < 6)
+            CADUsuario cadUsuario = new CADUsuario();
+            if (cadUsuario.ExisteCorreo(correo))
             {
-                Labelerror.Text = "La contraseña debe tener al menos 6 caracteres.";
+                Labelerror.Text = "Este correo ya está registrado.";
                 Labelerror.Visible = true;
-                Passregister.CssClass += " input-error";
-                Passrepregister.CssClass += " input-error";
+                Emailregister.CssClass += " input-error";
                 return;
             }
 
-            // Aquí se puede guardar la información del usuario en base de datos, etc.
+            ENUsuario nuevoUsuario = new ENUsuario();
+            nuevoUsuario.Nombre = nombre;
+            nuevoUsuario.Telefono = numero;
+            nuevoUsuario.Correo = correo;
+            nuevoUsuario.Password = pass;
+            nuevoUsuario.Direccion = direccion;
+            nuevoUsuario.Saldo = 0;
+            nuevoUsuario.NumTar = "";
+            nuevoUsuario.Caducidad = DateTime.Now;
+            nuevoUsuario.Cvv = "";
+            nuevoUsuario.Rol = 1; 
+            nuevoUsuario.Municipio = 1; 
+            nuevoUsuario.Imagen = "default.jpg"; 
 
-            Labelerror.Text = "";
-            Labelerror.Visible = false;
-            Response.Redirect("Juegos.aspx");
+            try
+            {
+                if (nuevoUsuario.Create())
+                {
+                    Session["Login"] = nuevoUsuario.ID;
+                    Response.Redirect("Juegos.aspx");
+                }
+                else
+                {
+                    Labelerror.Text = "Error al crear el usuario. Intenta de nuevo.";
+                    Labelerror.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Labelerror.Text = "Excepción: " + ex.Message;
+                Labelerror.Visible = true;
+            }
+
         }
     }
 }

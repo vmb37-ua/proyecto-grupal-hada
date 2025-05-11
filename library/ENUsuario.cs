@@ -156,5 +156,11 @@ namespace library
             CADUsuario usu = new CADUsuario();
             return usu.LoginUsu(this);
         }
+
+        public bool ExisteCorreo(string correo)
+        {
+            CADUsuario usu = new CADUsuario();
+            return usu.ExisteCorreo(this.Correo);
+        }
     }
 }
