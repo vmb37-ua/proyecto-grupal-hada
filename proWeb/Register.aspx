@@ -12,6 +12,8 @@
 
         <asp:TextBox ID="Emailregister" runat="server" CssClass="Inputregister"></asp:TextBox>
         
+        <asp:TextBox ID="Adressresgister" runat="server" CssClass="Inputregister"></asp:TextBox>
+
         <asp:TextBox ID="Passregister" runat="server" CssClass="Inputregister" TextMode="Password"></asp:TextBox>
 
 
