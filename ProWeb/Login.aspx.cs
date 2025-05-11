@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using library;
 
 namespace ProWeb
 {
@@ -63,5 +64,25 @@ namespace ProWeb
             public List<string> error_codes { get; set; }
         }
 
+            if (Session["Login"] != null)
+            {
+                // Ya está loggeado
+                Response.Redirect("Juegos.aspx");
+            }
+            else { 
+                ENUsuario usuario = new ENUsuario();
+                usuario.Correo = Emaillogin.Text;
+                usuario.Password = Passlogin.Text;
+                if (usuario.LoginUsu())
+                {
+                    //El usuario existe (contraseña correcta)
+                    Session["Login"] = usuario.ID;
+                    Response.Redirect("Juegos.aspx");
+                }
+                else {
+                    ErrMsg.Text = "Correo o contraseña incorrectos";
+                }
+            }
+        }
     }
 }

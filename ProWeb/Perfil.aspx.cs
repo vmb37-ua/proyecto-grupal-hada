@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using library;
 
 namespace ProWeb
 {
@@ -11,7 +13,21 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
 
+            ENUsuario usuario = new ENUsuario();
+            usuario.Telefono = "123456789";
+            usuario.Direccion = "C/ Miguel Hernandez";
+            usuario.Imagen = "Source/Images/default.jpg";
+            //usuario.Read();
+            FotoPerfil.ImageUrl = usuario.Imagen;
+            CampoNombre.Text = usuario.Nombre;
+            CampoDireccion.Text = usuario.Direccion;
+            CampoSaldo.Text = usuario.Saldo.ToString() + " €";
+            CampoTelefono.Text = usuario.Telefono;
         }
 
         protected void EventoEditarPerfil(object sender, EventArgs e)
@@ -34,6 +50,19 @@ namespace ProWeb
         protected void EventoBotonNotificaciones(object sender, EventArgs e)
         {
             Response.Redirect("Notificaciones.aspx");
+        }
+        protected void EventoCerrarSesion(object sender, EventArgs e)
+        {
+            Session["Login"] = null;
+            Response.Redirect("Juegos.aspx");
+        }
+        protected void EventoEliminarCuenta(object sender, EventArgs e)
+        {
+            ENUsuario usuario = new ENUsuario();
+            usuario.ID = int.Parse(Session["Login"].ToString());
+            usuario.Delete();
+            Session["Login"] = null;
+            Response.Redirect("Juegos.aspx");
         }
     }
 }
