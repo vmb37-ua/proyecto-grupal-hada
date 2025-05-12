@@ -21,7 +21,6 @@ namespace ProWeb
                 Adressresgister.Attributes["placeholder"] = "Dirección";
                 Passregister.Attributes["placeholder"] = "Contraseña";
                 Passrepregister.Attributes["placeholder"] = "Confirmar Contraseña";
-                ddlMunicipio.Attributes["placeholder"] = "Selecciona tu municipio";
 
 
 
