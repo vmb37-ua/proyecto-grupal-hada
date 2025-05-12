@@ -24,6 +24,13 @@
 
             <asp:Label runat="server" CssClass="Etiqueta">Teléfono:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+
+            <div id="cajaFoto">
+                <div id="selecFoto">
+                    <asp:FileUpload runat="server" CssClass="fileup"/>
+                </div>
+                <asp:Button ID="BotonFoto" Text="Cambiar foto de perfil" runat="server" CssClass="Boton"></asp:Button>
+            </div>  
         </div>
 
         <asp:Button runat="server" CssClass="Boton" Text="Editar el perfil"/>

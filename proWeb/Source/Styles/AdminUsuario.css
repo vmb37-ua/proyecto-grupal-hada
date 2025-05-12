@@ -48,3 +48,22 @@
     font-family: 'Times New Roman';
     font-size: 15px;
 }
+
+#cajaFoto {
+    border: 3px solid gray;
+    border-radius: 5px 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px 10px 30px;
+    width: 100%;
+}
+
+#cajaFoto > input{
+    margin: 10px auto 0 auto;
+    font-size: 15px;
+}
+
+.fileup {
+    font-family: Arial;
+    font-size: 15px;
+}

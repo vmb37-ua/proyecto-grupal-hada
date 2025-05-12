@@ -19,11 +19,8 @@ namespace ProWeb
             }
 
             ENUsuario usuario = new ENUsuario();
-            usuario.Telefono = "123456789";
-            usuario.Direccion = "C/ Miguel Hernandez";
-            usuario.Imagen = "Source/Images/default.jpg";
-            //usuario.Read();
-            FotoPerfil.ImageUrl = usuario.Imagen;
+            usuario.Read();
+            FotoPerfil.ImageUrl = "~/Source/Images/"+usuario.Imagen;
             CampoNombre.Text = usuario.Nombre;
             CampoDireccion.Text = usuario.Direccion;
             CampoSaldo.Text = usuario.Saldo.ToString() + " €";
