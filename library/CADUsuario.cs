@@ -16,8 +16,41 @@ namespace library
         }
         public bool Create(ENUsuario usuario)
         {
-            return true;
+            bool resultado = false;
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["TuCadenaConexion"].ConnectionString);
+            SqlCommand cmd = new SqlCommand("INSERT INTO usuario (imagen, contrasenya, correo, nombre, saldo, numero_tar, caducidad_tar, cvv, direccion, telefono, id_rol, id_municipio) VALUES (@imagen, @contrasenya, @correo, @nombre, @saldo, @numero_tar, @caducidad_tar, @cvv, @direccion, @telefono, @id_rol, @id_municipio)", conn);
+
+            cmd.Parameters.AddWithValue("@imagen", usuario.Imagen ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@contrasenya", usuario.Password);
+            cmd.Parameters.AddWithValue("@correo", usuario.Correo);
+            cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+            cmd.Parameters.AddWithValue("@saldo", usuario.Saldo);
+            cmd.Parameters.AddWithValue("@numero_tar", usuario.NumTar);
+            cmd.Parameters.AddWithValue("@caducidad_tar", usuario.Caducidad);
+            cmd.Parameters.AddWithValue("@cvv", usuario.Cvv);
+            cmd.Parameters.AddWithValue("@direccion", usuario.Direccion);
+            cmd.Parameters.AddWithValue("@telefono", usuario.Telefono);
+            cmd.Parameters.AddWithValue("@id_rol", usuario.Rol);
+            cmd.Parameters.AddWithValue("@id_municipio", usuario.Municipio);
+
+            try
+            {
+                conn.Open();
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                resultado = filasAfectadas != 0;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return resultado;
         }
+
         public bool Delete(ENUsuario usuario) {
             SqlConnection conn = new SqlConnection(conexion);
             bool resultado = false;
@@ -81,6 +114,40 @@ namespace library
             return resultado;
         }
         public bool Update(ENUsuario usuario) {
+            bool resultado = false;
+            string query = "UPDATE usuario SET imagen = @imagen, contrasenya = @contrasenya, correo = @correo, nombre = @nombre, saldo = @saldo, numero_tar = @numero_tar, caducidad_tar = @caducidad_tar, cvv = @cvv, direccion = @direccion, telefono = @telefono, id_rol = @id_rol, id_municipio = @id_municipio WHERE id = @id";
+
+            SqlConnection conn = new SqlConnection(conexion);
+            conn.Open();
+
+            try { 
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@imagen", usuario.Imagen);
+                cmd.Parameters.AddWithValue("@contrasenya", usuario.Password);
+                cmd.Parameters.AddWithValue("@correo", usuario.Correo);
+                cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                cmd.Parameters.AddWithValue("@saldo", usuario.Saldo);
+                cmd.Parameters.AddWithValue("@numero_tar", usuario.NumTar);
+                cmd.Parameters.AddWithValue("@caducidad_tar", usuario.Caducidad);
+                cmd.Parameters.AddWithValue("@cvv", usuario.Cvv);
+                cmd.Parameters.AddWithValue("@direccion", usuario.Direccion);
+                cmd.Parameters.AddWithValue("@telefono", usuario.Telefono);
+                cmd.Parameters.AddWithValue("@id_rol", usuario.Rol);
+                cmd.Parameters.AddWithValue("@id_municipio", usuario.Municipio);
+                cmd.Parameters.AddWithValue("@id", usuario.ID);
+           
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                resultado = filasAfectadas != 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
             return true;
         }
 
