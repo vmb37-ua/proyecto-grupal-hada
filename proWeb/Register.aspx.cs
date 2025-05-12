@@ -22,7 +22,7 @@ namespace ProWeb
                 Passregister.Attributes["placeholder"] = "Contraseña";
                 Passrepregister.Attributes["placeholder"] = "Confirmar Contraseña";
                 ddlMunicipio.Attributes["placeholder"] = "Selecciona tu municipio";
-                
+
 
 
             }
@@ -137,9 +137,9 @@ namespace ProWeb
             nuevoUsuario.NumTar = "";
             nuevoUsuario.Caducidad = DateTime.Now;
             nuevoUsuario.Cvv = "";
-            nuevoUsuario.Rol = 1; 
-            nuevoUsuario.Municipio = 10; 
-            nuevoUsuario.Imagen = "default.jpg"; 
+            nuevoUsuario.Rol = 1;
+            nuevoUsuario.Municipio = 10;
+            nuevoUsuario.Imagen = "default.jpg";
 
             try
             {
