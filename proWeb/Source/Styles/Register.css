@@ -49,7 +49,7 @@
     outline: none;
 }
 
-
+/* Estilo SOLO para los botones, no para los inputs */
 .botonregister {
     color: black;
     background-color: white;
