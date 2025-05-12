@@ -19,6 +19,7 @@ namespace ProWeb
             }
 
             ENUsuario usuario = new ENUsuario();
+            usuario.ID = int.Parse(Session["Login"].ToString());
             usuario.Read();
             FotoPerfil.ImageUrl = "~/Source/Images/"+usuario.Imagen;
             CampoNombre.Text = usuario.Nombre;
