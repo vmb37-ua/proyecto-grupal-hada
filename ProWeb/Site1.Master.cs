@@ -50,7 +50,7 @@ namespace ProWeb
         }
 
         protected void EventoBotonLogo(object sender, EventArgs e) {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Juegos.aspx");
         }
     }
 }

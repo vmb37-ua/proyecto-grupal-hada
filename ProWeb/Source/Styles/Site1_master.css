@@ -13,6 +13,16 @@ form {
     min-height: 100%;
 }
 
+#ContenedorFoto {
+    width: 80px;
+    height: 80px;
+    overflow:hidden;
+    border-radius: 50%;
+    align-self: flex-end;
+    position: absolute;
+    right: 0;
+}
+
 body {
     margin:0;
     padding:0;
@@ -81,11 +91,8 @@ padding: 0;
     }
 
 .FotoPerfil{
-    align-self: flex-end;
-    position: absolute;
-    right: 0;
+    height: 100%;
     width: 100px;
-    border-radius:50%;
     object-fit: cover;
 }
 
