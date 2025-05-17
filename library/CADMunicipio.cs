@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,21 +10,145 @@ namespace library
 {
     public class CADMunicipio
     {
+        private string conexion;
+
+        public CADMunicipio() {
+            conexion = ConfigurationManager.ConnectionStrings["miconex"].ToString();
+        }
         public bool Create(ENMunicipio municipio)
         {
-            return true;
+            bool resultado = false;
+            SqlConnection conn = new SqlConnection(conexion);
+            SqlCommand cmd = new SqlCommand("INSERT INTO municipio (id_provincia, nombre) VALUES (@id_provincia, @nombre)", conn);
+
+            cmd.Parameters.AddWithValue("@id_provincia", municipio.Id_provincia);
+            cmd.Parameters.AddWithValue("@nombre", municipio.Nombre);
+
+            try
+            {
+                conn.Open();
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                resultado = filasAfectadas != 0;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return resultado;
         }
         public bool Delete(ENMunicipio municipio) {
-            return true;
+            bool resultado = false;
+            SqlConnection conn = new SqlConnection(conexion);
+            SqlCommand cmd = new SqlCommand("DELETE FROM municipio WHERE id_municipio = @id_municipio", conn);
+
+            cmd.Parameters.AddWithValue("@id_municipio", municipio.Id_municipio);
+
+            try
+            {
+                conn.Open();
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                resultado = filasAfectadas != 0;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return resultado;
         }
         public bool Update(ENMunicipio municipio) {
+            bool resultado = false;
+            string query = "UPDATE municipio SET id_provincia = @id_provincia, nombre = @nombre WHERE id_municipio = @id";
+
+            SqlConnection conn = new SqlConnection(conexion);
+            conn.Open();
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", municipio.Id_municipio);
+                cmd.Parameters.AddWithValue("@imagen", municipio.Id_provincia);
+                cmd.Parameters.AddWithValue("@contrasenya", municipio.Nombre);
+
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                resultado = filasAfectadas != 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
             return true;
         }
         public bool Read(ENMunicipio municipio) {
-            return true;
+            SqlConnection conn = new SqlConnection(conexion);
+            bool resultado = false;
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM municipio WHERE id_municipio = @id", conn);
+                cmd.Parameters.AddWithValue("@id", municipio.Id_municipio);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    municipio.Id_provincia = int.Parse(reader["id_provincia"].ToString());
+                    municipio.Nombre = reader["nombre"].ToString();
+                    resultado = true;
+                }
+                else
+                {
+                    resultado = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                resultado = false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return resultado;
         }
         public List<ENMunicipio> ReadAll(ENMunicipio municipio) {
-            return new List<ENMunicipio>();
+            SqlConnection conn = new SqlConnection(conexion);
+            List<ENMunicipio> lista = new List<ENMunicipio>();
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM municipio", conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    municipio.Id_municipio = int.Parse(reader["id_municipio"].ToString());
+                    municipio.Id_provincia = int.Parse(reader["id_provincia"].ToString());
+                    municipio.Nombre = reader["nombre"].ToString();
+                    lista.Add(municipio);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return lista;
         }
     }
 }

@@ -17,10 +17,10 @@ namespace library
         public bool Create(ENUsuario usuario)
         {
             bool resultado = false;
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["TuCadenaConexion"].ConnectionString);
+            SqlConnection conn = new SqlConnection(conexion);
             SqlCommand cmd = new SqlCommand("INSERT INTO usuario (imagen, contrasenya, correo, nombre, saldo, numero_tar, caducidad_tar, cvv, direccion, telefono, id_rol, id_municipio) VALUES (@imagen, @contrasenya, @correo, @nombre, @saldo, @numero_tar, @caducidad_tar, @cvv, @direccion, @telefono, @id_rol, @id_municipio)", conn);
 
-            cmd.Parameters.AddWithValue("@imagen", usuario.Imagen ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@imagen", usuario.Imagen);
             cmd.Parameters.AddWithValue("@contrasenya", usuario.Password);
             cmd.Parameters.AddWithValue("@correo", usuario.Correo);
             cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);

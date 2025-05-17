@@ -10,7 +10,6 @@ namespace library
     {
         int _id_municipio;
         int _id_provincia;
-        int _id_pais;
         string _nombre;
 
         public int Id_municipio {
@@ -21,10 +20,6 @@ namespace library
             get { return _id_provincia; }
             set { _id_provincia = value; }
         }
-        public int Id_pais {
-            get { return _id_pais; }
-            set { _id_pais = value; }
-        }
         public string Nombre { 
             get { return _nombre; }
             set { _nombre = value; }
@@ -32,14 +27,12 @@ namespace library
         public ENMunicipio(){
             _id_municipio=0;
             _id_provincia=0;
-            _id_pais=0;
             _nombre = "";
         }
         public ENMunicipio(int id_municipio, int id_provincia, int id_pais, string nombre)
         {
             Id_municipio = id_municipio;
             Id_provincia = id_provincia;
-            Id_pais = id_pais;
             Nombre = nombre;
         }
         public bool Create() {
