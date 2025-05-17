@@ -6,53 +6,81 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    //clase que representa una transacción económica hecha por un usuario
-    public class Transaccion
+    public class ENTransaccion
     {
-        //el identificador único de la transacción
-        private int id;
+        private int _id;
+        private int _idUsuario;
+        private decimal _cantidad;
+        private string _metodoPago;
 
-        //identificador del usuario que hace la transacción
-        private int idUsuario;
-
-        //la cantidad de dinero implicada en la transacción
-        private decimal cantidad;
-
-        //la fecha y hora de la transacción
-        private DateTime fecha;
-
-        //el tipo de transacción (ej: ingreso, retiro, ganancia...)
-        private string tipo;
-
-        //el método del pago usado (ej: tarjeta, PayPal, transferencia...)
-        private string metodoPago;
-
-        //propiedades públicas
-        public int Id { get => id; set => id = value; }
-        public int IdUsuario { get => idUsuario; set => idUsuario = value; }
-        public decimal Cantidad { get => cantidad; set => cantidad = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
-        public string Tipo { get => tipo; set => tipo = value; }
-        public string MetodoPago { get => metodoPago; set => metodoPago = value; }
-
-        public Transaccion() { }
-
-        //el constructor hecho
-        public Transaccion(int id, int idUsuario, decimal cantidad, DateTime fecha, string tipo, string metodoPago)
+        public int Id
         {
-            this.id = id;
-            this.idUsuario = idUsuario;
-            this.cantidad = cantidad;
-            this.fecha = fecha;
-            this.tipo = tipo;
-            this.metodoPago = metodoPago;
+            get { return _id; }
+            set { _id = value; }
         }
 
-        //el mtodo para guardar esta transacción usando el CAD
-        public bool Guardar()
+        public int IdUsuario
+        {
+            get { return _idUsuario; }
+            set { _idUsuario = value; }
+        }
+
+        public decimal Cantidad
+        {
+            get { return _cantidad; }
+            set { _cantidad = value; }
+        }
+
+        public string MetodoPago
+        {
+            get { return _metodoPago; }
+            set { _metodoPago = value; }
+        }
+
+        public ENTransaccion()
+        {
+            _id = 0;
+            _idUsuario = 0;
+            _cantidad = 0;
+            _metodoPago = string.Empty;
+        }
+
+        public ENTransaccion(int id, int idUsuario, decimal cantidad, string metodoPago)
+        {
+            _id = id;
+            _idUsuario = idUsuario;
+            _cantidad = cantidad;
+            _metodoPago = metodoPago;
+        }
+
+        public bool Create()
         {
             CADTransaccion cad = new CADTransaccion();
-            return cad.CrearTransaccion(this);
+            return cad.Create(this);
+        }
+
+        public bool Delete()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.Delete(this);
+        }
+
+        public bool Update()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.Update(this);
+        }
+
+        public bool Read()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.Read(this);
+        }
+
+        public List<ENTransaccion> ReadAll()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.ReadAll(this);
         }
     }
 }

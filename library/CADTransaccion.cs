@@ -3,47 +3,151 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using library;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace library
 {
-    //clase de acceso a datos para la entidad transaccion
     public class CADTransaccion
     {
-        //crea una nueva transacción en la base de datos
-        public bool CrearTransaccion(Transaccion t)
+        private string conexion;
+
+        public CADTransaccion()
         {
-            throw new NotImplementedException();
+            conexion = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
 
-        //lee una transacción por su id
-        public Transaccion LeerTransaccion(int id)
+        public bool Create(ENTransaccion transaccion)
         {
-            throw new NotImplementedException();
+            bool creada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "INSERT INTO transaccion (dinero, metodo, id_usu) VALUES (@dinero, @metodo, @id_usu)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@dinero", transaccion.Cantidad);
+                    cmd.Parameters.AddWithValue("@metodo", transaccion.MetodoPago);
+                    cmd.Parameters.AddWithValue("@id_usu", transaccion.IdUsuario);
+
+                    conn.Open();
+                    creada = cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al crear transacción: " + ex.Message);
+            }
+            return creada;
         }
 
-        //devuelve todas las transacciones de un usuario
-        public List<Transaccion> LeerTransaccionesPorUsuario(int idUsuario)
+        public bool Delete(ENTransaccion transaccion)
         {
-            throw new NotImplementedException();
+            bool eliminada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "DELETE FROM transaccion WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", transaccion.Id);
+
+                    conn.Open();
+                    eliminada = cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al eliminar transacción: " + ex.Message);
+            }
+            return eliminada;
         }
 
-        //actualiza una transacción que ya existe
-        public bool ActualizarTransaccion(Transaccion t)
+        public bool Update(ENTransaccion transaccion)
         {
-            throw new NotImplementedException();
+            bool actualizada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "UPDATE transaccion SET dinero = @dinero, metodo = @metodo WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@dinero", transaccion.Cantidad);
+                    cmd.Parameters.AddWithValue("@metodo", transaccion.MetodoPago);
+                    cmd.Parameters.AddWithValue("@id", transaccion.Id);
+
+                    conn.Open();
+                    actualizada = cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al actualizar transacción: " + ex.Message);
+            }
+            return actualizada;
         }
 
-        //elimina una transacción por su id
-        public bool BorrarTransaccion(int id)
+        public bool Read(ENTransaccion transaccion)
         {
-            throw new NotImplementedException();
+            bool encontrada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "SELECT dinero, metodo, id_usu FROM transaccion WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", transaccion.Id);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        transaccion.Cantidad = Convert.ToDecimal(reader["dinero"]);
+                        transaccion.MetodoPago = reader["metodo"].ToString();
+                        transaccion.IdUsuario = Convert.ToInt32(reader["id_usu"]);
+                        encontrada = true;
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al leer transacción: " + ex.Message);
+            }
+            return encontrada;
         }
 
-        //busca transacciones por tipo (ingreso, retiro...)
-        public List<Transaccion> BuscarPorTipo(string tipo)
+        public List<ENTransaccion> ReadAll(ENTransaccion _)
         {
-            throw new NotImplementedException();
+            List<ENTransaccion> lista = new List<ENTransaccion>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "SELECT id, dinero, metodo, id_usu FROM transaccion";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ENTransaccion t = new ENTransaccion
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Cantidad = Convert.ToDecimal(reader["dinero"]),
+                            MetodoPago = reader["metodo"].ToString(),
+                            IdUsuario = Convert.ToInt32(reader["id_usu"])
+                        };
+                        lista.Add(t);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al leer todas las transacciones: " + ex.Message);
+            }
+            return lista;
         }
     }
 }
