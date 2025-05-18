@@ -9,15 +9,43 @@
         <div class="Contenedor2">
             <asp:Label runat="server" CssClass="Etiqueta">Nombre:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaNombre"></asp:TextBox>
+            <asp:RequiredFieldValidator 
+            ID="rfvNombre" 
+            runat="server" 
+            ControlToValidate="CajaNombre" 
+            ErrorMessage="El nombre es obligatorio." 
+            ForeColor="Red" 
+            Display="Dynamic"/>
 
             <asp:Label runat="server" CssClass="Etiqueta">Num. tarjeta:</asp:Label>
-                <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaNumTar"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaNumTar"></asp:TextBox>
+            <asp:RequiredFieldValidator 
+            ID="rvfNumTar" 
+            runat="server" 
+            ControlToValidate="CajaNumTar" 
+            ErrorMessage="El número de la tarjeta es obligatorio." 
+            ForeColor="Red" 
+            Display="Dynamic"/>
 
             <asp:Label runat="server" CssClass="Etiqueta">CVV:</asp:Label>
-            <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaCvv"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto" ID="CajaCvv"></asp:TextBox>
+            <asp:RequiredFieldValidator 
+            ID="rvfCvv" 
+            runat="server" 
+            ControlToValidate="CajaCvv" 
+            ErrorMessage="El cvv es obligatorio." 
+            ForeColor="Red" 
+            Display="Dynamic"/>
 
             <asp:Label runat="server" CssClass="Etiqueta">Fecha cad.:</asp:Label>
-            <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaCad"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto" ID="CajaCad"></asp:TextBox>
+            <asp:RequiredFieldValidator 
+            ID="rvfCad" 
+            runat="server" 
+            ControlToValidate="CajaCad" 
+            ErrorMessage="La caducidad de la tarjeta es obligatoria." 
+            ForeColor="Red" 
+            Display="Dynamic"/>
 
             <asp:Label runat="server" CssClass="Etiqueta">Dirección:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaDir"></asp:TextBox>
