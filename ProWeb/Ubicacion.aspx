@@ -14,6 +14,7 @@
             <label for="ddlEliminarPais">Eliminar país existente</label>
             <asp:DropDownList ID="ddlEliminarPais" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
             <asp:Button ID="btnEliminarPais" runat="server" Text="Eliminar País" CssClass="BotonEliminar" OnClick="btnEliminarPais_Click" />
+            <asp:Label ID="lblMensaje" runat="server" CssClass="mensaje-estilo" Visible="false"></asp:Label>
         </div>
 
         <!-- Creación de Provincia -->

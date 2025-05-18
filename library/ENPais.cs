@@ -6,17 +6,34 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    class ENPais
+    public class ENPais
     {
-        public int idPais;
-        public string nombrePais;
+        int _idPais;
+        string _nombrePais;
+
+        public int IdPais
+        {
+            get { return _idPais; }
+            set { _idPais = value; }
+        }
+
+        public string NombrePais
+        {
+            get { return _nombrePais; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("El nombre del país no puede estar vacío.");
+                _nombrePais = value.Trim();
+            }
+        }
 
         public ENPais() { }
 
         public ENPais(int idPais, string nombre)
         {
-            this.idPais = idPais;
-            this.nombrePais = nombre;
+            IdPais = idPais;
+            NombrePais = nombre;
         }
 
         public bool CrearPais()
@@ -30,25 +47,5 @@ namespace library
             CADPais cad = new CADPais();
             return cad.EliminarPais(this);
         }
-
-        public bool ModificarPais()
-        {
-            CADPais cad = new CADPais();
-            return cad.ModificarPais(this);
-        }
-
-        public bool Read()
-        {
-            CADPais cad = new CADPais();
-            return cad.Read(this);
-        }
-
-        public List<ENPais> ReadAll()
-        {
-            CADPais cad = new CADPais();
-            return cad.ReadAll(this);
-        }
-
-
     }
 }
