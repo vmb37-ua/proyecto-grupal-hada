@@ -92,6 +92,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Notificaciones.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Source\Styles\Informes.css" />
     <Content Include="Source\Styles\PanelAdmin.css" />
     <Content Include="Source\Styles\AdminNotificaciones.css" />
     <Content Include="Source\Images\estadio.jpg" />
@@ -126,6 +127,7 @@
     <Content Include="AdminApuestas.aspx" />
     <Content Include="AdminEstadios.aspx" />
     <Content Include="AdminEquipos.aspx" />
+    <Content Include="Informes.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminNotificaciones.aspx.cs">
@@ -303,6 +305,13 @@
     </Compile>
     <Compile Include="AdminEquipos.aspx.designer.cs">
       <DependentUpon>AdminEquipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Informes.aspx.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Informes.aspx.designer.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
