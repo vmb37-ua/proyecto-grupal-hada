@@ -73,17 +73,5 @@ namespace library
             CADNotificacion cad = new CADNotificacion();
             return cad.ReadAll(this);
         }
-
-        public List<ENNotificacion> ReadByUsuario()
-        {
-            CADNotificacion cad = new CADNotificacion();
-            return cad.LeerNotificacionesPorUsuario(this.IdUsuario);
-        }
-
-        public List<ENNotificacion> BuscarPorTexto(string texto)
-        {
-            CADNotificacion cad = new CADNotificacion();
-            return cad.BuscarPorTexto(texto);
-        }
     }
 }
