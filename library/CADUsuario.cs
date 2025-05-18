@@ -219,5 +219,31 @@ namespace library
             return lista;
         }
 
+        public bool ExisteCorreo(string correo)
+        {
+            bool existe = false;
+            SqlConnection cn = new SqlConnection(conexion);
+
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM usuario WHERE correo = @correo", cn);
+                cmd.Parameters.AddWithValue("@correo", correo);
+                int count = (int)cmd.ExecuteScalar();
+                existe = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                existe = false;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return existe;
+        }
+
     }
 }
