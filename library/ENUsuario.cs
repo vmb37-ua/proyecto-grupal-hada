@@ -156,5 +156,10 @@ namespace library
             CADUsuario usu = new CADUsuario();
             return usu.LoginUsu(this);
         }
+
+        public List<ENUsuario> ReadAll() {
+            CADUsuario usu = new CADUsuario();
+            return usu.ReadAll();
+        }
     }
 }
