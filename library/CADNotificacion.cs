@@ -130,13 +130,13 @@ namespace library
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        ENNotificacion noti = new ENNotificacion
+                        ENNotificacion n = new ENNotificacion
                         {
                             Id = Convert.ToInt32(reader["id"]),
                             IdUsuario = Convert.ToInt32(reader["id_usuario"]),
                             Mensaje = reader["texto"].ToString()
                         };
-                        lista.Add(noti);
+                        lista.Add(n);
                     }
                     reader.Close();
                 }
