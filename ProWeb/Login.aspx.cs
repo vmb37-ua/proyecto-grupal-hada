@@ -35,14 +35,18 @@ namespace ProWeb
                 ENUsuario usuario = new ENUsuario();
                 usuario.Correo = Emaillogin.Text;
                 usuario.Password = Passlogin.Text;
-                if (usuario.LoginUsu())
+                if (Page.IsValid)
                 {
-                    //El usuario existe (contraseña correcta)
-                    Session["Login"] = usuario.ID;
-                    Response.Redirect("Juegos.aspx");
-                }
-                else {
-                    ErrMsg.Text = "Correo o contraseña incorrectos";
+                    if (usuario.LoginUsu())
+                    {
+                        //El usuario existe (contraseña correcta)
+                        Session["Login"] = usuario.ID;
+                        Response.Redirect("Juegos.aspx");
+                    }
+                    else
+                    {
+                        ErrMsg.Text = "Correo o contraseña incorrectos";
+                    }
                 }
             }
         }
