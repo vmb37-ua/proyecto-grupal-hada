@@ -54,6 +54,7 @@ namespace ProWeb
         }
     }
 }
+/*
             string token = Request.Form["g-recaptcha-response"];
             if (string.IsNullOrEmpty(token))
             {
@@ -113,4 +114,4 @@ namespace ProWeb
 
 
     }
-}
+}*/
