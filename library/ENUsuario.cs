@@ -167,5 +167,11 @@ namespace library
             CADUsuario usu = new CADUsuario();
             return usu.ExisteCorreo(correo);
         }
+
+        public bool UpdateFoto()
+        {
+            CADUsuario usu = new CADUsuario();
+            return usu.UpdateFoto(this);
+        }
     }
 }

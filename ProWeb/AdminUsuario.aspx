@@ -14,23 +14,23 @@
                 <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaNumTar"></asp:TextBox>
 
             <asp:Label runat="server" CssClass="Etiqueta">CVV:</asp:Label>
-            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaCvv"></asp:TextBox>
 
             <asp:Label runat="server" CssClass="Etiqueta">Fecha cad.:</asp:Label>
-            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaCad"></asp:TextBox>
 
             <asp:Label runat="server" CssClass="Etiqueta">Dirección:</asp:Label>
-            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaDir"></asp:TextBox>
 
             <asp:Label runat="server" CssClass="Etiqueta">Teléfono:</asp:Label>
-            <asp:TextBox runat="server" CssClass="CajaDeTexto"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaTelef"></asp:TextBox>
 
             <div id="cajaFoto">
                 <div id="selecFoto">
                     <asp:FileUpload runat="server" CssClass="fileup" ID="selecFoto"/>
                 </div>
                 <asp:Button ID="BotonFoto" Text="Cambiar foto de perfil" runat="server" CssClass="Boton" OnClick="EventoCambioFoto"></asp:Button>
-                <asp:Label runat="server" ID="MensajeFoto"></asp:Label>
+                <asp:Label runat="server" ID="MensajeFoto" CssClass="MensajeError"></asp:Label>
             </div>  
         </div>
 

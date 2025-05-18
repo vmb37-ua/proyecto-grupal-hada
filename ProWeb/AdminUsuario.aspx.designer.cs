@@ -33,6 +33,42 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox CajaNumTar;
 
         /// <summary>
+        /// Control CajaCvv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CajaCvv;
+
+        /// <summary>
+        /// Control CajaCad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CajaCad;
+
+        /// <summary>
+        /// Control CajaDir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CajaDir;
+
+        /// <summary>
+        /// Control CajaTelef.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CajaTelef;
+
+        /// <summary>
         /// Control selecFoto.
         /// </summary>
         /// <remarks>

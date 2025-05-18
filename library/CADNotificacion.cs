@@ -147,5 +147,15 @@ namespace library
             }
             return lista;
         }
+
+        public List<ENNotificacion> LeerNotificacionesPorUsuario(int id)
+        {
+            return new List<ENNotificacion>();
+        }
+
+        public List<ENNotificacion> BuscarPorTexto(string hola)
+        {
+            return new List<ENNotificacion>();
+        }
     }
 }
