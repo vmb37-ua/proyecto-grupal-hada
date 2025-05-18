@@ -9,3 +9,12 @@
   </ItemGroup>
 
 </Project>
+	<ItemGroup>
+	  <PackageReference Include="AjaxControlToolkit" Version="20.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="System.Configuration" />
+	</ItemGroup>
+
+</Project>
