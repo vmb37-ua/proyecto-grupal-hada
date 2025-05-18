@@ -49,9 +49,23 @@
 
             <asp:Label runat="server" CssClass="Etiqueta">Dirección:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaDir"></asp:TextBox>
+            <asp:RequiredFieldValidator 
+            ID="rvfDir" 
+            runat="server" 
+            ControlToValidate="CajaDir" 
+            ErrorMessage="La direccion es obligatoria." 
+            ForeColor="Red" 
+            Display="Dynamic"/>
 
             <asp:Label runat="server" CssClass="Etiqueta">Teléfono:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaTelef"></asp:TextBox>
+            <asp:RequiredFieldValidator 
+            ID="rvfTelef" 
+            runat="server" 
+            ControlToValidate="CajaTelef" 
+            ErrorMessage="El teléfono es obligatorio." 
+            ForeColor="Red" 
+            Display="Dynamic"/>
 
             <div id="cajaFoto">
                 <div id="selecFoto">

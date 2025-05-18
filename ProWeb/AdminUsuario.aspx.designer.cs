@@ -87,6 +87,42 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfCad;
 
         /// <summary>
+        /// Control CajaDir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CajaDir;
+
+        /// <summary>
+        /// Control rvfDir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfDir;
+
+        /// <summary>
+        /// Control CajaTelef.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CajaTelef;
+
+        /// <summary>
+        /// Control rvfTelef.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfTelef;
+
+        /// <summary>
         /// Control selecFoto.
         /// </summary>
         /// <remarks>
