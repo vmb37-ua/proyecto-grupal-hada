@@ -6,48 +6,84 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    //esta clas representa una notificación enviada a un usuario
-    public class Notificacion
+    public class ENNotificacion
     {
-        //el id único de la notificación
-        private int id;
+        private int _id;
+        private int _idUsuario;
+        private string _mensaje;
 
-        //id del usuario al que se envía la notificación
-        private int idUsuario;
-
-        //el texti del mensaje
-        private string mensaje;
-
-        //la fecha y hora del envío
-        private DateTime fecha;
-
-        //indica si la notificación ha sido leída por el usuario
-        private bool leida;
-
-        //las propiedades públicas
-        public int Id { get => id; set => id = value; }
-        public int IdUsuario { get => idUsuario; set => idUsuario = value; }
-        public string Mensaje { get => mensaje; set => mensaje = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
-        public bool Leida { get => leida; set => leida = value; }
-
-        public Notificacion() { }
-
-        //el constructor completo
-        public Notificacion(int id, int idUsuario, string mensaje, DateTime fecha, bool leida)
+        public int Id
         {
-            this.id = id;
-            this.idUsuario = idUsuario;
-            this.mensaje = mensaje;
-            this.fecha = fecha;
-            this.leida = leida;
+            get { return _id; }
+            set { _id = value; }
         }
 
-        //método que llama al CAD para guardar la notificación
-        public bool Guardar()
+        public int IdUsuario
+        {
+            get { return _idUsuario; }
+            set { _idUsuario = value; }
+        }
+
+        public string Mensaje
+        {
+            get { return _mensaje; }
+            set { _mensaje = value; }
+        }
+
+        public ENNotificacion()
+        {
+            _id = 0;
+            _idUsuario = 0;
+            _mensaje = string.Empty;
+        }
+
+        public ENNotificacion(int id, int idUsuario, string mensaje)
+        {
+            _id = id;
+            _idUsuario = idUsuario;
+            _mensaje = mensaje;
+        }
+
+        public bool Create()
         {
             CADNotificacion cad = new CADNotificacion();
-            return cad.CrearNotificacion(this);
+            return cad.Create(this);
+        }
+
+        public bool Delete()
+        {
+            CADNotificacion cad = new CADNotificacion();
+            return cad.Delete(this);
+        }
+
+        public bool Update()
+        {
+            CADNotificacion cad = new CADNotificacion();
+            return cad.Update(this);
+        }
+
+        public bool Read()
+        {
+            CADNotificacion cad = new CADNotificacion();
+            return cad.Read(this);
+        }
+
+        public List<ENNotificacion> ReadAll()
+        {
+            CADNotificacion cad = new CADNotificacion();
+            return cad.ReadAll(this);
+        }
+
+        public List<ENNotificacion> ReadByUsuario()
+        {
+            CADNotificacion cad = new CADNotificacion();
+            return cad.LeerNotificacionesPorUsuario(this.IdUsuario);
+        }
+
+        public List<ENNotificacion> BuscarPorTexto(string texto)
+        {
+            CADNotificacion cad = new CADNotificacion();
+            return cad.BuscarPorTexto(texto);
         }
     }
 }
