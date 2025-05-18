@@ -52,6 +52,9 @@ namespace ProWeb
         protected void EventoCerrarSesion(object sender, EventArgs e)
         {
             Session["Login"] = null;
+            HttpCookie cookie = new HttpCookie("UsuarioID");
+            cookie.Value = "";
+            Response.Cookies.Add(cookie);
             Response.Redirect("Juegos.aspx");
         }
         protected void EventoEliminarCuenta(object sender, EventArgs e)
