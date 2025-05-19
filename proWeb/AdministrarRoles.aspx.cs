@@ -11,7 +11,6 @@ namespace ProWeb
 {
     public partial class AdministrarRoles : System.Web.UI.Page
     {
-        
         protected void IdEntrante(object sender, EventArgs e)
         {
             string texto = TBIdRol.Text.Trim();
@@ -79,17 +78,26 @@ namespace ProWeb
             LabelNombre.Visible = false;
             ENRol rol = new ENRol();
             rol.Id_rol = int.Parse(TBIdRol.Text);
-            if (rol.Delete())
+            if (rol.Read())
             {
-                LabelPanelOperacion.Text = "Rol <b>" + TBNombreRol.Text + "</b> eliminado con exito";
-                MPECreacion.Show();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "cerrarPopup();", true);
-                TBIdRol.Text = "";
-                TBNombreRol.Text = "";
-                TBDescipcionRol.Text = "";
-                BotonIz.Visible = false;
-                BotonBuscarRol.Visible = false;
-                BotonDe.Visible = false;
+                if (rol.Delete())
+                {
+                    LabelPanelOperacion.Text = "Rol <b>" + TBNombreRol.Text + "</b> eliminado con exito";
+                    MPECreacion.Show();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), "cerrarPopup();", true);
+                    TBIdRol.Text = "";
+                    TBNombreRol.Text = "";
+                    TBDescipcionRol.Text = "";
+                    BotonIz.Visible = false;
+                    BotonBuscarRol.Visible = false;
+                    BotonDe.Visible = false;
+                }
+                else
+                {
+                    LabelId.Text = "No ha podido eliminar";
+                    LabelId.Visible = true;
+                    LabelId.ForeColor = System.Drawing.Color.Red;
+                }
             }
             else
             {
