@@ -36,16 +36,16 @@ namespace library
             NombrePais = nombre;
         }
 
-        public bool CrearPais()
+        public bool Create()
         {
             CADPais cad = new CADPais();
-            return cad.CrearPais(this);
+            return cad.Create(this);
         }
 
-        public bool EliminarPais()
+        public bool Delete()
         {
             CADPais cad = new CADPais();
-            return cad.EliminarPais(this);
+            return cad.Delete(this);
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
+using System.Diagnostics;
 
 namespace library
 {
@@ -69,27 +71,39 @@ namespace library
             return resultado;
         }
 
-        public bool Delete(ENProvincia provincia)
+        public bool Delete(ENProvincia en)
         {
             bool resultado = false;
-            SqlConnection conn = new SqlConnection(conexion);
 
-            try
+            using (SqlConnection conn = new SqlConnection(conexion))
             {
                 conn.Open();
-                string query = "DELETE FROM provincia WHERE id = @id";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@id", provincia.IdProvincia);
-                int affectedRows = cmd.ExecuteNonQuery();
-                resultado = affectedRows > 0;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine( ex.Message);
-            }
-            finally
-            {
-                conn.Close();
+                SqlTransaction transaction = conn.BeginTransaction(); // Iniciar transacción
+
+                try
+                {
+                    // 1. Eliminar todos los municipios de la provincia
+                    string queryMunicipios = "DELETE FROM municipio WHERE id_provincia = @idProvincia";
+                    SqlCommand cmdMunicipios = new SqlCommand(queryMunicipios, conn, transaction);
+                    cmdMunicipios.Parameters.AddWithValue("@idProvincia", en.IdProvincia);
+                    cmdMunicipios.ExecuteNonQuery();
+
+                    // 2. Eliminar la provincia
+                    string queryProvincia = "DELETE FROM provincia WHERE id_provincia = @idProvincia";
+                    SqlCommand cmdProvincia = new SqlCommand(queryProvincia, conn, transaction);
+                    cmdProvincia.Parameters.AddWithValue("@idProvincia", en.IdProvincia);
+
+                    int affectedRows = cmdProvincia.ExecuteNonQuery();
+                    resultado = affectedRows > 0;
+
+                    transaction.Commit(); // Confirmar cambios si todo va bien
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Revertir en caso de error
+                    Debug.WriteLine($"Error eliminando provincia: {ex.Message}");
+                    throw;
+                }
             }
 
             return resultado;
@@ -127,37 +141,42 @@ namespace library
             return resultado;
         }
 
-        public List<ENProvincia> ReadAll(ENProvincia provincia)
+        public List<ENProvincia> ReadAll(ENProvincia en)
         {
             List<ENProvincia> lista = new List<ENProvincia>();
-            SqlConnection conn = new SqlConnection(conexion);
 
-            try
+            using (SqlConnection conn = new SqlConnection(conexion))
             {
-                conn.Open();
-                string query = "SELECT * FROM provincia WHERE id_pais = @id_pais";
+                string query = @"SELECT 
+                            id_provincia AS IdProvincia, 
+                            nombre AS Nombre, 
+                            id_pais AS IdPais 
+                         FROM provincia 
+                         WHERE id_pais = @idPais";
+
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@id_pais", provincia.IdPais);
+                cmd.Parameters.AddWithValue("@idPais", en.IdPais);
+
+                conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
+
+                // Verifica los nombres de columnas
+                var schemaTable = reader.GetSchemaTable();
+                foreach (DataRow row in schemaTable.Rows)
+                {
+                    Debug.WriteLine($"Columna BD: {row["ColumnName"]}");
+                }
 
                 while (reader.Read())
                 {
-                    ENProvincia p = new ENProvincia();
-                    p.IdProvincia = int.Parse(reader["id"].ToString());
-                    p.Nombre = reader["nombre"].ToString();
-                    p.IdPais = int.Parse(reader["id_pais"].ToString());
-                    lista.Add(p);
+                    lista.Add(new ENProvincia
+                    {
+                        IdProvincia = Convert.ToInt32(reader["IdProvincia"]),
+                        Nombre = reader["Nombre"].ToString(),
+                        IdPais = Convert.ToInt32(reader["IdPais"])
+                    });
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-
             return lista;
         }
     }

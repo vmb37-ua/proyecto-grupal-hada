@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace library
         }
 
         // Crear Pais
-        public bool CrearPais(ENPais en)
+        public bool Create(ENPais en)
         {
             using (SqlConnection c = new SqlConnection(constring))
             {
@@ -61,42 +62,51 @@ namespace library
         }
 
         // Eliminar Pais
-        public bool EliminarPais(ENPais en)
+        public bool Delete(ENPais en)
         {
-            try
+            bool resultado = false;
+
+            using (SqlConnection conn = new SqlConnection(constring))
             {
-                using (SqlConnection c = new SqlConnection(constring))
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+
+                try
                 {
-                    c.Open();
+                    // 1. Eliminar municipios (usando JOIN)
+                    string queryMunicipios = @"
+                DELETE m
+                FROM municipio m
+                INNER JOIN provincia p ON m.id_provincia = p.id_provincia
+                WHERE p.id_pais = @idPaisParam";  // Cambiado a @idPaisParam
 
-                    // Verificar existencia
-                    string checkQuery = "SELECT id_pais FROM Pais WHERE id_pais = @id";
-                    using (SqlCommand checkCmd = new SqlCommand(checkQuery, c))
-                    {
-                        checkCmd.Parameters.AddWithValue("@id", en.IdPais);
-                        if (checkCmd.ExecuteScalar() == null)
-                        {
-                            return false;
-                        }
-                    }
+                    SqlCommand cmdMunicipios = new SqlCommand(queryMunicipios, conn, transaction);
+                    cmdMunicipios.Parameters.AddWithValue("@idPaisParam", en.IdPais); // Nombre consistente
+                    cmdMunicipios.ExecuteNonQuery();
 
-                    // Eliminar por ID 
-                    string deleteQuery = "DELETE FROM Pais WHERE id_pais = @id";
-                    using (SqlCommand cmd = new SqlCommand(deleteQuery, c))
-                    {
-                        cmd.Parameters.AddWithValue("@id", en.IdPais);
-                        return cmd.ExecuteNonQuery() == 1;
-                    }
+                    // 2. Eliminar provincias
+                    string queryProvincias = "DELETE FROM provincia WHERE id_pais = @idPaisParam"; // Mismo nombre
+                    SqlCommand cmdProvincias = new SqlCommand(queryProvincias, conn, transaction);
+                    cmdProvincias.Parameters.AddWithValue("@idPaisParam", en.IdPais); // Mismo nombre
+                    cmdProvincias.ExecuteNonQuery();
+
+                    // 3. Eliminar el país
+                    string queryPais = "DELETE FROM pais WHERE id_pais = @idPaisParam"; // Mismo nombre
+                    SqlCommand cmdPais = new SqlCommand(queryPais, conn, transaction);
+                    cmdPais.Parameters.AddWithValue("@idPaisParam", en.IdPais); // Mismo nombre
+
+                    resultado = cmdPais.ExecuteNonQuery() > 0;
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Debug.WriteLine($"Error eliminando país: {ex.Message}");
+                    throw new Exception("Error al eliminar el país. Detalles: " + ex.Message);
                 }
             }
-            catch (SqlException ex) when (ex.Number == 547)
-            {
-                return false;
-            }
-            catch (SqlException ex)
-            {
-                return false;
-            }
+
+            return resultado;
         }
 
 
