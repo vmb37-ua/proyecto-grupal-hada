@@ -150,5 +150,42 @@ namespace library
             }
             return lista;
         }
+        public List<ENMunicipio> ReadAllByProvincia(ENMunicipio municipio)
+        {
+            List<ENMunicipio> lista = new List<ENMunicipio>();
+            SqlConnection conn = new SqlConnection(conexion);
+
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM municipio WHERE id_provincia = @id_provincia";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id_provincia", municipio.Id_provincia);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ENMunicipio m = new ENMunicipio();
+                    m.Id_municipio = Convert.ToInt32(reader["id_municipio"]);
+                    m.Id_provincia = Convert.ToInt32(reader["id_provincia"]);
+                    m.Nombre = reader["nombre"].ToString();
+
+                    lista.Add(m);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en ReadAllByProvincia: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return lista;
+        }
+
+
     }
 }

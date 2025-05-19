@@ -69,6 +69,33 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox Passrepregister;
 
         /// <summary>
+        /// Control Paisregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Paisregister;
+
+        /// <summary>
+        /// Control Provinciaregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Provinciaregister;
+
+        /// <summary>
+        /// Control Municipioregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Municipioregister;
+
+        /// <summary>
         /// Control Labelerror.
         /// </summary>
         /// <remarks>
@@ -76,5 +103,14 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Labelerror;
+
+        /// <summary>
+        /// Control LabelDebug.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDebug;
     }
 }

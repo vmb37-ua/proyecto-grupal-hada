@@ -64,12 +64,17 @@ namespace library
         public List<ENProvincia> ReadAll()
         {
             CADProvincia provincia = new CADProvincia();
-            return provincia.ReadAll(this);
+            return provincia.ReadAll();
         }
         public bool Read()
         {
             CADProvincia provincia = new CADProvincia();
             return provincia.Read(this);
+        }
+        public List<ENProvincia> ReadAllByPais()
+        {
+            CADProvincia cad = new CADProvincia();
+            return cad.ReadAllByPais(this);
         }
 
     }
