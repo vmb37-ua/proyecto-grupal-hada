@@ -8,16 +8,10 @@ namespace library
 {
     public class ENEstadio
     {
-        int _id_estadio;
         string _nombre;
-        string _ciudad;
-        string _direccion;
-
-        public int Id_estadio
-        {
-            get { return _id_estadio; }
-            set { _id_estadio = value; }
-        }
+        int _capacidad;
+        string _texto;
+        int _id_municipio;
 
         public string Nombre
         {
@@ -25,63 +19,36 @@ namespace library
             set { _nombre = value; }
         }
 
-        public string Ciudad
+        public int Capacidad
         {
-            get { return _ciudad; }
-            set { _ciudad = value; }
+            get { return _capacidad; }
+            set { _capacidad = value; }
         }
 
-        public string Direccion
+        public string Texto
         {
-            get { return _direccion; }
-            set { _direccion = value; }
+            get { return _texto; }
+            set { _texto = value; }
+        }
+
+        public int Id_municipio
+        {
+            get { return _id_municipio; }
+            set { _id_municipio = value; }
         }
 
         public ENEstadio()
         {
-            _id_estadio = 0;
             _nombre = "";
-            _ciudad = "";
-            _direccion = "";
+            _capacidad = 0;
+            _texto = "";
+            _id_municipio = 0;
         }
 
-        public ENEstadio(int id_estadio, string nombre, string ciudad, string direccion)
-        {
-            Id_estadio = id_estadio;
-            Nombre = nombre;
-            Ciudad = ciudad;
-            Direccion = direccion;
-        }
-
-        public bool Create()
-        {
-            CADEstadio estadio = new CADEstadio();
-            return estadio.Create(this);
-        }
-
-        public bool Delete()
-        {
-            CADEstadio estadio = new CADEstadio();
-            return estadio.Delete(this);
-        }
-
-        public bool Update()
-        {
-            CADEstadio estadio = new CADEstadio();
-            return estadio.Update(this);
-        }
-
-        public bool Read()
-        {
-            CADEstadio estadio = new CADEstadio();
-            return estadio.Read(this);
-        }
-
-        public List<ENEstadio> ReadAll()
-        {
-            CADEstadio estadio = new CADEstadio();
-            return estadio.ReadAll(this);
-        }
+        public bool Create() => new CADEstadio().Create(this);
+        public bool Update() => new CADEstadio().Update(this);
+        public bool Delete() => new CADEstadio().Delete(this);
+        public bool Read() => new CADEstadio().Read(this);
+        public List<ENEstadio> ReadAll() => new CADEstadio().ReadAll(this);
     }
 }
-

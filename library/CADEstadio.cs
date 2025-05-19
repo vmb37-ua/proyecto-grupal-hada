@@ -19,103 +19,97 @@ namespace library
 
         public bool Create(ENEstadio estadio)
         {
-            bool creado = false;
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "INSERT INTO estadio (nombre, ciudad, direccion) VALUES (@nombre, @ciudad, @direccion)";
+                    string query = "INSERT INTO estadio (nombre, capacidad, texto, id_municipio) VALUES (@nombre, @capacidad, @texto, @id_municipio)";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nombre", estadio.Nombre);
-                    cmd.Parameters.AddWithValue("@ciudad", estadio.Ciudad);
-                    cmd.Parameters.AddWithValue("@direccion", estadio.Direccion);
+                    cmd.Parameters.AddWithValue("@capacidad", estadio.Capacidad);
+                    cmd.Parameters.AddWithValue("@texto", estadio.Texto);
+                    cmd.Parameters.AddWithValue("@id_municipio", estadio.Id_municipio);
 
                     conn.Open();
-                    creado = cmd.ExecuteNonQuery() > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al crear estadio: " + ex.Message);
+                throw new Exception("Error al crear estadio: " + ex.Message);
             }
-            return creado;
-        }
 
-        public bool Delete(ENEstadio estadio)
-        {
-            bool eliminado = false;
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(conexion))
-                {
-                    string query = "DELETE FROM estadio WHERE id_estadio = @id_estadio";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id_estadio", estadio.Id_estadio);
-
-                    conn.Open();
-                    eliminado = cmd.ExecuteNonQuery() > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al eliminar estadio: " + ex.Message);
-            }
-            return eliminado;
         }
 
         public bool Update(ENEstadio estadio)
         {
-            bool actualizado = false;
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "UPDATE estadio SET nombre = @nombre, ciudad = @ciudad, direccion = @direccion WHERE id_estadio = @id_estadio";
+                    string query = "UPDATE estadio SET capacidad = @capacidad, texto = @texto, id_municipio = @id_municipio WHERE nombre = @nombre";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nombre", estadio.Nombre);
-                    cmd.Parameters.AddWithValue("@ciudad", estadio.Ciudad);
-                    cmd.Parameters.AddWithValue("@direccion", estadio.Direccion);
-                    cmd.Parameters.AddWithValue("@id_estadio", estadio.Id_estadio);
+                    cmd.Parameters.AddWithValue("@capacidad", estadio.Capacidad);
+                    cmd.Parameters.AddWithValue("@texto", estadio.Texto);
+                    cmd.Parameters.AddWithValue("@id_municipio", estadio.Id_municipio);
 
                     conn.Open();
-                    actualizado = cmd.ExecuteNonQuery() > 0;
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine("Error al actualizar estadio: " + ex.Message);
+                return false;
             }
-            return actualizado;
+        }
+
+        public bool Delete(ENEstadio estadio)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "DELETE FROM estadio WHERE nombre = @nombre";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@nombre", estadio.Nombre);
+
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Read(ENEstadio estadio)
         {
-            bool encontrado = false;
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "SELECT * FROM estadio WHERE id_estadio = @id_estadio";
+                    string query = "SELECT * FROM estadio WHERE nombre = @nombre";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id_estadio", estadio.Id_estadio);
+                    cmd.Parameters.AddWithValue("@nombre", estadio.Nombre);
 
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        estadio.Nombre = reader["nombre"].ToString();
-                        estadio.Ciudad = reader["ciudad"].ToString();
-                        estadio.Direccion = reader["direccion"].ToString();
-                        encontrado = true;
+                        estadio.Capacidad = Convert.ToInt32(reader["capacidad"]);
+                        estadio.Texto = reader["texto"].ToString();
+                        estadio.Id_municipio = Convert.ToInt32(reader["id_municipio"]);
+                        return true;
                     }
-                    reader.Close();
+                    return false;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine("Error al leer estadio: " + ex.Message);
+                return false;
             }
-            return encontrado;
         }
 
         public List<ENEstadio> ReadAll(ENEstadio _)
@@ -132,22 +126,17 @@ namespace library
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        ENEstadio estadio = new ENEstadio
+                        lista.Add(new ENEstadio
                         {
-                            Id_estadio = Convert.ToInt32(reader["id_estadio"]),
                             Nombre = reader["nombre"].ToString(),
-                            Ciudad = reader["ciudad"].ToString(),
-                            Direccion = reader["direccion"].ToString()
-                        };
-                        lista.Add(estadio);
+                            Capacidad = Convert.ToInt32(reader["capacidad"]),
+                            Texto = reader["texto"].ToString(),
+                            Id_municipio = Convert.ToInt32(reader["id_municipio"])
+                        });
                     }
-                    reader.Close();
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al leer todos los estadios: " + ex.Message);
-            }
+            catch { }
             return lista;
         }
     }
