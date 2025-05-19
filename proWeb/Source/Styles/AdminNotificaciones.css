@@ -68,3 +68,7 @@ select {
     font-size:15px;
     padding:5px 10px 5px 10px;
 }
+.MensajeError {
+    font-weight: bold;
+    margin-top: 5px;
+}
