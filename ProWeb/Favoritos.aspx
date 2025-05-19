@@ -13,5 +13,8 @@
                 <asp:BoundField DataField="CiudadEquipo" HeaderText="Ciudad" />
             </Columns>
         </asp:GridView>
+
+        <br />
+        <asp:Button ID="VolverPerfil" runat="server" Text="Volver al Perfil" OnClick="IrPerfil_Click" />
     </div>
 </asp:Content>

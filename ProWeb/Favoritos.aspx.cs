@@ -15,8 +15,8 @@ namespace ProWeb
             {
                 List<EquipoFavorito> equipos = new List<EquipoFavorito>
                 {
-                    new EquipoFavorito { NombreEquipo = "C.D. Thader", CiudadEquipo = "Rojales" },
-                    new EquipoFavorito { NombreEquipo = "Orihuela CF", CiudadEquipo = "Orihuela" }
+                    new EquipoFavorito { NombreEquipo = "FC Barcelona", CiudadEquipo = "Barcelona" },
+                    new EquipoFavorito { NombreEquipo = "Inter de Milán", CiudadEquipo = "Milán" }
                 };
 
                 TablaFavoritos.DataSource = equipos;
@@ -28,6 +28,11 @@ namespace ProWeb
         {
             public string NombreEquipo { get; set; }
             public string CiudadEquipo { get; set; }
+        }
+
+        protected void IrPerfil_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Perfil.aspx");
         }
     }
 }
