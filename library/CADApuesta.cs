@@ -36,6 +36,7 @@ namespace library
                 com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
                 com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
                 com.Parameters.AddWithValue("@CotX", apuesta.cotX);
+
             }
             catch (Exception ex)
             {
