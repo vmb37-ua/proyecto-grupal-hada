@@ -64,7 +64,7 @@ namespace library
         public List<ENProvincia> ReadAll()
         {
             CADProvincia provincia = new CADProvincia();
-            return provincia.ReadAll(this);
+            return provincia.ReadAll();
         }
         public bool Read()
         {

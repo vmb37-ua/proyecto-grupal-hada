@@ -33,7 +33,7 @@ namespace library
             }
             catch (Exception ex)
             {
-                Console.WriteLine( ex.Message);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -61,7 +61,7 @@ namespace library
             }
             catch (Exception ex)
             {
-                Console.WriteLine( ex.Message);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -141,7 +141,78 @@ namespace library
             return resultado;
         }
 
-        public List<ENProvincia> ReadAll(ENProvincia en)
+        public List<ENProvincia> ReadAll()
+        {
+            var provincias = new List<ENProvincia>();
+
+            using (var c = new SqlConnection(conexion))
+            {
+                try
+                {
+                    c.Open();
+                    string sql = "SELECT id_provincia, nombre, id_pais FROM Provincia ORDER BY nombre";
+
+                    using (var cmd = new SqlCommand(sql, c))
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            provincias.Add(new ENProvincia
+                            {
+                                IdProvincia = (int)dr["id_provincia"],
+                                Nombre = dr["nombre"].ToString(),
+                                IdPais = (int)dr["id_pais"]
+                            });
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"Error al leer provincias: {ex.Message}");
+                }
+            }
+
+            return provincias;
+        }
+
+        public List<ENProvincia> ReadAllByPais(ENProvincia provincia)
+        {
+            var provincias = new List<ENProvincia>();
+
+            using (var c = new SqlConnection(conexion))
+            {
+                try
+                {
+                    c.Open();
+                    string sql = "SELECT id_provincia, id_pais, nombre FROM Provincia WHERE id_pais = @idPais ORDER BY nombre";
+
+                    using (var cmd = new SqlCommand(sql, c))
+                    {
+                        cmd.Parameters.AddWithValue("@idPais", provincia.IdPais);
+
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                provincias.Add(new ENProvincia(
+                                    idProvincia: (int)dr["id_provincia"],
+                                    idPais: (int)dr["id_pais"],
+                                    nombre: dr["nombre"].ToString()
+                                ));
+                            }
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"Error al leer provincias por país: {ex.Message}");
+                }
+            }
+
+            return provincias;
+        }
+
+        /*public List<ENProvincia> ReadAll(ENProvincia en)
         {
             List<ENProvincia> lista = new List<ENProvincia>();
 
@@ -178,6 +249,6 @@ namespace library
                 }
             }
             return lista;
-        }
+        }*/
     }
 }
