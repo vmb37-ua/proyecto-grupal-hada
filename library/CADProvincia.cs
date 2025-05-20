@@ -1,9 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Data;
-using System.Diagnostics;
 
 namespace library
 {
@@ -33,7 +32,7 @@ namespace library
             }
             catch (Exception ex)
             {
-                Console.WriteLine( ex.Message);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -61,7 +60,7 @@ namespace library
             }
             catch (Exception ex)
             {
-                Console.WriteLine( ex.Message);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -71,39 +70,27 @@ namespace library
             return resultado;
         }
 
-        public bool Delete(ENProvincia en)
+        public bool Delete(ENProvincia provincia)
         {
             bool resultado = false;
+            SqlConnection conn = new SqlConnection(conexion);
 
-            using (SqlConnection conn = new SqlConnection(conexion))
+            try
             {
                 conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction(); // Iniciar transacción
-
-                try
-                {
-                    // 1. Eliminar todos los municipios de la provincia
-                    string queryMunicipios = "DELETE FROM municipio WHERE id_provincia = @idProvincia";
-                    SqlCommand cmdMunicipios = new SqlCommand(queryMunicipios, conn, transaction);
-                    cmdMunicipios.Parameters.AddWithValue("@idProvincia", en.IdProvincia);
-                    cmdMunicipios.ExecuteNonQuery();
-
-                    // 2. Eliminar la provincia
-                    string queryProvincia = "DELETE FROM provincia WHERE id_provincia = @idProvincia";
-                    SqlCommand cmdProvincia = new SqlCommand(queryProvincia, conn, transaction);
-                    cmdProvincia.Parameters.AddWithValue("@idProvincia", en.IdProvincia);
-
-                    int affectedRows = cmdProvincia.ExecuteNonQuery();
-                    resultado = affectedRows > 0;
-
-                    transaction.Commit(); // Confirmar cambios si todo va bien
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback(); // Revertir en caso de error
-                    Debug.WriteLine($"Error eliminando provincia: {ex.Message}");
-                    throw;
-                }
+                string query = "DELETE FROM provincia WHERE id = @id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", provincia.IdProvincia);
+                int affectedRows = cmd.ExecuteNonQuery();
+                resultado = affectedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
 
             return resultado;
@@ -141,43 +128,75 @@ namespace library
             return resultado;
         }
 
-        public List<ENProvincia> ReadAll(ENProvincia en)
+        public List<ENProvincia> ReadAll()
         {
-            List<ENProvincia> lista = new List<ENProvincia>();
+            var provincias = new List<ENProvincia>();
 
-            using (SqlConnection conn = new SqlConnection(conexion))
+            using (var c = new SqlConnection(conexion))
             {
-                string query = @"SELECT 
-                            id_provincia AS IdProvincia, 
-                            nombre AS Nombre, 
-                            id_pais AS IdPais 
-                         FROM provincia 
-                         WHERE id_pais = @idPais";
-
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@idPais", en.IdPais);
-
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                // Verifica los nombres de columnas
-                var schemaTable = reader.GetSchemaTable();
-                foreach (DataRow row in schemaTable.Rows)
+                try
                 {
-                    Debug.WriteLine($"Columna BD: {row["ColumnName"]}");
-                }
+                    c.Open();
+                    string sql = "SELECT id_provincia, nombre, id_pais FROM Provincia ORDER BY nombre";
 
-                while (reader.Read())
-                {
-                    lista.Add(new ENProvincia
+                    using (var cmd = new SqlCommand(sql, c))
+                    using (var dr = cmd.ExecuteReader())
                     {
-                        IdProvincia = Convert.ToInt32(reader["IdProvincia"]),
-                        Nombre = reader["Nombre"].ToString(),
-                        IdPais = Convert.ToInt32(reader["IdPais"])
-                    });
+                        while (dr.Read())
+                        {
+                            provincias.Add(new ENProvincia
+                            {
+                                IdProvincia = (int)dr["id_provincia"],
+                                Nombre = dr["nombre"].ToString(),
+                                IdPais = (int)dr["id_pais"]
+                            });
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"Error al leer provincias: {ex.Message}");
                 }
             }
-            return lista;
+
+            return provincias;
+        }
+
+        public List<ENProvincia> ReadAllByPais(ENProvincia provincia)
+        {
+            var provincias = new List<ENProvincia>();
+
+            using (var c = new SqlConnection(conexion))
+            {
+                try
+                {
+                    c.Open();
+                    string sql = "SELECT id_provincia, id_pais, nombre FROM Provincia WHERE id_pais = @idPais ORDER BY nombre";
+
+                    using (var cmd = new SqlCommand(sql, c))
+                    {
+                        cmd.Parameters.AddWithValue("@idPais", provincia.IdPais);
+
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                provincias.Add(new ENProvincia(
+                                    idProvincia: (int)dr["id_provincia"],
+                                    idPais: (int)dr["id_pais"],
+                                    nombre: dr["nombre"].ToString()
+                                ));
+                            }
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine($"Error al leer provincias por país: {ex.Message}");
+                }
+            }
+
+            return provincias;
         }
 
 
