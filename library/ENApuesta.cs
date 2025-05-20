@@ -13,7 +13,10 @@ namespace library
         ENEstadio _estadio;
         ENEquipo _equipo1;
         ENEquipo _equipo2;
-        int _resultado; //este me faltaba antes
+        int _resultado;
+        double _cot1;
+        double _cot2;
+        double _cotX;
         public int Resultado
         {
             get { return _resultado; }
