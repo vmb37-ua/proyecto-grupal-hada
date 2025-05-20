@@ -82,7 +82,8 @@ namespace ProWeb
 
         private void MostrarMensaje(string mensaje)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+            lblMensaje.Text = mensaje;
         }
+
     }
 }

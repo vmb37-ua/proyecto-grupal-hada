@@ -22,5 +22,8 @@
         <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear estadio" OnClick="btnCrear_Click" />
         <asp:Button ID="btnActualizar" runat="server" CssClass="BotonAdmin" Text="Actualizar estadio" OnClick="btnActualizar_Click" />
         <asp:Button ID="btnEliminar" runat="server" CssClass="BotonEliminar" Text="Eliminar estadio" OnClick="btnEliminar_Click" />
+        <br /><br />
+        <asp:Label ID="lblMensaje" runat="server" ForeColor="Green" /> 
+    
     </div>
 </asp:Content>
