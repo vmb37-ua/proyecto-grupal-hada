@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using library;
 using static ProWeb.ApuestasUsuario;
 
 namespace ProWeb
@@ -14,14 +15,67 @@ namespace ProWeb
 		{
             if (!IsPostBack)
             {
-                var juegos = new List<Juego>
+                CargarJuegosDesdeBD();
+            }
+        }
+
+        private void CargarJuegosDesdeBD()
+        {
+            try
+            {
+                var cadApuesta = new CADApuesta();
+                var apuestas = cadApuesta.ReadAll(new ENApuesta());
+                apuestas = apuestas.OrderBy(a => a.Fecha).ToList();
+
+                var juegos = new List<Juego>();
+
+                foreach (var apuesta in apuestas)
                 {
-                    new Juego { EquipoLocal = "Real Madrid", EquipoVisitante = "Barcelona", Estadio = "Santiago Bernabéu", Fecha = new DateTime(2025, 5, 15), Categoria="Futbol", Hora=new TimeSpan(14, 30, 0)},
-                    new Juego { EquipoLocal = "Manchester City", EquipoVisitante = "Liverpool", Estadio = "Etihad Stadium", Fecha = new DateTime(2025, 5, 16), Categoria="Futbol", Hora=new TimeSpan(20, 0, 0)}
-                };
+                    var equipoLocal = new ENEquipo { Id_equipo = apuesta.Equipo1.Id_equipo };
+                    var equipoVisitante = new ENEquipo { Id_equipo = apuesta.Equipo2.Id_equipo };
+
+                    var estadio = new ENEstadio { Id_estadio = apuesta.Estadio.Id_estadio };
+
+                    if (equipoLocal.Read() && equipoVisitante.Read() && estadio.Read())
+                    {
+                        juegos.Add(new Juego
+                        {
+                            EquipoLocal = equipoLocal.Nombre,
+                            EquipoVisitante = equipoVisitante.Nombre,
+                            Estadio = estadio.Nombre,
+                            Fecha = apuesta.Fecha.Date,
+                            Hora = apuesta.Fecha.TimeOfDay,
+                        });
+                    }
+                }
+
+                //Placeholder
+                if (juegos.Count == 0)
+                {
+                    juegos.Add(new Juego
+                    {
+                        EquipoLocal = "Real Madrid",
+                        EquipoVisitante = "Barcelona",
+                        Estadio = "Santiago Bernabéu",
+                        Fecha = DateTime.Today,
+                        Hora = new TimeSpan(21, 0, 0),
+                    });
+                    juegos.Add(new Juego
+                    {
+                        EquipoLocal = "Manchester City",
+                        EquipoVisitante = "Liverpool",
+                        Estadio = "Mestalla",
+                        Fecha = DateTime.Today,
+                        Hora = new TimeSpan(21, 0, 0),
+                    });
+                }
 
                 rptJuegos.DataSource = juegos;
                 rptJuegos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"<script>alert('Error al cargar los partidos: {ex.Message}');</script>");
             }
         }
 
@@ -34,11 +88,12 @@ namespace ProWeb
             public TimeSpan Hora { get; set; }
             public string Categoria { get; set; }
 
-        }
+        };
 
         protected void EventoJuegoClick(object sender, EventArgs e)
         {
             Response.Redirect("ApuestaUsuario.aspx");
         }
     }
+    
 }
