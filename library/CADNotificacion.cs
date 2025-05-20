@@ -148,15 +148,16 @@ namespace library
             return encontrada;
         }
 
-        public List<ENNotificacion> ReadAll(ENNotificacion _)
+        public List<ENNotificacion> ReadAll(ENNotificacion notificacion)
         {
             List<ENNotificacion> lista = new List<ENNotificacion>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "SELECT id, id_usuario, texto FROM notificacion";
+                    string query = "SELECT id, id_usuario, texto FROM notificacion WHERE id_usuario = @idUsuario";
                     SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@idUsuario", notificacion.IdUsuario);
 
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.UI;
+using library;
 
 namespace ProWeb
 {
@@ -10,15 +11,28 @@ namespace ProWeb
         {
             if (!IsPostBack)
             {
-                var notificaciones = new List<string>
+                if (Session["IdUsuario"] != null)
                 {
-                    "¡Has ganado tu apuesta!",
-                    "Tienes un bono disponible en tu cuenta",
-                    "Tu perfil ha sido actualizado correctamente"
-                };
+                    int idUsuario = Convert.ToInt32(Session["IdUsuario"]);
 
-                ListaNotificaciones.DataSource = notificaciones;
-                ListaNotificaciones.DataBind();
+                    ENNotificacion notificacion = new ENNotificacion();
+                    notificacion.IdUsuario = idUsuario;
+
+                    List<ENNotificacion> notificaciones = notificacion.ReadAll();
+
+                    List<string> mensajes = new List<string>();
+                    foreach (var n in notificaciones)
+                    {
+                        mensajes.Add(n.Mensaje);
+                    }
+
+                    ListaNotificaciones.DataSource = mensajes;
+                    ListaNotificaciones.DataBind();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
             }
         }
 
@@ -28,4 +42,3 @@ namespace ProWeb
         }
     }
 }
-
