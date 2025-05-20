@@ -12,7 +12,7 @@ namespace ProWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             // Ejemplo
-            /*
+            
             LabelNombre.Text = "Estadio Nacional";
             LabelCiudad.Text = "Ciudad: Madrid";
             LinkDireccion.Text = "Ver en Google Maps";
@@ -34,7 +34,7 @@ namespace ProWeb
               </iframe>";
 
             MapFrame.Text = iframe;
-            */
+            
         }
     }
 }

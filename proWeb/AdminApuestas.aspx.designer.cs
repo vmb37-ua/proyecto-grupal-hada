@@ -33,13 +33,31 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox txtIdApuesta;
 
         /// <summary>
-        /// Control txtResultado.
+        /// Control txtCot1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtResultado;
+        protected global::System.Web.UI.WebControls.TextBox txtCot1;
+
+        /// <summary>
+        /// Control txtCotX.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCotX;
+
+        /// <summary>
+        /// Control txtCot2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCot2;
 
         /// <summary>
         /// Control ddlEstadios.

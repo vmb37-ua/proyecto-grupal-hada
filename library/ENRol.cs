@@ -45,25 +45,40 @@ namespace library
             CADRol rol = new CADRol();
             return rol.Create(this);
         }
-        public bool Delete()
-        {
-            CADRol rol = new CADRol();
-            return rol.Delete(this);
-        }
         public bool Update()
         {
             CADRol rol = new CADRol();
             return rol.Update(this);
+        }
+        public bool Delete()
+        {
+            CADRol rol = new CADRol();
+            return rol.Delete(this);
         }
         public bool Read()
         {
             CADRol rol = new CADRol();
             return rol.Read(this);
         }
+        public bool ReadFirst()
+        {
+            CADRol rol = new CADRol();
+            return rol.ReadFirst(this);
+        }
+        public bool ReadNext()
+        {
+            CADRol rol = new CADRol();
+            return rol.ReadNext(this);
+        }
+        public bool ReadPrev()
+        {
+            CADRol rol = new CADRol();
+            return rol.ReadPrev(this);
+        }
         public List<ENRol> ReadAll()
         {
             CADRol rol = new CADRol();
-            return rol.ReadAll(this);
+            return rol.ReadAll();
         }
     }
 }

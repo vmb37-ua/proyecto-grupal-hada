@@ -39,8 +39,9 @@
         <asp:Button id="botonSesion" Text="Iniciar Sesión" runat="server" OnClick="EventoClickSesion" Height="28px" Width="131px" CssClass="ISboton" Visible="true"/>
         
         <!-- Sesión iniciada (abajo). Sesión no iniciada (arriba) -->
-        
-        <asp:ImageButton ImageUrl="~/Source/Images/DefaultPFP.jpg" runat="server" CssClass="FotoPerfil" id="botonPerfil" OnClick="EventoBotonPerfil" Visible="false"/>
+        <div id="ContenedorFoto">
+            <asp:ImageButton ImageUrl="~/Source/Images/DefaultPFP.jpg" runat="server" CssClass="FotoPerfil" id="botonPerfil" OnClick="EventoBotonPerfil" Visible="false"/>
+        </div>
     </header>
     <main class="ContenidoMaster">
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

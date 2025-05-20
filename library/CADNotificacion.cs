@@ -3,47 +3,149 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using library;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace library
 {
-    //clase de acceso a datos para la entidad Notificacion
     public class CADNotificacion
     {
-        //crea una nueva notificación en la base de datos
-        public bool CrearNotificacion(Notificacion n)
+        private string conexion;
+
+        public CADNotificacion()
         {
-            throw new NotImplementedException();
+            conexion = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
 
-        //devuelve una notificación por su id
-        public Notificacion LeerNotificacion(int id)
+        public bool Create(ENNotificacion notificacion)
         {
-            throw new NotImplementedException();
+            bool creada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "INSERT INTO notificacion (id_usuario, texto) VALUES (@id_usuario, @texto)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id_usuario", notificacion.IdUsuario);
+                    cmd.Parameters.AddWithValue("@texto", notificacion.Mensaje);
+
+                    conn.Open();
+                    creada = cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al crear notificación: " + ex.Message);
+            }
+            return creada;
         }
 
-        //devuelve todas las notificaciones de un usuario
-        public List<Notificacion> LeerNotificacionesPorUsuario(int idUsuario)
+        public bool Delete(ENNotificacion notificacion)
         {
-            throw new NotImplementedException();
+            bool eliminada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "DELETE FROM notificacion WHERE id = @id AND id_usuario = @id_usuario";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", notificacion.Id);
+                    cmd.Parameters.AddWithValue("@id_usuario", notificacion.IdUsuario);
+
+                    conn.Open();
+                    eliminada = cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al eliminar notificación: " + ex.Message);
+            }
+            return eliminada;
         }
 
-        //actualiza una notificación que ya existe
-        public bool ActualizarNotificacion(Notificacion n)
+        public bool Update(ENNotificacion notificacion)
         {
-            throw new NotImplementedException();
+            bool actualizada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "UPDATE notificacion SET texto = @texto WHERE id = @id AND id_usuario = @id_usuario";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@texto", notificacion.Mensaje);
+                    cmd.Parameters.AddWithValue("@id", notificacion.Id);
+                    cmd.Parameters.AddWithValue("@id_usuario", notificacion.IdUsuario);
+
+                    conn.Open();
+                    actualizada = cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al actualizar notificación: " + ex.Message);
+            }
+            return actualizada;
         }
 
-        //borra una notificación por id
-        public bool BorrarNotificacion(int id)
+        public bool Read(ENNotificacion notificacion)
         {
-            throw new NotImplementedException();
+            bool encontrada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "SELECT texto FROM notificacion WHERE id = @id AND id_usuario = @id_usuario";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", notificacion.Id);
+                    cmd.Parameters.AddWithValue("@id_usuario", notificacion.IdUsuario);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        notificacion.Mensaje = reader["texto"].ToString();
+                        encontrada = true;
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al leer notificación: " + ex.Message);
+            }
+            return encontrada;
         }
 
-        //devuelve las notificaciones no leídas de un usuario
-        public List<Notificacion> BuscarNoLeidas(int idUsuario)
+        public List<ENNotificacion> ReadAll(ENNotificacion _)
         {
-            throw new NotImplementedException();
+            List<ENNotificacion> lista = new List<ENNotificacion>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "SELECT id, id_usuario, texto FROM notificacion";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ENNotificacion n = new ENNotificacion
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            IdUsuario = Convert.ToInt32(reader["id_usuario"]),
+                            Mensaje = reader["texto"].ToString()
+                        };
+                        lista.Add(n);
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al leer todas las notificaciones: " + ex.Message);
+            }
+            return lista;
         }
     }
 }

@@ -156,5 +156,16 @@ namespace library
             CADUsuario usu = new CADUsuario();
             return usu.LoginUsu(this);
         }
+
+        public List<ENUsuario> ReadAll() {
+            CADUsuario usu = new CADUsuario();
+            return usu.ReadAll();
+        }
+
+        public bool ExisteCorreo(string correo)
+        {
+            CADUsuario usu = new CADUsuario();
+            return usu.ExisteCorreo(correo);
+        }
     }
 }
