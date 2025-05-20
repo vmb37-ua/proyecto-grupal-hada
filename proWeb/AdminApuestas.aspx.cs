@@ -95,7 +95,6 @@ namespace ProWeb
 
         private void MostrarMensaje(string mensaje)
         {
-            // Usa Label en el .aspx
             lblMensaje.Text = mensaje;
         }
     }

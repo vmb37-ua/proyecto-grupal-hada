@@ -8,7 +8,7 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Nada necesario por ahora
+           
         }
 
         protected void btnCrear_Click(object sender, EventArgs e)

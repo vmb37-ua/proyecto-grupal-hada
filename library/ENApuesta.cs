@@ -13,7 +13,7 @@ namespace library
         ENEstadio _estadio;
         ENEquipo _equipo1;
         ENEquipo _equipo2;
-        int _resultado;
+        int _resultado; //este me faltaba antes
         public int Resultado
         {
             get { return _resultado; }
