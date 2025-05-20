@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,10 +11,10 @@ using static ProWeb.ApuestasUsuario;
 
 namespace ProWeb
 {
-	public partial class Juegos : System.Web.UI.Page
-	{
-		protected void Page_Load(object sender, EventArgs e)
-		{
+    public partial class Juegos : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
             if (!IsPostBack)
             {
                 CargarJuegosDesdeBD();
@@ -34,7 +36,7 @@ namespace ProWeb
                     var equipoLocal = new ENEquipo { Id_equipo = apuesta.Equipo1.Id_equipo };
                     var equipoVisitante = new ENEquipo { Id_equipo = apuesta.Equipo2.Id_equipo };
 
-                    var estadio = new ENEstadio { Id_estadio = apuesta.Estadio.Id_estadio };
+                    var estadio = new ENEstadio { Nombre = apuesta.Estadio.Nombre };
 
                     if (equipoLocal.Read() && equipoVisitante.Read() && estadio.Read())
                     {
@@ -95,5 +97,5 @@ namespace ProWeb
             Response.Redirect("ApuestaUsuario.aspx");
         }
     }
-    
+
 }
