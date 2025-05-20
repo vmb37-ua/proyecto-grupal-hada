@@ -23,11 +23,12 @@
             <label for="txtNuevoProvincia">Nombre de la provincia</label>
             <asp:TextBox ID="txtNuevoProvincia" runat="server" CssClass="InputUbicacion" placeholder="Ej: Madrid"></asp:TextBox>
             <label for="ddlPaisProvincia">País asociado</label>
-            <asp:DropDownList ID="ddlPaisProvincia" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
+            <asp:DropDownList ID="ddlPaisProvincia" runat="server" AutoPostBack ="True" OnSelectedIndexChanged="ddlPaises_SelectedIndexChanged" CssClass="InputUbicacion"></asp:DropDownList>
             <asp:Button ID="btnCrearProvincia" runat="server" Text="Crear Provincia" CssClass="BotonCrear" OnClick="btnCrearProvincia_Click" />
             <label for="ddlEliminarProvincia">Eliminar provincia existente</label>
             <asp:DropDownList ID="ddlEliminarProvincia" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
             <asp:Button ID="btnEliminarProvincia" runat="server" Text="Eliminar Provincia" CssClass="BotonEliminar" OnClick="btnEliminarProvincia_Click" />
+            <asp:Label ID="lblMensaje2" runat="server" CssClass="mensaje-estilo" Visible="false"></asp:Label>
         </div>
 
         <!-- Creación de Municipio -->
@@ -36,7 +37,7 @@
             <label for="txtNuevoMunicipio">Nombre del municipio</label>
             <asp:TextBox ID="txtNuevoMunicipio" runat="server" CssClass="InputUbicacion" placeholder="Ej: Alcalá de Henares"></asp:TextBox>
             <label for="ddlProvinciaMunicipio">Provincia asociada</label>
-            <asp:DropDownList ID="ddlProvinciaMunicipio" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
+            <asp:DropDownList ID="ddlProvinciaMunicipio" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincias_SelectedIndexChanged" CssClass="InputUbicacion"></asp:DropDownList>
             <asp:Button ID="btnCrearMunicipio" runat="server" Text="Crear Municipio" CssClass="BotonCrear" OnClick="btnCrearMunicipio_Click" />
             <label for="ddlEliminarMunicipio">Eliminar municipio existente</label>
             <asp:DropDownList ID="ddlEliminarMunicipio" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
