@@ -20,6 +20,7 @@ namespace library
             set { _resultado = value; }
         }
 
+
         public int Id_apuesta
         {
             get { return _id_apuesta; }

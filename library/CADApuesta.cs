@@ -35,9 +35,15 @@ namespace library
                     cmd.Parameters.AddWithValue("@eq2", apuesta.Equipo2.Id_equipo);
                     cmd.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
 
-                    conn.Open();
-                    return cmd.ExecuteNonQuery() > 0;
-                }
+                com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
+                com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
+                com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
+                com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
+                com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
+                com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
+                com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
+                com.Parameters.AddWithValue("@CotX", apuesta.cotX);
+
             }
             catch (Exception ex)
             {
