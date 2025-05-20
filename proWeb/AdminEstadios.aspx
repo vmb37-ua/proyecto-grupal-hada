@@ -15,8 +15,11 @@
         <p>Descripción:</p>
         <asp:TextBox ID="txtTexto" runat="server" CssClass="InputCampo" TextMode="MultiLine"></asp:TextBox>
 
-        <p>ID Municipio:</p>
-        <asp:TextBox ID="txtIdMunicipio" runat="server" CssClass="InputCampo" TextMode="Number"></asp:TextBox>
+        <p>Nombre del Municipio:</p>
+        <asp:DropDownList ID="ddlMunicipios" runat="server" CssClass="ListaDesplegable">
+        <asp:ListItem Text="-- Selecciona un municipio --" Value="" />
+        </asp:DropDownList>
+
 
         <br /><br />
         <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear estadio" OnClick="btnCrear_Click" />

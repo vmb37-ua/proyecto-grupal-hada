@@ -42,13 +42,13 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox txtTexto;
 
         /// <summary>
-        /// Control txtIdMunicipio.
+        /// Control ddlMunicipios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdMunicipio;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMunicipios;
 
         /// <summary>
         /// Control btnCrear.
