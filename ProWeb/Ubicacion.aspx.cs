@@ -50,7 +50,7 @@ namespace ProWeb
                 CADProvincia cadProvincia = new CADProvincia();
                 ENProvincia en = new ENProvincia();
                 en.IdPais = idPais;
-                List<ENProvincia> provincias = cadProvincia.ReadAll(en);
+                List<ENProvincia> provincias = cadProvincia.ReadAllByPais(en);
 
                 ddlEliminarProvincia.DataSource = provincias;
                 ddlEliminarProvincia.DataTextField = "Nombre";
@@ -119,7 +119,12 @@ namespace ProWeb
             {
                 try
                 {
-                    RecargarListaPaises();
+                    int idPais = Convert.ToInt32(ddlPaisProvincia.SelectedValue);
+                    int idProvicia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
+                    RecargarListaPaises(); // Cuando cargue pagina, que carge todos los paises, provincias y municipios (arreglar).
+                    CargarProvincias(idPais);
+                    CargarMunicipios(idProvicia);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -255,7 +260,7 @@ namespace ProWeb
                 if (cadPais.Delete(en))
                 {
                     MostrarMensaje("País eliminado correctamente", "exito");
-                    // Recargar dropdowns
+                    // Recargar Listas
                     RecargarListaPaises();
                     CargarProvincias(Convert.ToInt32(ddlPaisProvincia.SelectedValue));
                     CargarMunicipios(Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue));
