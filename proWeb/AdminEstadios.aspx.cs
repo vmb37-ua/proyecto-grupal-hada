@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Web.UI;
 using library;
 
@@ -8,15 +9,19 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Nada necesario por ahora
+            if (!IsPostBack)
+            {
+                CargarMunicipios();
+            }
         }
+
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
             try
             {
                 if (int.TryParse(txtCapacidad.Text, out int capacidad) &&
-                    int.TryParse(txtIdMunicipio.Text, out int idMunicipio))
+                    int.TryParse(ddlMunicipios.SelectedValue, out int idMunicipio))
                 {
                     ENEstadio estadio = new ENEstadio
                     {
@@ -29,11 +34,11 @@ namespace ProWeb
                     if (estadio.Create())
                         MostrarMensaje("Estadio creado correctamente.");
                     else
-                        MostrarMensaje("No se pudo crear el estadio.");
+                        MostrarMensaje("Error al crear el estadio.");
                 }
                 else
                 {
-                    MostrarMensaje("Capacidad e ID de municipio deben ser números válidos.");
+                    MostrarMensaje("Capacidad e ID de municipio deben ser válidos.");
                 }
             }
             catch (Exception ex)
@@ -43,10 +48,11 @@ namespace ProWeb
         }
 
 
+
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
             if (int.TryParse(txtCapacidad.Text, out int capacidad) &&
-                int.TryParse(txtIdMunicipio.Text, out int idMunicipio))
+                int.TryParse(ddlMunicipios.SelectedValue, out int idMunicipio))
             {
                 ENEstadio estadio = new ENEstadio
                 {
@@ -82,7 +88,24 @@ namespace ProWeb
 
         private void MostrarMensaje(string mensaje)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+            lblMensaje.Text = mensaje;
         }
+        private void CargarMunicipios()
+        {
+            string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["miconex"].ToString();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string query = "SELECT id_municipio, nombre FROM municipio";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                ddlMunicipios.DataSource = reader;
+                ddlMunicipios.DataTextField = "nombre";
+                ddlMunicipios.DataValueField = "id_municipio";
+                ddlMunicipios.DataBind();
+            }
+        }
+
     }
 }

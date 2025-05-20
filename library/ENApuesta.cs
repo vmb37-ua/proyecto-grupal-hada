@@ -13,9 +13,12 @@ namespace library
         ENEstadio _estadio;
         ENEquipo _equipo1;
         ENEquipo _equipo2;
-        double _cot1;
-        double _cot2;
-        double _cotX;
+        int _resultado; //este me faltaba antes
+        public int Resultado
+        {
+            get { return _resultado; }
+            set { _resultado = value; }
+        }
 
         public int Id_apuesta
         {

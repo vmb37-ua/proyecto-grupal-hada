@@ -12,161 +12,145 @@ namespace library
 {
     public class CADApuesta
     {
-        private string constring { get; set; }
+        private string conexion;
+
         public CADApuesta()
         {
-            constring = ConfigurationManager.ConnectionStrings["miconex"].ToString();
+            conexion = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
 
         public bool Create(ENApuesta apuesta)
         {
-            bool aux = true;
-            SqlConnection c = new SqlConnection(constring);
             try
             {
-                c.Open();
-                SqlCommand com = new SqlCommand("INSERT INTO Apuesta (IdApuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX) " +
-                                                "VALUES (@IdApuesta, @Fecha, @IdEstadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
-
-                com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
-                com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
-                com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
-                com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
-                com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
-                com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
-                com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
-                com.Parameters.AddWithValue("@CotX", apuesta.cotX);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Failure to create Apuesta", ex.Message);
-                aux = false;
-            }
-            finally
-            {
-                c.Close();
-            }
-            return aux;
-        }
-        public bool Delete(ENApuesta apuesta)
-        {
-            bool aux = true;
-            SqlConnection c = new SqlConnection(constring);
-            try
-            {
-                c.Open();
-                SqlCommand com = new SqlCommand("DELETE FROM Apuesta WHERE IdApuesta = @IdApuesta", c);
-                com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
-                com.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Failure to delete Apuesta: " + ex.Message);
-                aux = false;
-            }
-            finally
-            {
-                c.Close();
-            }
-            return aux;
-        }
-        public bool Read(ENApuesta apuesta)
-        {
-            bool aux = false;
-            SqlConnection c = new SqlConnection(constring);
-            try
-            {
-                c.Open();
-                SqlCommand com = new SqlCommand("SELECT Fecha, estadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta WHERE IdApuesta = @IdApuesta", c);
-                com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
-                SqlDataReader data = com.ExecuteReader();
-                if (data.Read())
+                using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    apuesta.Fecha = Convert.ToDateTime(data["Fecha"]);
-                    apuesta.Estadio = new ENEstadio { Nombre = Convert.ToString(data["estadio"]) };
-                    apuesta.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo1"]) };
-                    apuesta.Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo2"]) };
-                    apuesta.cot1 = Convert.ToDouble(data["Cot1"]);
-                    apuesta.cot2 = Convert.ToDouble(data["Cot2"]);
-                    apuesta.cotX = Convert.ToDouble(data["CotX"]);
-                    aux = true;
+                    string query = "INSERT INTO apuesta (id_apuesta, resultado, fecha, id_equipo1, id_equipo2, estadio) " +
+                                   "VALUES (@id, @resultado, @fecha, @eq1, @eq2, @estadio)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", apuesta.Id_apuesta);
+                    cmd.Parameters.AddWithValue("@resultado", apuesta.Resultado);
+                    cmd.Parameters.AddWithValue("@fecha", apuesta.Fecha);
+                    cmd.Parameters.AddWithValue("@eq1", apuesta.Equipo1.Id_equipo);
+                    cmd.Parameters.AddWithValue("@eq2", apuesta.Equipo2.Id_equipo);
+                    cmd.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
+
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0;
                 }
-                data.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failure to read Apuesta: " + ex.Message);
+                throw new Exception("Error al crear apuesta: " + ex.Message);
             }
-            finally
-            {
-                c.Close();
-            }
-            return aux;
         }
+
         public bool Update(ENApuesta apuesta)
         {
-            bool aux = true;
-            SqlConnection c = new SqlConnection(constring);
             try
             {
-                c.Open();
-                SqlCommand com = new SqlCommand("UPDATE Apuesta SET Fecha = @Fecha, estadio = @estadio, IdEquipo1 = @IdEquipo1, " +
-                                                "IdEquipo2 = @IdEquipo2, Cot1 = @Cot1, Cot2 = @Cot2, CotX = @CotX WHERE IdApuesta = @IdApuesta", c);
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "UPDATE apuesta SET resultado = @resultado, fecha = @fecha, " +
+                                   "id_equipo1 = @eq1, id_equipo2 = @eq2, estadio = @estadio WHERE id_apuesta = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", apuesta.Id_apuesta);
+                    cmd.Parameters.AddWithValue("@resultado", apuesta.Resultado);
+                    cmd.Parameters.AddWithValue("@fecha", apuesta.Fecha);
+                    cmd.Parameters.AddWithValue("@eq1", apuesta.Equipo1.Id_equipo);
+                    cmd.Parameters.AddWithValue("@eq2", apuesta.Equipo2.Id_equipo);
+                    cmd.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
 
-                com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
-                com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
-                com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
-                com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
-                com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
-                com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
-                com.Parameters.AddWithValue("@CotX", apuesta.cotX);
-                com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
-
-                int rows = com.ExecuteNonQuery();
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failure to update Apuesta: " + ex.Message);
-                aux = false;
+                throw new Exception("Error al actualizar apuesta: " + ex.Message);
             }
-            finally
-            {
-                c.Close();
-            }
-            return aux;
         }
-        public List<ENApuesta> ReadAll(ENApuesta apuesta)
+
+        public bool Delete(ENApuesta apuesta)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "DELETE FROM apuesta WHERE id_apuesta = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", apuesta.Id_apuesta);
+
+                    conn.Open();
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar apuesta: " + ex.Message);
+            }
+        }
+
+        public bool Read(ENApuesta apuesta)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "SELECT * FROM apuesta WHERE id_apuesta = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", apuesta.Id_apuesta);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        apuesta.Resultado = Convert.ToInt32(reader["resultado"]);
+                        apuesta.Fecha = Convert.ToDateTime(reader["fecha"]);
+                        apuesta.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(reader["id_equipo1"]) };
+                        apuesta.Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(reader["id_equipo2"]) };
+                        apuesta.Estadio = new ENEstadio { Nombre = reader["estadio"].ToString() };
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al leer apuesta: " + ex.Message);
+            }
+        }
+
+        public List<ENApuesta> ReadAll(ENApuesta _)
         {
             List<ENApuesta> lista = new List<ENApuesta>();
-            SqlConnection c = new SqlConnection(constring);
             try
             {
-                c.Open();
-                SqlCommand com = new SqlCommand("SELECT IdApuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta", c);
-                SqlDataReader data = com.ExecuteReader();
-                while (data.Read())
+                using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    ENApuesta a = new ENApuesta();
-                    a.Id_apuesta = Convert.ToInt32(data["IdApuesta"]);
-                    a.Fecha = Convert.ToDateTime(data["Fecha"]);
-                    a.Estadio = new ENEstadio { Nombre = Convert.ToString(data["estadio"]) };
-                    a.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo1"]) };
-                    a.Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo2"]) };
-                    a.cot1 = Convert.ToDouble(data["Cot1"]);
-                    a.cot2 = Convert.ToDouble(data["Cot2"]);
-                    a.cotX = Convert.ToDouble(data["CotX"]);
-                    lista.Add(a);
+                    string query = "SELECT * FROM apuesta";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var ap = new ENApuesta
+                        {
+                            Id_apuesta = Convert.ToInt32(reader["id_apuesta"]),
+                            Resultado = Convert.ToInt32(reader["resultado"]),
+                            Fecha = Convert.ToDateTime(reader["fecha"]),
+                            Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(reader["id_equipo1"]) },
+                            Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(reader["id_equipo2"]) },
+                            Estadio = new ENEstadio { Nombre = reader["estadio"].ToString() }
+                        };
+                        lista.Add(ap);
+                    }
                 }
-                data.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failure to read all Apuestas: " + ex.Message);
-            }
-            finally
-            {
-                c.Close();
+                throw new Exception("Error al leer todas las apuestas: " + ex.Message);
             }
             return lista;
         }
