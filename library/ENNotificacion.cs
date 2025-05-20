@@ -67,7 +67,11 @@ namespace library
             CADNotificacion cad = new CADNotificacion();
             return cad.Read(this);
         }
-
+        public bool ReadbyId()
+        {
+            CADNotificacion cad = new CADNotificacion();
+            return cad.ReadbyId(this);
+        }
         public List<ENNotificacion> ReadAll()
         {
             CADNotificacion cad = new CADNotificacion();

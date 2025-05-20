@@ -21,27 +21,104 @@ namespace ProWeb
                 Adressresgister.Attributes["placeholder"] = "Dirección";
                 Passregister.Attributes["placeholder"] = "Contraseña";
                 Passrepregister.Attributes["placeholder"] = "Confirmar Contraseña";
-
-
+                CargarPaises();
 
             }
         }
+        private void CargarPaises()
+        {
+            var cadPais = new CADPais();
+            var paises = cadPais.ReadAll();
+            Paisregister.DataSource = paises;
+            Paisregister.DataTextField = "NombrePais";  
+            Paisregister.DataValueField = "IdPais";     
+            Paisregister.DataBind();
+
+            Paisregister.Items.Insert(0, new ListItem("Selecciona un país", ""));
+        }
+
+
+        private void CargarProvincia(int idPais)
+        {
+            var cadProvincia = new CADProvincia();
+            var provincias = new List<ENProvincia>();
+
+            ENProvincia filtroProvincia = new ENProvincia();
+            filtroProvincia.IdPais = idPais;
+
+            provincias = cadProvincia.ReadAllByPais(filtroProvincia);
+
+            Provinciaregister.DataSource = provincias;
+            Provinciaregister.DataTextField = "Nombre";
+            Provinciaregister.DataValueField = "IdProvincia";
+            Provinciaregister.DataBind();
+
+            Provinciaregister.Items.Insert(0, new ListItem("Selecciona una provincia", ""));
+        }
+
+        private void CargarMunicipios(int idProvincia)
+        {
+            var cadMunicipio = new CADMunicipio();
+            var municipios = new List<ENMunicipio>();
+
+            ENMunicipio filtroMunicipio = new ENMunicipio();
+            filtroMunicipio.Id_provincia = idProvincia;
+
+            municipios = cadMunicipio.ReadAllByProvincia(filtroMunicipio);
+
+            Municipioregister.DataSource = municipios;
+            Municipioregister.DataTextField = "Nombre";
+            Municipioregister.DataValueField = "Id_municipio";
+            Municipioregister.DataBind();
+
+            Municipioregister.Items.Insert(0, new ListItem("Selecciona un municipio", ""));
+        }
+
+
+        protected void Paisregister_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(Paisregister.SelectedValue, out int idPais))
+            {
+                Provinciaregister.Items.Clear();
+                Municipioregister.Items.Clear();
+                CargarProvincia(idPais); 
+            }
+            else
+            {
+                Provinciaregister.Items.Clear();
+                Municipioregister.Items.Clear();
+            }
+        }
+
+        protected void Provinciaregister_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Municipioregister.Items.Clear(); 
+            if (int.TryParse(Provinciaregister.SelectedValue, out int idProvincia))
+            {
+                CargarMunicipios(idProvincia);
+            }
+        }
+
+
 
         protected void EventoInicioSesion(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx");
         }
 
-        private bool CamposIncompletos(out string nombre, out string numero, out string correo, out string direccion, out string pass, out string passRep)
+        private bool CamposIncompletos(
+     out string nombre, out string numero, out string correo,
+     out string direccion, out string pass, out string passRep)
         {
-
             Nameregister.CssClass = "Inputregister";
             Numberregister.CssClass = "Inputregister";
             Emailregister.CssClass = "Inputregister";
             Adressresgister.CssClass = "Inputregister";
             Passregister.CssClass = "Inputregister";
             Passrepregister.CssClass = "Inputregister";
-
+            Paisregister.CssClass = "Inputregister";
+            Provinciaregister.CssClass = "Inputregister";
+            Municipioregister.CssClass = "Inputregister";
 
             nombre = Nameregister.Text.Trim();
             numero = Numberregister.Text.Trim();
@@ -82,16 +159,32 @@ namespace ProWeb
                 Passrepregister.CssClass += " input-error";
                 faltanCampos = true;
             }
+            if (string.IsNullOrEmpty(Paisregister.SelectedValue))
+            {
+                Paisregister.CssClass += " input-error";
+                faltanCampos = true;
+            }
+            if (string.IsNullOrEmpty(Provinciaregister.SelectedValue))
+            {
+                Provinciaregister.CssClass += " input-error";
+                faltanCampos = true;
+            }
+            if (string.IsNullOrEmpty(Municipioregister.SelectedValue))
+            {
+                Municipioregister.CssClass += " input-error";
+                faltanCampos = true;
+            }
 
             if (faltanCampos)
             {
-                Labelerror.Text = "Por favor, rellena todos los campos.";
+                Labelerror.Text = "Por favor, rellena todos los campos correctamente.";
                 Labelerror.Visible = true;
                 return true;
             }
 
             return false;
         }
+
 
         protected void EventoPaginaPrincipal(object sender, EventArgs e)
         {
@@ -137,7 +230,7 @@ namespace ProWeb
             nuevoUsuario.Caducidad = DateTime.Now;
             nuevoUsuario.Cvv = "";
             nuevoUsuario.Rol = 1;
-            nuevoUsuario.Municipio = 10;
+            nuevoUsuario.Municipio = int.Parse(Municipioregister.SelectedValue);
             nuevoUsuario.Imagen = "default.jpg";
 
             try

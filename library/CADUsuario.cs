@@ -219,6 +219,49 @@ namespace library
             return lista;
         }
 
+        public List<ENUsuario> ReadByRol(int idRol)
+        {
+            List<ENUsuario> lista = new List<ENUsuario>();
+
+            try
+            {
+                SqlConnection conn = new SqlConnection(conexion);
+                DataSet bdvirtual = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM usuario WHERE id_rol = @idRol", conn);
+                da.SelectCommand.Parameters.AddWithValue("@idRol", idRol);
+                da.Fill(bdvirtual, "usuario");
+                DataTable dt = new DataTable();
+                dt = bdvirtual.Tables["usuario"];
+
+                foreach (DataRow fila in dt.Rows)
+                {
+                    ENUsuario usuario = new ENUsuario();
+                    usuario.ID = int.Parse(fila["id"].ToString());
+                    usuario.Nombre = fila["nombre"].ToString();
+                    usuario.Password = fila["contrasenya"].ToString();
+                    usuario.Correo = fila["correo"].ToString();
+                    usuario.Imagen = fila["imagen"].ToString();
+                    usuario.Saldo = float.Parse(fila["saldo"].ToString());
+                    usuario.NumTar = fila["numero_tar"].ToString();
+                    usuario.Caducidad = DateTime.Parse(fila["caducidad_tar"].ToString());
+                    usuario.Cvv = fila["cvv"].ToString();
+                    usuario.Direccion = fila["direccion"].ToString();
+                    usuario.Telefono = fila["telefono"].ToString();
+                    usuario.Rol = int.Parse(fila["id_rol"].ToString());
+                    usuario.Municipio = int.Parse(fila["id_municipio"].ToString());
+
+                    lista.Add(usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return lista;
+        }
+
+
         public bool ExisteCorreo(string correo)
         {
             bool existe = false;

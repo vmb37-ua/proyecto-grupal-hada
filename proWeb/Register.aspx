@@ -18,27 +18,13 @@
 
 
     <asp:TextBox ID="Passrepregister" runat="server" CssClass="Inputregister" TextMode="Password"></asp:TextBox>
-<div class="dropdown-row">
-    <asp:DropDownList ID="ddlPais" runat="server" CssClass="Inputregister">
-        <asp:ListItem Text="País" Value="" Selected="True" />
-        <asp:ListItem Text="España" Value="España" />
-        <asp:ListItem Text="Francia" Value="Francia" />
-        <asp:ListItem Text="Italia" Value="Italia" />
-    </asp:DropDownList>
+    <div class="dropdown-row">
+    <asp:DropDownList ID="Paisregister" runat="server" CssClass="Inputregister" AutoPostBack="true" OnSelectedIndexChanged="Paisregister_SelectedIndexChanged" />
+    <asp:DropDownList ID="Provinciaregister" runat="server" CssClass="Inputregister" AutoPostBack="true" OnSelectedIndexChanged="Provinciaregister_SelectedIndexChanged" />
 
-    <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="Inputregister">
-        <asp:ListItem Text="Provincia" Value="" Selected="True" />
-        <asp:ListItem Text="Alicante" Value="Alicante" />
-        <asp:ListItem Text="Madrid" Value="Madrid" />
-        <asp:ListItem Text="Valencia" Value="Valencia" />
-    </asp:DropDownList>
+    <asp:DropDownList ID="Municipioregister" runat="server" CssClass="Inputregister"/>
 
-    <asp:DropDownList ID="ddlMunicipio" runat="server" CssClass="Inputregister">
-        <asp:ListItem Text="Municipio" Value="" Selected="True" />
-        <asp:ListItem Text="Elche" Value="Elche" />
-        <asp:ListItem Text="San Vicente" Value="San Vicente" />
-        <asp:ListItem Text="Alicante" Value="Alicante" />
-    </asp:DropDownList>
+
 </div>
 
 
@@ -51,6 +37,7 @@
 
         <asp:Button runat="server" Text="Crear cuenta" CssClass="botonregister" OnClick="EventoPaginaPrincipal"/>
         <asp:Button runat="server" Text="Iniciar Sesión" CssClass="botonregister" OnClick="EventoInicioSesion"/>
+        <asp:Label ID="LabelDebug" runat="server" Visible="false" ForeColor="Blue"></asp:Label>
 
     </div>
 </asp:Content>
