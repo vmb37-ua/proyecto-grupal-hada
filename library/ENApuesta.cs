@@ -17,9 +17,6 @@ namespace library
         double _cot2;
         double _cotX;
 
-
-
-
         public int Id_apuesta
         {
             get { return _id_apuesta; }
