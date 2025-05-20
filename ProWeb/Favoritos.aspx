@@ -7,14 +7,18 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="ContenedorFavoritos">
         <h2>Mis Equipos Favoritos</h2>
+
         <asp:GridView ID="TablaFavoritos" runat="server" CssClass="tablaFavoritos" AutoGenerateColumns="false">
             <Columns>
                 <asp:BoundField DataField="NombreEquipo" HeaderText="Equipo" />
-                <asp:BoundField DataField="CiudadEquipo" HeaderText="Ciudad" />
+                <asp:BoundField DataField="Categoria" HeaderText="Categoría" />
+                <asp:ImageField DataImageUrlField="Escudo" HeaderText="Escudo">
+                    <ControlStyle Height="40px" Width="40px" />
+                </asp:ImageField>
             </Columns>
         </asp:GridView>
 
         <br />
-        <asp:Button ID="VolverPerfil" runat="server" Text="Volver al Perfil" OnClick="IrPerfil_Click" />
+        <asp:Button ID="VolverPerfil" runat="server" Text="Volver al Perfil" OnClick="IrPerfil_Click" CssClass="botonVolver" />
     </div>
 </asp:Content>

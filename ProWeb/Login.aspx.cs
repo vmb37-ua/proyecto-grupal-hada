@@ -28,33 +28,7 @@ namespace ProWeb
 
         protected void EventoMainPage(object sender, EventArgs e)
         {
-            if (Session["Login"] != null)
-            {
-                // Ya está loggeado
-                Response.Redirect("Juegos.aspx");
-            }
-            else { 
-                ENUsuario usuario = new ENUsuario();
-                usuario.Correo = Emaillogin.Text;
-                usuario.Password = Passlogin.Text;
-                if (Page.IsValid)
-                {
-                    if (usuario.LoginUsu())
-                    {
-                        //El usuario existe (contraseña correcta)
-                        Session["Login"] = usuario.ID;
-                        Response.Redirect("Juegos.aspx");
-                    }
-                    else
-                    {
-                        ErrMsg.Text = "Correo o contraseña incorrectos";
-                    }
-                }
-            }
-        }
-    }
-}
-/*
+            // Obtener el token de reCAPTCHA enviado desde el formulario
             string token = Request.Form["g-recaptcha-response"];
             if (string.IsNullOrEmpty(token))
             {
@@ -72,7 +46,7 @@ namespace ProWeb
 
             if (captchaResponse.success)
             {
-
+                // Validación reCAPTCHA exitosa
                 if (Session["Login"] != null)
                 {
                     // Ya está loggeado
@@ -83,25 +57,31 @@ namespace ProWeb
                     ENUsuario usuario = new ENUsuario();
                     usuario.Correo = Emaillogin.Text;
                     usuario.Password = Passlogin.Text;
-                    if (usuario.LoginUsu())
+                    if (Page.IsValid)
                     {
-                        //El usuario existe (contraseña correcta)
-                        Session["Login"] = usuario.ID;
-                        Response.Redirect("Juegos.aspx");
-                    }
-                    else
-                    {
-                        ErrMsg.Text = "Correo o contraseña incorrectos";
+                        if (usuario.LoginUsu())
+                        {
+                            // El usuario existe (contraseña correcta)
+                            Session["Login"] = usuario.ID;
+                            HttpCookie userCookie = new HttpCookie("UsuarioID");
+                            userCookie.Value = usuario.ID.ToString();
+                            userCookie.Expires = DateTime.Now.AddDays(7);
+                            Response.Cookies.Add(userCookie);
+                            Response.Redirect("Juegos.aspx");
+                        }
+                        else
+                        {
+                            ErrMsg.Text = "Correo o contraseña incorrectos";
+                        }
                     }
                 }
-            
-        }
+            }
             else
             {
-
                 Response.Write("<script>alert('Acceso denegado. reCAPTCHA fallido.');</script>");
             }
         }
+
         public class RecaptchaResponse
         {
             public bool success { get; set; }
@@ -111,7 +91,5 @@ namespace ProWeb
             public string hostname { get; set; }
             public List<string> error_codes { get; set; }
         }
-
-
     }
-}*/
+}

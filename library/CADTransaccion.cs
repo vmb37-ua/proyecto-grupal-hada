@@ -117,15 +117,16 @@ namespace library
             return encontrada;
         }
 
-        public List<ENTransaccion> ReadAll(ENTransaccion _)
+        public List<ENTransaccion> ReadAll(ENTransaccion transaccion)
         {
             List<ENTransaccion> lista = new List<ENTransaccion>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "SELECT id, dinero, metodo, id_usu FROM transaccion";
+                    string query = "SELECT id, dinero, metodo, id_usu FROM transaccion WHERE id_usu = @id_usu";
                     SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id_usu", transaccion.IdUsuario);
 
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -145,7 +146,7 @@ namespace library
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al leer todas las transacciones: " + ex.Message);
+                Console.WriteLine("Error al leer transacciones del usuario: " + ex.Message);
             }
             return lista;
         }

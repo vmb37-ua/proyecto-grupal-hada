@@ -42,26 +42,29 @@ namespace library
 
         public bool Delete(ENNotificacion notificacion)
         {
-            bool eliminada = false;
+            bool result = false;
+            SqlConnection conn = new SqlConnection(conexion);
+
             try
             {
-                using (SqlConnection conn = new SqlConnection(conexion))
-                {
-                    string query = "DELETE FROM notificacion WHERE id = @id AND id_usuario = @id_usuario";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id", notificacion.Id);
-                    cmd.Parameters.AddWithValue("@id_usuario", notificacion.IdUsuario);
-
-                    conn.Open();
-                    eliminada = cmd.ExecuteNonQuery() > 0;
-                }
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM notificacion WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", notificacion.Id);
+                int rows = cmd.ExecuteNonQuery();
+                result = rows > 0;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al eliminar notificación: " + ex.Message);
             }
-            return eliminada;
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
         }
+
 
         public bool Update(ENNotificacion notificacion)
         {
@@ -116,15 +119,45 @@ namespace library
             return encontrada;
         }
 
-        public List<ENNotificacion> ReadAll(ENNotificacion _)
+        public bool ReadbyId(ENNotificacion notificacion)
+        {
+            bool encontrada = false;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "SELECT id_usuario, texto FROM notificacion WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", notificacion.Id);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        notificacion.IdUsuario = Convert.ToInt32(reader["id_usuario"]);
+                        notificacion.Mensaje = reader["texto"].ToString();
+                        encontrada = true;
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al leer notificación por ID: " + ex.Message);
+            }
+            return encontrada;
+        }
+
+        public List<ENNotificacion> ReadAll(ENNotificacion notificacion)
         {
             List<ENNotificacion> lista = new List<ENNotificacion>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "SELECT id, id_usuario, texto FROM notificacion";
+                    string query = "SELECT id, id_usuario, texto FROM notificacion WHERE id_usuario = @idUsuario";
                     SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@idUsuario", notificacion.IdUsuario);
 
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -146,6 +179,16 @@ namespace library
                 Console.WriteLine("Error al leer todas las notificaciones: " + ex.Message);
             }
             return lista;
+        }
+
+        public List<ENNotificacion> LeerNotificacionesPorUsuario(int id)
+        {
+            return new List<ENNotificacion>();
+        }
+
+        public List<ENNotificacion> BuscarPorTexto(string hola)
+        {
+            return new List<ENNotificacion>();
         }
     }
 }

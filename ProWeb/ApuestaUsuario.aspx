@@ -40,7 +40,7 @@
         <div class="SeccionPago">
             <div class="CampoFormulario">
                 <label for="txtCantidad">CANTIDAD (€):</label>
-                <asp:TextBox ID="txtCantidad" runat="server" CssClass="InputApuesta" placeholder="Ej: 20.00" TextMode="Number" step="1" AutoPostBack="true"></asp:TextBox>
+                <asp:TextBox ID="txtCantidad" runat="server" CssClass="InputApuesta" placeholder="Ej: 20.00" TextMode="Number" step="1" AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="*Campo obligatorio" CssClass="Validador"></asp:RequiredFieldValidator>
             </div>
 

@@ -116,20 +116,19 @@ namespace library
         }
         public bool Update(ENUsuario usuario) {
             bool resultado = false;
-            string query = "UPDATE usuario SET imagen = @imagen, contrasenya = @contrasenya, correo = @correo, nombre = @nombre, saldo = @saldo, numero_tar = @numero_tar, caducidad_tar = @caducidad_tar, cvv = @cvv, direccion = @direccion, telefono = @telefono, id_rol = @id_rol, id_municipio = @id_municipio WHERE id = @id";
+            string query = "UPDATE usuario SET contrasenya = @contrasenya, correo = @correo, nombre = @nombre, saldo = @saldo, numero_tar = @numero_tar, caducidad_tar = @caducidad_tar, cvv = @cvv, direccion = @direccion, telefono = @telefono, id_rol = @id_rol, id_municipio = @id_municipio WHERE id = @id";
 
             SqlConnection conn = new SqlConnection(conexion);
             conn.Open();
 
             try { 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@imagen", usuario.Imagen);
                 cmd.Parameters.AddWithValue("@contrasenya", usuario.Password);
                 cmd.Parameters.AddWithValue("@correo", usuario.Correo);
                 cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
                 cmd.Parameters.AddWithValue("@saldo", usuario.Saldo);
                 cmd.Parameters.AddWithValue("@numero_tar", usuario.NumTar);
-                cmd.Parameters.AddWithValue("@caducidad_tar", usuario.Caducidad);
+                cmd.Parameters.AddWithValue("@caducidad_tar", usuario.Caducidad.Date);
                 cmd.Parameters.AddWithValue("@cvv", usuario.Cvv);
                 cmd.Parameters.AddWithValue("@direccion", usuario.Direccion);
                 cmd.Parameters.AddWithValue("@telefono", usuario.Telefono);
@@ -142,6 +141,7 @@ namespace library
             }
             catch (Exception ex)
             {
+                resultado = false;
                 Console.WriteLine(ex.Message);
             }
             finally
@@ -149,7 +149,7 @@ namespace library
                 conn.Close();
             }
             
-            return true;
+            return resultado;
         }
 
         public bool LoginUsu(ENUsuario usuario) {
@@ -219,6 +219,49 @@ namespace library
             return lista;
         }
 
+        public List<ENUsuario> ReadByRol(int idRol)
+        {
+            List<ENUsuario> lista = new List<ENUsuario>();
+
+            try
+            {
+                SqlConnection conn = new SqlConnection(conexion);
+                DataSet bdvirtual = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM usuario WHERE id_rol = @idRol", conn);
+                da.SelectCommand.Parameters.AddWithValue("@idRol", idRol);
+                da.Fill(bdvirtual, "usuario");
+                DataTable dt = new DataTable();
+                dt = bdvirtual.Tables["usuario"];
+
+                foreach (DataRow fila in dt.Rows)
+                {
+                    ENUsuario usuario = new ENUsuario();
+                    usuario.ID = int.Parse(fila["id"].ToString());
+                    usuario.Nombre = fila["nombre"].ToString();
+                    usuario.Password = fila["contrasenya"].ToString();
+                    usuario.Correo = fila["correo"].ToString();
+                    usuario.Imagen = fila["imagen"].ToString();
+                    usuario.Saldo = float.Parse(fila["saldo"].ToString());
+                    usuario.NumTar = fila["numero_tar"].ToString();
+                    usuario.Caducidad = DateTime.Parse(fila["caducidad_tar"].ToString());
+                    usuario.Cvv = fila["cvv"].ToString();
+                    usuario.Direccion = fila["direccion"].ToString();
+                    usuario.Telefono = fila["telefono"].ToString();
+                    usuario.Rol = int.Parse(fila["id_rol"].ToString());
+                    usuario.Municipio = int.Parse(fila["id_municipio"].ToString());
+
+                    lista.Add(usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return lista;
+        }
+
+
         public bool ExisteCorreo(string correo)
         {
             bool existe = false;
@@ -243,6 +286,36 @@ namespace library
             }
 
             return existe;
+        }
+
+        public bool UpdateFoto(ENUsuario usuario)
+        {
+            bool resultado = false;
+            string query = "UPDATE usuario SET imagen = @imagen WHERE id = @id";
+
+            SqlConnection conn = new SqlConnection(conexion);
+            conn.Open();
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@imagen", usuario.Imagen);
+                cmd.Parameters.AddWithValue("@id", usuario.ID);
+
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                resultado = filasAfectadas != 0;
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return resultado;
         }
 
     }

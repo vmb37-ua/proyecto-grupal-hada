@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -124,31 +125,82 @@ namespace library
             }
             return resultado;
         }
-        public List<ENMunicipio> ReadAll(ENMunicipio municipio) {
-            SqlConnection conn = new SqlConnection(conexion);
+        public List<ENMunicipio> ReadAll(ENMunicipio en)
+        {
             List<ENMunicipio> lista = new List<ENMunicipio>();
+
+            using (SqlConnection conn = new SqlConnection(conexion))
+            {
+                
+                string query = "SELECT id_municipio, nombre FROM municipio WHERE id_provincia = @idProvincia";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@idProvincia", en.Id_provincia);
+
+                try
+                {
+                    conn.Open();
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Crear nueva instancia para cada municipio
+                            ENMunicipio municipio = new ENMunicipio
+                            {
+                                Id_municipio = Convert.ToInt32(reader["Id_municipio"]), 
+                                Nombre = Convert.ToString(reader["Nombre"]),      
+                                Id_provincia = en.Id_provincia 
+                            };
+                            lista.Add(municipio);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error en ReadAll (Municipio): {ex.ToString()}");
+                    
+                }
+            }
+
+            return lista;
+        }
+        public List<ENMunicipio> ReadAllByProvincia(ENMunicipio municipio)
+        {
+            List<ENMunicipio> lista = new List<ENMunicipio>();
+            SqlConnection conn = new SqlConnection(conexion);
+
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM municipio", conn);
+                string query = "SELECT * FROM municipio WHERE id_provincia = @id_provincia";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id_provincia", municipio.Id_provincia);
+
                 SqlDataReader reader = cmd.ExecuteReader();
+
                 while (reader.Read())
                 {
-                    municipio.Id_municipio = int.Parse(reader["id_municipio"].ToString());
-                    municipio.Id_provincia = int.Parse(reader["id_provincia"].ToString());
-                    municipio.Nombre = reader["nombre"].ToString();
-                    lista.Add(municipio);
+                    ENMunicipio m = new ENMunicipio();
+                    m.Id_municipio = Convert.ToInt32(reader["id_municipio"]);
+                    m.Id_provincia = Convert.ToInt32(reader["id_provincia"]);
+                    m.Nombre = reader["nombre"].ToString();
+
+                    lista.Add(m);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Error en ReadAllByProvincia: " + ex.Message);
             }
             finally
             {
                 conn.Close();
             }
+
             return lista;
         }
+
+
     }
 }

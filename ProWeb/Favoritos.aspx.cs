@@ -4,30 +4,33 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using library;
 
 namespace ProWeb
 {
-    public partial class Favoritos : System.Web.UI.Page
+    public partial class Favoritos : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                List<EquipoFavorito> equipos = new List<EquipoFavorito>
+                if (Session["IdUsuario"] != null)
                 {
-                    new EquipoFavorito { NombreEquipo = "FC Barcelona", CiudadEquipo = "Barcelona" },
-                    new EquipoFavorito { NombreEquipo = "Inter de Milán", CiudadEquipo = "Milán" }
-                };
+                    int idUsuario = Convert.ToInt32(Session["IdUsuario"]);
 
-                TablaFavoritos.DataSource = equipos;
-                TablaFavoritos.DataBind();
+                    ENFavoritos fav = new ENFavoritos();
+                    fav.IdUsuario = idUsuario;
+
+                    List<ENFavoritos> favoritos = fav.ReadAllUsuario();
+
+                    TablaFavoritos.DataSource = favoritos;
+                    TablaFavoritos.DataBind();
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
             }
-        }
-
-        public class EquipoFavorito
-        {
-            public string NombreEquipo { get; set; }
-            public string CiudadEquipo { get; set; }
         }
 
         protected void IrPerfil_Click(object sender, EventArgs e)

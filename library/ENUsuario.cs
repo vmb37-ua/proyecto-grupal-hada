@@ -161,11 +161,22 @@ namespace library
             CADUsuario usu = new CADUsuario();
             return usu.ReadAll();
         }
+        public List<ENUsuario> ReadByRol(int idRol)
+        {
+            CADUsuario cad = new CADUsuario();
+            return cad.ReadByRol(idRol);
+        }
 
         public bool ExisteCorreo(string correo)
         {
             CADUsuario usu = new CADUsuario();
             return usu.ExisteCorreo(correo);
+        }
+
+        public bool UpdateFoto()
+        {
+            CADUsuario usu = new CADUsuario();
+            return usu.UpdateFoto(this);
         }
     }
 }

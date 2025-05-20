@@ -16,6 +16,22 @@ namespace ProWeb
             {
                 Response.Redirect("Juegos.aspx");
             }
+            else
+            {
+                if (!IsPostBack)
+                {
+                    ENUsuario usuario = new ENUsuario();
+                    usuario.ID = int.Parse(Session["login"].ToString());
+                    usuario.Read();
+
+                    CajaNombre.Text = usuario.Nombre;
+                    CajaCvv.Text = usuario.Cvv;
+                    CajaCad.Text = usuario.Caducidad.ToString();
+                    CajaDir.Text = usuario.Direccion;
+                    CajaNumTar.Text = usuario.NumTar;
+                    CajaTelef.Text = usuario.Telefono;
+                }
+            }
         }
         
         protected void EventoCambioFoto (object sender, EventArgs e)
@@ -36,7 +52,7 @@ namespace ProWeb
                     usuario.ID = int.Parse(Session["Login"].ToString());
                     usuario.Read();
                     usuario.Imagen = selecFoto.FileName;
-                    usuario.Update();
+                    usuario.UpdateFoto();
 
                     Response.Redirect(Request.RawUrl);
                 }
@@ -53,9 +69,27 @@ namespace ProWeb
 
         protected void EventoCambiar(object sender, EventArgs e) {
             ENUsuario usuario = new ENUsuario();
-            usuario.Nombre = CajaNombre.Text;
-            usuario.NumTar = CajaNumTar.Text;
-            Response.Redirect("Juegos.aspx");
+            usuario.ID = int.Parse(Session["Login"].ToString()) ;
+            usuario.Read();
+            if (Page.IsValid)
+            {
+                DateTime fecha;
+                usuario.Nombre = CajaNombre.Text;
+                usuario.Cvv = CajaCvv.Text;
+                usuario.Direccion = CajaDir.Text;
+                usuario.NumTar = CajaNumTar.Text;
+                usuario.Telefono = CajaTelef.Text;
+
+                if(DateTime.TryParse(CajaCad.Text, out fecha))
+                {
+                    usuario.Caducidad = fecha.Date;
+                    if (usuario.Update()) Response.Redirect("Perfil.aspx");
+                }
+                else
+                {
+                    //Mensaje error validacion
+                }
+            }
         }
     }
 }
