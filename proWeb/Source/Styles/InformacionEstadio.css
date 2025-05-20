@@ -47,8 +47,6 @@
     height: 200px;
 }
 
-
-
 .Holder1 {
     vertical-align: top;
     width: 200px;
@@ -73,4 +71,67 @@
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
+}
+
+.contenedor-principal {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor-principal h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.grid-estadios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card-estadio {
+    border: 4px solid;
+    border-color: #fbbd24;
+    background-color: #141610;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.card-estadio:hover {
+    transform: translateY(-5px);
+}
+
+.contenido-estadio {
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.contenido-estadio h3 {
+    margin: 0;
+    font-size: 1.3em;
+    color: #007acc;
+}
+
+.contenido-estadio h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.contenido-estadio p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95em;
+    line-height: 1.4em;
 }

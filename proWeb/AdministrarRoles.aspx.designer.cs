@@ -33,6 +33,15 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.Panel PanelCreacion;
 
         /// <summary>
+        /// Control LabelPanelOperacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPanelOperacion;
+
+        /// <summary>
         /// Control MPECreacion.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,49 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox TBIdRol;
 
         /// <summary>
-        /// Control RequiredFieldValidatorId.
+        /// Control BotonFirst.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorId;
+        protected global::System.Web.UI.WebControls.Button BotonFirst;
+
+        /// <summary>
+        /// Control REVId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator REVId;
+
+        /// <summary>
+        /// Control RFVId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVId;
+
+        /// <summary>
+        /// Control REVId2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator REVId2;
+
+        /// <summary>
+        /// Control RFVId2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVId2;
 
         /// <summary>
         /// Control LabelId.
@@ -114,13 +159,22 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox TBNombreRol;
 
         /// <summary>
-        /// Control RequiredFieldValidatorNombre.
+        /// Control RFVNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorNombre;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVNombre;
+
+        /// <summary>
+        /// Control RFVNombre2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVNombre2;
 
         /// <summary>
         /// Control LabelNombre.
@@ -166,5 +220,14 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BotonEliminarRol;
+
+        /// <summary>
+        /// Control ConfirmEliminarRol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ConfirmButtonExtender ConfirmEliminarRol;
     }
 }

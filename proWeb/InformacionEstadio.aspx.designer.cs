@@ -11,52 +11,16 @@ namespace ProWeb
 {
 
 
-    public partial class WebForm2
+    public partial class InformacionEstadio
     {
 
         /// <summary>
-        /// Control TBSelector.
+        /// Control gridEstadios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TBSelector;
-
-        /// <summary>
-        /// Control LabelNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelNombre;
-
-        /// <summary>
-        /// Control LabelCiudad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCiudad;
-
-        /// <summary>
-        /// Control LinkDireccion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink LinkDireccion;
-
-        /// <summary>
-        /// Control MapFrame.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal MapFrame;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gridEstadios;
     }
 }
