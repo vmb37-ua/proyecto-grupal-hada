@@ -23,7 +23,7 @@ namespace library
         public bool Create(ENApuesta apuesta)
         {
             bool aux = true;
-            SqlConnection c = new SqlConnection(constring);
+            SqlConnection c = new SqlConnection(conexion);
             try
             {
                 c.Open();
