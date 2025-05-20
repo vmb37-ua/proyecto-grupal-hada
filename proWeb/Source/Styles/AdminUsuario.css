@@ -67,3 +67,8 @@
     font-family: Arial;
     font-size: 15px;
 }
+
+.MensajeError{
+    color:red;
+    margin: 0 auto 0 auto;
+}

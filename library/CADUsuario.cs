@@ -116,20 +116,19 @@ namespace library
         }
         public bool Update(ENUsuario usuario) {
             bool resultado = false;
-            string query = "UPDATE usuario SET imagen = @imagen, contrasenya = @contrasenya, correo = @correo, nombre = @nombre, saldo = @saldo, numero_tar = @numero_tar, caducidad_tar = @caducidad_tar, cvv = @cvv, direccion = @direccion, telefono = @telefono, id_rol = @id_rol, id_municipio = @id_municipio WHERE id = @id";
+            string query = "UPDATE usuario SET contrasenya = @contrasenya, correo = @correo, nombre = @nombre, saldo = @saldo, numero_tar = @numero_tar, caducidad_tar = @caducidad_tar, cvv = @cvv, direccion = @direccion, telefono = @telefono, id_rol = @id_rol, id_municipio = @id_municipio WHERE id = @id";
 
             SqlConnection conn = new SqlConnection(conexion);
             conn.Open();
 
             try { 
                 SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@imagen", usuario.Imagen);
                 cmd.Parameters.AddWithValue("@contrasenya", usuario.Password);
                 cmd.Parameters.AddWithValue("@correo", usuario.Correo);
                 cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
                 cmd.Parameters.AddWithValue("@saldo", usuario.Saldo);
                 cmd.Parameters.AddWithValue("@numero_tar", usuario.NumTar);
-                cmd.Parameters.AddWithValue("@caducidad_tar", usuario.Caducidad);
+                cmd.Parameters.AddWithValue("@caducidad_tar", usuario.Caducidad.Date);
                 cmd.Parameters.AddWithValue("@cvv", usuario.Cvv);
                 cmd.Parameters.AddWithValue("@direccion", usuario.Direccion);
                 cmd.Parameters.AddWithValue("@telefono", usuario.Telefono);
@@ -142,6 +141,7 @@ namespace library
             }
             catch (Exception ex)
             {
+                resultado = false;
                 Console.WriteLine(ex.Message);
             }
             finally
@@ -149,7 +149,7 @@ namespace library
                 conn.Close();
             }
             
-            return true;
+            return resultado;
         }
 
         public bool LoginUsu(ENUsuario usuario) {
@@ -243,6 +243,36 @@ namespace library
             }
 
             return existe;
+        }
+
+        public bool UpdateFoto(ENUsuario usuario)
+        {
+            bool resultado = false;
+            string query = "UPDATE usuario SET imagen = @imagen WHERE id = @id";
+
+            SqlConnection conn = new SqlConnection(conexion);
+            conn.Open();
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@imagen", usuario.Imagen);
+                cmd.Parameters.AddWithValue("@id", usuario.ID);
+
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                resultado = filasAfectadas != 0;
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return resultado;
         }
 
     }
