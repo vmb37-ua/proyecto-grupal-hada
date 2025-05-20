@@ -57,7 +57,9 @@ namespace ProWeb
                     Estadio = new ENEstadio { Nombre = ddlEstadios.SelectedValue },
                     Equipo1 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo1.SelectedValue) },
                     Equipo2 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo2.SelectedValue) },
-                    Resultado = int.Parse(txtResultado.Text)
+                    cot1 = double.Parse(txtCot1.Text),
+                    cot2 = double.Parse(txtCot2.Text),
+                    cotX = double.Parse(txtCotX.Text)
                 };
 
                 if (ap.Create())
@@ -73,8 +75,31 @@ namespace ProWeb
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
-            // Similar a crear, solo llama ap.Update() en vez de Create()
+            try
+            {
+                ENApuesta ap = new ENApuesta
+                {
+                    Id_apuesta = int.Parse(txtIdApuesta.Text),
+                    Fecha = DateTime.Parse(txtFecha.Text),
+                    Estadio = new ENEstadio { Nombre = ddlEstadios.SelectedValue },
+                    Equipo1 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo1.SelectedValue) },
+                    Equipo2 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo2.SelectedValue) },
+                    cot1 = double.Parse(txtCot1.Text),
+                    cot2 = double.Parse(txtCot2.Text),
+                    cotX = double.Parse(txtCotX.Text)
+                };
+
+                if (ap.Update())
+                    MostrarMensaje("Apuesta actualizada correctamente.");
+                else
+                    MostrarMensaje("Error al actualizar la apuesta.");
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("ERROR SQL: " + ex.Message.Replace("'", ""));
+            }
         }
+
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {

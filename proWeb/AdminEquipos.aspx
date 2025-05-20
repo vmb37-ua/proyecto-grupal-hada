@@ -13,10 +13,11 @@
         <asp:TextBox ID="txtNombre" runat="server" CssClass="InputCampo" />
 
         <p>Escudo (URL o nombre de archivo):</p>
-        <asp:TextBox ID="txtEscudo" runat="server" CssClass="InputCampo" />
+        <asp:FileUpload ID="fileEscudo" runat="server" CssClass="InputCampo" />
+
 
         <p>Categoría:</p>
-        <asp:TextBox ID="txtCategoria" runat="server" CssClass="InputCampo" />
+        <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="ListaDesplegable" />
 
         <br /><br />
         <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear equipo" OnClick="btnCrear_Click" />

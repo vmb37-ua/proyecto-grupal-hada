@@ -20,32 +20,43 @@ namespace ProWeb
         {
             try
             {
-                if (int.TryParse(txtCapacidad.Text, out int capacidad) &&
-                    int.TryParse(ddlMunicipios.SelectedValue, out int idMunicipio))
+                if (string.IsNullOrWhiteSpace(txtNombre.Text))
                 {
-                    ENEstadio estadio = new ENEstadio
-                    {
-                        Nombre = txtNombre.Text,
-                        Capacidad = capacidad,
-                        Texto = txtTexto.Text,
-                        Id_municipio = idMunicipio
-                    };
+                    MostrarMensaje("El nombre del estadio no puede estar vacío.");
+                    return;
+                }
 
-                    if (estadio.Create())
-                        MostrarMensaje("Estadio creado correctamente.");
-                    else
-                        MostrarMensaje("Error al crear el estadio.");
-                }
-                else
+                if (!int.TryParse(txtCapacidad.Text, out int capacidad))
                 {
-                    MostrarMensaje("Capacidad e ID de municipio deben ser válidos.");
+                    MostrarMensaje("La capacidad debe ser un número válido.");
+                    return;
                 }
+
+                if (!int.TryParse(ddlMunicipios.SelectedValue, out int idMunicipio))
+                {
+                    MostrarMensaje("Debes seleccionar un municipio válido.");
+                    return;
+                }
+
+                ENEstadio estadio = new ENEstadio
+                {
+                    Nombre = txtNombre.Text,
+                    Capacidad = capacidad,
+                    Texto = txtTexto.Text,
+                    Id_municipio = idMunicipio
+                };
+
+                if (estadio.Create())
+                    MostrarMensaje("Estadio creado correctamente.");
+                else
+                    MostrarMensaje("Error al crear el estadio.");
             }
             catch (Exception ex)
             {
                 MostrarMensaje("ERROR SQL: " + ex.Message.Replace("'", ""));
             }
         }
+
 
 
 
