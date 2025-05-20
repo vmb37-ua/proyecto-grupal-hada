@@ -69,8 +69,8 @@ namespace library
                             apuesta.IdApuesta = Convert.ToInt32(dr["id_apuesta"]);
                             apuesta.IdUsuario = Convert.ToInt32(dr["id_usuario"]);
                             apuesta.Prediccion = Convert.ToString(dr["prediccion"]);
-                            apuesta.Cantidad = Convert.ToDecimal(dr["cantidad"]);
-                            apuesta.Cuota = Convert.ToDecimal(dr["cuota"]);
+                            apuesta.Cantidad = (float)(dr["cantidad"]);
+                            apuesta.Cuota = (float)(dr["cuota"]);
 
                             apuestas_usuario.Add(apuesta);
                         }

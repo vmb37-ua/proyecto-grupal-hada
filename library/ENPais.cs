@@ -47,5 +47,11 @@ namespace library
             CADPais cad = new CADPais();
             return cad.Delete(this);
         }
+
+        public List<ENPais> ReadAll()
+        {
+            CADPais cad = new CADPais();
+            return cad.ReadAll();
+        }
     }
 }

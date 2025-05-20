@@ -24,14 +24,14 @@ namespace ProWeb
             }
 
             // 2. Validar que la cantidad sea un número positivo
-            if (!decimal.TryParse(txtCantidad.Text, out decimal cantidad) || cantidad <= 0)
+            if (!float.TryParse(txtCantidad.Text, out float cantidad) || cantidad <= 0)
             {
                 MostrarError("Ingresa una cantidad válida (ej: 10.50).");
                 return false;
             }
 
             // 3. Validar que el usuario tenga saldo suficiente
-            decimal saldoActual = (decimal)Session["saldo"];
+            float saldoActual = (float)Session["saldo"];
             if (cantidad > saldoActual)
             {
                 MostrarError("Saldo insuficiente.");
@@ -52,18 +52,17 @@ namespace ProWeb
 
         private int ObtenerIdUsuarioActual()
         {
-            if (Session["id_usuario"] != null)
-                return Convert.ToInt32(Session["id_usuario"]);
-            else
-                throw new Exception("Usuario no logueado.");
+            return Convert.ToInt32(Session["id_usuario"]);   
         }
 
         private int ObtenerIdApuestaActual()
+        { 
+            return Convert.ToInt32(Request.QueryString["id_apuesta"]);
+        }
+
+        private void ActualizarSaldo(int idUsuario, float nuevoSaldo)
         {
-            if (Request.QueryString["id_apuesta"] != null)
-                return Convert.ToInt32(Request.QueryString["id_apuesta"]);
-            else
-                throw new Exception("Apuesta no especificada.");
+            
         }
 
 
@@ -72,7 +71,7 @@ namespace ProWeb
             if (!IsPostBack)
             {
                 int idUsuario = Convert.ToInt32(Session["Login"]);
-                decimal saldoBD = 110;
+                float saldoBD = 110;
                 Session["saldo"] = saldoBD;
                 lblSaldo.Text = saldoBD.ToString();
             }
@@ -98,8 +97,8 @@ namespace ProWeb
                     int idUsuario = ObtenerIdUsuarioActual();
                     int idApuesta = ObtenerIdApuestaActual();
                     string prediccion = rblOpcionesApuesta.SelectedValue;
-                    decimal cantidad = decimal.Parse(txtCantidad.Text);
-                    decimal cuota = decimal.Parse(lblCuotaActual.Text, CultureInfo.InvariantCulture);
+                    float cantidad = float.Parse(txtCantidad.Text);
+                    float cuota = float.Parse(lblCuotaActual.Text);
 
 
                     ENApuesta_usuario apuesta = new ENApuesta_usuario(idUsuario, idApuesta, prediccion, cantidad, cuota);
@@ -108,9 +107,20 @@ namespace ProWeb
                     if (apuestaCreada)
                     {
                         pnlConfirmacion.Visible = true;
-                        lblMensajeExito.Text = "¡Apuesta realizada con éxito!";
+                        
 
                         //Actualizar saldo
+                        ENUsuario usuario = new ENUsuario();
+                        usuario.ID = idUsuario;
+
+                        if (usuario.Read())
+                        {
+                            usuario.Saldo -= cantidad;
+                            usuario.Update();
+
+                            lblSaldo.Text = usuario.Saldo.ToString("F2") + " €";
+                            lblMensajeExito.Text = "¡Apuesta realizada con éxito!";
+                        }
                     }
                     else
                     {
