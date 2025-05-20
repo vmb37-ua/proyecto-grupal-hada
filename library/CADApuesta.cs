@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -21,19 +22,13 @@ namespace library
 
         public bool Create(ENApuesta apuesta)
         {
+            bool aux = true;
+            SqlConnection c = new SqlConnection(constring);
             try
             {
-                using (SqlConnection conn = new SqlConnection(conexion))
-                {
-                    string query = "INSERT INTO apuesta (id_apuesta, resultado, fecha, id_equipo1, id_equipo2, estadio) " +
-                                   "VALUES (@id, @resultado, @fecha, @eq1, @eq2, @estadio)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id", apuesta.Id_apuesta);
-                    cmd.Parameters.AddWithValue("@resultado", apuesta.Resultado);
-                    cmd.Parameters.AddWithValue("@fecha", apuesta.Fecha);
-                    cmd.Parameters.AddWithValue("@eq1", apuesta.Equipo1.Id_equipo);
-                    cmd.Parameters.AddWithValue("@eq2", apuesta.Equipo2.Id_equipo);
-                    cmd.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
+                c.Open();
+                SqlCommand com = new SqlCommand("INSERT INTO Apuesta (IdApuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX) " +
+                                                "VALUES (@IdApuesta, @Fecha, @IdEstadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
 
                 com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
                 com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
@@ -47,8 +42,14 @@ namespace library
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al crear apuesta: " + ex.Message);
+                Console.WriteLine("Failure to create Apuesta", ex.Message);
+                aux = false;
             }
+            finally
+            {
+                c.Close();
+            }
+            return aux;
         }
 
         public bool Update(ENApuesta apuesta)
