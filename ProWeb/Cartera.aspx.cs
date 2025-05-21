@@ -10,8 +10,8 @@ namespace ProWeb
 {
     public partial class Cartera : Page
     {
-        private const decimal SALDO_MAXIMO = 10000m;
-        private const decimal SALDO_MINIMO = 0m;
+        private const float SALDO_MAXIMO = 10000f;
+        private const float SALDO_MINIMO = 0f;
 
         private ENUsuario usuarioActual;
 
@@ -19,13 +19,13 @@ namespace ProWeb
         {
             if (Session["id_usuario"] == null)
             {
-                Response.Redirect("Login.aspx"); 
+                Response.Redirect("Login.aspx");
                 return;
             }
 
             int idUsuario = (int)Session["id_usuario"];
             usuarioActual = new ENUsuario { ID = idUsuario };
-            if (usuarioActual.Read()) 
+            if (usuarioActual.Read())
             {
                 if (!IsPostBack)
                 {
@@ -41,7 +41,7 @@ namespace ProWeb
 
         protected void Ingresar_Click(object sender, EventArgs e)
         {
-            if (!decimal.TryParse(CantidadIngresar.Text, out decimal cantidad) || cantidad <= 0)
+            if (!float.TryParse(CantidadIngresar.Text, out float cantidad) || cantidad <= 0)
             {
                 MensajeOperacion.Text = "Introduce una cantidad válida.";
                 MensajeOperacion.ForeColor = System.Drawing.Color.Red;
@@ -51,7 +51,7 @@ namespace ProWeb
             usuarioActual.ID = (int)Session["id_usuario"];
             if (usuarioActual.Read())
             {
-                decimal nuevoSaldo = (decimal)usuarioActual.Saldo + cantidad;
+                float nuevoSaldo = usuarioActual.Saldo + cantidad;
 
                 if (nuevoSaldo > SALDO_MAXIMO)
                 {
@@ -60,7 +60,7 @@ namespace ProWeb
                 }
                 else
                 {
-                    usuarioActual.Saldo = (float)nuevoSaldo;
+                    usuarioActual.Saldo = nuevoSaldo;
                     if (usuarioActual.Update())
                     {
                         DineroDisponible.Text = nuevoSaldo.ToString("F2") + " €";
@@ -81,7 +81,7 @@ namespace ProWeb
 
         protected void Retirar_Click(object sender, EventArgs e)
         {
-            if (!decimal.TryParse(CantidadRetirar.Text, out decimal cantidad) || cantidad <= 0)
+            if (!float.TryParse(CantidadRetirar.Text, out float cantidad) || cantidad <= 0)
             {
                 MensajeOperacion.Text = "Introduce una cantidad válida.";
                 MensajeOperacion.ForeColor = System.Drawing.Color.Red;
@@ -91,7 +91,7 @@ namespace ProWeb
             usuarioActual.ID = (int)Session["id_usuario"];
             if (usuarioActual.Read())
             {
-                decimal saldoActual = (decimal)usuarioActual.Saldo;
+                float saldoActual = usuarioActual.Saldo;
 
                 if (cantidad > saldoActual)
                 {
@@ -100,8 +100,8 @@ namespace ProWeb
                 }
                 else
                 {
-                    decimal nuevoSaldo = saldoActual - cantidad;
-                    usuarioActual.Saldo = (float)nuevoSaldo;
+                    float nuevoSaldo = saldoActual - cantidad;
+                    usuarioActual.Saldo = nuevoSaldo;
                     if (usuarioActual.Update())
                     {
                         DineroDisponible.Text = nuevoSaldo.ToString("F2") + " €";
@@ -119,6 +119,7 @@ namespace ProWeb
                 }
             }
         }
+
         protected void Volver_Click(object sender, EventArgs e)
         {
             Response.Redirect("Perfil.aspx");

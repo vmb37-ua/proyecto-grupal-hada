@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using library;
 
+
 namespace ProWeb
 {
     public partial class Favoritos : Page
@@ -18,8 +19,10 @@ namespace ProWeb
                 {
                     int idUsuario = Convert.ToInt32(Session["IdUsuario"]);
 
-                    ENFavoritos fav = new ENFavoritos();
-                    fav.IdUsuario = idUsuario;
+                    ENFavoritos fav = new ENFavoritos
+                    {
+                        IdUsuario = idUsuario
+                    };
 
                     List<ENFavoritos> favoritos = fav.ReadAllUsuario();
 

@@ -24,20 +24,40 @@ namespace library
             SqlConnection c = new SqlConnection(constring);
             try
             {
-                c.Open();
-                SqlCommand com = new SqlCommand("INSERT INTO Apuesta (IdApuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX) " +
-                                                "VALUES (@IdApuesta, @Fecha, @IdEstadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
+                    c.Open();
 
-                com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
-                com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
-                com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
-                com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
-                com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
-                com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
-                com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
-                com.Parameters.AddWithValue("@CotX", apuesta.cotX);
+                    SqlCommand check = new SqlCommand("SELECT COUNT(*) FROM Apuesta WHERE estadio = @Estadio AND fecha = @Fecha", c);
+                    check.Parameters.AddWithValue("@Estadio", apuesta.Estadio.Nombre);
+                    check.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
 
+
+                    int count = (int)check.ExecuteScalar();
+                    if (count > 0)
+                    {
+                        throw new Exception("Ya existe una apuesta para ese estadio en esa fecha.");
+
+                    }
+
+              
+                    SqlCommand com = new SqlCommand(
+                        "INSERT INTO Apuesta (fecha, estadio, id_equipo1, id_equipo2, cot1, cot2, cotX) " +
+                        "OUTPUT INSERTED.id_apuesta " +
+                        "VALUES (@Fecha, @Estadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
+
+                    com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
+                    com.Parameters.AddWithValue("@Estadio", apuesta.Estadio.Nombre);
+                    com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
+                    com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
+                    com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
+                    com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
+                    com.Parameters.AddWithValue("@CotX", apuesta.cotX);
+
+                    apuesta.Id_apuesta = (int)com.ExecuteScalar(); 
+
+                    return true;
             }
+
+
             catch (Exception ex)
             {
                 Console.WriteLine("Failure to create Apuesta", ex.Message);
@@ -56,7 +76,7 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("DELETE FROM Apuesta WHERE IdApuesta = @IdApuesta", c);
+                SqlCommand com = new SqlCommand("DELETE FROM Apuesta WHERE id_apuesta = @IdApuesta", c);
                 com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
                 com.ExecuteNonQuery();
 
@@ -79,18 +99,18 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("SELECT Fecha, estadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta WHERE IdApuesta = @IdApuesta", c);
+                SqlCommand com = new SqlCommand("SELECT fecha, estadio, id_equipo1, id_equipo2, cot1, cot2, cotX FROM Apuesta WHERE id_apuesta = @IdApuesta", c);
                 com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
                 SqlDataReader data = com.ExecuteReader();
                 if (data.Read())
                 {
-                    apuesta.Fecha = Convert.ToDateTime(data["Fecha"]);
+                    apuesta.Fecha = Convert.ToDateTime(data["fecha"]);
                     apuesta.Estadio = new ENEstadio { Nombre = Convert.ToString(data["estadio"]) };
-                    apuesta.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo1"]) };
-                    apuesta.Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo2"]) };
-                    apuesta.cot1 = Convert.ToDouble(data["Cot1"]);
-                    apuesta.cot2 = Convert.ToDouble(data["Cot2"]);
-                    apuesta.cotX = Convert.ToDouble(data["CotX"]);
+                    apuesta.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(data["id_equipo1"]) };
+                    apuesta.Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(data["id_equipo2"]) };
+                    apuesta.cot1 = Convert.ToDouble(data["cot1"]);
+                    apuesta.cot2 = Convert.ToDouble(data["cot2"]);
+                    apuesta.cotX = Convert.ToDouble(data["cotX"]);
                     aux = true;
                 }
                 data.Close();
@@ -112,8 +132,8 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("UPDATE Apuesta SET Fecha = @Fecha, estadio = @estadio, IdEquipo1 = @IdEquipo1, " +
-                                                "IdEquipo2 = @IdEquipo2, Cot1 = @Cot1, Cot2 = @Cot2, CotX = @CotX WHERE IdApuesta = @IdApuesta", c);
+                SqlCommand com = new SqlCommand("UPDATE Apuesta SET fecha = @Fecha, estadio = @estadio, id_equipo1 = @IdEquipo1, " +
+                                                "id_equipo2 = @IdEquipo2, cot1 = @Cot1,cot2 = @Cot2, cotX = @CotX WHERE id_apuesta = @IdApuesta", c);
 
                 com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
                 com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
@@ -144,19 +164,19 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("SELECT IdApuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta", c);
+                SqlCommand com = new SqlCommand("SELECT id_apuesta, fecha, estadio, id_equipo1, id_equipo2, cot1, cot2, cotX FROM Apuesta", c);
                 SqlDataReader data = com.ExecuteReader();
                 while (data.Read())
                 {
                     ENApuesta a = new ENApuesta();
-                    a.Id_apuesta = Convert.ToInt32(data["IdApuesta"]);
-                    a.Fecha = Convert.ToDateTime(data["Fecha"]);
+                    a.Id_apuesta = Convert.ToInt32(data["id_apuesta"]);
+                    a.Fecha = Convert.ToDateTime(data["fecha"]);
                     a.Estadio = new ENEstadio { Nombre = Convert.ToString(data["estadio"]) };
-                    a.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo1"]) };
-                    a.Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo2"]) };
-                    a.cot1 = Convert.ToDouble(data["Cot1"]);
-                    a.cot2 = Convert.ToDouble(data["Cot2"]);
-                    a.cotX = Convert.ToDouble(data["CotX"]);
+                    a.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(data["id_equipo1"]) };
+                    a.Equipo2 = new ENEquipo { Id_equipo = Convert.ToInt32(data["id_equipo2"]) };
+                    a.cot1 = Convert.ToDouble(data["cot1"]);
+                    a.cot2 = Convert.ToDouble(data["cot2"]);
+                    a.cotX = Convert.ToDouble(data["cotX"]);
                     lista.Add(a);
                 }
                 data.Close();

@@ -31,58 +31,47 @@ using library;
         }
 
 
-      protected void btnCrear_Click(object sender, EventArgs e)
-{
-    try
-    {
-        if (!int.TryParse(txtIdEquipo.Text, out int id))
+        protected void btnCrear_Click(object sender, EventArgs e)
         {
-            MostrarMensaje("El ID debe ser un número válido.");
-            return;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtNombre.Text) || ddlCategoria.SelectedValue == "")
+                {
+                    MostrarMensaje("Todos los campos son obligatorios.");
+                    return;
+                }
+
+                string escudoRuta = "";
+                if (fileEscudo.HasFile)
+                {
+                    string nombreArchivo = Path.GetFileName(fileEscudo.FileName);
+                    string ruta = Server.MapPath("~/Source/Images/") + nombreArchivo;
+                    fileEscudo.SaveAs(ruta);
+                    escudoRuta = "Source/Images/" + nombreArchivo;
+                }
+                else
+                {
+                    MostrarMensaje("Debes subir un archivo para el escudo.");
+                    return;
+                }
+
+                ENEquipo equipo = new ENEquipo
+                {
+                    Nombre = txtNombre.Text,
+                    Escudo = escudoRuta,
+                    Categoria = ddlCategoria.SelectedValue
+                };
+
+                if (equipo.Create())
+                    MostrarMensaje("Equipo creado correctamente.");
+                else
+                    MostrarMensaje("Error al crear el equipo.");
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("ERROR: " + ex.Message.Replace("'", ""));
+            }
         }
-
-        if (string.IsNullOrWhiteSpace(txtNombre.Text) || ddlCategoria.SelectedValue == "")
-        {
-            MostrarMensaje("Todos los campos son obligatorios.");
-            return;
-        }
-
-        string escudoRuta = "";
-        if (fileEscudo.HasFile)
-        {
-            string nombreArchivo = Path.GetFileName(fileEscudo.FileName);
-            string ruta = Server.MapPath("~/Source/Images/") + nombreArchivo;
-            fileEscudo.SaveAs(ruta);
-            escudoRuta = "Source/Images/" + nombreArchivo;
-        }
-        else
-        {
-            MostrarMensaje("Debes subir un archivo para el escudo.");
-            return;
-        }
-
-        ENEquipo equipo = new ENEquipo
-        {
-            Id_equipo = id,
-            Nombre = txtNombre.Text,
-            Escudo = escudoRuta,
-            Categoria = ddlCategoria.SelectedValue
-        };
-
-        if (equipo.Create())
-            MostrarMensaje("Equipo creado correctamente.");
-        else
-            MostrarMensaje("Error al crear el equipo.");
-    }
-    catch (Exception ex)
-    {
-        MostrarMensaje("ERROR: " + ex.Message.Replace("'", ""));
-    }
-}
-
-               
-
-
 
 
 
@@ -90,45 +79,66 @@ using library;
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(txtIdEquipo.Text, out int id))
+            string nombreEquipo = txtNombre.Text.Trim();
+
+            if (string.IsNullOrEmpty(nombreEquipo))
             {
-                ENEquipo equipo = new ENEquipo
-                {
-                    Id_equipo = id,
-                    Nombre = txtNombre.Text,
-                    Escudo = "", // o mantener el valor anterior si no se cambia
-                    Categoria = ddlCategoria.SelectedValue
-
-                };
-
-                if (equipo.Update())
-                    MostrarMensaje("Equipo actualizado correctamente.");
-                else
-                    MostrarMensaje("Error al actualizar el equipo.");
+                MostrarMensaje("Debes escribir el nombre del equipo a actualizar.");
+                return;
             }
+
+            // Buscar el equipo por nombre
+            ENEquipo equipo = new ENEquipo { Nombre = nombreEquipo };
+            if (!equipo.Read())
+            {
+                MostrarMensaje("No se encontró un equipo con ese nombre.");
+                return;
+            }
+
+            string escudoRuta = equipo.Escudo; // valor actual, por si no sube uno nuevo
+
+            if (fileEscudo.HasFile)
+            {
+                string nombreArchivo = Path.GetFileName(fileEscudo.FileName);
+                string ruta = Server.MapPath("~/Source/Images/") + nombreArchivo;
+                fileEscudo.SaveAs(ruta);
+                escudoRuta = "Source/Images/" + nombreArchivo;
+            }
+
+            equipo.Escudo = escudoRuta;
+            equipo.Categoria = ddlCategoria.SelectedValue;
+
+            if (equipo.Update())
+                MostrarMensaje("Equipo actualizado correctamente.");
             else
-            {
-                MostrarMensaje("El ID debe ser un número válido.");
-            }
+                MostrarMensaje("Error al actualizar el equipo.");
         }
 
 
         protected void btnEliminar_Click(object sender, EventArgs e)
-            {
-                if (int.TryParse(txtIdEquipo.Text, out int id))
-                {
-                    ENEquipo equipo = new ENEquipo { Id_equipo = id };
+        {
+            string nombreEquipo = txtNombre.Text.Trim();
 
-                    if (equipo.Delete())
-                        MostrarMensaje("Equipo eliminado correctamente.");
-                    else
-                        MostrarMensaje("Error al eliminar el equipo.");
-                }
-                else
-                {
-                    MostrarMensaje("El ID debe ser un número válido.");
-                }
+            if (string.IsNullOrEmpty(nombreEquipo))
+            {
+                MostrarMensaje("Debes escribir el nombre del equipo a eliminar.");
+                return;
             }
+
+            ENEquipo equipo = new ENEquipo { Nombre = nombreEquipo };
+
+            if (!equipo.Read())
+            {
+                MostrarMensaje("No se encontró un equipo con ese nombre.");
+                return;
+            }
+
+            if (equipo.Delete())
+                MostrarMensaje("Equipo eliminado correctamente.");
+            else
+                MostrarMensaje("Error al eliminar el equipo.");
+        }
+
 
         private void MostrarMensaje(string mensaje)
         {
