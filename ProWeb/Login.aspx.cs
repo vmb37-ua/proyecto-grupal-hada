@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
@@ -56,7 +58,7 @@ namespace ProWeb
                 {
                     ENUsuario usuario = new ENUsuario();
                     usuario.Correo = Emaillogin.Text;
-                    usuario.Password = Passlogin.Text;
+                    usuario.Password = HashPassword(Passlogin.Text);
                     if (Page.IsValid)
                     {
                         if (usuario.LoginUsu())
@@ -79,6 +81,22 @@ namespace ProWeb
             else
             {
                 Response.Write("<script>alert('Acceso denegado. reCAPTCHA fallido.');</script>");
+            }
+        }
+
+        public static string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashBytes = sha256.ComputeHash(bytes);
+
+                // Convertir a string hexadecimal
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in hashBytes)
+                    builder.Append(b.ToString("x2"));
+
+                return builder.ToString();
             }
         }
 
