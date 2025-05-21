@@ -102,7 +102,7 @@ namespace library
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        transaccion.Cantidad = Convert.ToDecimal(reader["dinero"]);
+                        transaccion.Cantidad = float.Parse(reader["dinero"].ToString());
                         transaccion.MetodoPago = reader["metodo"].ToString();
                         transaccion.IdUsuario = Convert.ToInt32(reader["id_usu"]);
                         encontrada = true;
@@ -135,7 +135,7 @@ namespace library
                         ENTransaccion t = new ENTransaccion
                         {
                             Id = Convert.ToInt32(reader["id"]),
-                            Cantidad = Convert.ToDecimal(reader["dinero"]),
+                            Cantidad = float.Parse(reader["dinero"].ToString()),
                             MetodoPago = reader["metodo"].ToString(),
                             IdUsuario = Convert.ToInt32(reader["id_usu"])
                         };

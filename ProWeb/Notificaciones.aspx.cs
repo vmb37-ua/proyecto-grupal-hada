@@ -15,19 +15,40 @@ namespace ProWeb
                 {
                     int idUsuario = Convert.ToInt32(Session["IdUsuario"]);
 
-                    ENNotificacion notificacion = new ENNotificacion();
-                    notificacion.IdUsuario = idUsuario;
+                    string idQuery = Request.QueryString["id"];
 
-                    List<ENNotificacion> notificaciones = notificacion.ReadAll();
-
-                    List<string> mensajes = new List<string>();
-                    foreach (var n in notificaciones)
+                    if (!string.IsNullOrEmpty(idQuery) && int.TryParse(idQuery, out int idNoti))
                     {
-                        mensajes.Add(n.Mensaje);
-                    }
+                        ENNotificacion notiDetalle = new ENNotificacion();
+                        notiDetalle.Id = idNoti;
 
-                    ListaNotificaciones.DataSource = mensajes;
-                    ListaNotificaciones.DataBind();
+                        if (notiDetalle.ReadbyId() && notiDetalle.IdUsuario == idUsuario)
+                        {
+                            ListaNotificaciones.DataSource = new List<string> { notiDetalle.Mensaje };
+                            ListaNotificaciones.DataBind();
+                        }
+                        else
+                        {
+                            ListaNotificaciones.DataSource = new List<string> { "No se encontró la notificación o no tienes permiso para verla." };
+                            ListaNotificaciones.DataBind();
+                        }
+                    }
+                    else
+                    {
+                        ENNotificacion notificacion = new ENNotificacion();
+                        notificacion.IdUsuario = idUsuario;
+
+                        List<ENNotificacion> notificaciones = notificacion.ReadAll();
+
+                        List<string> mensajes = new List<string>();
+                        foreach (var n in notificaciones)
+                        {
+                            mensajes.Add(n.Mensaje);
+                        }
+
+                        ListaNotificaciones.DataSource = mensajes;
+                        ListaNotificaciones.DataBind();
+                    }
                 }
                 else
                 {

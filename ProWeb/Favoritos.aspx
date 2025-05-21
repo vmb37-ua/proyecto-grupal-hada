@@ -8,13 +8,13 @@
     <div id="ContenedorFavoritos">
         <h2>Mis Equipos Favoritos</h2>
 
-        <asp:GridView ID="TablaFavoritos" runat="server" CssClass="tablaFavoritos" AutoGenerateColumns="false">
+        <asp:GridView ID="TablaFavoritos" runat="server" CssClass="tablaFavoritos" AutoGenerateColumns="false" EmptyDataText="No tienes equipos favoritos guardados.">
             <Columns>
-                <asp:BoundField DataField="NombreEquipo" HeaderText="Equipo" />
-                <asp:BoundField DataField="Categoria" HeaderText="Categoría" />
                 <asp:ImageField DataImageUrlField="Escudo" HeaderText="Escudo">
                     <ControlStyle Height="40px" Width="40px" />
                 </asp:ImageField>
+                <asp:BoundField DataField="NombreEquipo" HeaderText="Equipo" />
+                <asp:BoundField DataField="Categoria" HeaderText="Categoría" />
             </Columns>
         </asp:GridView>
 

@@ -10,7 +10,7 @@ namespace library
     {
         private int _id;
         private int _idUsuario;
-        private decimal _cantidad;
+        private float _cantidad;
         private string _metodoPago;
 
         public int Id
@@ -25,7 +25,7 @@ namespace library
             set { _idUsuario = value; }
         }
 
-        public decimal Cantidad
+        public float Cantidad
         {
             get { return _cantidad; }
             set { _cantidad = value; }
@@ -45,7 +45,7 @@ namespace library
             _metodoPago = string.Empty;
         }
 
-        public ENTransaccion(int id, int idUsuario, decimal cantidad, string metodoPago)
+        public ENTransaccion(int id, int idUsuario, float cantidad, string metodoPago)
         {
             _id = id;
             _idUsuario = idUsuario;
