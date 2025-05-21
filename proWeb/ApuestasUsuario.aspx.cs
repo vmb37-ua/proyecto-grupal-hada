@@ -45,7 +45,7 @@ namespace ProWeb
                         IdApuesta = apuesta.Id_apuesta,
                         EquipoLocal = equipoLocal.Nombre,
                         EquipoVisitante = equipoVisitante.Nombre,
-                        Resultado_apuesta = apuestaUsuario.ResultadoApuesta,
+                        //Resultado_apuesta = apuestaUsuario.ResultadoApuesta,
                         Cotizacion = apuesta.cot1,
                         Estadio = estadio.Nombre,
                         Fecha = apuesta.Fecha
