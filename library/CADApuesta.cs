@@ -24,22 +24,37 @@ namespace library
             SqlConnection c = new SqlConnection(constring);
             try
             {
-                c.Open();
-                SqlCommand com = new SqlCommand(
-                    "INSERT INTO Apuesta (Fecha, estadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX) " +
-                    "OUTPUT INSERTED.id_apuesta " +
-                    "VALUES (@Fecha, @Estadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
+                    c.Open();
 
-                com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
-                com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
-                com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
-                com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
-                com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
-                com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
-                com.Parameters.AddWithValue("@CotX", apuesta.cotX);
+                    SqlCommand check = new SqlCommand("SELECT COUNT(*) FROM Apuesta WHERE estadio = @Estadio", c);
+                    check.Parameters.AddWithValue("@Estadio", apuesta.Estadio.Nombre);
 
-                apuesta.Id_apuesta = (int)com.ExecuteScalar();
+                    int count = (int)check.ExecuteScalar();
+                    if (count > 0)
+                    {
+                        throw new Exception("Ya existe una apuesta para ese estadio.");
+                    }
+
+              
+                    SqlCommand com = new SqlCommand(
+                        "INSERT INTO Apuesta (Fecha, estadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX) " +
+                        "OUTPUT INSERTED.id_apuesta " +
+                        "VALUES (@Fecha, @Estadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
+
+                    com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
+                    com.Parameters.AddWithValue("@Estadio", apuesta.Estadio.Nombre);
+                    com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
+                    com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
+                    com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
+                    com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
+                    com.Parameters.AddWithValue("@CotX", apuesta.cotX);
+
+                    apuesta.Id_apuesta = (int)com.ExecuteScalar(); 
+
+                    return true;
             }
+
+
             catch (Exception ex)
             {
                 Console.WriteLine("Failure to create Apuesta", ex.Message);
