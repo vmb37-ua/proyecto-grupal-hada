@@ -90,6 +90,7 @@
     <Content Include="Juegos.aspx" />
     <Content Include="Cartera.aspx" />
     <Content Include="Favoritos.aspx" />
+    <Content Include="Informes.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Notificaciones.aspx" />
     <Content Include="Perfil.aspx" />
@@ -120,9 +121,7 @@
     <Content Include="Source\Styles\Notificaciones.css" />
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
-    <Content Include="Source\Styles\InformacionEstadio.css" />
-    <Content Include="Source\Styles\Ubicacion.css" />
-    <Content Include="Ubicacion.aspx" />
+    <Content Include="Source\Styles\Informes.css" />
     <Content Include="Web.config" />
     <Content Include="AdministrarCateg.aspx" />
     <Content Include="InformacionEstadio.aspx" />
@@ -223,12 +222,12 @@
     <Compile Include="Favoritos.aspx.designer.cs">
       <DependentUpon>Favoritos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Cartera.aspx.cs">
-      <DependentUpon>Cartera.aspx</DependentUpon>
+    <Compile Include="Informes.aspx.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Cartera.aspx.designer.cs">
-      <DependentUpon>Cartera.aspx</DependentUpon>
+    <Compile Include="Informes.aspx.designer.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -325,7 +324,12 @@
       <Name>library</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\library\library.csproj">
+      <Project>{cc397af7-86c3-40df-b754-329113ae74c8}</Project>
+      <Name>library</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
