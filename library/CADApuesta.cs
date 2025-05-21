@@ -25,10 +25,11 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("INSERT INTO Apuesta (IdApuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX) " +
-                                                "VALUES (@IdApuesta, @Fecha, @IdEstadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
+                SqlCommand com = new SqlCommand(
+                    "INSERT INTO Apuesta (Fecha, estadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX) " +
+                    "OUTPUT INSERTED.id_apuesta " +
+                    "VALUES (@Fecha, @Estadio, @IdEquipo1, @IdEquipo2, @Cot1, @Cot2, @CotX)", c);
 
-                com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
                 com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
                 com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
                 com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
@@ -37,6 +38,7 @@ namespace library
                 com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
                 com.Parameters.AddWithValue("@CotX", apuesta.cotX);
 
+                apuesta.Id_apuesta = (int)com.ExecuteScalar();
             }
             catch (Exception ex)
             {
@@ -56,7 +58,7 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("DELETE FROM Apuesta WHERE IdApuesta = @IdApuesta", c);
+                SqlCommand com = new SqlCommand("DELETE FROM Apuesta WHERE id_apuesta = @IdApuesta", c);
                 com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
                 com.ExecuteNonQuery();
 
@@ -79,7 +81,7 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("SELECT Fecha, estadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta WHERE IdApuesta = @IdApuesta", c);
+                SqlCommand com = new SqlCommand("SELECT Fecha, estadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta WHERE id_apuesta = @IdApuesta", c);
                 com.Parameters.AddWithValue("@IdApuesta", apuesta.Id_apuesta);
                 SqlDataReader data = com.ExecuteReader();
                 if (data.Read())
@@ -113,7 +115,7 @@ namespace library
             {
                 c.Open();
                 SqlCommand com = new SqlCommand("UPDATE Apuesta SET Fecha = @Fecha, estadio = @estadio, IdEquipo1 = @IdEquipo1, " +
-                                                "IdEquipo2 = @IdEquipo2, Cot1 = @Cot1, Cot2 = @Cot2, CotX = @CotX WHERE IdApuesta = @IdApuesta", c);
+                                                "IdEquipo2 = @IdEquipo2, Cot1 = @Cot1, Cot2 = @Cot2, CotX = @CotX WHERE id_apuesta = @IdApuesta", c);
 
                 com.Parameters.AddWithValue("@Fecha", apuesta.Fecha);
                 com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
@@ -144,12 +146,12 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("SELECT IdApuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta", c);
+                SqlCommand com = new SqlCommand("SELECT id_apuesta, Fecha, IdEstadio, IdEquipo1, IdEquipo2, Cot1, Cot2, CotX FROM Apuesta", c);
                 SqlDataReader data = com.ExecuteReader();
                 while (data.Read())
                 {
                     ENApuesta a = new ENApuesta();
-                    a.Id_apuesta = Convert.ToInt32(data["IdApuesta"]);
+                    a.Id_apuesta = Convert.ToInt32(data["id_apuesta"]);
                     a.Fecha = Convert.ToDateTime(data["Fecha"]);
                     a.Estadio = new ENEstadio { Nombre = Convert.ToString(data["estadio"]) };
                     a.Equipo1 = new ENEquipo { Id_equipo = Convert.ToInt32(data["IdEquipo1"]) };
