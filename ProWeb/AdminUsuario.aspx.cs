@@ -43,7 +43,7 @@ namespace ProWeb
 
                 if (permitidas.Contains(extension))
                 {
-                    string ruta = Server.MapPath("~/Source/Images/") + selecFoto.FileName;
+                    string ruta = Server.MapPath("~/Source/Images/") + Session["Login"].ToString();
                     selecFoto.SaveAs(ruta);
                     MensajeFoto.Text = "Imagen subida correctamente.";
                     MensajeFoto.Text = "";
