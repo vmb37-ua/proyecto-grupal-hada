@@ -6,8 +6,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
-        <p>ID del equipo:</p>
-        <asp:TextBox ID="txtIdEquipo" runat="server" CssClass="InputCampo" />
 
         <p>Nombre del equipo:</p>
         <asp:TextBox ID="txtNombre" runat="server" CssClass="InputCampo" />

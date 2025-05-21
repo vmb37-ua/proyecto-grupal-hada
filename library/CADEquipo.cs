@@ -23,23 +23,35 @@ namespace library
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "INSERT INTO equipo (id_equipo, escudo, nombre, categoria) VALUES (@id, @escudo, @nombre, @categoria)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id", equipo.Id_equipo);
-                    cmd.Parameters.AddWithValue("@escudo", equipo.Escudo);
-                    cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
-                    cmd.Parameters.AddWithValue("@categoria", equipo.Categoria);
+                    // Verificar si ya existe un equipo con el mismo nombre
+                    string checkQuery = "SELECT COUNT(*) FROM equipo WHERE nombre = @nombre";
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
 
                     conn.Open();
-                    return cmd.ExecuteNonQuery() > 0;
+                    int count = (int)checkCmd.ExecuteScalar();
+
+                    if (count > 0)
+                    {
+                        throw new Exception("Ya existe un equipo con ese nombre.");
+                    }
+
+                    // Si no existe, insertar
+                    string insertQuery = "INSERT INTO equipo (escudo, nombre, categoria) VALUES (@escudo, @nombre, @categoria)";
+                    SqlCommand insertCmd = new SqlCommand(insertQuery, conn);
+                    insertCmd.Parameters.AddWithValue("@escudo", equipo.Escudo);
+                    insertCmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
+                    insertCmd.Parameters.AddWithValue("@categoria", equipo.Categoria);
+
+                    return insertCmd.ExecuteNonQuery() > 0;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al crear equipo: " + ex.Message);
             }
-
         }
+
 
         public bool Delete(ENEquipo equipo)
         {
@@ -47,9 +59,9 @@ namespace library
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "DELETE FROM equipo WHERE id_equipo = @id";
+                    string query = "DELETE FROM equipo WHERE nombre = @nombre";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id", equipo.Id_equipo);
+                    cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
 
                     conn.Open();
                     return cmd.ExecuteNonQuery() > 0;
@@ -62,17 +74,17 @@ namespace library
             }
         }
 
+
         public bool Update(ENEquipo equipo)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "UPDATE equipo SET escudo = @escudo, nombre = @nombre, categoria = @categoria WHERE id_equipo = @id";
+                    string query = "UPDATE equipo SET escudo = @escudo, categoria = @categoria WHERE nombre = @nombre";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id", equipo.Id_equipo);
-                    cmd.Parameters.AddWithValue("@escudo", equipo.Escudo);
                     cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
+                    cmd.Parameters.AddWithValue("@escudo", equipo.Escudo);
                     cmd.Parameters.AddWithValue("@categoria", equipo.Categoria);
 
                     conn.Open();
@@ -86,22 +98,23 @@ namespace library
             }
         }
 
+
         public bool Read(ENEquipo equipo)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "SELECT * FROM equipo WHERE id_equipo = @id";
+                    string query = "SELECT * FROM equipo WHERE nombre = @nombre";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@id", equipo.Id_equipo);
+                    cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
 
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
+                        equipo.Id_equipo = Convert.ToInt32(reader["id_equipo"]);
                         equipo.Escudo = reader["escudo"].ToString();
-                        equipo.Nombre = reader["nombre"].ToString();
                         equipo.Categoria = reader["categoria"].ToString();
                         return true;
                     }
@@ -114,6 +127,7 @@ namespace library
                 return false;
             }
         }
+
 
         public List<ENEquipo> ReadAll(ENEquipo _)
         {
