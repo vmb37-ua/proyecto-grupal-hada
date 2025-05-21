@@ -47,6 +47,7 @@ namespace ProWeb
                             Estadio = estadio.Nombre,
                             Fecha = apuesta.Fecha.Date,
                             Hora = apuesta.Fecha.TimeOfDay,
+                            IdApuesta=apuesta.Id_apuesta,
                         });
                     }
                 }
@@ -61,6 +62,7 @@ namespace ProWeb
                         Estadio = "Santiago Bernabéu",
                         Fecha = DateTime.Today,
                         Hora = new TimeSpan(21, 0, 0),
+                        IdApuesta = 3,
                     });
                     juegos.Add(new Juego
                     {
@@ -69,6 +71,7 @@ namespace ProWeb
                         Estadio = "Mestalla",
                         Fecha = DateTime.Today,
                         Hora = new TimeSpan(21, 0, 0),
+                        IdApuesta = 1,
                     });
                 }
 
@@ -85,16 +88,18 @@ namespace ProWeb
         {
             public string EquipoLocal { get; set; }
             public string EquipoVisitante { get; set; }
+            public int IdApuesta { get; set; }
             public string Estadio { get; set; }
             public DateTime Fecha { get; set; }
             public TimeSpan Hora { get; set; }
             public string Categoria { get; set; }
-
-        };
+       };
 
         protected void EventoJuegoClick(object sender, EventArgs e)
         {
+
             Response.Redirect("ApuestaUsuario.aspx");
+
         }
     }
 

@@ -13,6 +13,7 @@ namespace library
         ENEstadio _estadio;
         ENEquipo _equipo1;
         ENEquipo _equipo2;
+        string _resultado; //1, 2 o X
         double _cot1;
         double _cot2;
         double _cotX;
@@ -48,7 +49,11 @@ namespace library
             get { return _equipo2; }
             set { _equipo2 = value; }
         }
-
+        public string Resultado   
+        {
+            get { return _resultado; }
+            set { _resultado = value; }
+        }
         public double cot1
         {
             get { return _cot1; }
@@ -72,17 +77,19 @@ namespace library
             _estadio = new ENEstadio();
             _equipo1 = new ENEquipo();
             _equipo2 = new ENEquipo();
+            _resultado = string.Empty;
             _cot1 = 1;
             _cot2 = 1;
             _cotX = 1;
         }
-        public ENApuesta(int id_apuesta, int importe, int resultado_predicho, DateTime fecha, ENEstadio estadio, ENEquipo equipo1, ENEquipo equipo2, double cot1, double cot2, double cotX)
+        public ENApuesta(int id_apuesta, DateTime fecha, ENEstadio estadio, ENEquipo equipo1, ENEquipo equipo2, string resultado, double cot1, double cot2, double cotX)
         {
             _id_apuesta = id_apuesta;
             _fecha = fecha;
             _estadio = estadio;
             _equipo1 = equipo1;
             _equipo2 = equipo2;
+            _resultado = resultado;
             _cot1 = cot1;
             _cot2 = cot2;
             _cotX = cotX;

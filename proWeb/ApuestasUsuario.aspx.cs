@@ -24,7 +24,7 @@ namespace ProWeb
             //Cojo todas las apuestas
             var apuestasUsuario = new ENApuesta_usuario().ReadAll();
 
-            var apuestasMostrar = new List<Apuesta>();
+            var apuestasMostrar = new List<ApuestaFinal>();
 
             foreach (var apuestaUsuario in apuestasUsuario)
             {
@@ -40,12 +40,13 @@ namespace ProWeb
                     var estadio = new ENEstadio { Nombre = apuesta.Estadio.Nombre };
                     estadio.Read();
 
-                    apuestasMostrar.Add(new Apuesta
+                    apuestasMostrar.Add(new ApuestaFinal
                     {
                         IdApuesta = apuesta.Id_apuesta,
                         EquipoLocal = equipoLocal.Nombre,
                         EquipoVisitante = equipoVisitante.Nombre,
-                        Resultado_apuesta = apuestaUsuario.ResultadoApuesta,
+                        Resultado_apuesta = 
+                        Resultado_predicho= apuestaUsuario.Prediccion,
                         Cotizacion = apuesta.cot1,
                         Estadio = estadio.Nombre,
                         Fecha = apuesta.Fecha
@@ -59,12 +60,13 @@ namespace ProWeb
 
         }
 
-        public class Apuesta
+        public class ApuestaFinal
         {
             public int IdApuesta { get; set; }
             public string EquipoLocal { get; set; }
             public string EquipoVisitante { get; set; }
-            public string Resultado_apuesta { get; set; } //Ganada/Perdida
+            public string Resultado_apuesta { get; set; } //1, 2 o X
+            public string Resultado_predicho { get; set; } //1, 2 o X
             public double Cotizacion { get; set; }
             public string Estadio { get; set; }
             public DateTime Fecha { get; set; }
@@ -75,7 +77,7 @@ namespace ProWeb
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Apuesta apuesta = (Apuesta)e.Row.DataItem;
+                ApuestaFinal apuesta = (ApuestaFinal)e.Row.DataItem;
 
                 if (apuesta.Resultado_apuesta == "Ganada")
                     e.Row.BackColor = System.Drawing.Color.LightGreen;
