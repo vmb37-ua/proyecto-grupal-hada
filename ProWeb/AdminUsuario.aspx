@@ -75,7 +75,9 @@
                 <asp:Label runat="server" ID="MensajeFoto" CssClass="MensajeError"></asp:Label>
             </div>  
         </div>
-
+        <asp:DropDownList ID="Paisregister" runat="server" CssClass="Inputregister" AutoPostBack="true" OnSelectedIndexChanged="Paisregister_SelectedIndexChanged" />
+        <asp:DropDownList ID="Provinciaregister" runat="server" CssClass="Inputregister" AutoPostBack="true" OnSelectedIndexChanged="Provinciaregister_SelectedIndexChanged" />
+        <asp:DropDownList ID="Municipioregister" runat="server" CssClass="Inputregister"/>
         <asp:Button runat="server" CssClass="Boton" Text="Editar el perfil" OnClick="EventoCambiar"/>
     </div>
 </asp:Content>

@@ -21,6 +21,8 @@ namespace ProWeb
                 if (!IsPostBack)
                 {
                     ENUsuario usuario = new ENUsuario();
+                    ENMunicipio municipio = new ENMunicipio();
+                    ENProvincia provincia = new ENProvincia();
                     usuario.ID = int.Parse(Session["login"].ToString());
                     usuario.Read();
 
@@ -30,6 +32,13 @@ namespace ProWeb
                     CajaDir.Text = usuario.Direccion;
                     CajaNumTar.Text = usuario.NumTar;
                     CajaTelef.Text = usuario.Telefono;
+                    CargarMunicipios(usuario.Municipio);
+                    municipio.Id_municipio = usuario.Municipio;
+                    municipio.Read();
+                    CargarProvincia(municipio.Id_provincia);
+                    provincia.IdProvincia = municipio.Id_provincia;
+                    provincia.Read();
+                    CargarPaises();
                 }
             }
         }
@@ -89,6 +98,74 @@ namespace ProWeb
                 {
                     //Mensaje error validacion
                 }
+            }
+        }
+
+        private void CargarPaises()
+        {
+            var cadPais = new CADPais();
+            var paises = cadPais.ReadAll();
+            Paisregister.DataSource = paises;
+            Paisregister.DataTextField = "NombrePais";
+            Paisregister.DataValueField = "IdPais";
+            Paisregister.DataBind();
+            Paisregister.SelectedIndex = 0;
+        }
+
+
+        private void CargarProvincia(int idPais)
+        {
+            var cadProvincia = new CADProvincia();
+            var provincias = new List<ENProvincia>();
+
+            ENProvincia filtroProvincia = new ENProvincia();
+            filtroProvincia.IdPais = idPais;
+
+            provincias = cadProvincia.ReadAllByPais(filtroProvincia);
+
+            Provinciaregister.DataSource = provincias;
+            Provinciaregister.DataTextField = "Nombre";
+            Provinciaregister.DataValueField = "IdProvincia";
+            Provinciaregister.DataBind();
+        }
+
+        private void CargarMunicipios(int idProvincia)
+        {
+            var cadMunicipio = new CADMunicipio();
+            var municipios = new List<ENMunicipio>();
+
+            ENMunicipio filtroMunicipio = new ENMunicipio();
+            filtroMunicipio.Id_provincia = idProvincia;
+
+            municipios = cadMunicipio.ReadAllByProvincia(filtroMunicipio);
+
+            Municipioregister.DataSource = municipios;
+            Municipioregister.DataTextField = "Nombre";
+            Municipioregister.DataValueField = "Id_municipio";
+            Municipioregister.DataBind();
+        }
+
+        protected void Paisregister_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(Paisregister.SelectedValue, out int idPais))
+            {
+                Provinciaregister.Items.Clear();
+                Municipioregister.Items.Clear();
+                CargarProvincia(idPais);
+            }
+            else
+            {
+                Provinciaregister.Items.Clear();
+                Municipioregister.Items.Clear();
+            }
+        }
+
+        protected void Provinciaregister_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Municipioregister.Items.Clear();
+            if (int.TryParse(Provinciaregister.SelectedValue, out int idProvincia))
+            {
+                CargarMunicipios(idProvincia);
             }
         }
     }
