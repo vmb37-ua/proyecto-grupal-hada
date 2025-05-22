@@ -28,7 +28,7 @@
                     <p>Hora: <asp:Label ID="lblHora" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Hora.ToString(@"hh\:mm") %>'></asp:Label></p>
                     
 
-                    <asp:Button ID="botonJuego" runat="server" Text="Apostar" CssClass="juego_boton" OnClick="EventoJuegoClick"/>
+                    <asp:Button ID="botonJuego" runat="server" Text="Apostar" CssClass="juego_boton" CommandName="Apostar" CommandArgument='<%# ((ProWeb.Juegos.Juego)Container.DataItem).IdApuesta %>' OnCommand="EventoJuegoClick"/>
 
            
 

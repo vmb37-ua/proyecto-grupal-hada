@@ -30,10 +30,16 @@ namespace ProWeb
                 ddlEliminarPais.DataValueField = "IdPais";    
                 ddlEliminarPais.DataBind();
 
+                ddlEliminarPais.Items.Insert(0, new ListItem("-- Seleccione un país --", "0"));
+
+
                 ddlPaisProvincia.DataSource = paises;
                 ddlPaisProvincia.DataTextField = "NombrePais";
                 ddlPaisProvincia.DataValueField = "IdPais";
                 ddlPaisProvincia.DataBind();
+
+                ddlPaisProvincia.Items.Insert(0, new ListItem("-- Seleccione un país --", "0"));
+
             }
             catch (Exception ex)
             {
@@ -57,10 +63,16 @@ namespace ProWeb
                 ddlEliminarProvincia.DataValueField = "IdProvincia";
                 ddlEliminarProvincia.DataBind();
 
+                ddlEliminarProvincia.Items.Insert(0, new ListItem("-- Seleccione una provincia --", "0"));
+
+
                 ddlProvinciaMunicipio.DataSource = provincias;
                 ddlProvinciaMunicipio.DataTextField = "Nombre";
                 ddlProvinciaMunicipio.DataValueField = "IdProvincia";
                 ddlProvinciaMunicipio.DataBind();
+
+                ddlProvinciaMunicipio.Items.Insert(0, new ListItem("-- Seleccione una provincia --", "0"));
+
             }
             catch (Exception ex)
             {
@@ -83,6 +95,9 @@ namespace ProWeb
                 ddlEliminarMunicipio.DataTextField = "Nombre";
                 ddlEliminarMunicipio.DataValueField = "Id_municipio";
                 ddlEliminarMunicipio.DataBind();
+
+                ddlEliminarMunicipio.Items.Insert(0, new ListItem("-- Seleccione un municipio --", "0"));
+
             }
             catch (Exception ex)
             {
@@ -119,16 +134,23 @@ namespace ProWeb
             {
                 try
                 {
-                    int idPais = Convert.ToInt32(ddlPaisProvincia.SelectedValue);
-                    int idProvicia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
-                    RecargarListaPaises(); // Cuando cargue pagina, que carge todos los paises, provincias y municipios (arreglar).
-                    CargarProvincias(idPais);
-                    CargarMunicipios(idProvicia);
-                    
+                    RecargarListaPaises(); 
+
+                    if (ddlPaisProvincia.Items.Count > 0)
+                    {
+                        int idPais = Convert.ToInt32(ddlPaisProvincia.SelectedValue);
+                        CargarProvincias(idPais);
+
+                        if (ddlProvinciaMunicipio.Items.Count > 0)
+                        {
+                            int idProvincia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
+                            CargarMunicipios(idProvincia);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error cargando países: {ex.Message}");
+                    Console.WriteLine($"Error cargando datos iniciales: {ex.Message}");
                 }
             }
         }
@@ -198,6 +220,7 @@ namespace ProWeb
             catch (Exception ex)
             {
                 MostrarMensaje("Error al crear la provincia", tipo: "error");
+                Console.WriteLine("Errol al crear la provincia" + ex.Message);
             }
         }
 
@@ -254,30 +277,21 @@ namespace ProWeb
             try
             {
                 int idPais = Convert.ToInt32(ddlEliminarPais.SelectedValue);
-                ENPais en = new ENPais();
-                en.IdPais = idPais;
-                CADPais cadPais = new CADPais();
+                ENPais pais = new ENPais { IdPais = idPais };
 
-                if (cadPais.Delete(en))
+                if (pais.Delete())
                 {
                     MostrarMensaje("País eliminado correctamente", "exito");
-                    // Recargar Listas
                     RecargarListaPaises();
-                    CargarProvincias(Convert.ToInt32(ddlPaisProvincia.SelectedValue));
-                    CargarMunicipios(Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue));
                 }
                 else
                 {
                     MostrarMensaje("No se pudo eliminar el país", "error");
                 }
             }
-            catch (SqlException sqlEx)
-            {
-                MostrarMensaje($"Error de base de datos: {sqlEx.Message}", "error");
-            }
             catch (Exception ex)
             {
-                MostrarMensaje($"Error inesperado: {ex.Message}", "error");
+                MostrarMensaje($"Error al eliminar el país: {ex.Message}", "error");
             }
         }
 

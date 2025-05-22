@@ -20,9 +20,9 @@ namespace library
         {
             string query = @"
             INSERT INTO apuesta_usuario 
-            (id_usuario, id_apuesta, prediccion, cantidad, cuota, fecha)
+            (id_usuario, id_apuesta, prediccion, cantidad, cuota)
             VALUES 
-            (@idUsuario, @idApuesta, @prediccion, @cantidad, @cuota, GETDATE())";
+            (@idUsuario, @idApuesta, @prediccion, @cantidad, @cuota)";
 
             using (SqlConnection conexion = new SqlConnection(constring))
             {
