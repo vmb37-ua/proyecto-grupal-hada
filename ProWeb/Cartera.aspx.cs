@@ -17,13 +17,13 @@ namespace ProWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["id_usuario"] == null)
+            if (Session["Login"] == null)
             {
                 Response.Redirect("Login.aspx");
                 return;
             }
 
-            int idUsuario = (int)Session["id_usuario"];
+            int idUsuario = (int)Session["Login"];
             usuarioActual = new ENUsuario { ID = idUsuario };
             if (usuarioActual.Read())
             {
@@ -48,7 +48,9 @@ namespace ProWeb
                 return;
             }
 
-            usuarioActual.ID = (int)Session["id_usuario"];
+            int idUsuario = (int)Session["Login"];
+            usuarioActual.ID = idUsuario;
+
             if (usuarioActual.Read())
             {
                 float nuevoSaldo = usuarioActual.Saldo + cantidad;
@@ -88,7 +90,9 @@ namespace ProWeb
                 return;
             }
 
-            usuarioActual.ID = (int)Session["id_usuario"];
+            int idUsuario = (int)Session["Login"];
+            usuarioActual.ID = idUsuario;
+
             if (usuarioActual.Read())
             {
                 float saldoActual = usuarioActual.Saldo;
