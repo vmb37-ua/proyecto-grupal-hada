@@ -92,7 +92,9 @@
     <Content Include="Login.aspx" />
     <Content Include="Notificaciones.aspx" />
     <Content Include="Perfil.aspx" />
+    <Content Include="Source\Images\Estadios\definitivo.jpg" />
     <Content Include="Source\Images\Santiago Bernabéu.jpg" />
+    <Content Include="Source\Styles\InformacionEstadio.css" />
     <Content Include="Source\Styles\Informes.css" />
     <Content Include="Source\Styles\PanelAdmin.css" />
     <Content Include="Source\Styles\AdminNotificaciones.css" />
@@ -267,7 +269,6 @@
     </Compile>
     <Compile Include="InformacionEstadio.aspx.cs">
       <DependentUpon>InformacionEstadio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="InformacionEstadio.aspx.designer.cs">
       <DependentUpon>InformacionEstadio.aspx</DependentUpon>
