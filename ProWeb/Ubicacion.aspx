@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Ubicacion.aspx.cs" Inherits="ProWeb.Ubicacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Ubicacion.aspx.cs" Inherits="ProWeb.Ubicacion" MaintainScrollPositionOnPostBack="true"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -44,4 +44,8 @@
             <asp:Button ID="btnEliminarMunicipio" runat="server" Text="Eliminar Municipio" CssClass="BotonEliminar" OnClick="btnEliminarMunicipio_Click" CausesValidation="false" />
         </div>
     </div>
+
+        <asp:Button ID="btnVolverPanel" runat="server" Text="Volver"
+        CssClass="BotonEliminar" OnClick="btnVolverPanel_Click" />
+
 </asp:Content>

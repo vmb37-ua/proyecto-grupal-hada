@@ -14,26 +14,33 @@
             <asp:TextBox ID="txtBusqueda" runat="server" placeholder="Buscar equipo..." 
                 CssClass="input-busqueda" AutoPostBack="true" 
                 OnTextChanged="txtBusqueda_TextChanged"></asp:TextBox>
+
+        <div class="contenedor-dropdown">
+            <asp:DropDownList ID="ddlCategorias" runat="server" CssClass="dropdown-categorias" AutoPostBack="true" OnSelectedIndexChanged="ddlCategorias_SelectedIndexChanged" ></asp:DropDownList>
+        </div>
+            
         </div>
 
         <!-- Contenedor de equipos -->
         <div class="grid-equipos">
-            <asp:Repeater ID="rptEquipos" runat="server">
-                <ItemTemplate>
-                    <div class="card-equipo">
-                        <div class="escudo-fondo" 
-                             style='background-image: url("Source/Images/<%# Eval("Escudo") %>")'>
-                        </div>
+    <asp:Repeater ID="rptEquipos" runat="server" OnItemCommand="rptEquipos_ItemCommand">
+        <ItemTemplate>
+            <div class="card-equipo">
+                <div class="escudo-fondo" 
+                     style='<%# "background-image: url(\'Source/Images/" + Eval("Escudo") + "\')" %>'>
+                </div>
 
-                        <div class="contenido-equipo">
-                            <h3><%# Eval("Nombre") %></h3>
-                            <a class="btn-favorito" onclick="toggleFavorito">
-                                <i class="far fa-star"></i>
-                            </a>
-                        </div>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
+                <div class="contenido-equipo">
+                    <h3><%# Eval("Nombre") %></h3>
+                    <asp:LinkButton ID="btnFavorito" runat="server" CommandName="ToggleFavorito" CommandArgument='<%# Eval("Id_equipo") %>' CssClass="btn-favorito">
+                        <i class='<%# ((List<int>)ViewState["favoritosIdEquipos"]).Contains((int)Eval("Id_equipo")) ? "fas fa-star" : "far fa-star" %>'></i>
+                    </asp:LinkButton>
+
+                </div>
+            </div>
+        </ItemTemplate>
+    </asp:Repeater>
+</div>
+
     </div>
 </asp:Content>
