@@ -76,10 +76,6 @@
     <Content Include="AdminNotificaciones.aspx" />
     <Content Include="AdministrarRoles.aspx" />
     <Content Include="AdminUsuario.aspx" />
-    <Content Include="App_Data\Database1.mdf" />
-    <Content Include="App_Data\Database1_log.ldf">
-      <DependentUpon>Database1.mdf</DependentUpon>
-    </Content>
     <Content Include="PanelAdmin.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="ApuestaUsuario.aspx" />
