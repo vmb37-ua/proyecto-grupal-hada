@@ -39,7 +39,7 @@ namespace ProWeb
 
                     var estadio = new ENEstadio { Nombre = apuesta.Estadio.Nombre };
                     estadio.Read();
-
+                    //La cotización depende de la predicción
                     double cot=1;
                     if (string.Equals(apuestaUsuario.Prediccion, "1"))
                     {
@@ -93,7 +93,7 @@ namespace ProWeb
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ApuestaFinal apuesta = (ApuestaFinal)e.Row.DataItem;
-
+                //El color cambia conforme has ganado o perdido
                 if (apuesta.Resultado_apuesta == apuesta.Resultado_predicho)
                     e.Row.BackColor = System.Drawing.Color.LightGreen;
                 else 

@@ -10,14 +10,28 @@ using Microsoft.VisualBasic;
 
 namespace library
 {
+    /// <summary>
+    /// Clase de acceso a datos para Apuesta.
+    /// </summary>
     public class CADApuesta
     {
+
+        /// <summary>
+        /// Cadena de conexión a la BD.
+        /// </summary>
         private string constring { get; set; }
+        /// <summary>
+        /// Constructor por defecto
+        /// </summary>
         public CADApuesta()
         {
             constring = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
-
+        /// <summary>
+        /// Crea una nueva apuesta en la BD.
+        /// </summary>
+        /// <param name="apuesta"> ENApuesta con los datos.</param>
+        /// <returns>True si la operación fue exitosa; si no, false.</returns>
         public bool Create(ENApuesta apuesta)
         {
             bool aux = true;
@@ -70,6 +84,11 @@ namespace library
             }
             return aux;
         }
+        /// <summary>
+        /// Elimina una apuesta de la base de datos.
+        /// </summary>
+        /// <param name="apuesta">ENApuesta con el ID de la apuesta a eliminar.</param>
+        /// <returns>True si se eliminó correctamente; si no, false.</returns>
         public bool Delete(ENApuesta apuesta)
         {
             bool aux = true;

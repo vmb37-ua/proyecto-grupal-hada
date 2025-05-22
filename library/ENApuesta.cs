@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace library
 {
+    /// <summary>
+    /// Representa a la apuesta general, no la individual de cada usuario
+    /// </summary>
+
     public class ENApuesta
     {
         int _id_apuesta;
@@ -13,7 +17,7 @@ namespace library
         ENEstadio _estadio;
         ENEquipo _equipo1;
         ENEquipo _equipo2;
-        string _resultado; //1, 2 o X
+        string _resultado; // 1=Victoria local, 2=Victoria visitante, X=Empate
         double _cot1;
         double _cot2;
         double _cotX;
@@ -21,6 +25,9 @@ namespace library
 
 
 
+        /// <summary>
+        /// Getters y setters de los atributos
+        /// </summary>
         public int Id_apuesta
         {
             get { return _id_apuesta; }
@@ -70,6 +77,9 @@ namespace library
             set { _cotX = value; }
         }
 
+        /// <summary>
+        /// Constructor que inicializa una apuesta por defecto.
+        /// </summary>
         public ENApuesta()
         {
             _id_apuesta = 0;
@@ -82,6 +92,9 @@ namespace library
             _cot2 = 1;
             _cotX = 1;
         }
+        /// <summary>
+        /// Constructor que inicializa una apuesta com unos valores determinados.
+        /// </summary>
         public ENApuesta(int id_apuesta, DateTime fecha, ENEstadio estadio, ENEquipo equipo1, ENEquipo equipo2, string resultado, double cot1, double cot2, double cotX)
         {
             _id_apuesta = id_apuesta;
@@ -95,6 +108,10 @@ namespace library
             _cotX = cotX;
         }
 
+        /// <summary>
+        /// Crea una nueva apuesta en la base de datos.
+        /// </summary>
+        /// <returns>True si la operación fue exitosa; si no, false.</returns>
         public bool Create()
         {
             CADApuesta ap = new CADApuesta();
@@ -105,16 +122,29 @@ namespace library
             CADApuesta ap = new CADApuesta();
             return ap.Delete(this);
         }
+        /// <summary>
+        /// Lee los datos de la apuesta desde la base de datos.
+        /// </summary>
+        /// <returns>True si se encontró; si no, false.</returns>
         public bool Read()
         {
             CADApuesta ap = new CADApuesta();
             return ap.Read(this);
         }
+        /// <summary>
+        /// Lee todas las apuestas.
+        /// </summary>
+        /// <returns>Lista de todas las apuestas.</returns>
         public List<ENApuesta> ReadAll()
         {
             CADApuesta equipo = new CADApuesta();
             return equipo.ReadAll();
         }
+
+        /// <summary>
+        /// Actualiza la información de la apuesta en la base de datos.
+        /// </summary>
+        /// <returns>True si se actualizó correctamente; si no, false.</returns
         public bool Update()
         {
             CADApuesta ap = new CADApuesta();

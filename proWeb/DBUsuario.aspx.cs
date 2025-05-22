@@ -144,7 +144,7 @@ namespace ProWeb
                 bool resultado;
                 if (usuario.ID == 0)
                 {
-
+                    //La herramienta no crea usuarios, se debe de seleccionar uno
                     MostrarMensaje("Seleccione un usuario");
                 }
                 else

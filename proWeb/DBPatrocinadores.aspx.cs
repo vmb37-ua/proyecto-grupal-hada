@@ -21,8 +21,9 @@ namespace ProWeb
         }
 
         private void CargarPatrocinadores()
-        {
+        {   
             ListaPatrocinadores.Items.Clear();
+            //Nuevo patrocinador tiene reservado el valor 0 y no representa un patrocinador, sino la opción de crear uno nuevo
             ListaPatrocinadores.Items.Add(new ListItem("Nuevo patrocinador", "0"));
 
             var patrocinadores = new ENPatrocinador().ReadAll();
@@ -134,7 +135,7 @@ namespace ProWeb
         }
 
         private bool ValidarCampos()
-        {
+        {   //Comprobamos si cumple las normas
             if (string.IsNullOrWhiteSpace(TBdinero.Text) || !float.TryParse(TBdinero.Text, out _))
             {
                 MostrarError("Ingrese un valor válido para el pago");
@@ -179,7 +180,7 @@ namespace ProWeb
                 $"alert('{mensaje.Replace("'", "\\'")}');", true);
         }
         private int ObtenerNuevoId()
-        {
+        {//Creamos una función para asignar automáticamente el ID al patrocinador
             var patrocinadores = new ENPatrocinador().ReadAll();
             return patrocinadores.Count > 0 ? patrocinadores.Max(p => p.Id_patrocinador) + 1 : 1;
         }

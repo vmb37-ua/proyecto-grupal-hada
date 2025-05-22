@@ -45,7 +45,7 @@
             <br />
             <br />
             <asp:Button ID="BTNagregar_pat" runat="server" CssClass="BotonEditarUsuario" 
-                Text="Agregar/Editar usuario" OnClick="BTNagregar_pat_Click" />
+                Text="Editar usuario" OnClick="BTNagregar_pat_Click" />
             <asp:Button ID="BTNeliminar_pat" runat="server" CssClass="BotonBorrarUsuario" 
                 Text="Eliminar usuario" OnClick="BTNeliminar_pat_Click" />
     </div>

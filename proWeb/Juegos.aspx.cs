@@ -20,11 +20,15 @@ namespace ProWeb
                 CargarJuegosDesdeBD();
             }
         }
+        protected void timer1_Tick(object sender, EventArgs e)
+        {
+            CargarJuegosDesdeBD();
+        }
 
         private void CargarJuegosDesdeBD()
         {
             try
-            {
+            {   //Ordenamos por fecha
                 var cadApuesta = new CADApuesta();
                 var apuestas = cadApuesta.ReadAll();
                 apuestas = apuestas.OrderBy(a => a.Fecha).ToList();
@@ -32,7 +36,7 @@ namespace ProWeb
                 var juegos = new List<Juego>();
 
                 foreach (var apuesta in apuestas)
-                {
+                {   //Usamos el ID y el nombre para obtener el resto de datos de las entidades
                     var equipoLocal = new ENEquipo { Id_equipo = apuesta.Equipo1.Id_equipo };
                     var equipoVisitante = new ENEquipo { Id_equipo = apuesta.Equipo2.Id_equipo };
 
@@ -42,8 +46,6 @@ namespace ProWeb
                     bool leyoVisitante = equipoVisitante.Read();
                     bool leyoEstadio = estadio.Read();
 
-                    if (true)
-                    {
                         juegos.Add(new Juego
                         {
                             EquipoLocal = equipoLocal.Nombre,
@@ -52,8 +54,8 @@ namespace ProWeb
                             Fecha = apuesta.Fecha.Date,
                             Hora = apuesta.Fecha.TimeOfDay,
                             IdApuesta=apuesta.Id_apuesta,
-                        });
-                    }
+                       });
+                    
                 }
 
                 rptJuegos.DataSource = juegos;
@@ -64,7 +66,7 @@ namespace ProWeb
                 Response.Write($"<script>alert('Error al cargar los partidos: {ex.Message}');</script>");
             }
         }
-
+        //Creamos clase de Juego para almacenar los datos
         public class Juego
         {
             public string EquipoLocal { get; set; }
@@ -80,7 +82,7 @@ namespace ProWeb
         {
 
             if (e.CommandName == "Apostar")
-            {
+            {   //Mandamos el ID de la apuesta en la ULR para que la otra página pueda identificarla
                 string idApuesta = e.CommandArgument.ToString();
                 Response.Redirect($"ApuestaUsuario.aspx?idApuesta={idApuesta}");
             }
