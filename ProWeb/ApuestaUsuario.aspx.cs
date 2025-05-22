@@ -15,7 +15,7 @@ namespace ProWeb
 	{
 
         protected void Page_Load(object sender, EventArgs e)
-		{
+        {
             if (!IsPostBack)
             {
                 try
@@ -23,27 +23,55 @@ namespace ProWeb
                     int idUsuario = ObtenerIdUsuarioActual();
                     int idApuesta = ObtenerIdApuestaActual();
 
-                    Console.WriteLine("ID de apuesta recibido: " + idApuesta);//DEBUG
-
                     ENUsuario usuario = new ENUsuario { ID = idUsuario };
-
                     if (usuario.Read())
                     {
-                        Session["Login"] = usuario.Saldo;
                         lblSaldo.Text = usuario.Saldo.ToString("F2") + " €";
-                        Console.WriteLine("Saldo del usuario: " + usuario.Saldo);
                     }
                     else
                     {
-                        lblSaldo.Text = "No se pudo cargar el saldo(PageLoad).";
+                        lblSaldo.Text = "No se pudo cargar el saldo.";
+                        return;
+                    }
+
+                    ENApuesta apuesta = new ENApuesta { Id_apuesta = idApuesta };
+                    if (apuesta.Read())
+                    {
+
+                        ENEquipo local = new ENEquipo { Id_equipo = apuesta.Equipo1.Id_equipo };
+                        ENEquipo visitante = new ENEquipo { Id_equipo = apuesta.Equipo2.Id_equipo };
+
+                        if (local.Read() && visitante.Read())
+                        {
+                            lblEquipoLocal.Text = local.Nombre;
+                            lblEquipoVisitante.Text = visitante.Nombre;
+
+                            // Guardar cuotas en ViewState para usarlas más adelante
+                            ViewState["Cuota1"] = apuesta.cot1;
+                            ViewState["CuotaX"] = apuesta.cotX;
+                            ViewState["Cuota2"] = apuesta.cot2;
+
+                            // Modificar texto de los items para que muestren nombre y cuota
+                            rblOpcionesApuesta.Items.FindByValue("1").Text = $"{local.Nombre}";
+                            rblOpcionesApuesta.Items.FindByValue("X").Text = $"Empate";
+                            rblOpcionesApuesta.Items.FindByValue("2").Text = $"{visitante.Nombre}";
+
+                            lblCuotaActual.Text = apuesta.cot1.ToString("F2");
+                        }
+                        else
+                        {
+                            lblEquipoLocal.Text = "Equipo local no encontrado";
+                            lblEquipoVisitante.Text = "Equipo visitante no encontrado";
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    lblSaldo.Text = "Error al cargar saldo: " + ex.Message;
+                    lblSaldo.Text = "Error al cargar datos: " + ex.Message;
                 }
             }
-		}
+        }
+
 
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
@@ -58,7 +86,6 @@ namespace ProWeb
 
         protected void btnApostar_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (ValidarApuesta())
@@ -69,22 +96,30 @@ namespace ProWeb
                     float cantidad = float.Parse(txtCantidad.Text);
                     float cuota = float.Parse(lblCuotaActual.Text);
 
+                    // Leer saldo actualizado de BD
+                    ENUsuario usuario = new ENUsuario { ID = idUsuario };
+                    if (!usuario.Read())
+                    {
+                        MostrarError("Error al leer saldo de usuario");
+                        return;
+                    }
+
+                    if (cantidad > usuario.Saldo)
+                    {
+                        MostrarError("Saldo insuficiente.");
+                        return;
+                    }
 
                     ENApuesta_usuario apuesta = new ENApuesta_usuario(idUsuario, idApuesta, prediccion, cantidad, cuota);
                     bool apuestaCreada = apuesta.Apostar();
 
                     if (apuestaCreada)
                     {
-                        // Actualiza el saldo en la base de datos
-                        float saldoActual = 0;
+                        // Actualiza saldo en base de datos
+                        usuario.Saldo -= cantidad;
+                        usuario.Update();
 
-                        ENUsuario us = new ENUsuario();
-                        if (us.Read())
-                        {
-                            saldoActual = us.Saldo;
-                            float nuevoSaldo = saldoActual - cantidad;
-                            ActualizarSaldo(idUsuario, nuevoSaldo);
-                        }
+                        lblSaldo.Text = usuario.Saldo.ToString("F2") + " €";
 
                         // Mensaje de confirmacion
                         lblMensajeExito.Text = "¡Apuesta realizada con éxito!";
@@ -93,21 +128,49 @@ namespace ProWeb
                     }
                     else
                     {
-                        lblMensajeExito.Text = "Error al realizar la apuesta.";
+                        MostrarError("Error al realizar la apuesta.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                lblMensajeExito.Text = "Error inesperado: " + ex.Message;
+                MostrarError("Error inesperado: " + ex.Message);
             }
         }
+
 
         protected void btnCancelar_Click(Object sender, EventArgs e) {
             Response.Redirect("Juegos.aspx");
         }
 
-		protected void rblOpcionesApuesta_SelectedIndexChanged(object sender, EventArgs e) { }
+        protected void rblOpcionesApuesta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string seleccion = rblOpcionesApuesta.SelectedValue;
+            float cuota = 0.0f;
+
+            switch (seleccion)
+            {
+                case "1":
+                    cuota = Convert.ToSingle(ViewState["Cuota1"]);
+                    break;
+                case "X":
+                    cuota = Convert.ToSingle(ViewState["CuotaX"]);
+                    break;
+                case "2":
+                    cuota = Convert.ToSingle(ViewState["Cuota2"]);
+                    break;
+            }
+
+            lblCuotaActual.Text = cuota.ToString("F2");
+
+            
+            if (float.TryParse(txtCantidad.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out float cantidad))
+            {
+                float ganancia = cantidad * cuota;
+                lblGananciaPotencial.Text = ganancia.ToString("0.00") + " €";
+            }
+        }
+
 
 
         // Metodos auxiliares
@@ -122,34 +185,28 @@ namespace ProWeb
             }
 
             // Validar que la cantidad sea un número positivo
-            if (!float.TryParse(txtCantidad.Text, out float cantidad) || cantidad <= 0)
+            if (!float.TryParse(txtCantidad.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out float cantidad) || cantidad <= 0)
             {
-                MostrarError("Ingresa una cantidad válida (ej: 10.50).");
+                MostrarError("Cantidad inválida");
                 return false;
             }
 
             // Validar que el usuario tenga saldo suficiente
-            float saldoActual = 0;
-
-            ENUsuario us = new ENUsuario();
-            if(us.Read())
+            ENUsuario usuario = new ENUsuario();
+            usuario.ID = ObtenerIdUsuarioActual();
+            if (!usuario.Read())
             {
-                saldoActual = us.Saldo;
-
-                if (cantidad > saldoActual)
-                {
-                    MostrarError("Saldo insuficiente.");
-                    return false;
-                }
-            }
-            else
-            {
-                MostrarError("Error al leer el usuaro para obtener el saldo");
+                MostrarError("Error al leer usuario para obtener saldo");
+                return false;
             }
 
+            if (cantidad > usuario.Saldo)
+            {
+                MostrarError("Saldo insuficiente.");
+                return false;
+            }
 
-
-                return true;
+            return true;
         }
 
         private void MostrarError(string mensaje)
@@ -166,19 +223,7 @@ namespace ProWeb
 
         private int ObtenerIdApuestaActual()
         {
-            return Convert.ToInt32(Request.QueryString["id_apuesta"]); //Cambiar esto por el correcto
-        }
-
-        private void ActualizarSaldo(int idUsuario, float cantidad)
-        {
-            var usuario = new ENUsuario();
-            usuario.ID = idUsuario;
-            if (usuario.Read())
-            {
-                usuario.Saldo -= cantidad;
-                usuario.Update();
-                Session["Login"] = usuario.Saldo;
-            }
+            return Convert.ToInt32(Request.QueryString["idApuesta"]);
         }
 
     }
