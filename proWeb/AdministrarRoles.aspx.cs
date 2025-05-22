@@ -29,7 +29,23 @@ namespace ProWeb
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-    
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Juegos.aspx");
+            }
+            else
+            {
+                ENUsuario usuario = new ENUsuario();
+                usuario.ID = int.Parse(Session["Login"].ToString());
+                usuario.Read();
+                ENRol rol = new ENRol();
+                rol.Id_rol = usuario.Rol;
+                rol.Read();
+                if (rol.Nombre != "Administrador")
+                {
+                    Response.Redirect("Juegos.aspx");
+                }
+            }
         }
         protected void Create(object sender, EventArgs e)
         {

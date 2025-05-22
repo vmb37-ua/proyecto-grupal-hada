@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace library
 {
+
+    /// <summary>
+    /// Clase que representa la capa de acceso a datos de patrocinador.
+    /// Maneja las diferentes operaciones de la BD.
+    /// </summary>
     public class CADPatrocinador
     {
         private string constring { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public CADPatrocinador()
         {
             constring = ConfigurationManager.ConnectionStrings["miconex"].ToString();
