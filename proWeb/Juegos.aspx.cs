@@ -56,29 +56,6 @@ namespace ProWeb
                     }
                 }
 
-                //Placeholder
-                if (juegos.Count == 0)
-                {
-                    juegos.Add(new Juego
-                    {
-                        EquipoLocal = "Real Madrid",
-                        EquipoVisitante = "Barcelona",
-                        Estadio = "Santiago Bernabéu",
-                        Fecha = DateTime.Today,
-                        Hora = new TimeSpan(21, 0, 0),
-                        IdApuesta = 3,
-                    });
-                    juegos.Add(new Juego
-                    {
-                        EquipoLocal = "Manchester City",
-                        EquipoVisitante = "Liverpool",
-                        Estadio = "Mestalla",
-                        Fecha = DateTime.Today,
-                        Hora = new TimeSpan(21, 0, 0),
-                        IdApuesta = 1,
-                    });
-                }
-
                 rptJuegos.DataSource = juegos;
                 rptJuegos.DataBind();
             }
@@ -99,10 +76,14 @@ namespace ProWeb
             public string Categoria { get; set; }
        };
 
-        protected void EventoJuegoClick(object sender, EventArgs e)
+        protected void EventoJuegoClick(object sender, CommandEventArgs e)
         {
 
-            Response.Redirect("ApuestaUsuario.aspx");
+            if (e.CommandName == "Apostar")
+            {
+                string idApuesta = e.CommandArgument.ToString();
+                Response.Redirect($"ApuestaUsuario.aspx?idApuesta={idApuesta}");
+            }
 
         }
     }
