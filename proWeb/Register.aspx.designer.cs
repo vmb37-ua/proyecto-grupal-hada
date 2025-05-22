@@ -51,24 +51,6 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox Adressresgister;
 
         /// <summary>
-        /// Control Passregister.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Passregister;
-
-        /// <summary>
-        /// Control Passrepregister.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Passrepregister;
-
-        /// <summary>
         /// Control Paisregister.
         /// </summary>
         /// <remarks>
@@ -96,6 +78,51 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.DropDownList Municipioregister;
 
         /// <summary>
+        /// Control Passregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Passregister;
+
+        /// <summary>
+        /// Control Passrepregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Passrepregister;
+
+        /// <summary>
+        /// Control Numerotarregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Numerotarregister;
+
+        /// <summary>
+        /// Control CaducidadTarregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CaducidadTarregister;
+
+        /// <summary>
+        /// Control Cvvregister.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Cvvregister;
+
+        /// <summary>
         /// Control Labelerror.
         /// </summary>
         /// <remarks>
@@ -103,14 +130,5 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Labelerror;
-
-        /// <summary>
-        /// Control LabelDebug.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDebug;
     }
 }

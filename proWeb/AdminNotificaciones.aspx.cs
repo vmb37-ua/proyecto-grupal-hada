@@ -54,7 +54,7 @@ namespace ProWeb
 
         protected void ListaRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Aquí puedes actuar según el rol seleccionado
+
         }
 
         private void CargarRoles()
@@ -72,7 +72,7 @@ namespace ProWeb
 
         protected void EnviarNotificacion_Click(object sender, EventArgs e)
         {
-            // Limpia mensaje de eliminar, porque ahora actúas en enviar
+
             LblErrorEliminar.Text = "";
             LblErrorEliminar.ForeColor = System.Drawing.Color.Black;
 
@@ -183,7 +183,7 @@ namespace ProWeb
 
         protected void BtnEliminarNotificacion_Click(object sender, EventArgs e)
         {
-            // Limpia mensaje de envío porque actúas en eliminar
+
             LblErrorEnviar.Text = "";
             LblErrorEnviar.ForeColor = System.Drawing.Color.Black;
 
@@ -213,7 +213,6 @@ namespace ProWeb
             }
         }
 
-        // Método auxiliar para mostrar mensaje con color según éxito o error
         private void MostrarMensaje(Label label, string mensaje, bool esExito)
         {
             label.Text = mensaje;
@@ -221,7 +220,7 @@ namespace ProWeb
         }
         protected void BtnLeerNotificacion_Click(object sender, EventArgs e)
         {
-            LimpiarMensajes(); // Limpia mensajes anteriores
+            LimpiarMensajes(); 
 
             string idTexto = IdGestion.Text.Trim();
 
