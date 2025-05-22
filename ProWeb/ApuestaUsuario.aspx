@@ -10,9 +10,9 @@
         <div class="ResumenApuesta">
             <h1>CONFIRMAR APUESTA</h1>
             <div class="DetallePartido">
-                <asp:Label ID="lblEquipoLocal" runat="server" Text="FC Barcelona" CssClass="Equipo"></asp:Label>
+                <asp:Label ID="lblEquipoLocal" runat="server" CssClass="Equipo"></asp:Label>
                 <span class="VS">VS</span>
-                <asp:Label ID="lblEquipoVisitante" runat="server" Text="Real Madrid" CssClass="Equipo"></asp:Label>
+                <asp:Label ID="lblEquipoVisitante" runat="server" CssClass="Equipo"></asp:Label>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             <!-- Sección Cuota dinámica -->
             <div class="CuotaContainer">
                 <span class="CuotaLabel">CUOTA:</span>
-                <asp:Label ID="lblCuotaActual" runat="server" Text="2.10" CssClass="Cuota"></asp:Label>
+                <asp:Label ID="lblCuotaActual" runat="server" CssClass="Cuota"></asp:Label>
             </div>
         </div>
       </div>

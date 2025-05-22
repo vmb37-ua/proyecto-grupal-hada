@@ -19,8 +19,8 @@ namespace library
         public bool CrearApuesta(ENApuesta_usuario apuesta)
         {
             string query = @"
-            INSERT INTO apuesta_usuario 
-            (id_usuario, id_apuesta, prediccion, cantidad, cuota)
+            INSERT INTO apuesta_usu
+            (id_usuario, id_apuesta, prediccion, dinero_apostado, cuota)
             VALUES 
             (@idUsuario, @idApuesta, @prediccion, @cantidad, @cuota)";
 

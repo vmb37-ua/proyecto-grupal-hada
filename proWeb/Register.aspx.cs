@@ -7,8 +7,12 @@ using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using library;
+using System.Security.Cryptography;
+using System.Text;
+using AjaxControlToolkit.HtmlEditor.ToolbarButtons;
 namespace ProWeb
 {
+
     public partial class Register : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -25,13 +29,14 @@ namespace ProWeb
 
             }
         }
+
         private void CargarPaises()
         {
             var cadPais = new CADPais();
             var paises = cadPais.ReadAll();
             Paisregister.DataSource = paises;
-            Paisregister.DataTextField = "NombrePais";  
-            Paisregister.DataValueField = "IdPais";     
+            Paisregister.DataTextField = "NombrePais";
+            Paisregister.DataValueField = "IdPais";
             Paisregister.DataBind();
 
             Paisregister.Items.Insert(0, new ListItem("Selecciona un país", ""));
@@ -81,7 +86,7 @@ namespace ProWeb
             {
                 Provinciaregister.Items.Clear();
                 Municipioregister.Items.Clear();
-                CargarProvincia(idPais); 
+                CargarProvincia(idPais);
             }
             else
             {
@@ -92,7 +97,7 @@ namespace ProWeb
 
         protected void Provinciaregister_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Municipioregister.Items.Clear(); 
+            Municipioregister.Items.Clear();
             if (int.TryParse(Provinciaregister.SelectedValue, out int idProvincia))
             {
                 CargarMunicipios(idProvincia);
@@ -106,143 +111,51 @@ namespace ProWeb
             Response.Redirect("Login.aspx");
         }
 
-        private bool CamposIncompletos(
-     out string nombre, out string numero, out string correo,
-     out string direccion, out string pass, out string passRep)
-        {
-            Nameregister.CssClass = "Inputregister";
-            Numberregister.CssClass = "Inputregister";
-            Emailregister.CssClass = "Inputregister";
-            Adressresgister.CssClass = "Inputregister";
-            Passregister.CssClass = "Inputregister";
-            Passrepregister.CssClass = "Inputregister";
-            Paisregister.CssClass = "Inputregister";
-            Provinciaregister.CssClass = "Inputregister";
-            Municipioregister.CssClass = "Inputregister";
-
-            nombre = Nameregister.Text.Trim();
-            numero = Numberregister.Text.Trim();
-            correo = Emailregister.Text.Trim();
-            direccion = Adressresgister.Text.Trim();
-            pass = Passregister.Text.Trim();
-            passRep = Passrepregister.Text.Trim();
-
-            bool faltanCampos = false;
-
-            if (string.IsNullOrEmpty(nombre))
-            {
-                Nameregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(numero))
-            {
-                Numberregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(correo))
-            {
-                Emailregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(direccion))
-            {
-                Adressresgister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(pass))
-            {
-                Passregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(passRep))
-            {
-                Passrepregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(Paisregister.SelectedValue))
-            {
-                Paisregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(Provinciaregister.SelectedValue))
-            {
-                Provinciaregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-            if (string.IsNullOrEmpty(Municipioregister.SelectedValue))
-            {
-                Municipioregister.CssClass += " input-error";
-                faltanCampos = true;
-            }
-
-            if (faltanCampos)
-            {
-                Labelerror.Text = "Por favor, rellena todos los campos correctamente.";
-                Labelerror.Visible = true;
-                return true;
-            }
-
-            return false;
-        }
 
 
         protected void EventoPaginaPrincipal(object sender, EventArgs e)
         {
-            string nombre, numero, correo, direccion, pass, passRep;
-
-            if (CamposIncompletos(out nombre, out numero, out correo, out direccion, out pass, out passRep))
-                return;
-
-            if (correo.Length < 5 || !correo.Contains("@") || !correo.Contains(".") || correo.IndexOf("@") > correo.LastIndexOf("."))
-            {
-                Labelerror.Text = "El correo electrónico no es válido.";
-                Labelerror.Visible = true;
-                Emailregister.CssClass += " input-error";
-                return;
-            }
-
-            if (pass != passRep)
-            {
-                Labelerror.Text = "Las contraseñas no coinciden.";
-                Labelerror.Visible = true;
-                Passregister.CssClass += " input-error";
-                Passrepregister.CssClass += " input-error";
-                return;
-            }
+            string correo = Emailregister.Text.Trim();
 
             CADUsuario cadUsuario = new CADUsuario();
             if (cadUsuario.ExisteCorreo(correo))
             {
                 Labelerror.Text = "Este correo ya está registrado.";
                 Labelerror.Visible = true;
-                Emailregister.CssClass += " input-error";
                 return;
             }
 
-            ENUsuario nuevoUsuario = new ENUsuario();
-            nuevoUsuario.Nombre = nombre;
-            nuevoUsuario.Telefono = numero;
-            nuevoUsuario.Correo = correo;
-            nuevoUsuario.Password = pass;
-            nuevoUsuario.Direccion = direccion;
-            nuevoUsuario.Saldo = 0;
-            nuevoUsuario.NumTar = "";
-            nuevoUsuario.Caducidad = DateTime.Now;
-            nuevoUsuario.Cvv = "";
-            nuevoUsuario.Rol = 1;
-            nuevoUsuario.Municipio = int.Parse(Municipioregister.SelectedValue);
-            nuevoUsuario.Imagen = "default.jpg";
+            ENUsuario nuevoUsuario = new ENUsuario
+            {
+                Nombre = Nameregister.Text.Trim(),
+                Telefono = Numberregister.Text.Trim(),
+                Correo = correo,
+                Password = HashPassword(Passregister.Text.Trim()),
+                Direccion = Adressresgister.Text.Trim(),
+                Saldo = 0,
+                NumTar = "",
+                Caducidad = DateTime.Now,
+                Cvv = "",
+                Rol = 1,
+                Municipio = int.Parse(Municipioregister.SelectedValue),
+                Imagen = "default.jpg"
+            };
+
+
 
             try
             {
                 if (nuevoUsuario.Create())
                 {
+
+                    nuevoUsuario.ReadByCorreo();
+
                     Session["Login"] = nuevoUsuario.ID;
                     Response.Redirect("Juegos.aspx");
                 }
                 else
                 {
-                    Labelerror.Text = "Error al crear el usuario. Intenta de nuevo.";
+                    Labelerror.Text = nuevoUsuario.Password;
                     Labelerror.Visible = true;
                 }
             }
@@ -251,7 +164,23 @@ namespace ProWeb
                 Labelerror.Text = "Excepción: " + ex.Message;
                 Labelerror.Visible = true;
             }
-
         }
+
+        public static string HashPassword(string password)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashBytes = sha256.ComputeHash(bytes);
+
+                // Convertir a string hexadecimal
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in hashBytes)
+                    builder.Append(b.ToString("x2"));
+
+                return builder.ToString();
+            }
+        }
+
     }
 }

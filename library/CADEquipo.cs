@@ -164,5 +164,40 @@ namespace library
             }
             return lista;
         }
+
+        public List<ENEquipo> ReadAllbyCategoria(ENEquipo en)
+        {
+            List<ENEquipo> lista = new List<ENEquipo>();
+            try
+            {
+                
+                using (SqlConnection conn = new SqlConnection(conexion))
+                {
+                    string query = "SELECT * FROM equipo WHERE categoria = @categoria";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@categoria", en.Categoria);
+
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ENEquipo equipo = new ENEquipo
+                        {
+                            Id_equipo = Convert.ToInt32(reader["id_equipo"]),
+                            Escudo = reader["escudo"].ToString(),
+                            Nombre = reader["nombre"].ToString(),
+                            Categoria = reader["categoria"].ToString()
+                        };
+                        lista.Add(equipo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al leer todos los equipos: " + ex.Message);
+            }
+            return lista;
+        }
     }
 }

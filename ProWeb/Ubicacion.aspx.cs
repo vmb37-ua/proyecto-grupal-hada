@@ -403,6 +403,12 @@ namespace ProWeb
             }
         }
 
+        protected void btnVolverPanel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PanelAdmin.aspx");
+        }
+
+
 
     }
 }
