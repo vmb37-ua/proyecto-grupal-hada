@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using library;
 
-
 namespace ProWeb
 {
     public partial class Favoritos : Page
@@ -15,9 +14,9 @@ namespace ProWeb
         {
             if (!IsPostBack)
             {
-                if (Session["IdUsuario"] != null)
+                if (Session["Login"] != null)
                 {
-                    int idUsuario = Convert.ToInt32(Session["IdUsuario"]);
+                    int idUsuario = Convert.ToInt32(Session["Login"]);
 
                     ENFavoritos fav = new ENFavoritos
                     {
