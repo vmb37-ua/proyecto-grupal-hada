@@ -59,7 +59,7 @@
         <!-- Sección Botones -->
         <div class="BotonesAccion">
             <asp:Button ID="btnApostar" runat="server" Text="APOSTAR AHORA" CssClass="BotonApostar" OnClick="btnApostar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="CANCELAR" CssClass="BotonCancelar" OnClick="btnCancelar_Click" />
+            <asp:Button ID="btnCancelar" runat="server" Text="CANCELAR" CssClass="BotonCancelar" OnClick="btnCancelar_Click" CausesValidation="false" />
         </div>
 
         <!-- Sección Confirmación -->

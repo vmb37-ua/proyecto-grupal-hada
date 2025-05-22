@@ -13,7 +13,7 @@
             <asp:Button ID="btnCrearPais" runat="server" Text="Crear País" CssClass="BotonCrear" OnClick="btnCrearPais_Click" />
             <label for="ddlEliminarPais">Eliminar país existente</label>
             <asp:DropDownList ID="ddlEliminarPais" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
-            <asp:Button ID="btnEliminarPais" runat="server" Text="Eliminar País" CssClass="BotonEliminar" OnClick="btnEliminarPais_Click" />
+            <asp:Button ID="btnEliminarPais" runat="server" Text="Eliminar País" CssClass="BotonEliminar" OnClick="btnEliminarPais_Click" CausesValidation="false" />
             <asp:Label ID="lblMensaje" runat="server" CssClass="mensaje-estilo" Visible="false"></asp:Label>
         </div>
 
@@ -27,7 +27,7 @@
             <asp:Button ID="btnCrearProvincia" runat="server" Text="Crear Provincia" CssClass="BotonCrear" OnClick="btnCrearProvincia_Click" />
             <label for="ddlEliminarProvincia">Eliminar provincia existente</label>
             <asp:DropDownList ID="ddlEliminarProvincia" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
-            <asp:Button ID="btnEliminarProvincia" runat="server" Text="Eliminar Provincia" CssClass="BotonEliminar" OnClick="btnEliminarProvincia_Click" />
+            <asp:Button ID="btnEliminarProvincia" runat="server" Text="Eliminar Provincia" CssClass="BotonEliminar" OnClick="btnEliminarProvincia_Click" CausesValidation="false" />
             <asp:Label ID="lblMensaje2" runat="server" CssClass="mensaje-estilo" Visible="false"></asp:Label>
         </div>
 
@@ -41,7 +41,7 @@
             <asp:Button ID="btnCrearMunicipio" runat="server" Text="Crear Municipio" CssClass="BotonCrear" OnClick="btnCrearMunicipio_Click" />
             <label for="ddlEliminarMunicipio">Eliminar municipio existente</label>
             <asp:DropDownList ID="ddlEliminarMunicipio" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
-            <asp:Button ID="btnEliminarMunicipio" runat="server" Text="Eliminar Municipio" CssClass="BotonEliminar" OnClick="btnEliminarMunicipio_Click" />
+            <asp:Button ID="btnEliminarMunicipio" runat="server" Text="Eliminar Municipio" CssClass="BotonEliminar" OnClick="btnEliminarMunicipio_Click" CausesValidation="false" />
         </div>
     </div>
 </asp:Content>
