@@ -9,15 +9,31 @@ using System.Threading.Tasks;
 
 namespace library
 {
+    /// <summary>
+    /// Clase de acceso a datos para la entidad Categoría.
+    /// </summary>
     class CADCategoria
     {
         private string constring { get; set; }
-
+        /// <summary>
+        /// Inicializa una nueva instancia de <see cref="CADCategoria"/>.
+        /// </summary>
+        /// <remarks>
+        /// Consigue la cadena de conexión del archivo de configuración.
+        /// </remarks>
         public CADCategoria()
         {
             constring = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
 
+        /// <summary>
+        /// Crea una nueva categoría en la base de datos.
+        /// </summary>
+        /// <param name="categoria">Objeto <see cref="ENCategoria"/> con los datos.</param>
+        /// <returns>
+        /// <c>true</c> si la operación fue exitosa, <c>false</c> si no.
+        /// </returns>
+        /// <exception cref="SqlException">Error al ejecutar el comando SQL.</exception>
         public bool Create(ENCategoria categoria)
         {
             bool aux = true;
@@ -41,7 +57,14 @@ namespace library
             }
             return aux;
         }
-
+        /// <summary>
+        /// Elimina una categoría.
+        /// </summary>
+        /// <param name="categoria">Objeto <see cref="ENCategoria"/> con los datos para eliminar.</param>
+        /// <returns>
+        /// <c>true</c> si la operación fue exitosa, <c>false</c> si no.
+        /// </returns>
+        /// <exception cref="SqlException">Error al ejecutar el comando SQL.</exception>
         public bool Delete(ENCategoria categoria)
         {
             bool aux = true;
@@ -65,6 +88,14 @@ namespace library
             return aux;
         }
 
+        /// <summary>
+        /// Actualiza una categoría en la base de datos.
+        /// </summary>
+        /// <param name="categoria">Objeto <see cref="ENCategoria"/> con los datos a actualizar.</param>
+        /// <returns>
+        /// <c>true</c> si la operación fue exitosa, <c>false</c> si no.
+        /// </returns>
+        /// <exception cref="SqlException">Error al ejecutar el comando SQL.</exception>
         public bool Update(ENCategoria categoria)
         {
             bool aux = true;
@@ -90,6 +121,14 @@ namespace library
             return aux;
         }
 
+        /// <summary>
+        /// Coge los datos de una categoría desde la base de datos.
+        /// </summary>
+        /// <param name="categoria">Objeto <see cref="ENCategoria"/> donde se almacenarán los datos.</param>
+        /// <returns>
+        /// <c>true</c> si se encontró la categoría, <c>false</c> si no.
+        /// </returns>
+        /// <exception cref="SqlException">Error al ejecutar el comando SQL.</exception>
         public bool Read(ENCategoria categoria)
         {
             bool aux = false;
@@ -118,7 +157,14 @@ namespace library
             return aux;
         }
 
-        public List<ENCategoria> ReadAll(ENCategoria categoria)
+        /// <summary>
+        /// Obtiene todas las categorías que haya en la base de datos.
+        /// </summary>
+        /// <returns>
+        /// Lista de objetos <see cref="ENCategoria"/> con todas las categorías.
+        /// </returns>
+        /// <exception cref="SqlException">Error al ejecutar el comando SQL.</exception>
+        public List<ENCategoria> ReadAll()
         {
             List<ENCategoria> lista = new List<ENCategoria>();
             SqlConnection c = new SqlConnection(constring);

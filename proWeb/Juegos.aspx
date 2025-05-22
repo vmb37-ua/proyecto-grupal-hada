@@ -7,6 +7,11 @@
 
         <div class="juegos-container">
         <h1>Próximos partidos:</h1>
+            
+        <asp:ScriptManager runat="server" ID="ScriptManager1" />
+
+        <asp:UpdatePanel runat="server" ID="updJuegos">
+            <ContentTemplate>
         <asp:Repeater ID="rptJuegos" runat="server">
             <ItemTemplate>
                     
@@ -36,6 +41,13 @@
                 
             </ItemTemplate>
         </asp:Repeater>
+                            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="timer1" EventName="Tick" />
+            </Triggers>
+        </asp:UpdatePanel>
+
+        <asp:Timer ID="timer1" runat="server" Interval="30000" OnTick="timer1_Tick" />
     </div>
 
 
