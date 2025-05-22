@@ -74,6 +74,10 @@
     <Content Include="AdminNotificaciones.aspx" />
     <Content Include="AdministrarRoles.aspx" />
     <Content Include="AdminUsuario.aspx" />
+    <Content Include="App_Data\Database1.mdf" />
+    <Content Include="App_Data\Database1_log.ldf">
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
     <Content Include="PanelAdmin.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="ApuestaUsuario.aspx" />
@@ -116,6 +120,7 @@
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
     <Content Include="Source\Styles\Informes.css" />
+    <Content Include="Ubicacion.aspx" />
     <Content Include="Web.config" />
     <Content Include="AdministrarCateg.aspx" />
     <Content Include="InformacionEstadio.aspx" />
