@@ -105,7 +105,7 @@ namespace library
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "SELECT * FROM equipo WHERE nombre = @nombre";
+                    string query = "SELECT * FROM equipo WHERE id_equipo = @id_equipo";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
 
