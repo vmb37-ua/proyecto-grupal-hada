@@ -40,17 +40,32 @@ namespace ProWeb
                     var estadio = new ENEstadio { Nombre = apuesta.Estadio.Nombre };
                     estadio.Read();
 
-                    apuestasMostrar.Add(new ApuestaFinal
+                    double cot=1;
+                    if (string.Equals(apuestaUsuario.Prediccion, "1"))
                     {
-                        IdApuesta = apuesta.Id_apuesta,
-                        EquipoLocal = equipoLocal.Nombre,
-                        EquipoVisitante = equipoVisitante.Nombre,
-                        Resultado_apuesta = 
-                        Resultado_predicho= apuestaUsuario.Prediccion,
-                        Cotizacion = apuesta.cot1,
-                        Estadio = estadio.Nombre,
-                        Fecha = apuesta.Fecha
-                    });
+                        cot = apuesta.cot1;
+                    }
+                    if (string.Equals(apuestaUsuario.Prediccion, "2"))
+                    {
+                        cot = apuesta.cot2;
+                    }
+                    if (string.Equals(apuestaUsuario.Prediccion, "X"))
+                    {
+                        cot = apuesta.cotX;
+                    }
+
+
+                    apuestasMostrar.Add(new ApuestaFinal
+                        {
+                            IdApuesta = apuesta.Id_apuesta,
+                            EquipoLocal = equipoLocal.Nombre,
+                            EquipoVisitante = equipoVisitante.Nombre,
+                            Resultado_apuesta = apuesta.Resultado,
+                            Resultado_predicho = apuestaUsuario.Prediccion,
+                            Cotizacion = cot,
+                            Estadio = estadio.Nombre,
+                            Fecha = apuesta.Fecha
+                        });
                 }
             }
 
@@ -79,12 +94,12 @@ namespace ProWeb
             {
                 ApuestaFinal apuesta = (ApuestaFinal)e.Row.DataItem;
 
-                if (apuesta.Resultado_apuesta == "Ganada")
+                if (apuesta.Resultado_apuesta == apuesta.Resultado_predicho)
                     e.Row.BackColor = System.Drawing.Color.LightGreen;
-                else if (apuesta.Resultado_apuesta == "Perdida")
+                else 
                     e.Row.BackColor = System.Drawing.Color.LightCoral;
-                else
-                    e.Row.BackColor = System.Drawing.Color.LightYellow;
+           
+
             }
         }
     }
