@@ -88,6 +88,7 @@ namespace ProWeb
                 usuario.Direccion = CajaDir.Text;
                 usuario.NumTar = CajaNumTar.Text;
                 usuario.Telefono = CajaTelef.Text;
+                usuario.Municipio = int.Parse(Municipioregister.SelectedValue);
 
                 if(DateTime.TryParse(CajaCad.Text, out fecha))
                 {

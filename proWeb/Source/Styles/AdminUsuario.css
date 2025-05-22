@@ -82,7 +82,7 @@
     padding: 10px;
     font-family: Arial;
     font-size: 20px;
-    margin: 0 0 10px 0;
+    margin: 0 10% 10px 0;
 }
 
     .Inputregister::placeholder {
@@ -94,3 +94,8 @@
         color: black !important;
         background-color: white !important;
     }
+
+.ContDesp{
+    display: flex;
+    flex-direction: initial;
+}
