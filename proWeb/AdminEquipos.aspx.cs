@@ -4,20 +4,40 @@ using System.IO;
 
 using library;
 
-    namespace ProWeb
+namespace ProWeb
+{
+    public partial class AdminEquipos : System.Web.UI.Page
     {
-        public partial class AdminEquipos : System.Web.UI.Page
-        {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+            // Solo cargamos los datos la primera vez
             if (!IsPostBack)
             {
                 CargarCategorias();
+                CargarEquipos();
             }
+        }
+
+        private void CargarEquipos()
+        {
+            // Llenamos el dropdown con todos los equipos existentes
+            ENEquipo equipo = new ENEquipo();
+            var lista = equipo.ReadAll();
+
+            ddlEquipos.DataSource = lista;
+            ddlEquipos.DataTextField = "Nombre";
+            ddlEquipos.DataValueField = "Id_equipo";
+            ddlEquipos.DataBind();
         }
 
         private void CargarCategorias()
         {
+            // Cargamos las categorías de la base de datos
             string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["miconex"].ToString();
             using (var conn = new System.Data.SqlClient.SqlConnection(connStr))
             {
@@ -30,6 +50,22 @@ using library;
             }
         }
 
+        protected void ddlEquipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Al seleccionar un equipo, cargamos sus datos
+            int id = int.Parse(ddlEquipos.SelectedValue);
+            ENEquipo equipo = new ENEquipo { Id_equipo = id };
+
+            if (equipo.Read())
+            {
+                txtNombre.Text = equipo.Nombre;
+                ddlCategoria.SelectedValue = equipo.Categoria;
+            }
+            else
+            {
+                MostrarMensaje("No se encontró el equipo.");
+            }
+        }
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
@@ -73,29 +109,23 @@ using library;
             }
         }
 
-
-
-
-
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
-            string nombreEquipo = txtNombre.Text.Trim();
-
-            if (string.IsNullOrEmpty(nombreEquipo))
+            // Actualizamos el equipo seleccionado
+            if (!int.TryParse(ddlEquipos.SelectedValue, out int id))
             {
-                MostrarMensaje("Debes escribir el nombre del equipo a actualizar.");
+                MostrarMensaje("Selecciona un equipo válido.");
                 return;
             }
 
-            // Buscar el equipo por nombre
-            ENEquipo equipo = new ENEquipo { Nombre = nombreEquipo };
+            ENEquipo equipo = new ENEquipo { Id_equipo = id };
             if (!equipo.Read())
             {
-                MostrarMensaje("No se encontró un equipo con ese nombre.");
+                MostrarMensaje("No se encontró un equipo con ese ID.");
                 return;
             }
 
-            string escudoRuta = equipo.Escudo; // valor actual, por si no sube uno nuevo
+            string escudoRuta = equipo.Escudo;
 
             if (fileEscudo.HasFile)
             {
@@ -105,6 +135,7 @@ using library;
                 escudoRuta = "Source/Images/" + nombreArchivo;
             }
 
+            equipo.Nombre = txtNombre.Text.Trim();
             equipo.Escudo = escudoRuta;
             equipo.Categoria = ddlCategoria.SelectedValue;
 
@@ -114,22 +145,20 @@ using library;
                 MostrarMensaje("Error al actualizar el equipo.");
         }
 
-
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            string nombreEquipo = txtNombre.Text.Trim();
-
-            if (string.IsNullOrEmpty(nombreEquipo))
+            // Eliminamos el equipo seleccionado
+            if (!int.TryParse(ddlEquipos.SelectedValue, out int id))
             {
-                MostrarMensaje("Debes escribir el nombre del equipo a eliminar.");
+                MostrarMensaje("Selecciona un equipo válido.");
                 return;
             }
 
-            ENEquipo equipo = new ENEquipo { Nombre = nombreEquipo };
+            ENEquipo equipo = new ENEquipo { Id_equipo = id };
 
             if (!equipo.Read())
             {
-                MostrarMensaje("No se encontró un equipo con ese nombre.");
+                MostrarMensaje("No se encontró un equipo con ese ID.");
                 return;
             }
 
@@ -139,11 +168,9 @@ using library;
                 MostrarMensaje("Error al eliminar el equipo.");
         }
 
-
         private void MostrarMensaje(string mensaje)
         {
             lblMensaje.Text = mensaje;
         }
-
     }
 }

@@ -59,9 +59,9 @@ namespace library
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "DELETE FROM equipo WHERE nombre = @nombre";
+                    string query = "DELETE FROM equipo WHERE id_equipo = @id_equipo";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
+                    cmd.Parameters.AddWithValue("@id_equipo", equipo.Id_equipo);  
 
                     conn.Open();
                     return cmd.ExecuteNonQuery() > 0;
@@ -75,14 +75,16 @@ namespace library
         }
 
 
+
         public bool Update(ENEquipo equipo)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(conexion))
                 {
-                    string query = "UPDATE equipo SET escudo = @escudo, categoria = @categoria WHERE nombre = @nombre";
+                    string query = "UPDATE equipo SET nombre = @nombre, escudo = @escudo, categoria = @categoria WHERE id_equipo = @id_equipo";
                     SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id_equipo", equipo.Id_equipo);  
                     cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
                     cmd.Parameters.AddWithValue("@escudo", equipo.Escudo);
                     cmd.Parameters.AddWithValue("@categoria", equipo.Categoria);
@@ -99,6 +101,7 @@ namespace library
         }
 
 
+
         public bool Read(ENEquipo equipo)
         {
             try
@@ -107,13 +110,13 @@ namespace library
                 {
                     string query = "SELECT * FROM equipo WHERE id_equipo = @id_equipo";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@nombre", equipo.Nombre);
+                    cmd.Parameters.AddWithValue("@id_equipo", equipo.Id_equipo);  
 
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        equipo.Id_equipo = Convert.ToInt32(reader["id_equipo"]);
+                        equipo.Nombre = reader["nombre"].ToString();
                         equipo.Escudo = reader["escudo"].ToString();
                         equipo.Categoria = reader["categoria"].ToString();
                         return true;
@@ -127,6 +130,7 @@ namespace library
                 return false;
             }
         }
+
 
 
         public List<ENEquipo> ReadAll(ENEquipo _)
