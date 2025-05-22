@@ -178,5 +178,11 @@ namespace library
             CADUsuario usu = new CADUsuario();
             return usu.UpdateFoto(this);
         }
+
+        public bool ReadByCorreo()
+        {
+            CADUsuario usu = new CADUsuario();
+            return usu.ReadByCorreo(this);
+        }
     }
 }

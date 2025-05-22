@@ -72,3 +72,30 @@
     color:red;
     margin: 0 auto 0 auto;
 }
+
+.Inputregister {
+    color: black;
+    background-color: white;
+    border-radius: 20px 20px;
+    border: 2px solid black;
+    width: fit-content;
+    padding: 10px;
+    font-family: Arial;
+    font-size: 20px;
+    margin: 0 10% 10px 0;
+}
+
+    .Inputregister::placeholder {
+        font-family: Arial;
+        font-size: 15px;
+    }
+
+    .Inputregister:hover {
+        color: black !important;
+        background-color: white !important;
+    }
+
+.ContDesp{
+    display: flex;
+    flex-direction: initial;
+}
