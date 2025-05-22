@@ -63,6 +63,9 @@ namespace ProWeb
             usuario.ID = int.Parse(Session["Login"].ToString());
             usuario.Delete();
             Session["Login"] = null;
+            HttpCookie cookie = new HttpCookie("UsuarioID");
+            cookie.Value = "";
+            Response.Cookies.Add(cookie);
             Response.Redirect("Juegos.aspx");
         }
     }
