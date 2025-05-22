@@ -53,7 +53,7 @@ namespace ProWeb
                     ENUsuario usuario = new ENUsuario();
                     usuario.ID = int.Parse(Session["Login"].ToString());
                     usuario.Read();
-                    usuario.Imagen = selecFoto.FileName;
+                    usuario.Imagen = "pfp_"+Session["Login"].ToString()+extension;
                     usuario.UpdateFoto();
 
                     Response.Redirect(Request.RawUrl);
