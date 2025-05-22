@@ -8,9 +8,6 @@
     <div>
         <p>Fecha de la apuesta:</p>
         <asp:TextBox ID="txtFecha" runat="server" CssClass="InputCampo" TextMode="Date"></asp:TextBox>
-        
-        <p>ID Apuesta:</p>
-        <asp:TextBox ID="txtIdApuesta" runat="server" CssClass="InputCampo" />
 
         <p>Cuota Equipo 1:</p>
         <asp:TextBox ID="txtCot1" runat="server" CssClass="InputCampo" />
@@ -21,6 +18,9 @@
         <p>Cuota Equipo 2:</p>
         <asp:TextBox ID="txtCot2" runat="server" CssClass="InputCampo" />
 
+
+        <p>Seleccionar apuesta:</p>
+        <asp:DropDownList ID="ddlApuestas" runat="server" AutoPostBack="true" CssClass="ListaDesplegable" OnSelectedIndexChanged="ddlApuestas_SelectedIndexChanged" />
 
         <p>Estadio:</p>
         <asp:DropDownList ID="ddlEstadios" runat="server" CssClass="ListaDesplegable"></asp:DropDownList>
