@@ -116,6 +116,8 @@
     <Content Include="Source\Styles\Perfil.css" />
     <Content Include="Source\Styles\Site1_master.css" />
     <Content Include="Source\Styles\Informes.css" />
+    <Content Include="Source\Styles\Ubicacion.css" />
+    <Content Include="Ubicacion.aspx" />
     <Content Include="Web.config" />
     <Content Include="AdministrarCateg.aspx" />
     <Content Include="InformacionEstadio.aspx" />
@@ -271,7 +273,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Ubicacion.aspx.designer.cs">
-      <DependentUpon>Ubicacion.aspx</DependentUpon>
+      <DependentUpon>Ubicacion.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminApuestas.aspx.cs">
       <DependentUpon>AdminApuestas.aspx</DependentUpon>
