@@ -55,10 +55,5 @@ namespace library
             CADMunicipio municipio = new CADMunicipio();
             return municipio.ReadAll(this);
         }
-        public List<ENMunicipio> ReadAllByProvincia()
-        {
-            CADMunicipio municipio = new CADMunicipio();
-            return municipio.ReadAllByProvincia(this);
-        }
     }
 }

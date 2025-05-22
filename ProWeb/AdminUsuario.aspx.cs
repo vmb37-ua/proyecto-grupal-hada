@@ -138,7 +138,7 @@ namespace ProWeb
             ENMunicipio filtroMunicipio = new ENMunicipio();
             filtroMunicipio.Id_provincia = idProvincia;
 
-            municipios = cadMunicipio.ReadAllByProvincia(filtroMunicipio);
+            municipios = cadMunicipio.ReadAll(filtroMunicipio);
 
             Municipioregister.DataSource = municipios;
             Municipioregister.DataTextField = "Nombre";
