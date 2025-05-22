@@ -9,9 +9,9 @@ namespace library
     public class ENEquipo
     {
         int _id_equipo;
-        int _id_estadio;
+        string _escudo;
         string _nombre;
-        string _ciudad;
+        string _categoria;
 
         public int Id_equipo
         {
@@ -19,10 +19,10 @@ namespace library
             set { _id_equipo = value; }
         }
 
-        public int Id_estadio
+        public string Escudo
         {
-            get { return _id_estadio; }
-            set { _id_estadio = value; }
+            get { return _escudo; }
+            set { _escudo = value; }
         }
 
         public string Nombre
@@ -31,57 +31,58 @@ namespace library
             set { _nombre = value; }
         }
 
-        public string Ciudad
+        public string Categoria
         {
-            get { return _ciudad; }
-            set { _ciudad = value; }
+            get { return _categoria; }
+            set { _categoria = value; }
         }
 
         public ENEquipo()
         {
             _id_equipo = 0;
-            _id_estadio = 0;
+            _escudo = "";
             _nombre = "";
-            _ciudad = "";
+            _categoria = "";
         }
 
-        public ENEquipo(int id_equipo, int id_estadio, string nombre, string ciudad)
+        public ENEquipo(int id_equipo, string escudo, string nombre, string categoria)
         {
             Id_equipo = id_equipo;
-            Id_estadio = id_estadio;
+            Escudo = escudo;
             Nombre = nombre;
-            Ciudad = ciudad;
+            Categoria = categoria;
         }
 
         public bool Create()
         {
-            CADEquipo equipo = new CADEquipo();
-            return equipo.Create(this);
+            return new CADEquipo().Create(this);
         }
 
         public bool Delete()
         {
-            CADEquipo equipo = new CADEquipo();
-            return equipo.Delete(this);
+            return new CADEquipo().Delete(this);
         }
 
         public bool Update()
         {
-            CADEquipo equipo = new CADEquipo();
-            return equipo.Update(this);
+            return new CADEquipo().Update(this);
         }
 
         public bool Read()
         {
-            CADEquipo equipo = new CADEquipo();
-            return equipo.Read(this);
+            return new CADEquipo().Read(this);
         }
 
         public List<ENEquipo> ReadAll()
         {
-            CADEquipo equipo = new CADEquipo();
-            return equipo.ReadAll(this);
+            return new CADEquipo().ReadAll(this);
         }
+
+        public List<ENEquipo> ReadAllbyCategoria()
+        {
+            return new CADEquipo().ReadAllbyCategoria(this);
+        }
+
+
     }
 }
-

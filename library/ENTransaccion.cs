@@ -1,58 +1,125 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace library
 {
-    //clase que representa una transacción económica hecha por un usuario
-    public class Transaccion
+    /// <summary>
+    /// Clase de entidad que representa una transacción realizada por un usuario.
+    /// Contiene información sobre la cantidad, método de pago y el usuario asociado.
+    /// </summary>
+    public class ENTransaccion
     {
-        //el identificador único de la transacción
-        private int id;
+        private int _id;
+        private int _idUsuario;
+        private float _cantidad;
+        private string _metodoPago;
 
-        //identificador del usuario que hace la transacción
-        private int idUsuario;
-
-        //la cantidad de dinero implicada en la transacción
-        private decimal cantidad;
-
-        //la fecha y hora de la transacción
-        private DateTime fecha;
-
-        //el tipo de transacción (ej: ingreso, retiro, ganancia...)
-        private string tipo;
-
-        //el método del pago usado (ej: tarjeta, PayPal, transferencia...)
-        private string metodoPago;
-
-        //propiedades públicas
-        public int Id { get => id; set => id = value; }
-        public int IdUsuario { get => idUsuario; set => idUsuario = value; }
-        public decimal Cantidad { get => cantidad; set => cantidad = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
-        public string Tipo { get => tipo; set => tipo = value; }
-        public string MetodoPago { get => metodoPago; set => metodoPago = value; }
-
-        public Transaccion() { }
-
-        //el constructor hecho
-        public Transaccion(int id, int idUsuario, decimal cantidad, DateTime fecha, string tipo, string metodoPago)
+        /// <summary>
+        /// Identificador único de la transacción.
+        /// </summary>
+        public int Id
         {
-            this.id = id;
-            this.idUsuario = idUsuario;
-            this.cantidad = cantidad;
-            this.fecha = fecha;
-            this.tipo = tipo;
-            this.metodoPago = metodoPago;
+            get { return _id; }
+            set { _id = value; }
         }
 
-        //el mtodo para guardar esta transacción usando el CAD
-        public bool Guardar()
+        /// <summary>
+        /// Identificador del usuario que realiza la transacción.
+        /// </summary>
+        public int IdUsuario
+        {
+            get { return _idUsuario; }
+            set { _idUsuario = value; }
+        }
+
+        /// <summary>
+        /// Cantidad de dinero implicada en la transacción.
+        /// </summary>
+        public float Cantidad
+        {
+            get { return _cantidad; }
+            set { _cantidad = value; }
+        }
+
+        /// <summary>
+        /// Método utilizado para realizar la transacción (ej: Ingreso, Retiro).
+        /// </summary>
+        public string MetodoPago
+        {
+            get { return _metodoPago; }
+            set { _metodoPago = value; }
+        }
+
+        /// <summary>
+        /// Constructor por defecto.
+        /// </summary>
+        public ENTransaccion()
+        {
+            _id = 0;
+            _idUsuario = 0;
+            _cantidad = 0;
+            _metodoPago = string.Empty;
+        }
+
+        /// <summary>
+        /// Constructor con parámetros para inicializar una transacción.
+        /// </summary>
+        public ENTransaccion(int id, int idUsuario, float cantidad, string metodoPago)
+        {
+            _id = id;
+            _idUsuario = idUsuario;
+            _cantidad = cantidad;
+            _metodoPago = metodoPago;
+        }
+
+        /// <summary>
+        /// Inserta la transacción actual en la base de datos.
+        /// </summary>
+        /// <returns>True si la operación fue exitosa.</returns>
+        public bool Create()
         {
             CADTransaccion cad = new CADTransaccion();
-            return cad.CrearTransaccion(this);
+            return cad.Create(this);
+        }
+
+        /// <summary>
+        /// Elimina esta transacción de la base de datos.
+        /// </summary>
+        /// <returns>True si la eliminación fue exitosa.</returns>
+        public bool Delete()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.Delete(this);
+        }
+
+        /// <summary>
+        /// Actualiza los datos de esta transacción en la base de datos.
+        /// </summary>
+        /// <returns>True si la actualización fue exitosa.</returns>
+        public bool Update()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.Update(this);
+        }
+
+        /// <summary>
+        /// Carga los datos de la transacción desde la base de datos por su ID.
+        /// </summary>
+        /// <returns>True si se encontró la transacción.</returns>
+        public bool Read()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.Read(this);
+        }
+
+        /// <summary>
+        /// Devuelve una lista con todas las transacciones asociadas al usuario.
+        /// </summary>
+        /// <returns>Lista de transacciones.</returns>
+        public List<ENTransaccion> ReadAll()
+        {
+            CADTransaccion cad = new CADTransaccion();
+            return cad.ReadAll(this);
         }
     }
 }

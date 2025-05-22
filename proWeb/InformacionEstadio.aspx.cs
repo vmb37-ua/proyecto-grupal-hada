@@ -1,40 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using library;
 
 namespace ProWeb
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public class EstadioConMunicipio
     {
+        public string Nombre { get; set; }
+        public int Capacidad { get; set; }
+        public string Texto { get; set; }
+        public string NombreMunicipio { get; set; }
+    }
+
+    public partial class InformacionEstadio : System.Web.UI.Page
+    {
+
+        public string GetGoogleMapsEmbedUrl(object nombreObj, object municipioObj)
+        {
+            string nombre = nombreObj?.ToString() ?? "";
+            string municipio = municipioObj?.ToString() ?? "";
+            string query = $"{nombre} {municipio}";
+            string encodedQuery = HttpUtility.UrlEncode(query);
+            return $"https://www.google.com/maps?q={encodedQuery}&output=embed";
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Ejemplo
-            /*
-            LabelNombre.Text = "Estadio Nacional";
-            LabelCiudad.Text = "Ciudad: Madrid";
-            LinkDireccion.Text = "Ver en Google Maps";
-            LinkDireccion.NavigateUrl = "https://maps.google.com/?q=Estadio+Nacional+Madrid";
+            if (!IsPostBack)
+            {
+                CargarEstadios();
+            }
+        }
 
+        private void CargarEstadios()
+        {
+            LabelEstadios.Visible = false;
+            List<ENEstadio> estadios = new ENEstadio().ReadAll();
 
+            if ((estadios == null) || (!estadios.Any()))
+            {
+                LabelEstadios.Text = "No hay estadios disponibles.";
+                LabelEstadios.Visible = true;
+                LabelEstadios.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                List<EstadioConMunicipio> lista = new List<EstadioConMunicipio>();
 
-            string direccion = "C. Batalla del Salado, 59, Tarifa, Cádiz";
-            string q = Server.UrlEncode(direccion);
-            string iframe = $@"
-              <iframe
-                id='Mapa'
-                width='100%'
-                height='300'
-                style='border:0'
-                loading='lazy'
-                allowfullscreen
-                src='https://www.google.com/maps?q={q}&output=embed'>
-              </iframe>";
+                foreach (var estadio in estadios)
+                {
+                    ENMunicipio municipio = new ENMunicipio();
+                    municipio.Id_municipio = estadio.Id_municipio;
+                    municipio.Read();
 
-            MapFrame.Text = iframe;
-            */
+                    lista.Add(new EstadioConMunicipio
+                    {
+                        Nombre = estadio.Nombre,
+                        Capacidad = estadio.Capacidad,
+                        Texto = estadio.Texto,
+                        NombreMunicipio = municipio.Nombre
+                    });
+                }
+
+                RepeaterEstadios.DataSource = lista;
+                RepeaterEstadios.DataBind();
+            }
+        }
+        public string TruncarTexto(object texto)
+        {
+            if (texto == null)
+            {
+                return "";
+            }
+            string textoaux = texto.ToString();
+            if (string.IsNullOrEmpty(textoaux))
+            {
+                return "";
+            }
+            if (textoaux.Length > 85)
+            {
+                return textoaux.Substring(0, 85) + "...";
+            }
+            else
+            {
+                return textoaux;
+            }
         }
     }
 }

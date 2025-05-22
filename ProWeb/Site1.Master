@@ -14,7 +14,7 @@
     <form id="form1" runat="server">
     <div class="contenedor">
     <header id="menu">
-        <asp:ImageButton id="botonLogo" OnClick="EventoBotonLogo" ImageUrl="~/Source/Images/logo.png" runat="server" CssClass="LogoImagen"/>
+        <asp:ImageButton id="botonLogo" OnClick="EventoBotonLogo" ImageUrl="~/Source/Images/logo.png" runat="server" CssClass="LogoImagen" CausesValidation="false"/>
         <asp:Menu ID="mainMenu" Orientation="Horizontal" runat="server" StaticSubMenuIndent="16px" CssClass="menu-tabs" DynamicMenuItemStyle-CssClass="submenu">
             <Items>
                 <asp:MenuItem NavigateUrl="juegos.aspx" Text="Juegos"></asp:MenuItem>
@@ -31,16 +31,18 @@
                     <asp:MenuItem NavigateUrl="adminapuestas.aspx" Text="Apuestas"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="DBPatrocinadores.aspx" Text="Patrocinadores"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="AdministrarCateg.aspx" Text="Categorías"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="Informes.aspx" Text="Estadísticas"></asp:MenuItem>
                     
                 </asp:MenuItem>
             </Items>
         </asp:Menu>
     
-        <!-- <asp:Button id="botonSesion" Text="Iniciar Sesión" runat="server" OnClick="EventoClickSesion" Height="28px" Width="131px" CssClass="ISboton"/> -->
+        <asp:Button id="botonSesion" Text="Iniciar Sesión" runat="server" OnClick="EventoClickSesion" Height="28px" Width="131px" CssClass="ISboton" Visible="true" CausesValidation="false"/>
         
         <!-- Sesión iniciada (abajo). Sesión no iniciada (arriba) -->
-        
-        <asp:ImageButton ImageUrl="~/Source/Images/DefaultPFP.jpg" runat="server" CssClass="FotoPerfil" id="botonPerfil" OnClick="EventoBotonPerfil"/>
+        <div id="ContenedorFoto">
+            <asp:ImageButton ImageUrl="~/Source/Images/DefaultPFP.jpg" runat="server" CssClass="FotoPerfil" id="botonPerfil" OnClick="EventoBotonPerfil" Visible="false" CausesValidation="false"/>
+        </div>
     </header>
     <main class="ContenidoMaster">
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

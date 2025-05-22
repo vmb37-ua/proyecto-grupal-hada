@@ -6,18 +6,28 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
+
         <p>Nombre del equipo:</p>
-        <asp:TextBox ID="txtNombre" runat="server" CssClass="InputCampo"></asp:TextBox>
+        <asp:TextBox ID="txtNombre" runat="server" CssClass="InputCampo" />
 
-        <p>Ciudad:</p>
-        <asp:TextBox ID="txtCiudad" runat="server" CssClass="InputCampo"></asp:TextBox>
+        <p>Escudo (URL o nombre de archivo):</p>
+        <asp:FileUpload ID="fileEscudo" runat="server" CssClass="InputCampo" />
 
-        <p>Estadio asignado:</p>
-        <asp:DropDownList ID="ddlEstadios" runat="server" CssClass="ListaDesplegable"></asp:DropDownList>
+
+        <p>Categoría:</p>
+        <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="ListaDesplegable" />
+
+        <p>Seleccionar equipo (por ID):</p>
+        <asp:DropDownList ID="ddlEquipos" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEquipos_SelectedIndexChanged" CssClass="ListaDesplegable" />
+
 
         <br /><br />
-        <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear equipo" />
-        <asp:Button ID="btnActualizar" runat="server" CssClass="BotonAdmin" Text="Actualizar equipo" />
-        <asp:Button ID="btnEliminar" runat="server" CssClass="BotonEliminar" Text="Eliminar equipo" />
+        <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear equipo" OnClick="btnCrear_Click" />
+        <asp:Button ID="btnActualizar" runat="server" CssClass="BotonAdmin" Text="Actualizar equipo" OnClick="btnActualizar_Click" />
+        <asp:Button ID="btnEliminar" runat="server" CssClass="BotonEliminar" Text="Eliminar equipo" OnClick="btnEliminar_Click" />
+
+        <br /><br />
+        <asp:Label ID="lblMensaje" runat="server" ForeColor="Green" />
     </div>
 </asp:Content>
+

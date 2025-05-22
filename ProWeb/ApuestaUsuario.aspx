@@ -10,9 +10,9 @@
         <div class="ResumenApuesta">
             <h1>CONFIRMAR APUESTA</h1>
             <div class="DetallePartido">
-                <asp:Label ID="lblEquipoLocal" runat="server" Text="FC Barcelona" CssClass="Equipo"></asp:Label>
+                <asp:Label ID="lblEquipoLocal" runat="server" CssClass="Equipo"></asp:Label>
                 <span class="VS">VS</span>
-                <asp:Label ID="lblEquipoVisitante" runat="server" Text="Real Madrid" CssClass="Equipo"></asp:Label>
+                <asp:Label ID="lblEquipoVisitante" runat="server" CssClass="Equipo"></asp:Label>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             <!-- Sección Cuota dinámica -->
             <div class="CuotaContainer">
                 <span class="CuotaLabel">CUOTA:</span>
-                <asp:Label ID="lblCuotaActual" runat="server" Text="2.10" CssClass="Cuota"></asp:Label>
+                <asp:Label ID="lblCuotaActual" runat="server" CssClass="Cuota"></asp:Label>
             </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
         <div class="SeccionPago">
             <div class="CampoFormulario">
                 <label for="txtCantidad">CANTIDAD (€):</label>
-                <asp:TextBox ID="txtCantidad" runat="server" CssClass="InputApuesta" placeholder="Ej: 20.00" TextMode="Number" step="1" AutoPostBack="true"></asp:TextBox>
+                <asp:TextBox ID="txtCantidad" runat="server" CssClass="InputApuesta" placeholder="Ej: 20.00" TextMode="Number" step="1" AutoPostBack="true" OnTextChanged="txtCantidad_TextChanged"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvCantidad" runat="server" ControlToValidate="txtCantidad" ErrorMessage="*Campo obligatorio" CssClass="Validador"></asp:RequiredFieldValidator>
             </div>
 
@@ -59,7 +59,7 @@
         <!-- Sección Botones -->
         <div class="BotonesAccion">
             <asp:Button ID="btnApostar" runat="server" Text="APOSTAR AHORA" CssClass="BotonApostar" OnClick="btnApostar_Click" />
-            <asp:Button ID="btnCancelar" runat="server" Text="CANCELAR" CssClass="BotonCancelar" OnClick="btnCancelar_Click" />
+            <asp:Button ID="btnCancelar" runat="server" Text="CANCELAR" CssClass="BotonCancelar" OnClick="btnCancelar_Click" CausesValidation="false" />
         </div>
 
         <!-- Sección Confirmación -->

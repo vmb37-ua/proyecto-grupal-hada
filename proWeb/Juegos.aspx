@@ -7,28 +7,33 @@
 
         <div class="juegos-container">
         <h1>Próximos partidos:</h1>
+            
+        <asp:ScriptManager runat="server" ID="ScriptManager1" />
+
+        <asp:UpdatePanel runat="server" ID="updJuegos">
+            <ContentTemplate>
         <asp:Repeater ID="rptJuegos" runat="server">
             <ItemTemplate>
                     
                 <div class="juego">
 
                         <div class="titulo-partido">
-                                <img src="Source/Images/madrid.png" alt="Imagen izquierda" class="imagen_lateral" />
+                                <img src='<%# "Source/Images/" + ((ProWeb.Juegos.Juego)Container.DataItem).EquipoLocal.Replace(" ", "").ToLower() + ".png" %>' alt="Imagen izquierda" class="imagen_lateral" />
                                 <span class="titulo-texto">
                                     <h2><asp:Label ID="lblEquipoLocal" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).EquipoLocal %>'></asp:Label> vs 
                                     <asp:Label ID="lblEquipoVisitante" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).EquipoVisitante %>'></asp:Label></h2>
                                 </span>
 
-                                <img src="Source/Images/barca.png" alt="Imagen derecha" class="imagen_lateral" />
+                                <img src='<%# "Source/Images/" + ((ProWeb.Juegos.Juego)Container.DataItem).EquipoVisitante.Replace(" ", "").ToLower() + ".png" %>' alt="Imagen derecha" class="imagen_lateral" />
                         </div>
 
 
                     <p>Estadio: <asp:Label ID="lblEstadio" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Estadio %>'></asp:Label></p>
                     <p>Fecha: <asp:Label ID="lblFecha" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Fecha.ToString("dd/MM/yyyy") %>'></asp:Label></p>
                     <p>Hora: <asp:Label ID="lblHora" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Hora.ToString(@"hh\:mm") %>'></asp:Label></p>
-                    <p>Categoría: <asp:Label ID="lblCategoria" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).Categoria %>'></asp:Label></p>
+                    
 
-                    <asp:Button ID="botonJuego" runat="server" Text="Apostar" CssClass="juego_boton" OnClick="EventoJuegoClick" />
+                    <asp:Button ID="botonJuego" runat="server" Text="Apostar" CssClass="juego_boton" CommandName="Apostar" CommandArgument='<%# ((ProWeb.Juegos.Juego)Container.DataItem).IdApuesta %>' OnCommand="EventoJuegoClick"/>
 
            
 
@@ -36,6 +41,13 @@
                 
             </ItemTemplate>
         </asp:Repeater>
+                            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="timer1" EventName="Tick" />
+            </Triggers>
+        </asp:UpdatePanel>
+
+        <asp:Timer ID="timer1" runat="server" Interval="30000" OnTick="timer1_Tick" />
     </div>
 
 

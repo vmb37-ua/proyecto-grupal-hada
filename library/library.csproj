@@ -1,9 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="AjaxControlToolkit" Version="20.1.0" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.4" />
+	</ItemGroup>
 
 </Project>

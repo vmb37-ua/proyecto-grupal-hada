@@ -9,15 +9,24 @@
         <p>Nombre del estadio:</p>
         <asp:TextBox ID="txtNombre" runat="server" CssClass="InputCampo"></asp:TextBox>
 
-        <p>Ciudad:</p>
-        <asp:TextBox ID="txtCiudad" runat="server" CssClass="InputCampo"></asp:TextBox>
+        <p>Capacidad:</p>
+        <asp:TextBox ID="txtCapacidad" runat="server" CssClass="InputCampo" TextMode="Number"></asp:TextBox>
 
-        <p>Dirección:</p>
-        <asp:TextBox ID="txtDireccion" runat="server" CssClass="InputCampo"></asp:TextBox>
+        <p>Descripción:</p>
+        <asp:TextBox ID="txtTexto" runat="server" CssClass="InputCampo" TextMode="MultiLine"></asp:TextBox>
+
+        <p>Nombre del Municipio:</p>
+        <asp:DropDownList ID="ddlMunicipios" runat="server" CssClass="ListaDesplegable">
+        <asp:ListItem Text="-- Selecciona un municipio --" Value="" />
+        </asp:DropDownList>
+
 
         <br /><br />
-        <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear estadio" />
-        <asp:Button ID="btnActualizar" runat="server" CssClass="BotonAdmin" Text="Actualizar estadio" />
-        <asp:Button ID="btnEliminar" runat="server" CssClass="BotonEliminar" Text="Eliminar estadio" />
+        <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear estadio" OnClick="btnCrear_Click" />
+        <asp:Button ID="btnActualizar" runat="server" CssClass="BotonAdmin" Text="Actualizar estadio" OnClick="btnActualizar_Click" />
+        <asp:Button ID="btnEliminar" runat="server" CssClass="BotonEliminar" Text="Eliminar estadio" OnClick="btnEliminar_Click" />
+        <br /><br />
+        <asp:Label ID="lblMensaje" runat="server" ForeColor="Green" /> 
+    
     </div>
 </asp:Content>

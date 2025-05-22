@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Web.UI;
+using library;
 
 namespace ProWeb
 {
@@ -7,22 +9,120 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+            // Solo cargamos municipios al cargar la página por primera vez
+            if (!IsPostBack)
+            {
+                CargarMunicipios();
+            }
         }
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
+            // Creamos un nuevo estadio
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtNombre.Text))
+                {
+                    MostrarMensaje("El nombre del estadio no puede estar vacío.");
+                    return;
+                }
 
+                if (!int.TryParse(txtCapacidad.Text, out int capacidad))
+                {
+                    MostrarMensaje("La capacidad debe ser un número válido.");
+                    return;
+                }
+
+                if (!int.TryParse(ddlMunicipios.SelectedValue, out int idMunicipio))
+                {
+                    MostrarMensaje("Debes seleccionar un municipio válido.");
+                    return;
+                }
+
+                ENEstadio estadio = new ENEstadio
+                {
+                    Nombre = txtNombre.Text,
+                    Capacidad = capacidad,
+                    Texto = txtTexto.Text,
+                    Id_municipio = idMunicipio
+                };
+
+                if (estadio.Create())
+                    MostrarMensaje("Estadio creado correctamente.");
+                else
+                    MostrarMensaje("Error al crear el estadio.");
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("ERROR SQL: " + ex.Message.Replace("'", ""));
+            }
         }
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+            // Actualizamos un estadio ya existente
+            if (int.TryParse(txtCapacidad.Text, out int capacidad) &&
+                int.TryParse(ddlMunicipios.SelectedValue, out int idMunicipio))
+            {
+                ENEstadio estadio = new ENEstadio
+                {
+                    Nombre = txtNombre.Text,
+                    Capacidad = capacidad,
+                    Texto = txtTexto.Text,
+                    Id_municipio = idMunicipio
+                };
 
+                if (estadio.Update())
+                    MostrarMensaje("Estadio actualizado correctamente.");
+                else
+                    MostrarMensaje("Error al actualizar el estadio.");
+            }
+            else
+            {
+                MostrarMensaje("Capacidad e ID de municipio deben ser números válidos.");
+            }
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            // Eliminamos un estadio por su nombre
+            ENEstadio estadio = new ENEstadio
+            {
+                Nombre = txtNombre.Text
+            };
 
+            if (estadio.Delete())
+                MostrarMensaje("Estadio eliminado correctamente.");
+            else
+                MostrarMensaje("Error al eliminar el estadio.");
+        }
+
+        private void MostrarMensaje(string mensaje)
+        {
+            lblMensaje.Text = mensaje;
+        }
+
+        private void CargarMunicipios()
+        {
+            // Cargamos los municipios desde la base de datos al dropdown
+            string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["miconex"].ToString();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string query = "SELECT id_municipio, nombre FROM municipio";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                ddlMunicipios.DataSource = reader;
+                ddlMunicipios.DataTextField = "nombre";
+                ddlMunicipios.DataValueField = "id_municipio";
+                ddlMunicipios.DataBind();
+            }
         }
     }
 }

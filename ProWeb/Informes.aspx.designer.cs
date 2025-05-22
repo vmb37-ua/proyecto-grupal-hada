@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------
+﻿//------------------------------------------------------------------------------
 // <generado automáticamente>
 //     Este código fue generado por una herramienta.
 //
@@ -11,70 +11,79 @@ namespace ProWeb
 {
 
 
-    public partial class Cartera
+    public partial class WebForm3
     {
 
         /// <summary>
-        /// Control DineroDisponible.
+        /// Control gvTopPartidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DineroDisponible;
+        protected global::System.Web.UI.WebControls.GridView gvTopPartidos;
 
         /// <summary>
-        /// Control CantidadIngresar.
+        /// Control lblMayorCuota.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CantidadIngresar;
+        protected global::System.Web.UI.WebControls.Label lblMayorCuota;
 
         /// <summary>
-        /// Control BotonIngresar.
+        /// Control blTopGanadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BotonIngresar;
+        protected global::System.Web.UI.WebControls.BulletedList blTopGanadores;
 
         /// <summary>
-        /// Control CantidadRetirar.
+        /// Control lblUsuarioActivo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CantidadRetirar;
+        protected global::System.Web.UI.WebControls.Label lblUsuarioActivo;
 
         /// <summary>
-        /// Control BotonRetirar.
+        /// Control lblUsuarioActivo2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BotonRetirar;
+        protected global::System.Web.UI.WebControls.Label lblUsuarioActivo2;
 
         /// <summary>
-        /// Control MensajeOperacion.
+        /// Control lblApuestasHoy.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajeOperacion;
+        protected global::System.Web.UI.WebControls.Label lblApuestasHoy;
 
         /// <summary>
-        /// Control BotonVolverPerfil.
+        /// Control lblGanancias.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BotonVolverPerfil;
+        protected global::System.Web.UI.WebControls.Label lblGanancias;
+
+        /// <summary>
+        /// Control lblProximoEvento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProximoEvento;
     }
 }

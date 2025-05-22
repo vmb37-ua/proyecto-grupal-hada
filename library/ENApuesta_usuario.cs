@@ -8,53 +8,41 @@ namespace library
 {
     public class ENApuesta_usuario
     {
-        // Identificador único de la apuesta del usuario
-        private int idApuesta_usuario;
+        private int _idUsuario;
+        private int _idApuesta;
+        private string _prediccion;  // "1", "X" o "2"
+        private float _cantidad;
+        private float _cuota;
 
-        // Identificador de la apuesta a la que corresponde
-        private int idApuesta;
+        public int IdUsuario { get => _idUsuario; set => _idUsuario = value; }
+        public int IdApuesta { get => _idApuesta; set => _idApuesta = value; }
+        public string Prediccion { get => _prediccion; set => _prediccion = value; }
+        public float Cantidad { get => _cantidad; set => _cantidad = value; }
+        public float Cuota { get => _cuota; set => _cuota = value; }
 
-        // Resultado de la apuesta: Ganada / Perdida
-        private string resultadoApuesta;
-
-        // Propiedades públicas
-        public int IdApuesta_usuario { get => idApuesta_usuario; set => idApuesta_usuario = value; }
-
-        public string ResultadoApuesta { get => resultadoApuesta; set => resultadoApuesta = value; }
-
-        public int IdApuesta { get => idApuesta; set => idApuesta = value; }
 
         public ENApuesta_usuario() { }
 
-        public ENApuesta_usuario(int idApuesta_usuario, int idUsuario, int idApuesta, decimal importe, string resultado_predicho, string estadoApuesta, DateTime fechaApuesta, string resultadoApuesta, decimal ganancia, string comentarios)
+        public ENApuesta_usuario(int idUsuario, int idApuesta, string prediccion, float cantidad, float cuota)
         {
-            IdApuesta_usuario = idApuesta_usuario;
+            IdUsuario = idUsuario;
             IdApuesta = idApuesta;
-            ResultadoApuesta = resultadoApuesta;
+            Prediccion = prediccion;
+            Cantidad = cantidad;
+            Cuota = cuota;
         }
 
-        public bool CrearApuesta()
+        
+        public bool Apostar()
         {
             CADApuesta_usuario cad = new CADApuesta_usuario();
             return cad.CrearApuesta(this);
         }
 
-        public bool ModificarApuesta()
+        public List<ENApuesta_usuario> ReadAll()
         {
             CADApuesta_usuario cad = new CADApuesta_usuario();
-            return cad.ModificarApuesta(this);
-        }
-
-        public bool CancelarApuesta()
-        {
-            CADApuesta_usuario cad = new CADApuesta_usuario();
-            return cad.CancelarApuesta(this);
-        }
-
-        public bool MostrarInfoApuesta()
-        {
-            CADApuesta_usuario cad = new CADApuesta_usuario();
-            return cad.MostrarInfoApuesta(this);
+            return cad.ReadAll();
         }
     }
 }
