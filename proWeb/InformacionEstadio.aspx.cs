@@ -52,7 +52,8 @@ namespace ProWeb
 
         private void CargarEstadios()
         {
-            var estadios = new ENEstadio().ReadAll();
+            LabelEstadios.Visible = false;
+            List<ENEstadio> estadios = new ENEstadio().ReadAll();
 
             // Prueba, luego Borrar, lo inserto a mano
             estadios.Add(new ENEstadio
@@ -97,54 +98,22 @@ namespace ProWeb
 
             // hasta aqui
 
-            if (estadios == null || estadios.Count == 0)
+            if ((estadios == null) || (!estadios.Any()))
             {
-                HtmlGenericControl msg = new HtmlGenericControl("p");
-                msg.InnerText = "No hay estadios disponibles.";
-                gridEstadios.Controls.Add(msg);
-                return;
+                LabelEstadios.Text = "No hay estadios disponibles.";
+                LabelEstadios.Visible = true;
+                LabelEstadios.ForeColor = System.Drawing.Color.Red;
             }
-
-            foreach (var estadio in estadios)
+            else
             {
-                HtmlGenericControl cardDiv = new HtmlGenericControl("div");
-                cardDiv.Attributes["class"] = "card-estadio";
-
-                HtmlGenericControl bgDiv = new HtmlGenericControl("div");
-                bgDiv.Attributes["class"] = "fondo-estadio";
-                bgDiv.Attributes["style"] = $"background-image: url('Source/Images/{estadio.Nombre}.jpg');";
-                cardDiv.Controls.Add(bgDiv);
-
-                HtmlGenericControl contenidoDiv = new HtmlGenericControl("div");
-                contenidoDiv.Attributes["class"] = "contenido-estadio";
-
-                HtmlGenericControl h3 = new HtmlGenericControl("h3");
-                HtmlAnchor link = new HtmlAnchor
-                {
-                    HRef = $"DetalleEstadio.aspx?nombre={Server.UrlEncode(estadio.Nombre)}",
-                    InnerText = estadio.Nombre
-                };
-                h3.Controls.Add(link);
-                contenidoDiv.Controls.Add(h3);
-
-                HtmlGenericControl capacidadP = new HtmlGenericControl("p");
-                capacidadP.InnerText = "Capacidad: " + estadio.Capacidad;
-                contenidoDiv.Controls.Add(capacidadP);
-
-                if (!string.IsNullOrEmpty(estadio.Texto))
-                {
-                    HtmlGenericControl textoP = new HtmlGenericControl("p");
-                    textoP.InnerText = estadio.Texto.Length > 100 ? estadio.Texto.Substring(0, 100) + "..." : estadio.Texto;
-                    contenidoDiv.Controls.Add(textoP);
-                }
-
-                HtmlGenericControl municipioP = new HtmlGenericControl("p");
-                municipioP.InnerText = "ID Municipio: " + estadio.Id_municipio;
-                contenidoDiv.Controls.Add(municipioP);
-
-                cardDiv.Controls.Add(contenidoDiv);
-                gridEstadios.Controls.Add(cardDiv);
+                RepeaterEstadios.DataSource = estadios;
+                RepeaterEstadios.DataBind();
             }
+        }
+        public string TruncarTexto(object textoObj)
+        {
+            string texto = textoObj?.ToString();
+            return string.IsNullOrEmpty(texto) ? "" : (texto.Length > 100 ? texto.Substring(0, 100) + "..." : texto);
         }
     }
 }

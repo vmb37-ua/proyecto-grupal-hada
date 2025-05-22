@@ -20,16 +20,16 @@ namespace library
         public float Cantidad { get => _cantidad; set => _cantidad = value; }
         public float Cuota { get => _cuota; set => _cuota = value; }
 
-        
+
         public ENApuesta_usuario() { }
 
         public ENApuesta_usuario(int idUsuario, int idApuesta, string prediccion, float cantidad, float cuota)
         {
-            _idUsuario = idUsuario;
-            _idApuesta = idApuesta;
-            _prediccion = prediccion;
-            _cantidad = cantidad;
-            _cuota = cuota;
+            IdUsuario = idUsuario;
+            IdApuesta = idApuesta;
+            Prediccion = prediccion;
+            Cantidad = cantidad;
+            Cuota = cuota;
         }
 
         

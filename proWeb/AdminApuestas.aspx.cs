@@ -12,17 +12,18 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Solo cargamos los datos si no es un postback
             if (!IsPostBack)
             {
                 CargarEquipos();
                 CargarEstadios();
-                CargarApuestas(); // nuevo
+                CargarApuestas(); // Cargamos apuestas existentes para editar/eliminar
             }
-
         }
 
         private void CargarEquipos()
         {
+            // Leemos todos los equipos y los asignamos a los dos dropdowns
             ENEquipo eq = new ENEquipo();
             var lista = eq.ReadAll();
 
@@ -39,19 +40,21 @@ namespace ProWeb
 
         private void CargarEstadios()
         {
+            // Cargamos todos los estadios en el dropdown
             ENEstadio es = new ENEstadio();
             var lista = es.ReadAll();
 
             ddlEstadios.DataSource = lista;
             ddlEstadios.DataTextField = "Nombre";
-            ddlEstadios.DataValueField = "Nombre"; // PK = nombre en base de datos
+            ddlEstadios.DataValueField = "Nombre"; // Usamos nombre porque es la PK
             ddlEstadios.DataBind();
         }
 
         private void CargarApuestas()
         {
+            // Mostramos las apuestas existentes en el dropdown
             ENApuesta ap = new ENApuesta();
-            var lista = ap.ReadAll(); // asegúrate de que este método existe
+            var lista = ap.ReadAll();
 
             ddlApuestas.DataSource = lista;
             ddlApuestas.DataTextField = "Id_apuesta";
@@ -63,9 +66,9 @@ namespace ProWeb
         {
             try
             {
+                // Creamos una nueva apuesta a partir de los datos del formulario
                 ENApuesta ap = new ENApuesta
                 {
-                    
                     Fecha = DateTime.Parse(txtFecha.Text),
                     Estadio = new ENEstadio { Nombre = ddlEstadios.SelectedValue },
                     Equipo1 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo1.SelectedValue) },
@@ -84,16 +87,16 @@ namespace ProWeb
             {
                 MostrarMensaje("ERROR SQL: " + ex.Message.Replace("'", ""));
             }
-
         }
 
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
             try
             {
+                // Actualizamos la apuesta seleccionada con los nuevos datos
                 ENApuesta ap = new ENApuesta
                 {
-                    Id_apuesta = int.Parse(ddlApuestas.SelectedValue), // <-- Añadido aquí
+                    Id_apuesta = int.Parse(ddlApuestas.SelectedValue),
                     Fecha = DateTime.Parse(txtFecha.Text),
                     Estadio = new ENEstadio { Nombre = ddlEstadios.SelectedValue },
                     Equipo1 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo1.SelectedValue) },
@@ -114,12 +117,11 @@ namespace ProWeb
             }
         }
 
-
-
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
             try
             {
+                // Eliminamos la apuesta seleccionada
                 ENApuesta ap = new ENApuesta
                 {
                     Id_apuesta = int.Parse(ddlApuestas.SelectedValue)
@@ -136,11 +138,11 @@ namespace ProWeb
             }
         }
 
-
         protected void ddlApuestas_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                // Cargamos los datos de la apuesta seleccionada para mostrarlos en el formulario
                 int id = int.Parse(ddlApuestas.SelectedValue);
                 ENApuesta ap = new ENApuesta { Id_apuesta = id };
 
@@ -161,6 +163,7 @@ namespace ProWeb
             }
         }
 
+        // Método auxiliar para mostrar mensajes en el formulario
         private void MostrarMensaje(string mensaje)
         {
             lblMensaje.Text = mensaje;
