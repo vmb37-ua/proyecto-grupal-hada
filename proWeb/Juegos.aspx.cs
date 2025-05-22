@@ -26,7 +26,7 @@ namespace ProWeb
             try
             {
                 var cadApuesta = new CADApuesta();
-                var apuestas = cadApuesta.ReadAll(new ENApuesta());
+                var apuestas = cadApuesta.ReadAll();
                 apuestas = apuestas.OrderBy(a => a.Fecha).ToList();
 
                 var juegos = new List<Juego>();

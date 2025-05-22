@@ -113,7 +113,7 @@ namespace library
         public List<ENApuesta> ReadAll()
         {
             CADApuesta equipo = new CADApuesta();
-            return equipo.ReadAll(this);
+            return equipo.ReadAll();
         }
         public bool Update()
         {
