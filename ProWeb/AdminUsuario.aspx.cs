@@ -28,7 +28,7 @@ namespace ProWeb
 
                     CajaNombre.Text = usuario.Nombre;
                     CajaCvv.Text = usuario.Cvv;
-                    CajaCad.Text = usuario.Caducidad.ToString();
+                    CajaCad.Text = usuario.Caducidad.ToShortDateString();
                     CajaDir.Text = usuario.Direccion;
                     CajaNumTar.Text = usuario.NumTar;
                     CajaTelef.Text = usuario.Telefono;
