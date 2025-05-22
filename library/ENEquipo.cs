@@ -77,5 +77,12 @@ namespace library
         {
             return new CADEquipo().ReadAll(this);
         }
+
+        public List<ENEquipo> ReadAllbyCategoria()
+        {
+            return new CADEquipo().ReadAllbyCategoria(this);
+        }
+
+
     }
 }
