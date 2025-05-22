@@ -38,12 +38,16 @@ namespace ProWeb
 
                     var estadio = new ENEstadio { Nombre = apuesta.Estadio.Nombre };
 
+                    bool leyoLocal = equipoLocal.Read();
+                    bool leyoVisitante = equipoVisitante.Read();
+                    bool leyoEstadio = estadio.Read();
+
                     if (true)
                     {
                         juegos.Add(new Juego
                         {
                             EquipoLocal = equipoLocal.Nombre,
-                            EquipoVisitante = equipoVisitante.Nombre,
+                            EquipoVisitante = equipoLocal.Nombre,
                             Estadio = estadio.Nombre,
                             Fecha = apuesta.Fecha.Date,
                             Hora = apuesta.Fecha.TimeOfDay,
