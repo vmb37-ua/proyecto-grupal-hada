@@ -196,6 +196,7 @@
     </Compile>
     <Compile Include="ApuestasUsuario.aspx.cs">
       <DependentUpon>ApuestasUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ApuestasUsuario.aspx.designer.cs">
       <DependentUpon>ApuestasUsuario.aspx</DependentUpon>
