@@ -87,8 +87,15 @@
 
 
 
-        <asp:TextBox ID="Passregister" runat="server" CssClass="Inputregister" TextMode="Password" placeholder="Contraseña" />
-        <asp:RequiredFieldValidator ControlToValidate="Passregister" ErrorMessage="La contraseña es obligatoria." ForeColor="Red" Display="Dynamic" runat="server" />
+<asp:TextBox ID="Passregister" runat="server" CssClass="Inputregister" TextMode="Password" placeholder="Contraseña" />
+<asp:RequiredFieldValidator ControlToValidate="Passregister" ErrorMessage="La contraseña es obligatoria." ForeColor="Red" Display="Dynamic" runat="server" />
+<asp:RegularExpressionValidator 
+    ControlToValidate="Passregister"
+    ValidationExpression="^.{7,}$"
+    ErrorMessage="La contraseña debe tener al menos 7 caracteres."
+    ForeColor="Red"
+    Display="Dynamic"
+    runat="server" />
 
         <asp:TextBox ID="Passrepregister" runat="server" CssClass="Inputregister" TextMode="Password" placeholder="Confirmar Contraseña" />
         <asp:RequiredFieldValidator ControlToValidate="Passrepregister" ErrorMessage="La confirmación es obligatoria." ForeColor="Red" Display="Dynamic" runat="server" />

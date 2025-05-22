@@ -9,6 +9,30 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Juegos.aspx");
+                return;
+            }
+
+            ENUsuario usuario = new ENUsuario();
+            usuario.ID = int.Parse(Session["Login"].ToString());
+
+            if (!usuario.Read())
+            {
+                Response.Redirect("Juegos.aspx");
+                return;
+            }
+
+            ENRol rol = new ENRol();
+            rol.Id_rol = usuario.Rol;
+
+            if (!rol.Read() || rol.Nombre != "Administrador")
+            {
+                Response.Redirect("Juegos.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
                 IdGestion.Attributes["placeholder"] = "Escriba el id aquí";
@@ -16,6 +40,7 @@ namespace ProWeb
                 LimpiarMensajes();
             }
         }
+
 
         private void LimpiarMensajes()
         {

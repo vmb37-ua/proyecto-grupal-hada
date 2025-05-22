@@ -155,7 +155,7 @@ namespace ProWeb
                 }
                 else
                 {
-                    Labelerror.Text = nuevoUsuario.Password;
+                    Labelerror.Text = "Error al crear el Usuario";
                     Labelerror.Visible = true;
                 }
             }
