@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
 
 namespace library
 {
+    /// <summary>
+    /// Clase de acceso a datos que gestiona las operaciones CRUD sobre la tabla transaccion.
+    /// </summary>
     public class CADTransaccion
     {
         private string conexion;
 
+        /// <summary>
+        /// Constructor que obtiene la cadena de conexión desde Web.config.
+        /// </summary>
         public CADTransaccion()
         {
             conexion = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
 
+        /// <summary>
+        /// Inserta una nueva transacción en la base de datos.
+        /// </summary>
+        /// <param name="transaccion">Objeto ENTransaccion con los datos a insertar.</param>
+        /// <returns>True si la operación fue exitosa.</returns>
         public bool Create(ENTransaccion transaccion)
         {
             bool creada = false;
@@ -41,6 +49,11 @@ namespace library
             return creada;
         }
 
+        /// <summary>
+        /// Elimina una transacción de la base de datos por su ID.
+        /// </summary>
+        /// <param name="transaccion">Objeto ENTransaccion con el ID a eliminar.</param>
+        /// <returns>True si la eliminación fue exitosa.</returns>
         public bool Delete(ENTransaccion transaccion)
         {
             bool eliminada = false;
@@ -63,6 +76,11 @@ namespace library
             return eliminada;
         }
 
+        /// <summary>
+        /// Actualiza los datos de una transacción existente.
+        /// </summary>
+        /// <param name="transaccion">Objeto ENTransaccion con los datos actualizados.</param>
+        /// <returns>True si la actualización fue exitosa.</returns>
         public bool Update(ENTransaccion transaccion)
         {
             bool actualizada = false;
@@ -87,6 +105,11 @@ namespace library
             return actualizada;
         }
 
+        /// <summary>
+        /// Carga los datos de una transacción específica desde la base de datos.
+        /// </summary>
+        /// <param name="transaccion">Objeto ENTransaccion con el ID de la transacción.</param>
+        /// <returns>True si la transacción fue encontrada.</returns>
         public bool Read(ENTransaccion transaccion)
         {
             bool encontrada = false;
@@ -117,6 +140,11 @@ namespace library
             return encontrada;
         }
 
+        /// <summary>
+        /// Devuelve todas las transacciones de un usuario concreto.
+        /// </summary>
+        /// <param name="transaccion">Objeto ENTransaccion con el IdUsuario establecido.</param>
+        /// <returns>Lista de transacciones del usuario.</returns>
         public List<ENTransaccion> ReadAll(ENTransaccion transaccion)
         {
             List<ENTransaccion> lista = new List<ENTransaccion>();
