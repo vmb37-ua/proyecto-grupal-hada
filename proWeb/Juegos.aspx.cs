@@ -38,7 +38,7 @@ namespace ProWeb
 
                     var estadio = new ENEstadio { Nombre = apuesta.Estadio.Nombre };
 
-                    if (equipoLocal.Read() && equipoVisitante.Read() && estadio.Read())
+                    if (true)
                     {
                         juegos.Add(new Juego
                         {
