@@ -4,20 +4,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <link rel="stylesheet" href="Source/Styles/DBUsuario.css" />
 
-        <div >
+    <div>
         <p>Seleccione un usuario: </p>
-        <asp:DropDownList runat="server" ID="ListaDBUsuarios" CssClass="ListaDesplegable" OnSelectedIndexChanged="ListaDBUsuarios_SelectedIndexChanged">
-            <asp:ListItem Text="Nuevo Usuario" Value="1" />
+        <asp:DropDownList runat="server" ID="ListaDBUsuarios" CssClass="ListaDesplegable" 
+            AutoPostBack="true" OnSelectedIndexChanged="ListaDBUsuarios_SelectedIndexChanged">
         </asp:DropDownList>
     </div>
     <hr/>
     <div id="Editor_Usuarios">
             ID de Usuario&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBid" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            Contraseña&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBcontrasena" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TBid" runat="server" ReadOnly="true"></asp:TextBox>
             <br />
             <br />
             Nombre&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,7 +21,7 @@
             <br />
             <br />
             Saldo (€)&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBsaldo" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TBsaldo" runat="server" TextMode="Number" step="0.01"></asp:TextBox>
             <br />
             <br />
             Datos de pago&nbsp;&nbsp;&nbsp;&nbsp;
@@ -37,16 +33,21 @@
             <br />
             <br />
             Teléfono&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBtelefono" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TBtelefono" runat="server" TextMode="Phone"></asp:TextBox>
+            <br />
+            <br />
+            Rol&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:TextBox ID="TBrol" runat="server" Visible="false"></asp:TextBox>
             <br />
             <br />
             Imagen (.png)&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="TBimagen" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:Button ID="BTNagregar_pat" runat="server" CssClass="BotonEditarUsuario" Text="Agregar/Editar usuario" />
-            <asp:Button ID="BTNeliminar_pat" runat="server" CssClass="BotonBorrarUsuario" Text="Eliminar usuario" />
-            
+            <asp:Button ID="BTNagregar_pat" runat="server" CssClass="BotonEditarUsuario" 
+                Text="Agregar/Editar usuario" OnClick="BTNagregar_pat_Click" />
+            <asp:Button ID="BTNeliminar_pat" runat="server" CssClass="BotonBorrarUsuario" 
+                Text="Eliminar usuario" OnClick="BTNeliminar_pat_Click" />
     </div>
 
 
