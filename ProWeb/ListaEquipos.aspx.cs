@@ -33,10 +33,7 @@ namespace ProWeb
             ViewState["favoritosIdEquipos"] = favoritos.Select(f => f.IdEquipo).ToList();
 
 
-            foreach (var equipo in equipos)
-            {
-                equipo.Escudo = "Source/Images/" + equipo.Escudo;
-            }
+            
 
             rptEquipos.DataSource = equipos;
             rptEquipos.DataBind();
@@ -48,10 +45,7 @@ namespace ProWeb
             en.Categoria = categoria;
             List<ENEquipo> equipos = en.ReadAllbyCategoria();
 
-            foreach (var equipo in equipos)
-            {
-                equipo.Escudo = "Source/Images/" + equipo.Escudo;
-            }
+            
 
             rptEquipos.DataSource = equipos;
             rptEquipos.DataBind();
