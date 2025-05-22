@@ -379,22 +379,21 @@ namespace library
                 DataTable dt = new DataTable();
                 dt = bdvirtual.Tables["usuario"];
 
-                ENUsuario usuario = new ENUsuario();
                 foreach (DataRow fila in dt.Rows)
                 {
-                    usuario.ID = int.Parse(fila["id"].ToString());
-                    usuario.Nombre = fila["nombre"].ToString();
-                    usuario.Password = fila["contrasenya"].ToString();
-                    usuario.Correo = fila["correo"].ToString();
-                    usuario.Imagen = fila["imagen"].ToString();
-                    usuario.Saldo = float.Parse(fila["saldo"].ToString());
-                    usuario.NumTar = fila["numero_tar"].ToString();
-                    usuario.Caducidad = DateTime.Parse(fila["caducidad_tar"].ToString());
-                    usuario.Cvv = fila["cvv"].ToString();
-                    usuario.Direccion = fila["direccion"].ToString();
-                    usuario.Telefono = fila["telefono"].ToString();
-                    usuario.Rol = int.Parse(fila["id_rol"].ToString());
-                    usuario.Municipio = int.Parse(fila["id_municipio"].ToString());
+                    usu.ID = int.Parse(fila["id"].ToString());
+                    usu.Nombre = fila["nombre"].ToString();
+                    usu.Password = fila["contrasenya"].ToString();
+                    usu.Correo = fila["correo"].ToString();
+                    usu.Imagen = fila["imagen"].ToString();
+                    usu.Saldo = float.Parse(fila["saldo"].ToString());
+                    usu.NumTar = fila["numero_tar"].ToString();
+                    usu.Caducidad = DateTime.Parse(fila["caducidad_tar"].ToString());
+                    usu.Cvv = fila["cvv"].ToString();
+                    usu.Direccion = fila["direccion"].ToString();
+                    usu.Telefono = fila["telefono"].ToString();
+                    usu.Rol = int.Parse(fila["id_rol"].ToString());
+                    usu.Municipio = int.Parse(fila["id_municipio"].ToString());
                 }
             }
             catch (Exception ex)
