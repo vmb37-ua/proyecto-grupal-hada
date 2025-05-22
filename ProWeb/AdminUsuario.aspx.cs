@@ -10,6 +10,11 @@ namespace ProWeb
 {
     public partial class AdminUsuario : System.Web.UI.Page
     {
+        /// <summary>
+        /// Evento que ocurre al cargar la página.
+        /// Se asegura de que haya sesión iniciada, si no redirige a Juegos.aspx.
+        /// Si es la primera vez, carga los datos del usuario y rellena los controles.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Login"] == null)
@@ -42,7 +47,11 @@ namespace ProWeb
                 }
             }
         }
-        
+        /// <summary>
+        /// Evento que se ocurre al cambiar la foto de perfil.
+        /// Verifica la extensión y guarda la imagen.
+        /// Actualiza la ruta de la imagen en la base de datos.
+        /// </summary>
         protected void EventoCambioFoto (object sender, EventArgs e)
         {
             if (selecFoto.HasFile)
@@ -75,7 +84,10 @@ namespace ProWeb
                 MensajeFoto.Text = "Por favor selecciona una imagen.";
             }
         }
-
+        /// <summary>
+        /// Guarda los cambios realizados por el usuario en su perfil.
+        /// Mira que los datos sean correctos y actualiza el perfil.
+        /// </summary>
         protected void EventoCambiar(object sender, EventArgs e) {
             ENUsuario usuario = new ENUsuario();
             usuario.ID = int.Parse(Session["Login"].ToString()) ;
@@ -102,6 +114,9 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Carga los países.
+        /// </summary>
         private void CargarPaises()
         {
             var cadPais = new CADPais();
@@ -114,6 +129,10 @@ namespace ProWeb
         }
 
 
+        /// <summary>
+        /// Carga las provinciasdel país.
+        /// </summary>
+        /// <param name="idPais">ID del país</param>
         private void CargarProvincia(int idPais)
         {
             var cadProvincia = new CADProvincia();
@@ -130,6 +149,10 @@ namespace ProWeb
             Provinciaregister.DataBind();
         }
 
+        /// <summary>
+        /// Carga los municipios de la provincia.
+        /// </summary>
+        /// <param name="idProvincia">ID de la provincia</param>
         private void CargarMunicipios(int idProvincia)
         {
             var cadMunicipio = new CADMunicipio();
@@ -146,6 +169,11 @@ namespace ProWeb
             Municipioregister.DataBind();
         }
 
+
+        /// <summary>
+        /// Evento que se ocurre al cambiar la selección del país.
+        /// Limpia y recarga provincias y municipios según el país seleccionado.
+        /// </summary>
         protected void Paisregister_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (int.TryParse(Paisregister.SelectedValue, out int idPais))
@@ -160,7 +188,10 @@ namespace ProWeb
                 Municipioregister.Items.Clear();
             }
         }
-
+        /// <summary>
+        /// Evento que se dispara al cambiar la selección de la provincia.
+        /// Limpia y recarga municipios según la provincia 
+        /// </summary>
         protected void Provinciaregister_SelectedIndexChanged(object sender, EventArgs e)
         {
             Municipioregister.Items.Clear();

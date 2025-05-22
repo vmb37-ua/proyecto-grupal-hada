@@ -10,6 +10,10 @@ namespace ProWeb
 {
     public partial class ApuestasUsuario : System.Web.UI.Page
     {
+        /// <summary>
+        /// Evento que pasa al cargar la página.
+        /// Si no es postback, carga las apuestas del usuario.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -18,17 +22,19 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Carga todas las apuestas realizadas por el usuario y las muestra en el GridView.
+        /// Para cada apuesta, consigue datos como equipos, estadio, predicción y cotización.
+        /// </summary>
         private void CargarApuestasUsuario()
         {
 
-            //Cojo todas las apuestas
             var apuestasUsuario = new ENApuesta_usuario().ReadAll();
 
             var apuestasMostrar = new List<ApuestaFinal>();
 
             foreach (var apuestaUsuario in apuestasUsuario)
             {
-                //Obtengo lo que haga falta de ENApuesta
                 var apuesta = new ENApuesta { Id_apuesta = apuestaUsuario.IdApuesta };
                 if (apuesta.Read())
                 {
@@ -39,8 +45,9 @@ namespace ProWeb
 
                     var estadio = new ENEstadio { Nombre = apuesta.Estadio.Nombre };
                     estadio.Read();
-                    //La cotización depende de la predicción
                     double cot=1;
+
+                    // Se determina la cotización dependiendo de la predicción del usuario 
                     if (string.Equals(apuestaUsuario.Prediccion, "1"))
                     {
                         cot = apuesta.cot1;
@@ -75,6 +82,10 @@ namespace ProWeb
 
         }
 
+        /// <summary>
+        /// Clase creada ad hoc para almacenar los datos completos de una apuesta
+        /// para luego presentarlos en el GridView.
+        /// </summary>
         public class ApuestaFinal
         {
             public int IdApuesta { get; set; }
@@ -87,13 +98,15 @@ namespace ProWeb
             public DateTime Fecha { get; set; }
 
         }
-
+        /// <summary>
+        /// Evento que se ejecuta para cada fila 
+        /// Cambia el color de fondo de la fila según si el usuario ha acertado o no
+        /// </summary>
         protected void GridViewJuegos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ApuestaFinal apuesta = (ApuestaFinal)e.Row.DataItem;
-                //El color cambia conforme has ganado o perdido
                 if (apuesta.Resultado_apuesta == apuesta.Resultado_predicho)
                     e.Row.BackColor = System.Drawing.Color.LightGreen;
                 else 

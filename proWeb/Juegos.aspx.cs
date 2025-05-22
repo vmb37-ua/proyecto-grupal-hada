@@ -11,8 +11,15 @@ using static ProWeb.ApuestasUsuario;
 
 namespace ProWeb
 {
+    /// <summary>
+    /// Página que muestra la lista de juegos que hay según la base de datos.
+    /// Incluye botón de apostar en cada juego.
+    /// </summary>
     public partial class Juegos : System.Web.UI.Page
     {
+        /// <summary>
+        /// Evento que se ejecuta al cargarse la página, si no es un postback, se cargan los juegos desde la base de datos.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,11 +27,17 @@ namespace ProWeb
                 CargarJuegosDesdeBD();
             }
         }
+
+        /// <summary>
+        /// Evento que se ejecuta cuando pasa un tiempo determinado por el aspx y recarga los juegos
+        /// </summary>
         protected void timer1_Tick(object sender, EventArgs e)
         {
             CargarJuegosDesdeBD();
         }
-
+        /// <summary>
+        /// Carga todas las apuestas desde la base de datos, y las transforma en una lista de objetos Juego para mostrarlos
+        /// </summary>
         private void CargarJuegosDesdeBD()
         {
             try
@@ -49,7 +62,7 @@ namespace ProWeb
                         juegos.Add(new Juego
                         {
                             EquipoLocal = equipoLocal.Nombre,
-                            EquipoVisitante = equipoLocal.Nombre,
+                            EquipoVisitante = equipoVisitante.Nombre,
                             Estadio = estadio.Nombre,
                             Fecha = apuesta.Fecha.Date,
                             Hora = apuesta.Fecha.TimeOfDay,
@@ -66,7 +79,10 @@ namespace ProWeb
                 Response.Write($"<script>alert('Error al cargar los partidos: {ex.Message}');</script>");
             }
         }
-        //Creamos clase de Juego para almacenar los datos
+
+        /// <summary>
+        /// Clase que representa un partido para mostrarlo
+        /// </summary>
         public class Juego
         {
             public string EquipoLocal { get; set; }
@@ -78,11 +94,15 @@ namespace ProWeb
             public string Categoria { get; set; }
        };
 
+        /// <summary>
+        /// Evento que se lanza cuando el usuario hace clic en el botón "Apostar" de un juego y
+        /// redirige a la página ApuestaUsuario.aspx mandando además el ID de la apuesta
+        /// </summary>
         protected void EventoJuegoClick(object sender, CommandEventArgs e)
         {
 
             if (e.CommandName == "Apostar")
-            {   //Mandamos el ID de la apuesta en la ULR para que la otra página pueda identificarla
+            {  
                 string idApuesta = e.CommandArgument.ToString();
                 Response.Redirect($"ApuestaUsuario.aspx?idApuesta={idApuesta}");
             }

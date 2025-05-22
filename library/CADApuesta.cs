@@ -112,6 +112,11 @@ namespace library
             }
             return aux;
         }
+        /// <summary>
+        /// Lee una apuesta determinada desde la base de datos.
+        /// </summary>
+        /// <param name="apuesta">Objeto ENApuesta para leer su ID.</param>
+        /// <returns>True si se encontró; si no, false.</returns>
         public bool Read(ENApuesta apuesta)
         {
             bool aux = false;
@@ -146,6 +151,11 @@ namespace library
             }
             return aux;
         }
+        /// <summary>
+        /// Actualiza los datos de una apuesta.
+        /// </summary>
+        /// <param name="apuesta">Objeto ENApuesta con los datos actualizados.</param>
+        /// <returns>True si se actualizó, si no, false.</returns>
         public bool Update(ENApuesta apuesta)
         {
             bool aux = true;
@@ -179,6 +189,11 @@ namespace library
             }
             return aux;
         }
+
+        /// <summary>
+        /// Lee todas las apuestas existentes en la BD.
+        /// </summary>
+        /// <returns>Lista de objetos ENApuesta con sus daros correspondientes.</returns>
         public List<ENApuesta> ReadAll()
         {
             List<ENApuesta> lista = new List<ENApuesta>();
