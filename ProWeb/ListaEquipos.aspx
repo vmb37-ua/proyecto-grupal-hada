@@ -27,7 +27,7 @@
         <ItemTemplate>
             <div class="card-equipo">
                 <div class="escudo-fondo" 
-                     style='<%# "background-image: url(\'Source/Images/" + Eval("Escudo") + "\')" %>'>
+                    style='background-image: url("<%# Eval("Escudo") %>")'>
                 </div>
 
                 <div class="contenido-equipo">
