@@ -175,6 +175,7 @@ namespace ProWeb
                 }
 
                 int idPais = Convert.ToInt32(ddlPaisProvincia.SelectedValue);
+                int idProvincia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
 
                 ENProvincia provincia = new ENProvincia
                 {
@@ -190,8 +191,8 @@ namespace ProWeb
                     MostrarMensaje("Provincia creada correctamente", tipo: "exito");
                     txtNuevoProvincia.Text = "";
 
-                    
                     CargarProvincias(idPais);
+                    CargarMunicipios(idProvincia);
                 }
             }
             catch (Exception ex)
@@ -360,7 +361,20 @@ namespace ProWeb
             if (ddlPaisProvincia.SelectedValue != "0")
             {
                 int idPais = Convert.ToInt32(ddlPaisProvincia.SelectedValue);
-                CargarProvincias(idPais); // Carga solo las provincias del país seleccionado
+                CargarProvincias(idPais); // Carga las provincias del país seleccionado
+
+                // Solo si el dropdown de provincias tiene items y el SelectedValue es válido, cargo municipios
+                if (ddlProvinciaMunicipio.Items.Count > 0 && ddlProvinciaMunicipio.SelectedValue != "0")
+                {
+                    int idProvincia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
+                    CargarMunicipios(idProvincia);
+                }
+                else
+                {
+                    // Si no hay provincias, limpiar dropdown de municipios para que no quede con datos inválidos
+                    ddlEliminarMunicipio.Items.Clear();
+                    ddlEliminarMunicipio.Items.Add(new ListItem("--Seleccione municipio--", "0"));
+                }
             }
         }
 
@@ -371,6 +385,7 @@ namespace ProWeb
             {
                 int idProvincia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
                 CargarMunicipios(idProvincia); // Carga solo los municipios de la provincia seleccionado
+
             }
         }
 
