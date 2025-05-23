@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using library;
 
 namespace ProWeb
@@ -9,17 +10,34 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Login"] == null)
             {
-                Response.Redirect("Login.aspx");
-                return;
-            }
-            // Solo cargamos municipios al cargar la página por primera vez
-            if (!IsPostBack)
-            {
-                CargarMunicipios();
+                if (Session["Login"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                    return;
+                }
+                // Solo cargamos municipios al cargar la página por primera vez
+                if (!IsPostBack)
+                {
+                    CargarMunicipios();
+                    CargarEstadios();
+                }
+
             }
         }
+
+        private void CargarEstadios()
+        {
+            ENEstadio estadio = new ENEstadio();
+            var lista = estadio.ReadAll();
+
+            ddlEstadios.Items.Clear();
+            foreach (var est in lista)
+            {
+                ddlEstadios.Items.Add(new ListItem(est.Nombre, est.Nombre)); // PK = nombre
+            }
+        }
+
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
@@ -53,9 +71,14 @@ namespace ProWeb
                 };
 
                 if (estadio.Create())
+                {
                     MostrarMensaje("Estadio creado correctamente.");
+                    CargarEstadios(); 
+                }
                 else
+                {
                     MostrarMensaje("Error al crear el estadio.");
+                }
             }
             catch (Exception ex)
             {
@@ -97,9 +120,15 @@ namespace ProWeb
             };
 
             if (estadio.Delete())
+            {
                 MostrarMensaje("Estadio eliminado correctamente.");
+                CargarEstadios();
+            }
             else
+            {
                 MostrarMensaje("Error al eliminar el estadio.");
+            }
+
         }
 
         private void MostrarMensaje(string mensaje)
@@ -124,5 +153,17 @@ namespace ProWeb
                 ddlMunicipios.DataBind();
             }
         }
+        protected void ddlEstadios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ENEstadio estadio = new ENEstadio { Nombre = ddlEstadios.SelectedValue };
+            if (estadio.Read())
+            {
+                txtNombre.Text = estadio.Nombre;
+                txtCapacidad.Text = estadio.Capacidad.ToString();
+                txtTexto.Text = estadio.Texto;
+                ddlMunicipios.SelectedValue = estadio.Id_municipio.ToString();
+            }
+        }
+
     }
 }

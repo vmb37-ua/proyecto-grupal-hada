@@ -20,6 +20,9 @@
         <asp:ListItem Text="-- Selecciona un municipio --" Value="" />
         </asp:DropDownList>
 
+        <p>Estadios Disponibles:</p>
+        <asp:DropDownList ID="ddlEstadios" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEstadios_SelectedIndexChanged" />
+
 
         <br /><br />
         <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear estadio" OnClick="btnCrear_Click" />

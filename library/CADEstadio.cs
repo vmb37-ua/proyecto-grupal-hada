@@ -8,15 +8,27 @@ using System.Threading.Tasks;
 
 namespace library
 {
+    /// <summary>
+    /// Clase de acceso a datos para la entidad Estadio.
+    /// Contiene métodos para realizar operaciones CRUD en la base de datos.
+    /// </summary>
     public class CADEstadio
     {
         private string conexion;
 
+        /// <summary>
+        /// Constructor por defecto. Inicializa la cadena de conexión.
+        /// </summary>
         public CADEstadio()
         {
             conexion = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
 
+        /// <summary>
+        /// Crea un nuevo estadio en la base de datos.
+        /// </summary>
+        /// <param name="estadio">Objeto ENEstadio con los datos del estadio.</param>
+        /// <returns>True si se creó correctamente, false en caso contrario.</returns>
         public bool Create(ENEstadio estadio)
         {
             try
@@ -38,9 +50,13 @@ namespace library
             {
                 throw new Exception("Error al crear estadio: " + ex.Message);
             }
-
         }
 
+        /// <summary>
+        /// Actualiza los datos de un estadio existente en la base de datos.
+        /// </summary>
+        /// <param name="estadio">Objeto ENEstadio con los nuevos datos.</param>
+        /// <returns>True si se actualizó correctamente, false en caso contrario.</returns>
         public bool Update(ENEstadio estadio)
         {
             try
@@ -64,6 +80,11 @@ namespace library
             }
         }
 
+        /// <summary>
+        /// Elimina un estadio de la base de datos por su nombre.
+        /// </summary>
+        /// <param name="estadio">Objeto ENEstadio con el nombre del estadio a eliminar.</param>
+        /// <returns>True si se eliminó correctamente, false en caso contrario.</returns>
         public bool Delete(ENEstadio estadio)
         {
             try
@@ -84,6 +105,11 @@ namespace library
             }
         }
 
+        /// <summary>
+        /// Lee los datos de un estadio por su nombre.
+        /// </summary>
+        /// <param name="estadio">Objeto ENEstadio con el nombre del estadio. Se actualiza con los datos leídos.</param>
+        /// <returns>True si se encontró el estadio, false en caso contrario.</returns>
         public bool Read(ENEstadio estadio)
         {
             try
@@ -112,6 +138,11 @@ namespace library
             }
         }
 
+        /// <summary>
+        /// Lee todos los estadios existentes en la base de datos.
+        /// </summary>
+        /// <param name="_">No se utiliza, puede pasarse null.</param>
+        /// <returns>Lista de objetos ENEstadio.</returns>
         public List<ENEstadio> ReadAll(ENEstadio _)
         {
             List<ENEstadio> lista = new List<ENEstadio>();

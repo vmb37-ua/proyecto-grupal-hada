@@ -15,6 +15,15 @@ namespace ProWeb
     {
 
         /// <summary>
+        /// Control ddlApuestas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlApuestas;
+
+        /// <summary>
         /// Control txtFecha.
         /// </summary>
         /// <remarks>
@@ -51,15 +60,6 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox txtCot2;
 
         /// <summary>
-        /// Control ddlApuestas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlApuestas;
-
-        /// <summary>
         /// Control ddlEstadios.
         /// </summary>
         /// <remarks>
@@ -85,6 +85,15 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEquipo2;
+
+        /// <summary>
+        /// Control ddlResultado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlResultado;
 
         /// <summary>
         /// Control btnCrear.
