@@ -94,16 +94,6 @@ body {
     line-height: 1.4em;
 }
 
-.fondo-estadio {
-    width: 100%;
-    height: 180px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-}
-
 .Holder {
     vertical-align: top;
     max-width: 500px;
