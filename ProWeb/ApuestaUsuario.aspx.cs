@@ -234,7 +234,6 @@ namespace ProWeb
         /// Muestra un mensaje de error en el panel de confirmación con estilo de alerta de error.
         /// </summary>
         /// <param name="mensaje">Texto del mensaje a mostrar.</param>
-        private void MostrarError(string mensaje)
         private void mostrarMensaje(string mensaje, string tipo)
         {
             pnlConfirmacion.Visible = true;
