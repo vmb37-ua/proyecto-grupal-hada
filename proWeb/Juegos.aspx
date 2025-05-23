@@ -18,13 +18,13 @@
                 <div class="juego">
 
                         <div class="titulo-partido">
-                                <img src='<%# "Source/Images/" + ((ProWeb.Juegos.Juego)Container.DataItem).EscudoLocal %>' alt="Imagen izquierda" class="imagen_lateral" />
+                                <img src='<%# ((ProWeb.Juegos.Juego)Container.DataItem).EscudoLocal %>' alt="Imagen izquierda" class="imagen_lateral" />
                                 <span class="titulo-texto">
                                     <h2><asp:Label ID="lblEquipoLocal" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).EquipoLocal %>'></asp:Label> vs 
                                     <asp:Label ID="lblEquipoVisitante" runat="server" Text='<%# ((ProWeb.Juegos.Juego)Container.DataItem).EquipoVisitante %>'></asp:Label></h2>
                                 </span>
 
-                                <img src='<%# "Source/Images/" + ((ProWeb.Juegos.Juego)Container.DataItem).EscudoVisitante %>' alt="Imagen derecha" class="imagen_lateral" />
+                                <img src='<%#  ((ProWeb.Juegos.Juego)Container.DataItem).EscudoVisitante %>' alt="Imagen derecha" class="imagen_lateral" />
                         </div>
 
 
