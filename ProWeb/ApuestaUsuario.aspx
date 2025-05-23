@@ -56,16 +56,18 @@
             </div>
         </div>
 
+        <!-- Sección Confirmación -->
+        <asp:Panel ID="pnlConfirmacion" runat="server" CssClass="PanelConfirmacion" Visible="false">
+            <asp:Label ID="lblMensaje" runat="server" CssClass="MensajeExito"></asp:Label>
+        </asp:Panel>
+
         <!-- Sección Botones -->
         <div class="BotonesAccion">
-            <asp:Button ID="btnApostar" runat="server" Text="APOSTAR AHORA" CssClass="BotonApostar" OnClick="btnApostar_Click" />
+            <asp:Button ID="btnApostar" runat="server" Text="ACEPTAR" CssClass="BotonApostar" OnClick="btnApostar_Click" />
             <asp:Button ID="btnCancelar" runat="server" Text="CANCELAR" CssClass="BotonCancelar" OnClick="btnCancelar_Click" CausesValidation="false" />
         </div>
 
-        <!-- Sección Confirmación -->
-        <asp:Panel ID="pnlConfirmacion" runat="server" CssClass="PanelConfirmacion" Visible="false">
-            <asp:Label ID="lblMensajeExito" runat="server" Text="¡Apuesta realizada con éxito!" CssClass="MensajeExito"></asp:Label>
-        </asp:Panel>
+        
       </div>
     </div>
 </asp:Content>

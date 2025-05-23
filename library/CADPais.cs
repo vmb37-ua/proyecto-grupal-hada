@@ -70,6 +70,7 @@ namespace library
                     Console.WriteLine($"Error al crear país: {ex.Message}");
                     return false;
                 }
+                finally {c.Close();}
             }
         }
 
@@ -120,6 +121,7 @@ namespace library
                     Debug.WriteLine($"Error eliminando país: {ex.Message}");
                     throw new Exception("Error al eliminar el país. Detalles: " + ex.Message);
                 }
+                finally {conn.Close();}
             }
 
             return resultado;
@@ -157,6 +159,7 @@ namespace library
                 {
                     Console.WriteLine($"Error al leer países: {ex.Message}");
                 }
+                finally { c.Close();}
             }
 
             return paises;
