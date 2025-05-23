@@ -32,12 +32,13 @@
         <asp:DropDownList ID="ddlEquipo2" runat="server" CssClass="ListaDesplegable"></asp:DropDownList>
 
          <p>Resultado de la Apuesta:</p>
-       <asp:DropDownList ID="ddlResultado" runat="server">
-   
-       <asp:ListItem Text="Empate" Value="X" />
-       <asp:ListItem Text="Victoria Equipo 1" Value="1" />
-       <asp:ListItem Text="Victoria Equipo 2" Value="2" />
-       </asp:DropDownList>
+        <asp:DropDownList ID="ddlResultado" runat="server">
+        <asp:ListItem Text="Sin Resultado" Value="" />
+        <asp:ListItem Text="Victoria Equipo 1" Value="1" />
+        <asp:ListItem Text="Empate" Value="X" />
+        <asp:ListItem Text="Victoria Equipo 2" Value="2" />
+        </asp:DropDownList>
+
 
 
 

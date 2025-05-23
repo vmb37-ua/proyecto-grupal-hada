@@ -62,7 +62,7 @@ namespace library
                     com.Parameters.AddWithValue("@Estadio", apuesta.Estadio.Nombre);
                     com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
                     com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
-                    com.Parameters.AddWithValue("@Resultado", apuesta.Resultado);
+                    com.Parameters.AddWithValue("@Resultado", string.IsNullOrEmpty(apuesta.Resultado) ? DBNull.Value : (object)apuesta.Resultado);
                     com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
                     com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
                     com.Parameters.AddWithValue("@CotX", apuesta.cotX);
@@ -170,7 +170,7 @@ namespace library
                 com.Parameters.AddWithValue("@estadio", apuesta.Estadio.Nombre);
                 com.Parameters.AddWithValue("@IdEquipo1", apuesta.Equipo1.Id_equipo);
                 com.Parameters.AddWithValue("@IdEquipo2", apuesta.Equipo2.Id_equipo);
-                com.Parameters.AddWithValue("@Resultado", apuesta.Resultado);
+                com.Parameters.AddWithValue("@Resultado", string.IsNullOrEmpty(apuesta.Resultado) ? DBNull.Value : (object)apuesta.Resultado);
                 com.Parameters.AddWithValue("@Cot1", apuesta.cot1);
                 com.Parameters.AddWithValue("@Cot2", apuesta.cot2);
                 com.Parameters.AddWithValue("@CotX", apuesta.cotX);

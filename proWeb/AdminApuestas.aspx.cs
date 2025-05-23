@@ -31,9 +31,11 @@ namespace ProWeb
         private void CargarResultados()
         {
             ddlResultado.Items.Clear();
+            ddlResultado.Items.Add(new ListItem("Sin Resultado", ""));
             ddlResultado.Items.Add(new ListItem("Victoria Equipo 1", "1"));
             ddlResultado.Items.Add(new ListItem("Empate", "X"));
             ddlResultado.Items.Add(new ListItem("Victoria Equipo 2", "2"));
+
         }
 
         private void CargarEquipos()
@@ -86,16 +88,13 @@ namespace ProWeb
             try
             {
                 string res = ddlResultado.SelectedValue;
-                if (string.IsNullOrEmpty(res))
-                {
-                    MostrarMensaje("Error: Resultado no seleccionado.");
-                    return;
-                }
+                // No validar si es vacío, ya que "Sin Resultado" es válido
                 if (res.Length > 1)
                 {
                     MostrarMensaje("Error: Resultado demasiado largo ('" + res + "')");
                     return;
                 }
+
 
                 // Creamos una nueva apuesta a partir de los datos del formulario
                 ENApuesta ap = new ENApuesta
@@ -134,11 +133,13 @@ namespace ProWeb
             try
             {
                 string res = ddlResultado.SelectedValue;
-                if (string.IsNullOrEmpty(res))
+                // No validar si es vacío, ya que "Sin Resultado" es válido
+                if (res.Length > 1)
                 {
-                    MostrarMensaje("Error: Resultado no seleccionado.");
+                    MostrarMensaje("Error: Resultado demasiado largo ('" + res + "')");
                     return;
                 }
+
                 // Actualizamos la apuesta seleccionada con los nuevos datos
                 ENApuesta ap = new ENApuesta
                 {
