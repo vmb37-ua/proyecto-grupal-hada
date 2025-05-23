@@ -170,11 +170,14 @@ namespace ProWeb
                     MostrarMensaje("País creado correctamente", tipo: "exito");
                     txtNuevoPais.Text = "";
                     RecargarListaPaises();
+                }else
+                {
+                    MostrarMensaje("Error: El país ya existe", tipo: "error");
                 }
             }
             catch (Exception ex)
             {
-                MostrarMensaje("Error: El país ya existe o no es válido", tipo: "error");
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
 
@@ -216,11 +219,14 @@ namespace ProWeb
                     CargarProvincias(idPais);
                     CargarMunicipios(idProvincia);
                 }
+                else
+                {
+                    MostrarMensaje("Error: La Provincia ya existe", tipo: "error");
+                }
             }
             catch (Exception ex)
             {
-                MostrarMensaje("Error al crear la provincia", tipo: "error");
-                Console.WriteLine("Errol al crear la provincia" + ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
 
@@ -259,10 +265,14 @@ namespace ProWeb
                     txtNuevoMunicipio.Text = "";
                     CargarMunicipios(idProvincia);
                 }
+                else
+                {
+                    MostrarMensaje("Error: El municipio ya existe", tipo: "error");
+                }
             }
             catch (Exception ex)
             {
-                MostrarMensaje("Error al crear la provincia", tipo: "error");
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
 
@@ -291,7 +301,7 @@ namespace ProWeb
             }
             catch (Exception ex)
             {
-                MostrarMensaje($"Error al eliminar el país: {ex.Message}", "error");
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
 
@@ -322,13 +332,9 @@ namespace ProWeb
                     MostrarMensaje("No se pudo eliminar la provincia", "error");
                 }
             }
-            catch (SqlException sqlEx)
-            {
-                MostrarMensaje($"Error de base de datos: {sqlEx.Message}", "error");
-            }
             catch (Exception ex)
             {
-                MostrarMensaje($"Error inesperado: {ex.Message}", "error");
+                Console.WriteLine("Error: " + ex.Message);
             }
         }
 
@@ -359,25 +365,19 @@ namespace ProWeb
                     lblMensaje.Text = "No se pudo eliminar el municipio";
                 }
             }
-            catch (SqlException sqlEx)
-            {
-                lblMensaje.Text = $"Error de base de datos: {sqlEx.Message}";
-            }
             catch (Exception ex)
             {
-                lblMensaje.Text = $"Error inesperado: {ex.Message}";
+                Console.WriteLine("Errol: " + ex.Message);
             }
         }
 
-        // Evento cuando se selecciona un país
         protected void ddlPaises_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlPaisProvincia.SelectedValue != "0")
             {
                 int idPais = Convert.ToInt32(ddlPaisProvincia.SelectedValue);
-                CargarProvincias(idPais); // Carga las provincias del país seleccionado
+                CargarProvincias(idPais); 
 
-                // Solo si el dropdown de provincias tiene items y el SelectedValue es válido, cargo municipios
                 if (ddlProvinciaMunicipio.Items.Count > 0 && ddlProvinciaMunicipio.SelectedValue != "0")
                 {
                     int idProvincia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
@@ -385,20 +385,18 @@ namespace ProWeb
                 }
                 else
                 {
-                    // Si no hay provincias, limpiar dropdown de municipios para que no quede con datos inválidos
                     ddlEliminarMunicipio.Items.Clear();
-                    ddlEliminarMunicipio.Items.Add(new ListItem("--Seleccione municipio--", "0"));
+                    ddlEliminarMunicipio.Items.Add(new ListItem("-- Seleccione un municipio --", "0"));
                 }
             }
         }
 
-        // Evento cundo se selecciona una provincia
         protected void ddlProvincias_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlProvinciaMunicipio.SelectedValue != "0")
             {
                 int idProvincia = Convert.ToInt32(ddlProvinciaMunicipio.SelectedValue);
-                CargarMunicipios(idProvincia); // Carga solo los municipios de la provincia seleccionado
+                CargarMunicipios(idProvincia); 
 
             }
         }
@@ -407,8 +405,5 @@ namespace ProWeb
         {
             Response.Redirect("PanelAdmin.aspx");
         }
-
-
-
     }
 }

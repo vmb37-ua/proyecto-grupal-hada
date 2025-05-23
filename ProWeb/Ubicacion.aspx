@@ -28,7 +28,6 @@
             <label for="ddlEliminarProvincia">Eliminar provincia existente</label>
             <asp:DropDownList ID="ddlEliminarProvincia" runat="server" CssClass="InputUbicacion"></asp:DropDownList>
             <asp:Button ID="btnEliminarProvincia" runat="server" Text="Eliminar Provincia" CssClass="BotonEliminar" OnClick="btnEliminarProvincia_Click" CausesValidation="false" />
-            <asp:Label ID="lblMensaje2" runat="server" CssClass="mensaje-estilo" Visible="false"></asp:Label>
         </div>
 
         <!-- Creación de Municipio -->

@@ -58,7 +58,7 @@ namespace library
                 try
                 {
                     c.Open();
-                    string sql = "SELECT id_usuario, id_apuesta, prediccion, cantidad, cuota FROM ApuestaUsuario";
+                    string sql = "SELECT id_usuario, id_apuesta, prediccion, cantidad, cuota FROM apuesta_usu";
 
                     using (var cmd = new SqlCommand(sql, c))
                     using (var dr = cmd.ExecuteReader())
