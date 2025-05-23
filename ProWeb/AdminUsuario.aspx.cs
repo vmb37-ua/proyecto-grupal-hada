@@ -94,7 +94,7 @@ namespace ProWeb
                 usuario.NumTar = CajaNumTar.Text;
                 usuario.Telefono = CajaTelef.Text;
 
-                if(DateTime.TryParse(CajaCad.Text, out fecha))
+                if(DateTime.TryParse(CajaCad.Text, out fecha) || (DateTime.Compare(fecha,DateTime.Now)>0))
                 {
                     usuario.Caducidad = fecha.Date;
                     if (usuario.Update()) Response.Redirect("Perfil.aspx");
