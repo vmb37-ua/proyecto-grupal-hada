@@ -25,79 +25,105 @@ namespace library
         string _direccion;
         int _municipio;
         string _telefono;
-
+        /// <summary>
+        /// Número entero que identifica unívocamente al usuario.
+        /// </summary>
         public int ID
         {
             get { return _id; }
             set { _id = value; }
         }
-
+        /// <summary>
+        /// Cadena de texto con el nombre de la imagen de perfil.
+        /// </summary>
         public string Imagen
         {
             get { return _imagen; }
             set { _imagen = value; }
         }
-
+        /// <summary>
+        /// Nombre del usuario.
+        /// </summary>
         public string Nombre
         {
             get { return _nombre; }
             set { _nombre = value; }
         }
-
+        /// <summary>
+        /// Correo electrónico del usuario.
+        /// </summary>
         public string Correo
         {
             get { return _correo; }
             set { _correo = value; }
         }
-
+        /// <summary>
+        /// Contraseña cifrada del usuario.
+        /// </summary>
         public string Password
         {
             get { return _password; }
             set { _password = value; }
         }
-
+        /// <summary>
+        /// Saldo actual del usuario en euros.
+        /// </summary>
         public float Saldo
         {
             get { return _saldo; }
             set { _saldo = value; }
         }
-
+        /// <summary>
+        /// Número de la tarjeta de crédito del usuario.
+        /// </summary>
         public string NumTar
         {
             get { return _numtar; }
             set { _numtar = value; }
         }
-
+        /// <summary>
+        /// Fecha de caducidad de la tarjeta de crédito.
+        /// </summary>
         public DateTime Caducidad
         {
             get { return _caducidad; }
             set { _caducidad = value; }
         }
-
+        /// <summary>
+        /// Cvv de la tarjeta de crédito.
+        /// </summary>
         public string Cvv
         {
             get { return _cvv; }
             set { _cvv = value; }
         }
-
+        /// <summary>
+        /// Entero que identifica el rol del usuario.
+        /// </summary>
         public int Rol
         {
             get { return _rol; }
             set { _rol = value; }
         }
-
+        /// <summary>
+        /// Dirección física del usuario.
+        /// </summary>
         public string Direccion
         {
             get { return _direccion; }
             set { _direccion = value; }
         }
-
+        /// <summary>
+        /// Identificador del municipio de residencia del usuario.
+        /// </summary>
         public int Municipio
         {
             get { return _municipio; }
             set { _municipio = value; }
         }
-
+        /// <summary>
+        /// Número de teléfono del usuario.
+        /// </summary>
         public string Telefono
         {
             get { return _telefono; }

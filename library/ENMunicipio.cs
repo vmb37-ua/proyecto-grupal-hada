@@ -14,15 +14,23 @@ namespace library
         int _id_municipio;
         int _id_provincia;
         string _nombre;
-
+        /// <summary>
+        /// Identificador único del municipio.
+        /// </summary>
         public int Id_municipio {
             get { return _id_municipio; }
             set { _id_municipio = value; }
         }
+        /// <summary>
+        /// Identificador de la provincia a la que pertenece el municipio.
+        /// </summary>
         public int Id_provincia {
             get { return _id_provincia; }
             set { _id_provincia = value; }
         }
+        /// <summary>
+        /// Nombre del municipio.
+        /// </summary>
         public string Nombre { 
             get { return _nombre; }
             set { _nombre = value; }

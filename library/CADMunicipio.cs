@@ -15,6 +15,9 @@ namespace library
     /// </summary>
     public class CADMunicipio
     {
+        /// <summary>
+        /// Cadena que almacena la cadena de conexión a la base de datos.
+        /// </summary>
         private string conexion;
         /// <summary>
         /// Constructor por defecto.

@@ -14,6 +14,9 @@ namespace library
     /// </summary>
     public class CADUsuario
     {
+        /// <summary>
+        /// Cadena que almacena la cadena de conexión a la base de datos.
+        /// </summary>
         private string conexion;
         /// <summary>
         /// Constructor por defecto. Inicializa la cadena de conexión a la base de datos.

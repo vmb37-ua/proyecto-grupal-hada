@@ -14,6 +14,12 @@ namespace ProWeb
 {
     public partial class Login : System.Web.UI.Page
     {
+        /// <summary>
+        /// Evento que se ejecuta al cargar la página.
+        /// Coloca los placeholders de los campos de texto.
+        /// </summary>
+        /// <param name="sender">Página objeto que lanza el evento</param>
+        /// <param name="e">Argumentos del evento</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,12 +28,22 @@ namespace ProWeb
                 Passlogin.Attributes["placeholder"] = "Contraseña";
             }
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al pulsar el botón de registrar.
+        /// Redirije a la página de registrar.
+        /// </summary>
+        /// <param name="sender">Página objeto que lanza el evento</param>
+        /// <param name="e">Argumentos del evento</param>
         protected void EventoRegistrar(object sender, EventArgs e)
         {
             Response.Redirect("Register.aspx");
         }
-
+        /// <summary>
+        /// Evento que se ejecuta al pulsar el botón de iniciar sesión.
+        /// Verifica el reCaptcha y los campos de incio de sesión para validar e identificar al usuario.
+        /// </summary>
+        /// <param name="sender">Página objeto que lanza el evento</param>
+        /// <param name="e">Argumentos del evento</param>
         protected void EventoMainPage(object sender, EventArgs e)
         {
             // Obtener el token de reCAPTCHA enviado desde el formulario
@@ -83,7 +99,11 @@ namespace ProWeb
                 Response.Write("<script>alert('Acceso denegado. reCAPTCHA fallido.');</script>");
             }
         }
-
+        /// <summary>
+        /// Funcìón auxiliar que cifra la contraseña con hashing.
+        /// </summary>
+        /// <param name="password">Cadena con la contraseña a cifrar</param>
+        /// <returns>Cadena de 64 caracteres con la cadena original cifrada</returns>
         public static string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -99,7 +119,10 @@ namespace ProWeb
                 return builder.ToString();
             }
         }
-
+        /// <summary>
+        /// Clase con valores necesarios para utilizar reCaptcha.
+        /// Los atributos de la clase corresponden a la cadena JSON que devuelve la función captcha.
+        /// </summary>
         public class RecaptchaResponse
         {
             public bool success { get; set; }
