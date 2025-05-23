@@ -245,7 +245,7 @@ namespace ProWeb
         }
         protected void BtnLeerNotificacion_Click(object sender, EventArgs e)
         {
-            LimpiarMensajes(); 
+            LimpiarMensajes();
 
             string idTexto = IdGestion.Text.Trim();
 
@@ -254,9 +254,24 @@ namespace ProWeb
                 ENNotificacion not = new ENNotificacion();
                 not.Id = id;
 
-                if (not.ReadbyId()) 
+                if (not.ReadbyId())
                 {
-                    TextoNotificacion.Text = not.Mensaje; 
+                    TextoNotificacion.Text = not.Mensaje;
+
+                    string idUsuario = not.IdUsuario.ToString();
+                    ListItem item = ListaUsuarios.Items.FindByValue(idUsuario);
+                    if (item != null)
+                    {
+                        ListaUsuarios.ClearSelection();
+                        item.Selected = true;
+                    }
+                    else
+                    {
+                        ListaUsuarios.ClearSelection();
+                        ListaUsuarios.Items.Insert(0, new ListItem("Usuario no encontrado", idUsuario));
+                        ListaUsuarios.Items[0].Selected = true;
+                    }
+
                     MostrarMensaje(LblErrorEliminar, "Notificación cargada correctamente", true);
                 }
                 else
@@ -270,6 +285,7 @@ namespace ProWeb
                 MostrarMensaje(LblErrorEliminar, "Introduce un ID válido", false);
             }
         }
+
 
     }
 }
