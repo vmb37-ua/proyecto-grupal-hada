@@ -80,6 +80,8 @@ Por otra parte, encontramos que el proyecto web "proWeb" se estaba almacenando i
 Finalmente, es destacable la falta de experiencia de trabajo en grupo que tenemos, así como de desarrollo en equipo. Principalmente erramos en alcanzar las metas internas a tiempo y la comunicación entre nosotros, pero se ha notado una mejoría exponencial con el paso de los días.
 
 ### Instrucciones de instalación
+El proyecto no tiene requisitos más allá de tener instalados correctamente los paquetes nuGet necesarios (deberían estar incluidos con la instalación), además de
+los requisitos para compilar y ejecutar NET 4.8
 
 ### Tareas hechas por cada miembro
 | Miembro del grupo | Tareas realizadas                                                                                                                                        |
