@@ -29,7 +29,7 @@
             <br />
             <br />
             Rol&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBrol" runat="server" Visible="false"></asp:TextBox>
+            <asp:DropDownList ID="ddlRoles" runat="server" CssClass="ListaDesplegable"></asp:DropDownList>
             <br />
             <br />
             <asp:Button ID="BTNagregar_pat" runat="server" CssClass="BotonEditarUsuario" 

@@ -19,6 +19,8 @@ namespace ProWeb
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
+            CargarRoles();
+
             if (!IsPostBack)
             {
                 CargarUsuarios();
@@ -26,6 +28,8 @@ namespace ProWeb
                 MostrarDatosUsuario();
             }
         }
+
+
 
         private void CargarUsuarios()
         {
@@ -46,24 +50,13 @@ namespace ProWeb
 
         private void CargarRoles()
         {
-            // Cogemos los roles
+            ddlRoles.Items.Clear();
             List<ENRol> roles = new CADRol().ReadAll();
-
-            
-            TBrol.Visible = false;
-
-            DropDownList ddlRoles = new DropDownList();
-            ddlRoles.ID = "ddlRoles";
-            ddlRoles.CssClass = "ListaDesplegable";
 
             foreach (ENRol rol in roles)
             {
                 ddlRoles.Items.Add(new ListItem(rol.Nombre, rol.Id_rol.ToString()));
             }
-
-           
-            TBrol.Parent.Controls.Add(ddlRoles);
-            TBrol.Parent.Controls.Remove(TBrol);
         }
 
         protected void ListaDBUsuarios_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,13 +78,7 @@ namespace ProWeb
                     TBnombre.Text = usuario.Nombre;
                     TBdireccion.Text = usuario.Direccion;
                     TBtelefono.Text = usuario.Telefono;
-
-                    //Metemos el rol quehemos escogido
-                    DropDownList ddlRoles = (DropDownList)FindControl("ddlRoles");
-                    if (ddlRoles != null)
-                    {
-                        ddlRoles.SelectedValue = usuario.Rol.ToString();
-                    }
+                    ddlRoles.SelectedValue = usuario.Rol.ToString(); 
                 }
             }
             else
@@ -107,8 +94,7 @@ namespace ProWeb
             TBdireccion.Text = "";
             TBtelefono.Text = "";
 
-            DropDownList ddlRoles = (DropDownList)FindControl("ddlRoles");
-            if (ddlRoles != null)
+            if (ddlRoles.Items.Count > 0)
             {
                 ddlRoles.SelectedIndex = 0;
             }
@@ -136,9 +122,8 @@ namespace ProWeb
                 usuario.Direccion = TBdireccion.Text;
                 usuario.Telefono = TBtelefono.Text;
 
-              
-                DropDownList ddlRoles = (DropDownList)FindControl("ddlRoles");
-                if (ddlRoles != null)
+
+                if (ddlRoles.SelectedValue != null)
                 {
                     usuario.Rol = int.Parse(ddlRoles.SelectedValue);
                 }
@@ -186,6 +171,7 @@ namespace ProWeb
                     MostrarMensaje("Usuario eliminado correctamente");
                     LimpiarCampos();
                     CargarUsuarios();
+                    ListaDBUsuarios.SelectedIndex = 0;
                 }
                 else
                 {
