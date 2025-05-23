@@ -8,8 +8,15 @@ using library;
 
 namespace ProWeb
 {
+    /// <summary>
+    /// Página de administración para gestionar usuarios de la base de datos.
+    /// Permite eliminar usuarios y modificar ciertos atributos.
+    /// </summary>
     public partial class DBUsuario : System.Web.UI.Page
     {
+        /// <summary>
+        /// Evento que se ejecuta al cargarse la página.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -76,11 +83,8 @@ namespace ProWeb
                 {
                     TBid.Text = usuario.ID.ToString();
                     TBnombre.Text = usuario.Nombre;
-                    TBsaldo.Text = usuario.Saldo.ToString("0.00");
-                    TBdatos_pago.Text = usuario.NumTar;
                     TBdireccion.Text = usuario.Direccion;
                     TBtelefono.Text = usuario.Telefono;
-                    TBimagen.Text = usuario.Imagen;
 
                     //Metemos el rol quehemos escogido
                     DropDownList ddlRoles = (DropDownList)FindControl("ddlRoles");
@@ -100,11 +104,8 @@ namespace ProWeb
         {
             TBid.Text = "";
             TBnombre.Text = "";
-            TBsaldo.Text = "";
-            TBdatos_pago.Text = "";
             TBdireccion.Text = "";
             TBtelefono.Text = "";
-            TBimagen.Text = "";
 
             DropDownList ddlRoles = (DropDownList)FindControl("ddlRoles");
             if (ddlRoles != null)
@@ -113,6 +114,10 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Evento del botón para actualizar un usuario.
+        /// Si se ha seleccionado un usuario se actualiza, no puede crear desde cero
+        /// </summary>
         protected void BTNagregar_pat_Click(object sender, EventArgs e)
         {
             try
@@ -128,11 +133,8 @@ namespace ProWeb
 
                 
                 usuario.Nombre = TBnombre.Text;
-                usuario.Saldo = float.Parse(TBsaldo.Text);
-                usuario.NumTar = TBdatos_pago.Text;
                 usuario.Direccion = TBdireccion.Text;
                 usuario.Telefono = TBtelefono.Text;
-                usuario.Imagen = TBimagen.Text;
 
               
                 DropDownList ddlRoles = (DropDownList)FindControl("ddlRoles");
@@ -162,12 +164,22 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Evento del botón para eliminar el usuario seleccionado.
+        /// </summary>
         protected void BTNeliminar_pat_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(TBid.Text))
             {
                 ENUsuario usuario = new ENUsuario();
                 usuario.ID = int.Parse(TBid.Text);
+
+                if (Session["usuario"] != null && Session["usuario"] is ENUsuario usuarioSesion &&
+                     usuarioSesion.ID == usuario.ID)
+                {
+                    MostrarMensaje("No puedes eliminar tu propio usuario mientras estás conectado.");
+                    return;
+                }
 
                 if (usuario.Delete())
                 {
@@ -182,6 +194,10 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Pone un mensaje en pantalla
+        /// </summary>
+        /// <param name="mensaje">Texto del mensaje </param>
         private void MostrarMensaje(string mensaje)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "showalert",

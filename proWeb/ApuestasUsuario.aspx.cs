@@ -10,12 +10,20 @@ namespace ProWeb
 {
     public partial class ApuestasUsuario : System.Web.UI.Page
     {
+
+
+
         /// <summary>
         /// Evento que pasa al cargar la página.
         /// Si no es postback, carga las apuestas del usuario.
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+
             if (!IsPostBack)
             {
                 CargarApuestasUsuario();
@@ -36,8 +44,8 @@ namespace ProWeb
             foreach (var apuestaUsuario in apuestasUsuario)
             {
                 var apuesta = new ENApuesta { Id_apuesta = apuestaUsuario.IdApuesta };
-                if (apuesta.Read())
-                {
+
+                apuesta.Read();
                     var equipoLocal = new ENEquipo { Id_equipo = apuesta.Equipo1.Id_equipo };
                     var equipoVisitante = new ENEquipo { Id_equipo = apuesta.Equipo2.Id_equipo };
                     equipoLocal.Read();
@@ -73,7 +81,7 @@ namespace ProWeb
                             Estadio = estadio.Nombre,
                             Fecha = apuesta.Fecha
                         });
-                }
+                
             }
 
             GridViewApuestasUsuario.DataSource = apuestasMostrar;
@@ -107,11 +115,13 @@ namespace ProWeb
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 ApuestaFinal apuesta = (ApuestaFinal)e.Row.DataItem;
-                if (apuesta.Resultado_apuesta == apuesta.Resultado_predicho)
+                if (apuesta.Resultado_apuesta == apuesta.Resultado_predicho && apuesta.Resultado_apuesta != string.Empty)
                     e.Row.BackColor = System.Drawing.Color.LightGreen;
-                else 
+                else if (apuesta.Resultado_apuesta!=string.Empty)
                     e.Row.BackColor = System.Drawing.Color.LightCoral;
-           
+                else
+                    e.Row.BackColor = System.Drawing.Color.LightYellow;
+
 
             }
         }

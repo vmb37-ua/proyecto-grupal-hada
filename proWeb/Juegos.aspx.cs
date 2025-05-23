@@ -63,9 +63,10 @@ namespace ProWeb
                         {
                             EquipoLocal = equipoLocal.Nombre,
                             EquipoVisitante = equipoVisitante.Nombre,
+                            EscudoVisitante = equipoVisitante.Escudo,
+                            EscudoLocal = equipoLocal.Escudo,
                             Estadio = estadio.Nombre,
                             Fecha = apuesta.Fecha.Date,
-                            Hora = apuesta.Fecha.TimeOfDay,
                             IdApuesta=apuesta.Id_apuesta,
                        });
                     
@@ -87,10 +88,11 @@ namespace ProWeb
         {
             public string EquipoLocal { get; set; }
             public string EquipoVisitante { get; set; }
+            public string EscudoVisitante { get; set; }
+            public string EscudoLocal { get; set; }
             public int IdApuesta { get; set; }
             public string Estadio { get; set; }
             public DateTime Fecha { get; set; }
-            public TimeSpan Hora { get; set; }
             public string Categoria { get; set; }
        };
 
