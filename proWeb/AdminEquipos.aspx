@@ -17,6 +17,10 @@
         <p>Categoría:</p>
         <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="ListaDesplegable" />
 
+        <p>Seleccionar equipo (por ID):</p>
+        <asp:DropDownList ID="ddlEquipos" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlEquipos_SelectedIndexChanged" CssClass="ListaDesplegable" />
+
+
         <br /><br />
         <asp:Button ID="btnCrear" runat="server" CssClass="BotonAdmin" Text="Crear equipo" OnClick="btnCrear_Click" />
         <asp:Button ID="btnActualizar" runat="server" CssClass="BotonAdmin" Text="Actualizar equipo" OnClick="btnActualizar_Click" />

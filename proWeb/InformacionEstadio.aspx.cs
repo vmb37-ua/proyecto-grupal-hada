@@ -11,37 +11,26 @@ using library;
 
 namespace ProWeb
 {
+    public class EstadioConMunicipio
+    {
+        public string Nombre { get; set; }
+        public int Capacidad { get; set; }
+        public string Texto { get; set; }
+        public string NombreMunicipio { get; set; }
+    }
+
     public partial class InformacionEstadio : System.Web.UI.Page
     {
 
-        /*protected void Page_Load(object sender, EventArgs e)
+        public string GetGoogleMapsEmbedUrl(object nombreObj, object municipioObj)
         {
-            // Ejemplo
-            
-            LabelNombre.Text = "Estadio Nacional";
-            LabelCiudad.Text = "Ciudad: Madrid";
-            LinkDireccion.Text = "Ver en Google Maps";
-            LinkDireccion.NavigateUrl = "https://maps.google.com/?q=Estadio+Nacional+Madrid";
-
-
-
-            string direccion = "C. Batalla del Salado, 59, Tarifa, Cádiz";
-            string q = Server.UrlEncode(direccion);
-            string iframe = $@"
-              <iframe
-                id='Mapa'
-                width='100%'
-                height='300'
-                style='border:0'
-                loading='lazy'
-                allowfullscreen
-                src='https://www.google.com/maps?q={q}&output=embed'>
-              </iframe>";
-
-            MapFrame.Text = iframe;
-            
+            string nombre = nombreObj?.ToString() ?? "";
+            string municipio = municipioObj?.ToString() ?? "";
+            string query = $"{nombre} {municipio}";
+            string encodedQuery = HttpUtility.UrlEncode(query);
+            return $"https://www.google.com/maps?q={encodedQuery}&output=embed";
         }
-        */
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -55,49 +44,6 @@ namespace ProWeb
             LabelEstadios.Visible = false;
             List<ENEstadio> estadios = new ENEstadio().ReadAll();
 
-            // Prueba, luego Borrar, lo inserto a mano
-            estadios.Add(new ENEstadio
-            {
-                Nombre = "Santiago Bernabéu",
-                Capacidad = 81044,
-                Texto = "Estadio del Real Madrid C.F., ubicado en Madrid.",
-                Id_municipio = 1
-            });
-
-            estadios.Add(new ENEstadio
-            {
-                Nombre = "Camp Nou",
-                Capacidad = 99354,
-                Texto = "Antiguo estadio del F.C. Barcelona, situado en Barcelona.",
-                Id_municipio = 2
-            });
-
-            estadios.Add(new ENEstadio
-            {
-                Nombre = "Wanda Metropolitano",
-                Capacidad = 68456,
-                Texto = "Estadio del Atlético de Madrid, en Madrid.",
-                Id_municipio = 1
-            });
-
-            estadios.Add(new ENEstadio
-            {
-                Nombre = "La Cartuja",
-                Capacidad = 60000,
-                Texto = "Estadio de La Cartuja en Sevilla, usado para eventos deportivos y conciertos.",
-                Id_municipio = 3
-            });
-
-            estadios.Add(new ENEstadio
-            {
-                Nombre = "San Mamés",
-                Capacidad = 53289,
-                Texto = "Estadio del Athletic Club de Bilbao, en el País Vasco.",
-                Id_municipio = 4
-            });
-
-            // hasta aqui
-
             if ((estadios == null) || (!estadios.Any()))
             {
                 LabelEstadios.Text = "No hay estadios disponibles.";
@@ -106,14 +52,46 @@ namespace ProWeb
             }
             else
             {
-                RepeaterEstadios.DataSource = estadios;
+                List<EstadioConMunicipio> lista = new List<EstadioConMunicipio>();
+
+                foreach (var estadio in estadios)
+                {
+                    ENMunicipio municipio = new ENMunicipio();
+                    municipio.Id_municipio = estadio.Id_municipio;
+                    municipio.Read();
+
+                    lista.Add(new EstadioConMunicipio
+                    {
+                        Nombre = estadio.Nombre,
+                        Capacidad = estadio.Capacidad,
+                        Texto = estadio.Texto,
+                        NombreMunicipio = municipio.Nombre
+                    });
+                }
+
+                RepeaterEstadios.DataSource = lista;
                 RepeaterEstadios.DataBind();
             }
         }
-        public string TruncarTexto(object textoObj)
+        public string TruncarTexto(object texto)
         {
-            string texto = textoObj?.ToString();
-            return string.IsNullOrEmpty(texto) ? "" : (texto.Length > 100 ? texto.Substring(0, 100) + "..." : texto);
+            if (texto == null)
+            {
+                return "";
+            }
+            string textoaux = texto.ToString();
+            if (string.IsNullOrEmpty(textoaux))
+            {
+                return "";
+            }
+            if (textoaux.Length > 85)
+            {
+                return textoaux.Substring(0, 85) + "...";
+            }
+            else
+            {
+                return textoaux;
+            }
         }
     }
 }

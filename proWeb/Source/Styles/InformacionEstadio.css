@@ -64,7 +64,7 @@ body {
 }
 
 .card-estadio:hover {
-    transform: translateY(-5px);
+    transform: translateX(-5px) translateY(-5px);
 }
 
 .contenido-estadio {

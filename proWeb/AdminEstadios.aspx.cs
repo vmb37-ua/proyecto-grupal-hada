@@ -9,15 +9,21 @@ namespace ProWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+            // Solo cargamos municipios al cargar la página por primera vez
             if (!IsPostBack)
             {
                 CargarMunicipios();
             }
         }
 
-
         protected void btnCrear_Click(object sender, EventArgs e)
         {
+            // Creamos un nuevo estadio
             try
             {
                 if (string.IsNullOrWhiteSpace(txtNombre.Text))
@@ -57,11 +63,9 @@ namespace ProWeb
             }
         }
 
-
-
-
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+            // Actualizamos un estadio ya existente
             if (int.TryParse(txtCapacidad.Text, out int capacidad) &&
                 int.TryParse(ddlMunicipios.SelectedValue, out int idMunicipio))
             {
@@ -86,6 +90,7 @@ namespace ProWeb
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            // Eliminamos un estadio por su nombre
             ENEstadio estadio = new ENEstadio
             {
                 Nombre = txtNombre.Text
@@ -101,8 +106,10 @@ namespace ProWeb
         {
             lblMensaje.Text = mensaje;
         }
+
         private void CargarMunicipios()
         {
+            // Cargamos los municipios desde la base de datos al dropdown
             string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["miconex"].ToString();
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -117,6 +124,5 @@ namespace ProWeb
                 ddlMunicipios.DataBind();
             }
         }
-
     }
 }

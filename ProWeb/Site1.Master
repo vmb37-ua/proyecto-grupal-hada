@@ -31,6 +31,7 @@
                     <asp:MenuItem NavigateUrl="adminapuestas.aspx" Text="Apuestas"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="DBPatrocinadores.aspx" Text="Patrocinadores"></asp:MenuItem>
                     <asp:MenuItem NavigateUrl="AdministrarCateg.aspx" Text="Categorías"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="Informes.aspx" Text="Estadísticas"></asp:MenuItem>
                     
                 </asp:MenuItem>
             </Items>
