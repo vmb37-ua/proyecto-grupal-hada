@@ -11,6 +11,13 @@ namespace ProWeb
 {
     public partial class AdministrarRoles : System.Web.UI.Page
     {
+
+        /// <summary>
+        /// Funcion que se ejecuta cuando se ha introducido una id.
+        /// Maneja la visibilidad de los botones de buscar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">Argumento del evento de cambio de texto.</param>
         protected void IdEntrante(object sender, EventArgs e)
         {
             string texto = TBIdRol.Text.Trim();
@@ -27,6 +34,13 @@ namespace ProWeb
                 BotonDe.Visible = true;
             }
         }
+
+        /// <summary>
+        /// Funcion que se ejecuta al gargar la pagina.
+        /// Verifica si el usuario esta logeado y sea un administrador.
+        /// </summary>
+        /// <param name="sender">Objeto de la pagina.</param>
+        /// <param name="e">Evento de cargar la pagina.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["Login"] == null)
@@ -47,6 +61,14 @@ namespace ProWeb
                 }
             }
         }
+
+        /// <summary>
+        /// Crea un nuevo rol en la pagina web.
+        /// Si se crea muestra un panel de confirmacion.
+        /// Muestra un mensaje de error de que no se ha podido crear el rol.
+        /// </summary>
+        /// <param name="sender">Boton Crear.</param>
+        /// <param name="e">Argumento del evento de crear rol.</param>
         protected void Create(object sender, EventArgs e)
         {
             LabelId.Visible = false;
@@ -67,6 +89,14 @@ namespace ProWeb
                 LabelNombre.ForeColor = System.Drawing.Color.Red;
             }
         }
+
+        /// <summary>
+        /// Actualiza un rol ya existente en la pagina web.
+        /// Si se elimina muestra un panel de confirmacion.
+        /// Muestra un mensaje de error de que no existe la id.
+        /// </summary>
+        /// <param name="sender">Boton Actualizar.</param>
+        /// <param name="e">Argumento del evento de actualizar rol.</param>
         protected void Update(object sender, EventArgs e)
         {
             LabelId.Visible = false;
@@ -88,6 +118,16 @@ namespace ProWeb
                 LabelId.ForeColor = System.Drawing.Color.Red;
             }
         }
+
+        /// <summary>
+        /// Elimina un rol ya existente en la pagina web.
+        /// Antes de elimnarlo, advierte al usuario con una pestaña emergente.
+        /// Si se elimina muestra un panel de confirmacion.
+        /// Muestra un mensaje de error de que no existe la id.
+        /// Vacia todos los campos de la pagina web.
+        /// </summary>
+        /// <param name="sender">Boton Eliminar.</param>
+        /// <param name="e">Argumento del evento de eliminar rol.</param>
         protected void Delete(object sender, EventArgs e)
         {
             LabelId.Visible = false;
@@ -122,6 +162,14 @@ namespace ProWeb
                 LabelId.ForeColor = System.Drawing.Color.Red;
             }
         }
+
+        /// <summary>
+        /// Busca un rol ya existente en la pagina web.
+        /// Rellena todos los campos con la informacion del rol.
+        /// Muestra un mensaje de error de que no existe la id.
+        /// </summary>
+        /// <param name="sender">Boton Buscar.</param>
+        /// <param name="e">Argumento del evento de buscar rol.</param>
         protected void Read(object sender, EventArgs e)
         {
             LabelId.Visible = false;
@@ -140,6 +188,14 @@ namespace ProWeb
                 LabelId.ForeColor = System.Drawing.Color.Red;
             }
         }
+
+        /// <summary>
+        /// Busca el primer rol en la pagina web.
+        /// Rellena todos los campos con la informacion del rol.
+        /// Muestra un mensaje de error de que no existe ningun rol.
+        /// </summary>
+        /// <param name="sender">Boton First.</param>
+        /// <param name="e">Argumento del evento de buscar first rol.</param>
         protected void ReadFirst(object sender, EventArgs e)
         {
             LabelId.Visible = false;
@@ -167,6 +223,15 @@ namespace ProWeb
                 BotonDe.Visible = false;
             }
         }
+
+        /// <summary>
+        /// Busca el siguiente rol respecto al introducido en la pagina web.
+        /// Rellena todos los campos con la informacion del rol.
+        /// Muestra un mensaje de error de que no existe la id.
+        /// Muestra un mensaje de error de que no existe siguiente rol.
+        /// </summary>
+        /// <param name="sender">Boton Buscar Next.</param>
+        /// <param name="e">Argumento del evento de buscar next rol.</param>
         protected void ReadNext(object sender, EventArgs e)
         {
             LabelId.Visible = false;
@@ -193,6 +258,15 @@ namespace ProWeb
                 LabelId.ForeColor = System.Drawing.Color.Red;
             }
         }
+
+        /// <summary>
+        /// Busca el anterior rol respecto al introducido en la pagina web.
+        /// Rellena todos los campos con la informacion del rol.
+        /// Muestra un mensaje de error de que no existe la id.
+        /// Muestra un mensaje de error de que no existe anterior rol.
+        /// </summary>
+        /// <param name="sender">Boton Buscar Prev.</param>
+        /// <param name="e">Argumento del evento de buscar prev rol.</param>
         protected void ReadPrev(object sender, EventArgs e)
         {
             LabelId.Visible = false;

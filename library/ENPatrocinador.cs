@@ -46,7 +46,7 @@ namespace library
 
         /// <summary>
         /// Constructor por defecto.
-        /// Inicializa <c>id_patrocinador</c> y <c>dinero</c> a cero, y <c>texto</c> e <c>imagen</c> a cadenas vacias.
+        /// Inicializa <c>id_patrocinador</c> y <c>dinero</c> a cero, y <c>texto</c> a cadenas vacias.
         /// </summary>
         public ENPatrocinador()
         {
@@ -61,8 +61,7 @@ namespace library
         /// <param name="id_patrocinador">Id del patrocinador a asignar.</param>
         /// <param name="dinero">Dinero del patrocinador a asignar.</param>
         /// /// <param name="texto">Nombre del patrocinador a asiginar.</param>
-        /// <param name="imagen">Imagen del patrocinador a asignar.</param>
-        public ENPatrocinador(int id_patrocinador, float dinero, string texto, string imagen)
+        public ENPatrocinador(int id_patrocinador, float dinero, string texto)
         {
             this.id_patrocinador = id_patrocinador;
             this.dinero = dinero;
