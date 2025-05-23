@@ -73,13 +73,13 @@ namespace ProWeb
 
                         //Partido con mayor cuota
                         string queryCuota = @"
-                            SELECT TOP 1 CONCAT(e1.nombre, ' vs ', e2.nombre) AS Partido, MAX(au.cuota) AS Cuota
+                            SELECT TOP 1 CONCAT(e1.nombre, ' vs ', e2.nombre) AS Partido, au.cuota AS Cuota
                             FROM apuesta_usu au
                             JOIN apuesta a ON au.id_apuesta = a.id_apuesta
                             JOIN equipo e1 ON a.id_equipo1 = e1.id_equipo
                             JOIN equipo e2 ON a.id_equipo2 = e2.id_equipo
-                            GROUP BY e1.nombre, e2.nombre
-                            ORDER BY Cuota DESC";
+                            WHERE a.resultado IS NOT NULL
+                            ORDER BY au.cuota DESC";
 
                         using (SqlCommand cmdCuota = new SqlCommand(queryCuota, conn))
                         using (SqlDataReader reader = cmdCuota.ExecuteReader())
@@ -102,7 +102,7 @@ namespace ProWeb
                             FROM apuesta_usu au
                             JOIN usuario u ON au.id_usuario = u.id
                             JOIN apuesta a ON au.id_apuesta = a.id_apuesta
-                            WHERE au.prediccion = a.resultado
+                            WHERE a.resultado IS NOT NULL AND au.prediccion = a.resultado
                             GROUP BY u.nombre
                             ORDER BY GananciaNeta DESC";
 
@@ -123,7 +123,7 @@ namespace ProWeb
                             SELECT SUM((cuota * dinero_apostado) - dinero_apostado)
                             FROM apuesta_usu au
                             JOIN apuesta a ON au.id_apuesta = a.id_apuesta
-                            WHERE au.prediccion = a.resultado", conn))
+                            WHERE a.resultado IS NOT NULL AND au.prediccion = a.resultado", conn))
                         {
                             object totalGan = cmdGanancias.ExecuteScalar();
 
