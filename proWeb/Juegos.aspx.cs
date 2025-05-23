@@ -103,6 +103,12 @@ namespace ProWeb
         protected void EventoJuegoClick(object sender, CommandEventArgs e)
         {
 
+            if (Session["Login"] == null)
+            {
+                Response.Redirect("Login.aspx");
+                return;
+            }
+
             if (e.CommandName == "Apostar")
             {  
                 string idApuesta = e.CommandArgument.ToString();
