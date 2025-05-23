@@ -34,30 +34,27 @@ namespace library
             {
                 conn.Open();
 
-                string checkQuery = "SELECT COUNT(*) FROM provincia WHERE LOWER(nombre) = LOWER(@nombre) AND id_pais = @id_pais";
+                string checkQuery = @"SELECT COUNT(*) FROM provincia WHERE LOWER(nombre) = LOWER(@nombre)AND id_pais = @idPais";
                 using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
                 {
                     checkCmd.Parameters.AddWithValue("@nombre", provincia.Nombre);
-                    checkCmd.Parameters.AddWithValue("@id_pais", provincia.IdPais);
+                    checkCmd.Parameters.AddWithValue("@idPais", provincia.IdPais);
 
                     if ((int)checkCmd.ExecuteScalar() > 0)
-                    {
                         return false;
-                    }
                 }
 
-                // Insertar nueva provincia
+
                 string query = "INSERT INTO provincia (nombre, id_pais) VALUES (@nombre, @id_pais)";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@nombre", provincia.Nombre);
                 cmd.Parameters.AddWithValue("@id_pais", provincia.IdPais);
                 cmd.ExecuteNonQuery();
-
                 resultado = true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al crear provincia: " + ex.Message);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -66,7 +63,6 @@ namespace library
 
             return resultado;
         }
-
         /// <summary>
         /// Modifica los datos de una provincia ya registrada.
         /// </summary>
