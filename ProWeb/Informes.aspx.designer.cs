@@ -42,33 +42,6 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.BulletedList blTopGanadores;
 
         /// <summary>
-        /// Control lblUsuarioActivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsuarioActivo;
-
-        /// <summary>
-        /// Control lblUsuarioActivo2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsuarioActivo2;
-
-        /// <summary>
-        /// Control lblApuestasHoy.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblApuestasHoy;
-
-        /// <summary>
         /// Control lblGanancias.
         /// </summary>
         /// <remarks>
