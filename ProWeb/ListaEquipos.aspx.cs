@@ -10,9 +10,16 @@ using library;
 
 namespace ProWeb
 {
-	public partial class ListaEquipos : System.Web.UI.Page
+    /// <summary>
+    /// Página ASP.NET que permite visualizar un listado de equipos deportivos.
+    /// Ofrece funcionalidades de filtrado por categoría, búsqueda por nombre y gestión de favoritos por usuario.
+    /// </summary>
+    public partial class ListaEquipos : System.Web.UI.Page
 	{
-        
+        /// <summary>
+        /// Evento que se ejecuta al cargar la página.
+        /// Si no es un postback, carga la lista completa de equipos y las categorías disponibles.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,6 +29,10 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Carga todos los equipos desde la base de datos y los muestra en el Repeater.
+        /// También obtiene los favoritos del usuario actual desde la sesión y los guarda en ViewState.
+        /// </summary>
         private void CargarEquipos()
         {
             ENEquipo en = new ENEquipo();
@@ -36,6 +47,10 @@ namespace ProWeb
             rptEquipos.DataBind();
         }
 
+        /// <summary>
+        /// Carga los equipos de una categoría específica seleccionada por el usuario.
+        /// </summary>
+        /// <param name="categoria">Nombre de la categoría seleccionada.</param>
         private void CargarEquiposPorCategoria(string categoria)
         {
             ENEquipo en = new ENEquipo();
@@ -49,6 +64,10 @@ namespace ProWeb
 
         }
 
+        /// <summary>
+        /// Carga todas las categorías de equipos disponibles desde la base de datos
+        /// y las muestra en un desplegable para permitir filtrado.
+        /// </summary>
         private void CargarCategorias()
         {
             ENCategoria en = new ENCategoria();
@@ -63,7 +82,10 @@ namespace ProWeb
             ddlCategorias.Items.Insert(0, new ListItem("Categorias", "0"));
         }
 
-
+        /// <summary>
+        /// Evento que se lanza cuando el usuario cambia el texto en la caja de búsqueda.
+        /// Filtra los equipos cuyo nombre contenga el texto buscado.
+        /// </summary>
         protected void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
             string nombre = txtBusqueda.Text.ToLower();
@@ -79,6 +101,10 @@ namespace ProWeb
             rptEquipos.DataBind();
         }
 
+        /// <summary>
+        /// Evento que se lanza cuando el usuario selecciona una categoría del desplegable.
+        /// Filtra los equipos según la categoría seleccionada o muestra todos si no se selecciona ninguna.
+        /// </summary>
         protected void ddlCategorias_SelectedIndexChanged(object sender, EventArgs e)
         {
             string categoria = ddlCategorias.SelectedValue;
@@ -95,6 +121,10 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Evento que se lanza cuando se hace clic en un botón del Repeater de equipos.
+        /// Permite añadir o quitar un equipo de los favoritos del usuario actual.
+        /// </summary>
         protected void rptEquipos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "ToggleFavorito")
@@ -126,8 +156,5 @@ namespace ProWeb
                 CargarEquipos();
             }
         }
-
-
-
     }
 }

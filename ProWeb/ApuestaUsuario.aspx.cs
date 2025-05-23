@@ -11,9 +11,17 @@ using library;
 
 namespace ProWeb
 {
-	public partial class ApuestaUsuario : System.Web.UI.Page
+    /// <summary>
+    /// Página para que un usuario realice apuestas en un evento deportivo.
+    /// Permite seleccionar el resultado (local, empate o visitante), introducir la cantidad a apostar,
+    /// mostrar saldo actual, cuotas y calcular ganancia potencial.
+    /// </summary>
+    public partial class ApuestaUsuario : System.Web.UI.Page
 	{
-
+        /// <summary>
+        /// Evento que se ejecuta al cargar la página. Inicializa datos del usuario, apuesta
+        /// y actualiza la interfaz con el saldo, cuotas y nombres de equipos.
+        /// </summary>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -72,7 +80,9 @@ namespace ProWeb
             }
         }
 
-
+        /// <summary>
+        /// Actualiza la ganancia potencial cuando el usuario cambia la cantidad apostada.
+        /// </summary>
         protected void txtCantidad_TextChanged(object sender, EventArgs e)
         {
             if (float.TryParse(txtCantidad.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out float cantidad) &&
@@ -83,7 +93,10 @@ namespace ProWeb
             }
         }
 
-
+        /// <summary>
+        /// Evento que se ejecuta al pulsar el botón de apostar.
+        /// Valida la apuesta, crea la apuesta, actualiza el saldo y muestra mensajes de confirmación o error.
+        /// </summary>
         protected void btnApostar_Click(object sender, EventArgs e)
         {
             try
@@ -138,11 +151,16 @@ namespace ProWeb
             }
         }
 
-
+        /// <summary>
+        /// Redirige a la página de juegos al cancelar la apuesta.
+        /// </summary>
         protected void btnCancelar_Click(Object sender, EventArgs e) {
             Response.Redirect("Juegos.aspx");
         }
 
+        /// <summary>
+        /// Actualiza la cuota actual y la ganancia potencial cuando se cambia la opción de apuesta seleccionada.
+        /// </summary>
         protected void rblOpcionesApuesta_SelectedIndexChanged(object sender, EventArgs e)
         {
             string seleccion = rblOpcionesApuesta.SelectedValue;
@@ -175,6 +193,11 @@ namespace ProWeb
 
         // Metodos auxiliares
 
+        /// <summary>
+        /// Valida los datos de la apuesta antes de procesarla:
+        /// comprueba selección, cantidad válida y saldo suficiente.
+        /// </summary>
+        /// <returns>true si la apuesta es válida; false en caso contrario.</returns>
         private bool ValidarApuesta()
         {
             // Validar que se haya seleccionado una opción
@@ -209,6 +232,10 @@ namespace ProWeb
             return true;
         }
 
+        /// <summary>
+        /// Muestra un mensaje de error en el panel de confirmación con estilo de alerta de error.
+        /// </summary>
+        /// <param name="mensaje">Texto del mensaje a mostrar.</param>
         private void MostrarError(string mensaje)
         {
             pnlConfirmacion.Visible = true;
@@ -216,11 +243,19 @@ namespace ProWeb
             pnlConfirmacion.CssClass = "alert alert-danger";
         }
 
+        /// <summary>
+        /// Obtiene el identificador del usuario actual de la sesión.
+        /// </summary>
+        /// <returns>ID del usuario.</returns>
         private int ObtenerIdUsuarioActual()
         {
             return Convert.ToInt32(Session["Login"]);
         }
 
+        /// <summary>
+        /// Obtiene el identificador de la apuesta actual desde la query string.
+        /// </summary>
+        /// <returns>ID de la apuesta.</returns>
         private int ObtenerIdApuestaActual()
         {
             return Convert.ToInt32(Request.QueryString["idApuesta"]);
