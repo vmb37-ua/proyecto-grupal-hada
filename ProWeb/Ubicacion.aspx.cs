@@ -14,8 +14,16 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace ProWeb
 {
+    /// <summary>
+    /// Página web para gestionar ubicaciones geográficas: países, provincias y municipios.
+    /// Permite crear, leer y eliminar estos elementos mediante interacciones con controles web.
+    /// </summary>
     public partial class Ubicacion : System.Web.UI.Page
     {
+        /// <summary>
+        /// Recarga la lista de países en los dropdowns para eliminación y selección de país en provincias.
+        /// </summary>
+        /// <exception cref="Exception">Se lanza si hay error al cargar los países desde la base de datos.</exception>
         private void RecargarListaPaises()
         {
             try
@@ -47,6 +55,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Carga las provincias de un país determinado en los dropdowns para eliminación y selección de provincia en municipios.
+        /// </summary>
+        /// <param name="idPais">Identificador del país para filtrar las provincias.</param>
+        /// <exception cref="Exception">Se lanza si hay error al cargar las provincias desde la base de datos.</exception>
         private void CargarProvincias(int idPais)
         {
             try
@@ -80,6 +93,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Carga los municipios de una provincia determinada en el dropdown para eliminación.
+        /// </summary>
+        /// <param name="idProvincia">Identificador de la provincia para filtrar los municipios.</param>
+        /// <exception cref="Exception">Se lanza si hay error al cargar los municipios desde la base de datos.</exception>
         private void CargarMunicipios(int idProvincia)
         {
             try
@@ -105,6 +123,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Muestra un mensaje en pantalla con estilo dependiendo del tipo (informativo, error, éxito).
+        /// </summary>
+        /// <param name="texto">Texto del mensaje a mostrar.</param>
+        /// <param name="tipo">Tipo de mensaje: "informativo" (por defecto), "error" o "exito".</param>
         private void MostrarMensaje(string texto, string tipo = "informativo")
         {
             lblMensaje.Text = texto;
@@ -128,6 +151,12 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Evento que se ejecuta al cargar la página por primera vez.
+        /// Inicializa los dropdowns con países, provincias y municipios.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -155,6 +184,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo país con el nombre especificado en el textbox y actualiza la lista de países.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnCrearPais_Click(object sender, EventArgs e)
         {
             try
@@ -181,6 +215,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Crea una nueva provincia con el nombre y país seleccionados, actualizando las listas correspondientes.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnCrearProvincia_Click(object sender, EventArgs e)
         {
             try
@@ -230,6 +269,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Crea un nuevo municipio con el nombre y provincia seleccionados, actualizando la lista correspondiente.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnCrearMunicipio_Click(object sender, EventArgs e)
         {
             try
@@ -276,6 +320,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Elimina el país seleccionado en el dropdown correspondiente y actualiza la lista de países.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnEliminarPais_Click(object sender, EventArgs e)
         {
             if (ddlEliminarPais.SelectedValue == "0")
@@ -305,6 +354,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Elimina la provincia seleccionada en el dropdown correspondiente y actualiza la lista de provincias.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnEliminarProvincia_Click(object sender, EventArgs e)
         {
             if (ddlEliminarProvincia.SelectedValue == "0")
@@ -338,6 +392,11 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Elimina el municipio seleccionado en el dropdown correspondiente y actualiza la lista de municipios.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnEliminarMunicipio_Click(object sender, EventArgs e)
         {
             if (ddlEliminarMunicipio.SelectedValue == "0" || string.IsNullOrEmpty(ddlEliminarMunicipio.SelectedValue))
@@ -371,6 +430,12 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Evento que se ejecuta cuando cambia la selección del dropdown de países para provincias.
+        /// Carga las provincias correspondientes al país seleccionado.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void ddlPaises_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlPaisProvincia.SelectedValue != "0")
@@ -391,6 +456,12 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Evento que se ejecuta cuando cambia la selección del dropdown de provincias para municipios.
+        /// Carga los municipios correspondientes a la provincia seleccionada.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void ddlProvincias_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlProvinciaMunicipio.SelectedValue != "0")
@@ -401,6 +472,12 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Evento que se ejecuta cuando el administrador hace click en el boton Volver.
+        /// Devuelve al administrador al panel de administrador.
+        /// </summary>
+        /// <param name="sender">Control que generó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         protected void btnVolverPanel_Click(object sender, EventArgs e)
         {
             Response.Redirect("PanelAdmin.aspx");
