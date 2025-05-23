@@ -55,10 +55,11 @@ namespace library
                 }
                 catch (SqlException ex)
                 {
-                    
-                    System.Diagnostics.Debug.WriteLine($"SQL Error creando apuesta: {ex.Number} - {ex.Message}");
+
+                    Console.WriteLine(ex.Message);
                     return false;
                 }
+                finally { conexion.Close(); }
             }
         }
 
@@ -75,7 +76,7 @@ namespace library
                 try
                 {
                     c.Open();
-                    string sql = "SELECT id_usuario, id_apuesta, prediccion, cantidad, cuota FROM apuesta_usu";
+                    string sql = "SELECT id_usuario, id_apuesta, dinero_apostado, prediccion, cuota FROM apuesta_usu";
 
                     using (var cmd = new SqlCommand(sql, c))
                     using (var dr = cmd.ExecuteReader())
@@ -86,8 +87,8 @@ namespace library
                             apuesta.IdApuesta = Convert.ToInt32(dr["id_apuesta"]);
                             apuesta.IdUsuario = Convert.ToInt32(dr["id_usuario"]);
                             apuesta.Prediccion = Convert.ToString(dr["prediccion"]);
-                            apuesta.Cantidad = (float)(dr["cantidad"]);
-                            apuesta.Cuota = (float)(dr["cuota"]);
+                            apuesta.Cantidad = float.Parse(dr["dinero_apostado"].ToString());
+                            apuesta.Cuota = float.Parse(dr["cuota"].ToString());
 
                             apuestas_usuario.Add(apuesta);
                         }
@@ -95,8 +96,9 @@ namespace library
                 }
                 catch (SqlException ex)
                 {
-                    Console.WriteLine($"Error al leer apuestas_usuario: {ex.Message}");
+                    Console.WriteLine(ex.Message);
                 }
+                finally {c.Close();}
             }
 
             return apuestas_usuario;

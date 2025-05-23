@@ -113,13 +113,13 @@ namespace ProWeb
                     ENUsuario usuario = new ENUsuario { ID = idUsuario };
                     if (!usuario.Read())
                     {
-                        MostrarError("Error al leer saldo de usuario");
+                        mostrarMensaje("Error al leer saldo de usuario", "error");
                         return;
                     }
 
                     if (cantidad > usuario.Saldo)
                     {
-                        MostrarError("Saldo insuficiente.");
+                        mostrarMensaje("Saldo insuficiente.", "error");
                         return;
                     }
 
@@ -135,19 +135,17 @@ namespace ProWeb
                         lblSaldo.Text = usuario.Saldo.ToString("F2") + " €";
 
                         // Mensaje de confirmacion
-                        lblMensajeExito.Text = "¡Apuesta realizada con éxito!";
-                        pnlConfirmacion.Visible = true;
-                        pnlConfirmacion.CssClass = "alert alert-success";
+                        mostrarMensaje("¡Apuesta realizada con éxito!", "exito");
                     }
                     else
                     {
-                        MostrarError("Error al realizar la apuesta.");
+                        mostrarMensaje("Ya ha jugado esta apuesta.", "error");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MostrarError("Error inesperado: " + ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -203,14 +201,14 @@ namespace ProWeb
             // Validar que se haya seleccionado una opción
             if (rblOpcionesApuesta.SelectedValue == null)
             {
-                MostrarError("Selecciona una predicción.");
+                mostrarMensaje("Selecciona una predicción.", "error");
                 return false;
             }
 
             // Validar que la cantidad sea un número positivo
             if (!float.TryParse(txtCantidad.Text, NumberStyles.Float, CultureInfo.InvariantCulture, out float cantidad) || cantidad <= 0)
             {
-                MostrarError("Cantidad inválida");
+                mostrarMensaje("Cantidad inválida", "error");
                 return false;
             }
 
@@ -219,13 +217,13 @@ namespace ProWeb
             usuario.ID = ObtenerIdUsuarioActual();
             if (!usuario.Read())
             {
-                MostrarError("Error al leer usuario para obtener saldo");
+                mostrarMensaje("Error al leer usuario para obtener saldo", "error");
                 return false;
             }
 
             if (cantidad > usuario.Saldo)
             {
-                MostrarError("Saldo insuficiente.");
+                mostrarMensaje("Saldo insuficiente.", "error");
                 return false;
             }
 
@@ -237,10 +235,19 @@ namespace ProWeb
         /// </summary>
         /// <param name="mensaje">Texto del mensaje a mostrar.</param>
         private void MostrarError(string mensaje)
+        private void mostrarMensaje(string mensaje, string tipo)
         {
             pnlConfirmacion.Visible = true;
-            lblMensajeExito.Text = mensaje;
-            pnlConfirmacion.CssClass = "alert alert-danger";
+            lblMensaje.Text = mensaje;
+
+            if (tipo == "exito")
+            {
+                lblMensaje.CssClass = "MensajeExito";
+            }
+            else
+            {
+                lblMensaje.CssClass = "MensajeError";
+            }
         }
 
         /// <summary>

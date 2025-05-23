@@ -3,15 +3,14 @@
     justify-content: space-between;
     gap: 30px;
     width: 100%;
-    max-width: 1200px; /* Ancho máximo para evitar que se estire demasiado */
+    max-width: 1200px; 
     margin: 0 auto;
     padding: 30px;
     box-sizing: border-box;
 }
 
-/* Columnas (ahora con flex: 1 para dividir el espacio) */
 #Contenedor1, #Contenedor2 {
-    flex: 1; /* Para que ocupen el mismo espacio*/
+    flex: 1; 
     min-width: 0;
     padding: 30px;
     border: 3px solid #000;
@@ -155,26 +154,26 @@
 }
 
 .BotonApostar {
-    background-color: white;
+    background-color: lawngreen;
     color: white;
     border-color: lawngreen;
 }
 
 .BotonApostar:hover {
-    background-color: lawngreen;
-    color: white;
+    background-color: white;
+    color: lawngreen;
 }
 
 .BotonCancelar {
-    background-color: white;
+    background-color: red;
     color: white;
     border-color: red;
 }
 
-.BotonCancelar:hover {
-    background-color: red;
-    color: white;
-}
+    .BotonCancelar:hover {
+        background-color: white;
+        color: red;
+    }
 
 /* Panel de confirmación */
 .PanelConfirmacion {
@@ -192,6 +191,14 @@
     color: #2e7d32;
     font-weight: bold;
 }
+
+.MensajeError {
+    font-family: Arial;
+    font-size: 18px;
+    color: #d32f2f;
+    font-weight: bold;
+}
+
 
 
 /* Selector de la apuesta */
