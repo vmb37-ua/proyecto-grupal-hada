@@ -55,7 +55,7 @@ namespace ProWeb
             HttpCookie cookie = new HttpCookie("UsuarioID");
             cookie.Value = "";
             Response.Cookies.Add(cookie);
-            Response.Redirect("Juegos.aspx");
+            Response.Redirect("Login.aspx");
         }
         protected void EventoEliminarCuenta(object sender, EventArgs e)
         {
@@ -66,7 +66,7 @@ namespace ProWeb
             HttpCookie cookie = new HttpCookie("UsuarioID");
             cookie.Value = "";
             Response.Cookies.Add(cookie);
-            Response.Redirect("Juegos.aspx");
+            Response.Redirect("Login.aspx");
         }
     }
 }
