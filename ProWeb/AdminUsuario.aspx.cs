@@ -94,14 +94,21 @@ namespace ProWeb
                 usuario.NumTar = CajaNumTar.Text;
                 usuario.Telefono = CajaTelef.Text;
 
-                if(DateTime.TryParse(CajaCad.Text, out fecha) || (DateTime.Compare(fecha,DateTime.Now)>0))
+                if (DateTime.TryParse(CajaCad.Text, out fecha) && (DateTime.Compare(fecha, DateTime.Now) > 0))
                 {
                     usuario.Caducidad = fecha.Date;
-                    if (usuario.Update()) Response.Redirect("Perfil.aspx");
+                    if (usuario.Update())
+                    {
+                        Response.Redirect("Perfil.aspx");
+                    }
+                    else
+                    {
+                        Errorval.Text = "Error al actualizar el usuario";
+                    }
                 }
                 else
                 {
-                    //Mensaje error validacion
+                    Errorval.Text = "Fecha de caducidad de la tarjeta no válida";
                 }
             }
         }

@@ -26,6 +26,14 @@
             ErrorMessage="El número de la tarjeta es obligatorio." 
             ForeColor="Red" 
             Display="Dynamic"/>
+            <asp:RegularExpressionValidator 
+            ID="rvfTar" 
+            runat="server" 
+            ControlToValidate="CajaNumTar"
+            ValidationExpression="^\d{16}$"
+            ErrorMessage="El num. de tarjeta debe tener exactamente 16 números"
+            ForeColor="Red"
+            Display="Dynamic" />
 
             <asp:Label runat="server" CssClass="Etiqueta">CVV:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto" ID="CajaCvv"></asp:TextBox>
@@ -36,6 +44,14 @@
             ErrorMessage="El cvv es obligatorio." 
             ForeColor="Red" 
             Display="Dynamic"/>
+            <asp:RegularExpressionValidator 
+            ID="revCvv" 
+            runat="server" 
+            ControlToValidate="CajaCvv"
+            ValidationExpression="^\d{3}$"
+            ErrorMessage="Cvv debe tener exactamente 3 números"
+            ForeColor="Red"
+            Display="Dynamic" />
 
             <asp:Label runat="server" CssClass="Etiqueta">Fecha cad.:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto" ID="CajaCad"></asp:TextBox>
@@ -46,6 +62,7 @@
             ErrorMessage="La caducidad de la tarjeta es obligatoria." 
             ForeColor="Red" 
             Display="Dynamic"/>
+            <asp:Label runat="server" CssClass="MensajeError" ID="Errorval"></asp:Label>
 
             <asp:Label runat="server" CssClass="Etiqueta">Dirección:</asp:Label>
             <asp:TextBox runat="server" CssClass="CajaDeTexto" id="CajaDir"></asp:TextBox>
@@ -66,6 +83,14 @@
             ErrorMessage="El teléfono es obligatorio." 
             ForeColor="Red" 
             Display="Dynamic"/>
+            <asp:RegularExpressionValidator 
+            ID="RegularExpressionValidator1" 
+            runat="server" 
+            ControlToValidate="CajaTelef"
+            ValidationExpression="^\d{9}$"
+            ErrorMessage="El teléfono debe ser de exactamente 9 números"
+            ForeColor="Red"
+            Display="Dynamic" />
 
             <div id="cajaFoto">
                 <div id="selecFoto">

@@ -51,6 +51,15 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfNumTar;
 
         /// <summary>
+        /// Control rvfTar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rvfTar;
+
+        /// <summary>
         /// Control CajaCvv.
         /// </summary>
         /// <remarks>
@@ -69,6 +78,15 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfCvv;
 
         /// <summary>
+        /// Control revCvv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revCvv;
+
+        /// <summary>
         /// Control CajaCad.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,15 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfCad;
+
+        /// <summary>
+        /// Control Errorval.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Errorval;
 
         /// <summary>
         /// Control CajaDir.
@@ -121,6 +148,15 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rvfTelef;
+
+        /// <summary>
+        /// Control RegularExpressionValidator1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
 
         /// <summary>
         /// Control selecFoto.
