@@ -40,6 +40,17 @@ namespace library
             try
             {
                 conn.Open();
+
+                string checkQuery = @"SELECT COUNT(*) FROM municipio WHERE LOWER(nombre) = LOWER(@nombre)AND id_provincia = @idProvincia";
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+                {
+                    checkCmd.Parameters.AddWithValue("@nombre", municipio.Nombre);
+                    checkCmd.Parameters.AddWithValue("@idProvincia", municipio.Id_provincia);
+
+                    if ((int)checkCmd.ExecuteScalar() > 0)
+                        return false;
+                }
+
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 resultado = filasAfectadas != 0;
             }
