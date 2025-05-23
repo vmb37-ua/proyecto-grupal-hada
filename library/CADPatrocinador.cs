@@ -31,11 +31,10 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("INSERT INTO patrocinador (id_patrocinador, dinero, texto, imagen) VALUES (@Id, @Dinero, @Texto, @Imagen)", c);
+                SqlCommand com = new SqlCommand("INSERT INTO patrocinador (id_patrocinador, dinero, texto) VALUES (@Id, @Dinero, @Texto)", c);
                 com.Parameters.AddWithValue("@Id", patrocinador.Id_patrocinador);
                 com.Parameters.AddWithValue("@Dinero", patrocinador.Dinero);
                 com.Parameters.AddWithValue("@Texto", patrocinador.Texto);
-                com.Parameters.AddWithValue("@Imagen", patrocinador.Imagen);
                 com.ExecuteNonQuery();
 
             }
@@ -57,11 +56,10 @@ namespace library
             try
             {
                 c.Open();
-                SqlCommand com = new SqlCommand("UPDATE patrocinador SET dinero=@Dinero, texto=@Texto, imagen=@Imagen WHERE id_patrocinador=@Id", c);
+                SqlCommand com = new SqlCommand("UPDATE patrocinador SET dinero=@Dinero, texto=@Texto WHERE id_patrocinador=@Id", c);
                 com.Parameters.AddWithValue("@Id", patrocinador.Id_patrocinador);
                 com.Parameters.AddWithValue("@Dinero", patrocinador.Dinero);
                 com.Parameters.AddWithValue("@Texto", patrocinador.Texto);
-                com.Parameters.AddWithValue("@Imagen", patrocinador.Imagen);
                 com.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -111,7 +109,6 @@ namespace library
                 {
                     patrocinador.Dinero = float.Parse(dr["dinero"].ToString());
                     patrocinador.Texto = dr["texto"].ToString();
-                    patrocinador.Imagen = dr["imagen"].ToString();
                 }
                 else
                 {
@@ -144,7 +141,6 @@ namespace library
                     patrocinador.Id_patrocinador = int.Parse(dr["id_patrocinador"].ToString());
                     patrocinador.Dinero = float.Parse(dr["dinero"].ToString());
                     patrocinador.Texto = dr["texto"].ToString();
-                    patrocinador.Imagen = dr["imagen"].ToString();
                 }
                 else
                 {
@@ -178,7 +174,6 @@ namespace library
                     patrocinador.Id_patrocinador = int.Parse(dr["id_patrocinador"].ToString());
                     patrocinador.Dinero = float.Parse(dr["dinero"].ToString());
                     patrocinador.Texto = dr["texto"].ToString();
-                    patrocinador.Imagen = dr["imagen"].ToString();
                 }
                 else
                 {
@@ -211,8 +206,7 @@ namespace library
                 {
                     patrocinador.Id_patrocinador = int.Parse(dr["id_patrocinador"].ToString());
                     patrocinador.Dinero = float.Parse(dr["dinero"].ToString());
-                    patrocinador.Texto = dr["texto"].ToString();
-                    patrocinador.Imagen = dr["imagen"].ToString();
+                    patrocinador.Texto = dr["texto"].ToString(); 
                 }
                 else
                 {
@@ -246,8 +240,7 @@ namespace library
                     {
                         Id_patrocinador = int.Parse(dr["id_patrocinador"].ToString()),
                         Dinero = float.Parse(dr["dinero"].ToString()),
-                        Texto = dr["texto"].ToString(),
-                        Imagen = dr["imagen"].ToString()
+                        Texto = dr["texto"].ToString()
                     };
                     lista.Add(p);
                 }

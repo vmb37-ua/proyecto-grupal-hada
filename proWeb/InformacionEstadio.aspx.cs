@@ -11,17 +11,42 @@ using library;
 
 namespace ProWeb
 {
+    /// <summary>
+    /// Clase que combina la informacion del estadio mas el nombre del municipio.
+    /// </summary>
     public class EstadioConMunicipio
     {
+
+        /// <summary>
+        /// Nombre del estadio.
+        /// </summary>
         public string Nombre { get; set; }
+
+        /// <summary>
+        /// Capacidad del estadio.
+        /// </summary>
         public int Capacidad { get; set; }
+
+        /// <summary>
+        /// Descripcion del estadio.
+        /// </summary>
         public string Texto { get; set; }
+
+        /// <summary>
+        /// Nombre del municipio.
+        /// </summary>
         public string NombreMunicipio { get; set; }
     }
 
     public partial class InformacionEstadio : System.Web.UI.Page
     {
 
+        /// <summary>
+        /// Funcion que crea la URL de la ubicacion del estadio en Google Maps.
+        /// </summary>
+        /// <param name="nombreObj">Nombre del estadio.</param>
+        /// <param name="municipioObj">Nombre del municipio.</param>
+        /// <returns>URL del Google Maps.</returns>
         public string GetGoogleMapsEmbedUrl(object nombreObj, object municipioObj)
         {
             string nombre = nombreObj?.ToString() ?? "";
@@ -31,6 +56,11 @@ namespace ProWeb
             return $"https://www.google.com/maps?q={encodedQuery}&output=embed";
         }
 
+        /// <summary>
+        /// Funcion que se ejecuta al gargar la pagina.
+        /// </summary>
+        /// <param name="sender">Objeto de la pagina.</param>
+        /// <param name="e">Argumento del evento de cargar la pagina.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,6 +69,9 @@ namespace ProWeb
             }
         }
 
+        /// <summary>
+        /// Carga todos los estadios de la BD y los almacena en el Repeater.
+        /// </summary>
         private void CargarEstadios()
         {
             LabelEstadios.Visible = false;
@@ -73,6 +106,12 @@ namespace ProWeb
                 RepeaterEstadios.DataBind();
             }
         }
+
+        /// <summary>
+        /// Funcion que trunca la descripcion del estadio para no salirse del Repeater.
+        /// </summary>
+        /// <param name="texto">Descripcion del estadio.</param>
+        /// <returns>La descripcion truncada.</returns>
         public string TruncarTexto(object texto)
         {
             if (texto == null)

@@ -12,7 +12,6 @@
         <asp:Repeater ID="RepeaterEstadios" runat="server">
             <ItemTemplate>
                 <div class="card-estadio">
-                    <div class="fondo-estadio" style='background-image: url("Source/Images/Estadios/<%# Eval("Nombre") %>.jpg");'></div>
                     <div class="contenido-estadio">
                         <h3><%# Eval("Nombre") %></h3>
                         <p><%# TruncarTexto(Eval("Texto")) %></p>
