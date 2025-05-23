@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="ProWeb.Register" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <style>
         .input-error {
@@ -66,8 +65,9 @@
         <asp:TextBox ID="Nameregister" runat="server" CssClass="Inputregister" placeholder="Nombre Completo" />
         <asp:RequiredFieldValidator ControlToValidate="Nameregister" ErrorMessage="El nombre es obligatorio." ForeColor="Red" Display="Dynamic" runat="server" />
 
-        <asp:TextBox ID="Numberregister" runat="server" CssClass="Inputregister" placeholder="Número de teléfono" />
-        <asp:RequiredFieldValidator ControlToValidate="Numberregister" ErrorMessage="El número es obligatorio." ForeColor="Red" Display="Dynamic" runat="server" />
+<asp:TextBox ID="Numberregister" runat="server" CssClass="Inputregister" placeholder="Número de teléfono" />
+<asp:RequiredFieldValidator    ControlToValidate="Numberregister"  ErrorMessage="El número es obligatorio."  ForeColor="Red"  Display="Dynamic"  runat="server" />
+<asp:RegularExpressionValidator  ControlToValidate="Numberregister" ValidationExpression="^\d{9}$" ErrorMessage="El número debe tener exactamente 9 dígitos." ForeColor="Red" Display="Dynamic" runat="server" />
 
         <asp:TextBox ID="Emailregister" runat="server" CssClass="Inputregister" placeholder="Correo electrónico" />
         <asp:RequiredFieldValidator ControlToValidate="Emailregister" ErrorMessage="El correo es obligatorio." ForeColor="Red" Display="Dynamic" runat="server" />
