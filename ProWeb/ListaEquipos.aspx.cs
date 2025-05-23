@@ -32,9 +32,6 @@ namespace ProWeb
             List<ENFavoritos> favoritos = new ENFavoritos { IdUsuario = idUsuario }.ReadAllUsuario();
             ViewState["favoritosIdEquipos"] = favoritos.Select(f => f.IdEquipo).ToList();
 
-
-            
-
             rptEquipos.DataSource = equipos;
             rptEquipos.DataBind();
         }
@@ -77,11 +74,6 @@ namespace ProWeb
             var filtrados = equipos
                 .Where(eq => eq.Nombre.ToLower().Contains(nombre))
                 .ToList();
-
-            foreach (var equipo in filtrados)
-            {
-                equipo.Escudo = "Source/Images/" + equipo.Escudo;
-            }
 
             rptEquipos.DataSource = filtrados;
             rptEquipos.DataBind();

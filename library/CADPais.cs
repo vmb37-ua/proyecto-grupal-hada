@@ -9,17 +9,29 @@ using System.Threading.Tasks;
 
 namespace library
 {
+    /// <summary>
+    /// Clase que representa un objeto de Pais en la base de datos.
+    /// Contiene los métodos necesarios para las operaciones Crear, Eliminar y Leer.
+    /// </summary>
     public class CADPais
     {
         private string constring;
 
+        /// <summary>
+        /// Constructor por defecto.
+        /// Inicializa la cadena de conexión para la base de datos.
+        /// </summary>
         public CADPais()
         {
             constring = ConfigurationManager.ConnectionStrings["miconex"].ConnectionString;
         }
 
-        // Crear Pais
-        public bool Create(ENPais en)
+        /// <summary>
+        /// Método que crea un pais en la base de datos.
+        /// </summary>
+        /// <param name="pais">Objeto entidad Pais que contiene todos los datos del pais a crear en la base de datos.</param>
+        /// <returns>True si la creación es exitosa. False si hubo alguna excepción o no se pudo insertar.</returns>
+        public bool Create(ENPais pais)
         {
             using (SqlConnection c = new SqlConnection(constring))
             {
@@ -31,7 +43,7 @@ namespace library
                     string checkQuery = "SELECT COUNT(*) FROM Pais WHERE LOWER(nombre) = LOWER(@nombre)";
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, c))
                     {
-                        checkCmd.Parameters.AddWithValue("@nombre", en.NombrePais);
+                        checkCmd.Parameters.AddWithValue("@nombre", pais.NombrePais);
                         if ((int)checkCmd.ExecuteScalar() > 0)
                             return false;
                     }
@@ -42,12 +54,12 @@ namespace library
 
                     using (SqlCommand cmd = new SqlCommand(insertQuery, c))
                     {
-                        cmd.Parameters.AddWithValue("@nombre", en.NombrePais);
+                        cmd.Parameters.AddWithValue("@nombre", pais.NombrePais);
                         object result = cmd.ExecuteScalar();
 
                         if (result != null && result != DBNull.Value)
                         {
-                            en.IdPais = Convert.ToInt32(result);
+                            pais.IdPais = Convert.ToInt32(result);
                             return true;
                         }
                         return false;
@@ -61,8 +73,12 @@ namespace library
             }
         }
 
-        // Eliminar Pais
-        public bool Delete(ENPais en)
+        /// <summary>
+        /// Método que elimina un pais en la base de datos.
+        /// </summary>
+        /// <param name="pais">Objeto entidad Pais que contiene, el ID del pais a eliminar.</param>
+        /// <returns>True si la eliminación es exitosa. False si hubo alguna excepción o no se pudo borrar.</returns>
+        public bool Delete(ENPais pais)
         {
             bool resultado = false;
 
@@ -78,22 +94,22 @@ namespace library
                 DELETE m
                 FROM municipio m
                 INNER JOIN provincia p ON m.id_provincia = p.id_provincia
-                WHERE p.id_pais = @idPaisParam";  // Cambiado a @idPaisParam
+                WHERE p.id_pais = @idPaisParam"; 
 
                     SqlCommand cmdMunicipios = new SqlCommand(queryMunicipios, conn, transaction);
-                    cmdMunicipios.Parameters.AddWithValue("@idPaisParam", en.IdPais); // Nombre consistente
+                    cmdMunicipios.Parameters.AddWithValue("@idPaisParam", pais.IdPais); 
                     cmdMunicipios.ExecuteNonQuery();
 
-                    // 2. Eliminar provincias
-                    string queryProvincias = "DELETE FROM provincia WHERE id_pais = @idPaisParam"; // Mismo nombre
+                    
+                    string queryProvincias = "DELETE FROM provincia WHERE id_pais = @idPaisParam"; 
                     SqlCommand cmdProvincias = new SqlCommand(queryProvincias, conn, transaction);
-                    cmdProvincias.Parameters.AddWithValue("@idPaisParam", en.IdPais); // Mismo nombre
+                    cmdProvincias.Parameters.AddWithValue("@idPaisParam", pais.IdPais); 
                     cmdProvincias.ExecuteNonQuery();
 
-                    // 3. Eliminar el país
-                    string queryPais = "DELETE FROM pais WHERE id_pais = @idPaisParam"; // Mismo nombre
+                    
+                    string queryPais = "DELETE FROM pais WHERE id_pais = @idPaisParam";
                     SqlCommand cmdPais = new SqlCommand(queryPais, conn, transaction);
-                    cmdPais.Parameters.AddWithValue("@idPaisParam", en.IdPais); // Mismo nombre
+                    cmdPais.Parameters.AddWithValue("@idPaisParam", pais.IdPais); 
 
                     resultado = cmdPais.ExecuteNonQuery() > 0;
                     transaction.Commit();
@@ -110,7 +126,10 @@ namespace library
         }
 
 
-        // Leer todos los paises
+        /// <summary>
+        /// Método que lee todos los municipios de la base de datos de una misma provincia.
+        /// </summary>
+        /// <returns>Lista de entidades pais leídas de la base de datos.</returns>
         public List<ENPais> ReadAll()
         {
             var paises = new List<ENPais>();

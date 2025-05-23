@@ -8,14 +8,27 @@ using System.Threading.Tasks;
 
 namespace library
 {
+    /// <summary>
+    /// Clase de acceso a datos para la entidad Apuesta_usuario.
+    /// </summary>
     public class CADApuesta_usuario
     {
         private string constring;
 
+        /// <summary>
+        /// Constructor por defecto.
+        /// Inicializa la cadena de conexión para la base de datos.
+        /// </summary>
         public CADApuesta_usuario()
         {
             constring = ConfigurationManager.ConnectionStrings["miconex"].ConnectionString;
         }
+
+        /// <summary>
+        /// Método que crea un apuesta de un usuario en la base de datos.
+        /// </summary>
+        /// <param name="apuesta">Objeto entidad Apuesta_usuario que contiene todos los datos de la apuesta a crear en la base de datos.</param>
+        /// <returns>True si la creación es exitosa. False si hubo alguna excepción o no se pudo insertar.</returns>
         public bool CrearApuesta(ENApuesta_usuario apuesta)
         {
             string query = @"
@@ -49,6 +62,10 @@ namespace library
             }
         }
 
+        /// <summary>
+        /// Método que lee todos los municipios de la base de datos de una misma provincia.
+        /// </summary>
+        /// <returns>Lista de entidades Apuesta_usuario leídas de la base de datos.</returns>
         public List<ENApuesta_usuario> ReadAll()
         {
             var apuestas_usuario = new List<ENApuesta_usuario>();
@@ -58,7 +75,7 @@ namespace library
                 try
                 {
                     c.Open();
-                    string sql = "SELECT id_usuario, id_apuesta, prediccion, cantidad, cuota FROM ApuestaUsuario";
+                    string sql = "SELECT id_usuario, id_apuesta, prediccion, cantidad, cuota FROM apuesta_usu";
 
                     using (var cmd = new SqlCommand(sql, c))
                     using (var dr = cmd.ExecuteReader())
