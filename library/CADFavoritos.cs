@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace library
 {
+    /// <summary>
+    /// Clase encargada de manejar la interacción con la base de datos
+    /// para operaciones relacionadas con los favoritos.
+    /// </summary>
     public class CADFavoritos
     {
         private string conexion;
@@ -16,7 +20,11 @@ namespace library
         {
             conexion = ConfigurationManager.ConnectionStrings["miconex"].ToString();
         }
-
+        /// <summary>
+        /// Añade un nuevo favorito a la base de datos.
+        /// </summary>
+        /// <param name="fav">Objeto ENFavoritos con los datos del usuario y equipo.</param>
+        /// <returns><c>true</c> si la operación fue exitosa, <c>false</c> en caso contrario.</returns>
         public bool Create(ENFavoritos fav)
         {
             bool creado = false;
@@ -45,7 +53,11 @@ namespace library
             return creado;
         }
 
-
+        /// <summary>
+        /// Elimina un favorito de la base de datos.
+        /// </summary>
+        /// <param name="fav">Objeto ENFavoritos con el ID del favorito a eliminar.</param>
+        /// <returns><c>true</c> si se eliminó correctamente, <c>false</c> si ocurrió algún error.</returns>
         public bool Delete(ENFavoritos fav)
         {
             bool eliminado = false;
@@ -72,7 +84,11 @@ namespace library
 
             return eliminado;
         }
-
+        /// <summary>
+        /// Obtiene todos los favoritos de un usuario específico.
+        /// </summary>
+        /// <param name="idUsuario">Identificador del usuario cuyos favoritos se quieren consultar.</param>
+        /// <returns>Lista con las instancias de <c>ENFavoritos</c> asociadas a ese usuario.</returns>
 
         public List<ENFavoritos> ReadAllUsuario(int idUsuario)
         {
