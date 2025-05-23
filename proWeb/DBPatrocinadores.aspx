@@ -24,10 +24,6 @@
             <asp:TextBox ID="TBdinero" runat="server"></asp:TextBox> 
             <br />
             <br />
-            Imagen (.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBimagen" runat="server"></asp:TextBox>
-            <br />
-            <br />
             <asp:Button ID="BTNagregar_pat" runat="server" CssClass="BotonEditarPatrocinador" Text="Agregar/Editar patrocinador"  OnClick="BTNagregar_pat_Click" />
             <asp:Button ID="BTNeliminar_pat" runat="server" CssClass="BotonBorrarPatrocinador" Text="Eliminar patrocinador" OnClick="BTNeliminar_pat_Click"/>
             

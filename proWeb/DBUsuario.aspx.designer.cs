@@ -42,24 +42,6 @@ namespace ProWeb
         protected global::System.Web.UI.WebControls.TextBox TBnombre;
 
         /// <summary>
-        /// Control TBsaldo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TBsaldo;
-
-        /// <summary>
-        /// Control TBdatos_pago.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TBdatos_pago;
-
-        /// <summary>
         /// Control TBdireccion.
         /// </summary>
         /// <remarks>
@@ -85,15 +67,6 @@ namespace ProWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TBrol;
-
-        /// <summary>
-        /// Control TBimagen.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TBimagen;
 
         /// <summary>
         /// Control BTNagregar_pat.

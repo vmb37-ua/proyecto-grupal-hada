@@ -68,7 +68,6 @@ namespace ProWeb
             TBid.Text = patrocinador.Id_patrocinador.ToString();
             TBdinero.Text = patrocinador.Dinero.ToString();
             TBtexto.Text = patrocinador.Texto;
-            TBimagen.Text = patrocinador.Imagen;
         }
         /// <summary>
         /// Evento que se ejecuta al pulsar el botón para agregar o actualizar un patrocinador.
@@ -92,7 +91,6 @@ namespace ProWeb
                     Id_patrocinador = ObtenerNuevoId(),
                     Dinero = dinero,
                     Texto = TBtexto.Text,
-                    Imagen = TBimagen.Text
                 };
                 patrocinador.Create();
                 CargarPatrocinadores();
@@ -106,7 +104,6 @@ namespace ProWeb
                     Id_patrocinador = int.Parse(ListaPatrocinadores.SelectedValue),
                     Dinero = dinero,
                     Texto = TBtexto.Text,
-                    Imagen = TBimagen.Text
                 };
 
                 patrocinador.Update();
@@ -156,7 +153,6 @@ namespace ProWeb
             TBid.Text = "0";
             TBdinero.Text = "";
             TBtexto.Text = "";
-            TBimagen.Text = "";
         }
 
         /// <summary>
@@ -175,12 +171,6 @@ namespace ProWeb
             if (string.IsNullOrWhiteSpace(TBtexto.Text))
             {
                 MostrarError("Ingrese un texto descriptivo");
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(TBimagen.Text))
-            {
-                MostrarError("Ingrese una ruta de imagen");
                 return false;
             }
 

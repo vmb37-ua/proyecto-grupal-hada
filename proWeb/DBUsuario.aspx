@@ -20,14 +20,6 @@
             <asp:TextBox ID="TBnombre" runat="server"></asp:TextBox>
             <br />
             <br />
-            Saldo (€)&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBsaldo" runat="server" TextMode="Number" step="0.01"></asp:TextBox>
-            <br />
-            <br />
-            Datos de pago&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBdatos_pago" runat="server"></asp:TextBox>
-            <br />
-            <br />
             Dirección&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="TBdireccion" runat="server"></asp:TextBox>
             <br />
@@ -38,10 +30,6 @@
             <br />
             Rol&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="TBrol" runat="server" Visible="false"></asp:TextBox>
-            <br />
-            <br />
-            Imagen (.png)&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TBimagen" runat="server"></asp:TextBox>
             <br />
             <br />
             <asp:Button ID="BTNagregar_pat" runat="server" CssClass="BotonEditarUsuario" 

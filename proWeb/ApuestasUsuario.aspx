@@ -11,7 +11,7 @@
         
         <Columns>
 
-            <asp:BoundField DataField="IdApuesta" HeaderText="Local" />
+            <asp:BoundField DataField="IdApuesta" HeaderText="Id de la apuesta" />
             <asp:BoundField DataField="EquipoLocal" HeaderText="Local" />
             <asp:BoundField DataField="EquipoVisitante" HeaderText="Visitante" />
             <asp:BoundField DataField="Resultado_apuesta" HeaderText="Resultado de la apuesta" />
