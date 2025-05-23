@@ -22,8 +22,18 @@ namespace ProWeb
             {
                 CargarEquipos();
                 CargarEstadios();
-                CargarApuestas(); // Cargamos apuestas existentes para editar/eliminar
+                CargarApuestas();
+                CargarResultados(); // ← ¡esto debe existir!
             }
+
+        }
+
+        private void CargarResultados()
+        {
+            ddlResultado.Items.Clear();
+            ddlResultado.Items.Add(new ListItem("Victoria Equipo 1", "1"));
+            ddlResultado.Items.Add(new ListItem("Empate", "X"));
+            ddlResultado.Items.Add(new ListItem("Victoria Equipo 2", "2"));
         }
 
         private void CargarEquipos()
@@ -57,20 +67,36 @@ namespace ProWeb
 
         private void CargarApuestas()
         {
-            // Mostramos las apuestas existentes en el dropdown
             ENApuesta ap = new ENApuesta();
             var lista = ap.ReadAll();
 
-            ddlApuestas.DataSource = lista;
-            ddlApuestas.DataTextField = "Id_apuesta";
-            ddlApuestas.DataValueField = "Id_apuesta";
-            ddlApuestas.DataBind();
+            ddlApuestas.Items.Clear();
+
+            foreach (var apuesta in lista)
+            {
+                // Formato: 14/04/2020 (ID: 9)
+                string textoVisible = $"{apuesta.Fecha:dd/MM/yyyy} (ID: {apuesta.Id_apuesta})";
+                ddlApuestas.Items.Add(new ListItem(textoVisible, apuesta.Id_apuesta.ToString()));
+            }
         }
+
 
         protected void btnCrear_Click(object sender, EventArgs e)
         {
             try
             {
+                string res = ddlResultado.SelectedValue;
+                if (string.IsNullOrEmpty(res))
+                {
+                    MostrarMensaje("Error: Resultado no seleccionado.");
+                    return;
+                }
+                if (res.Length > 1)
+                {
+                    MostrarMensaje("Error: Resultado demasiado largo ('" + res + "')");
+                    return;
+                }
+
                 // Creamos una nueva apuesta a partir de los datos del formulario
                 ENApuesta ap = new ENApuesta
                 {
@@ -80,13 +106,22 @@ namespace ProWeb
                     Equipo2 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo2.SelectedValue) },
                     cot1 = double.Parse(txtCot1.Text),
                     cot2 = double.Parse(txtCot2.Text),
-                    cotX = double.Parse(txtCotX.Text)
+                    cotX = double.Parse(txtCotX.Text),
+                    Resultado = ddlResultado.SelectedValue
+
+
                 };
 
                 if (ap.Create())
+                {
                     MostrarMensaje("Apuesta creada correctamente.");
+                    CargarApuestas();
+                }
                 else
+                {
                     MostrarMensaje("Error al crear la apuesta.");
+                }
+
             }
             catch (Exception ex)
             {
@@ -98,6 +133,12 @@ namespace ProWeb
         {
             try
             {
+                string res = ddlResultado.SelectedValue;
+                if (string.IsNullOrEmpty(res))
+                {
+                    MostrarMensaje("Error: Resultado no seleccionado.");
+                    return;
+                }
                 // Actualizamos la apuesta seleccionada con los nuevos datos
                 ENApuesta ap = new ENApuesta
                 {
@@ -108,7 +149,8 @@ namespace ProWeb
                     Equipo2 = new ENEquipo { Id_equipo = int.Parse(ddlEquipo2.SelectedValue) },
                     cot1 = double.Parse(txtCot1.Text),
                     cot2 = double.Parse(txtCot2.Text),
-                    cotX = double.Parse(txtCotX.Text)
+                    cotX = double.Parse(txtCotX.Text),
+                    Resultado = ddlResultado.SelectedValue
                 };
 
                 if (ap.Update())
@@ -133,9 +175,15 @@ namespace ProWeb
                 };
 
                 if (ap.Delete())
+                {
                     MostrarMensaje("Apuesta eliminada correctamente.");
+                    CargarApuestas();
+                }
                 else
+                {
                     MostrarMensaje("Error al eliminar la apuesta.");
+                }
+
             }
             catch (Exception ex)
             {
@@ -160,6 +208,7 @@ namespace ProWeb
                     txtCot1.Text = ap.cot1.ToString();
                     txtCot2.Text = ap.cot2.ToString();
                     txtCotX.Text = ap.cotX.ToString();
+                    ddlResultado.SelectedValue = ap.Resultado;
                 }
             }
             catch (Exception ex)

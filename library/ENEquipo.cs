@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace library
 {
+    /// <summary>
+    /// Clase que representa una entidad de negocio de un equipo deportivo.
+    /// </summary>
     public class ENEquipo
     {
         int _id_equipo;
@@ -37,6 +40,9 @@ namespace library
             set { _categoria = value; }
         }
 
+        /// <summary>
+        /// Constructor por defecto. Crea un equipo con valores por defecto.
+        /// </summary>
         public ENEquipo()
         {
             _id_equipo = 0;
@@ -45,6 +51,13 @@ namespace library
             _categoria = "";
         }
 
+        /// <summary>
+        /// Constructor sobrecargado para inicializar un equipo con valores dados.
+        /// </summary>
+        /// <param name="id_equipo">ID del equipo</param>
+        /// <param name="escudo">Ruta del escudo del equipo</param>
+        /// <param name="nombre">Nombre del equipo</param>
+        /// <param name="categoria">Categoría del equipo</param>
         public ENEquipo(int id_equipo, string escudo, string nombre, string categoria)
         {
             Id_equipo = id_equipo;
@@ -53,36 +66,40 @@ namespace library
             Categoria = categoria;
         }
 
-        public bool Create()
-        {
-            return new CADEquipo().Create(this);
-        }
+        /// <summary>
+        /// Crea este equipo en la base de datos.
+        /// </summary>
+        /// <returns>True si la operación fue exitosa. False si no.</returns>
+        public bool Create() => new CADEquipo().Create(this);
 
-        public bool Delete()
-        {
-            return new CADEquipo().Delete(this);
-        }
+        /// <summary>
+        /// Elimina este equipo de la base de datos.
+        /// </summary>
+        /// <returns>True si la operación fue exitosa. False si no.</returns>
+        public bool Delete() => new CADEquipo().Delete(this);
 
-        public bool Update()
-        {
-            return new CADEquipo().Update(this);
-        }
+        /// <summary>
+        /// Actualiza este equipo en la base de datos.
+        /// </summary>
+        /// <returns>True si la operación fue exitosa. False si no.</returns>
+        public bool Update() => new CADEquipo().Update(this);
 
-        public bool Read()
-        {
-            return new CADEquipo().Read(this);
-        }
+        /// <summary>
+        /// Lee los datos del equipo desde la base de datos en este objeto.
+        /// </summary>
+        /// <returns>True si la operación fue exitosa. False si no.</returns>
+        public bool Read() => new CADEquipo().Read(this);
 
-        public List<ENEquipo> ReadAll()
-        {
-            return new CADEquipo().ReadAll(this);
-        }
+        /// <summary>
+        /// Lee todos los equipos de la base de datos.
+        /// </summary>
+        /// <returns>Lista de todos los equipos</returns>
+        public List<ENEquipo> ReadAll() => new CADEquipo().ReadAll(this);
 
-        public List<ENEquipo> ReadAllbyCategoria()
-        {
-            return new CADEquipo().ReadAllbyCategoria(this);
-        }
-
-
+        /// <summary>
+        /// Lee todos los equipos de una categoría específica desde la base de datos.
+        /// </summary>
+        /// <returns>Lista de equipos de la categoría</returns>
+        public List<ENEquipo> ReadAllbyCategoria() => new CADEquipo().ReadAllbyCategoria(this);
     }
 }

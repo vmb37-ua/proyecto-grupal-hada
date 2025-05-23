@@ -6,6 +6,10 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
+
+        <p>Seleccionar apuesta:</p>
+        <asp:DropDownList ID="ddlApuestas" runat="server" AutoPostBack="true" CssClass="ListaDesplegable" OnSelectedIndexChanged="ddlApuestas_SelectedIndexChanged" />
+
         <p>Fecha de la apuesta:</p>
         <asp:TextBox ID="txtFecha" runat="server" CssClass="InputCampo" TextMode="Date"></asp:TextBox>
 
@@ -18,10 +22,6 @@
         <p>Cuota Equipo 2:</p>
         <asp:TextBox ID="txtCot2" runat="server" CssClass="InputCampo" />
 
-
-        <p>Seleccionar apuesta:</p>
-        <asp:DropDownList ID="ddlApuestas" runat="server" AutoPostBack="true" CssClass="ListaDesplegable" OnSelectedIndexChanged="ddlApuestas_SelectedIndexChanged" />
-
         <p>Estadio:</p>
         <asp:DropDownList ID="ddlEstadios" runat="server" CssClass="ListaDesplegable"></asp:DropDownList>
 
@@ -30,6 +30,17 @@
 
         <p>Equipo 2:</p>
         <asp:DropDownList ID="ddlEquipo2" runat="server" CssClass="ListaDesplegable"></asp:DropDownList>
+
+         <p>Resultado de la Apuesta:</p>
+       <asp:DropDownList ID="ddlResultado" runat="server">
+   
+       <asp:ListItem Text="Empate" Value="X" />
+       <asp:ListItem Text="Victoria Equipo 1" Value="1" />
+       <asp:ListItem Text="Victoria Equipo 2" Value="2" />
+       </asp:DropDownList>
+
+
+
 
         <br /><br />
         <asp:Button ID="btnCrear" runat="server" Text="Crear apuesta" CssClass="BotonAdmin" OnClick="btnCrear_Click" />
