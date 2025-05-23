@@ -1,131 +1,176 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.UI;
 
 namespace ProWeb
 {
     /// <summary>
-    /// Página que muestra estadísticas de apuestas:
-    /// - Los 5 partidos con más apuestas.
-    /// - El partido con la cuota más alta.
-    /// - Los 5 usuarios que más han ganado.
+    /// Página que genera informes estadísticos sobre apuestas, usuarios y eventos.
+    /// Incluye:
+    /// - Partidos más apostados
+    /// - Mayor cuota
+    /// - Usuarios con más ganancias
+    /// - Ganancias totales
+    /// - Próximo evento
     /// </summary>
     public partial class WebForm3 : Page
     {
         /// <summary>
         /// Evento que se ejecuta al cargar la página.
-        /// Consulta la base de datos y muestra:
-        /// - Top 5 partidos más apostados.
-        /// - Partido con la cuota más alta.
-        /// - Top 5 ganadores por ganancias.
+        /// Solo se ejecuta si no es un postback.
+        /// Realiza todas las consultas necesarias para mostrar los informes.
         /// </summary>
-        /// <param name="sender">Objeto que genera el evento (la página).</param>
-        /// <param name="e">Argumentos del evento de carga.</param>
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Solo se ejecuta la primera vez que se carga la página (no en postbacks)
+            //Verifica si es la primera carga de la página
             if (!IsPostBack)
             {
                 //Obtiene la cadena de conexión desde Web.config
                 string connStr = ConfigurationManager.ConnectionStrings["miconex"].ToString();
 
-                /// ================== TOP 5 PARTIDOS MÁS APOSTADOS ==================
-                List<object> topPartidos = new List<object>(); //Lista para almacenar los resultados
-
-                //Abre conexión a la base de datos
-                using (SqlConnection conn = new SqlConnection(connStr))
+                try
                 {
-                    //Consulta que devuelve los 5 partidos más apostados
-                    string query = @"
-                        SELECT TOP 5 CONCAT(e1.nombre, ' vs ', e2.nombre) AS Partido,
-                               COUNT(*) AS TotalApuestas
-                        FROM apuesta_usu au
-                        JOIN apuesta a ON au.id_apuesta = a.id_apuesta
-                        JOIN equipo e1 ON a.id_equipo1 = e1.id_equipo
-                        JOIN equipo e2 ON a.id_equipo2 = e2.id_equipo
-                        GROUP BY e1.nombre, e2.nombre
-                        ORDER BY TotalApuestas DESC";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    conn.Open(); //Abre la conexión
-
-                    SqlDataReader reader = cmd.ExecuteReader(); //Ejecuta la consulta
-
-                    int pos = 1; //Contador de posición
-                    while (reader.Read())
+                    //Abre una conexión a la base de datos
+                    using (SqlConnection conn = new SqlConnection(connStr))
                     {
-                        //Añade el resultado a la lista con posición, nombres de equipos y total de apuestas
-                        topPartidos.Add(new
+                        conn.Open();
+
+                        //Top 5 partidos más apostados
+                        List<object> topPartidos = new List<object>();
+
+                        string queryPartidos = @"
+                            SELECT TOP 5 CONCAT(e1.nombre, ' vs ', e2.nombre) AS Partido,
+                                   COUNT(*) AS TotalApuestas
+                            FROM apuesta_usu au
+                            JOIN apuesta a ON au.id_apuesta = a.id_apuesta
+                            JOIN equipo e1 ON a.id_equipo1 = e1.id_equipo
+                            JOIN equipo e2 ON a.id_equipo2 = e2.id_equipo
+                            GROUP BY a.id_apuesta, e1.nombre, e2.nombre
+                            ORDER BY TotalApuestas DESC";
+
+                        using (SqlCommand cmdPartidos = new SqlCommand(queryPartidos, conn))
+                        using (SqlDataReader reader = cmdPartidos.ExecuteReader())
                         {
-                            Posicion = pos++,
-                            Partido = reader["Partido"].ToString(),
-                            Apuestas = Convert.ToInt32(reader["TotalApuestas"])
-                        });
-                    }
+                            int pos = 1;
 
-                    reader.Close(); //Cierra el lector
+                            //Lee cada partido y lo agrega a la lista
+                            while (reader.Read())
+                            {
+                                topPartidos.Add(new
+                                {
+                                    Posicion = pos++,
+                                    Partido = reader["Partido"].ToString(),
+                                    Apuestas = Convert.ToInt32(reader["TotalApuestas"])
+                                });
+                            }
+                        }
+
+                        //Muestra los datos en el GridView
+                        gvTopPartidos.DataSource = topPartidos;
+                        gvTopPartidos.DataBind();
+
+                        //Partido con mayor cuota
+                        string queryCuota = @"
+                            SELECT TOP 1 CONCAT(e1.nombre, ' vs ', e2.nombre) AS Partido, MAX(au.cuota) AS Cuota
+                            FROM apuesta_usu au
+                            JOIN apuesta a ON au.id_apuesta = a.id_apuesta
+                            JOIN equipo e1 ON a.id_equipo1 = e1.id_equipo
+                            JOIN equipo e2 ON a.id_equipo2 = e2.id_equipo
+                            GROUP BY e1.nombre, e2.nombre
+                            ORDER BY Cuota DESC";
+
+                        using (SqlCommand cmdCuota = new SqlCommand(queryCuota, conn))
+                        using (SqlDataReader reader = cmdCuota.ExecuteReader())
+                        {
+                            //Muestra el partido con la mayor cuota
+                            if (reader.Read())
+                            {
+                                float cuota = Convert.ToSingle(reader["Cuota"]);
+                                string partido = reader["Partido"].ToString();
+                                lblMayorCuota.Text = partido + " - Cuota: " + cuota.ToString("0.00");
+                            }
+                        }
+
+                        //Top 5 usuarios con más ganancias netas
+                        blTopGanadores.Items.Clear();
+
+                        string queryGanadores = @"
+                            SELECT TOP 5 u.nombre, 
+                                SUM((au.cuota * au.dinero_apostado) - au.dinero_apostado) AS GananciaNeta
+                            FROM apuesta_usu au
+                            JOIN usuario u ON au.id_usuario = u.id
+                            JOIN apuesta a ON au.id_apuesta = a.id_apuesta
+                            WHERE au.prediccion = a.resultado
+                            GROUP BY u.nombre
+                            ORDER BY GananciaNeta DESC";
+
+                        using (SqlCommand cmdGanadores = new SqlCommand(queryGanadores, conn))
+                        using (SqlDataReader reader = cmdGanadores.ExecuteReader())
+                        {
+                            //Muestra cada usuario y su ganancia
+                            while (reader.Read())
+                            {
+                                string nombre = reader["nombre"].ToString();
+                                float ganancia = Convert.ToSingle(reader["GananciaNeta"]);
+                                blTopGanadores.Items.Add(nombre + " - " + ganancia.ToString("N0") + "€");
+                            }
+                        }
+
+                        //Ganancias totales de todos los usuarios (MODIFICADO A GANANCIA NETA)
+                        using (SqlCommand cmdGanancias = new SqlCommand(@"
+                            SELECT SUM((cuota * dinero_apostado) - dinero_apostado)
+                            FROM apuesta_usu au
+                            JOIN apuesta a ON au.id_apuesta = a.id_apuesta
+                            WHERE au.prediccion = a.resultado", conn))
+                        {
+                            object totalGan = cmdGanancias.ExecuteScalar();
+
+                            //Muestra total si hay datos, o 0€ si no hay
+                            if (totalGan != DBNull.Value && totalGan != null)
+                            {
+                                float total = Convert.ToSingle(totalGan);
+                                lblGanancias.Text = total.ToString("N0") + "€";
+                            }
+                            else
+                            {
+                                lblGanancias.Text = "0€";
+                            }
+                        }
+
+                        //Próximo evento (partido futuro más cercano)
+                        using (SqlCommand cmdProx = new SqlCommand(@"
+                            SELECT TOP 1 CONCAT(e1.nombre, ' vs ', e2.nombre)
+                            FROM apuesta a
+                            JOIN equipo e1 ON a.id_equipo1 = e1.id_equipo
+                            JOIN equipo e2 ON a.id_equipo2 = e2.id_equipo
+                            WHERE a.fecha > GETDATE()
+                            ORDER BY a.fecha ASC", conn))
+                        {
+                            object proxEvento = cmdProx.ExecuteScalar();
+
+                            if (proxEvento != null && proxEvento != DBNull.Value)
+                            {
+                                lblProximoEvento.Text = proxEvento.ToString();
+                            }
+                            else
+                            {
+                                lblProximoEvento.Text = "No hay eventos programados";
+                            }
+                        }
+                    }
                 }
-
-                //Muestra los datos en el GridView
-                gvTopPartidos.DataSource = topPartidos;
-                gvTopPartidos.DataBind();
-
-
-                /// ================== PARTIDO CON MAYOR CUOTA ==================
-                using (SqlConnection conn = new SqlConnection(connStr))
+                catch (Exception)
                 {
-                    //Consulta que obtiene el partido con la mayor cuota
-                    string query = @"
-                        SELECT TOP 1 CONCAT(e1.nombre, ' vs ', e2.nombre) AS Partido, MAX(au.cuota) AS Cuota
-                        FROM apuesta_usu au
-                        JOIN apuesta a ON au.id_apuesta = a.id_apuesta
-                        JOIN equipo e1 ON a.id_equipo1 = e1.id_equipo
-                        JOIN equipo e2 ON a.id_equipo2 = e2.id_equipo
-                        GROUP BY e1.nombre, e2.nombre
-                        ORDER BY Cuota DESC";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    conn.Open();
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        //Muestra el partido con mayor cuota en un Label
-                        lblMayorCuota.Text = $"{reader["Partido"]} - Cuota: {Convert.ToDecimal(reader["Cuota"]):0.00}";
-                    }
-                    reader.Close();
-                }
-
-                /// ================== TOP 5 GANADORES ==================
-                blTopGanadores.Items.Clear(); //Limpia la lista visual antes de llenarla
-
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    //Consulta para obtener los 5 usuarios con mayores ganancias
-                    string query = @"
-                        SELECT TOP 5 u.nombre, SUM(au.cuota * au.dinero_apostado) AS Ganancia
-                        FROM apuesta_usu au
-                        JOIN usuario u ON au.id_usuario = u.id
-                        GROUP BY u.nombre
-                        ORDER BY Ganancia DESC";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    conn.Open();
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        //Formatea el nombre y la ganancia y los añade a la lista
-                        string texto = $"{reader["nombre"]} - {Convert.ToDecimal(reader["Ganancia"]):N0}€";
-                        blTopGanadores.Items.Add(texto);
-                    }
-
-                    reader.Close();
+                    //Si ocurre un error, muestra mensajes de error en todos los controles
+                    lblProximoEvento.Text = "Error al cargar informes";
+                    lblGanancias.Text = "Error";
+                    lblMayorCuota.Text = "Error";
+                    blTopGanadores.Items.Clear();
+                    blTopGanadores.Items.Add("Error al obtener datos");
+                    gvTopPartidos.DataSource = null;
+                    gvTopPartidos.DataBind();
                 }
             }
         }
