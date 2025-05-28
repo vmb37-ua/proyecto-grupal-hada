@@ -66,7 +66,7 @@ En su parte pública el usuario invitado podrá consultar las apuestas disponibl
 En su parte privada con un perfil cualquiera se podrá acceder a apostar, ver las notificaciones recibidas, consultar la cartera virtual, o añadir equipos a la lista de favoritos.\
 Por último desde la parte privada pero con acceso de administrador se podrá acceder a todas las páginas que gestionan los usuarios, equipos, estadios, notificaciones, etc; así como a la página de los informes generales de monetización.\
 Como **mejoras** hemos implementado:
-* Foto de perfil
+* Foto de perfil (Cuenta como mejora de personalización)
 * Uso de cookies para facilitar el inicio de sesión
 * Login con reCaptcha
 * Contraseña encriptada mediante hashing
@@ -89,9 +89,9 @@ los requisitos para compilar y ejecutar NET 4.8
 | Víctor            | ENU y CAD Usuario, EN y CAD Municipio, Login aspx, Editar usuario aspx, Perfil aspx, Master, Coordinador, Cookies, Foto perfil, Diseño y programación DB |
 | Marcos            | EN y CAD Categoría, EN y CAD Apuesta, Apuestas usuario aspx, Admin patrocinadores aspx, Admin usuario aspx, Juegos aspx, ayuda con diseño BD             |
 | Alexander         | Esquema DB, EN y CAD Rol, EN y CAD Patrocinador, Admin Rol aspx, Admin categoria aspx, Info. estadios aspx                                               |
-| Andrés            | EN y CAD favoritos EN y CAD provincia, register aspx, Admin notificaciones aspx y Admin menu aspx                                                        |
+| Andrés            | EN y CAD favoritos EN y CAD provincia, register aspx, Admin notificaciones aspx y Admin menu aspx. CADUsuario hizo ReadByRol, en Login el reCAPTCHA, y en CADNotificaciones implementó ReadbyID y cambió el Delete por otro|
 | Alejandro         | EN y CAD notificaciones, EN y CAD transacción, cartera aspx, notificación aspx, favoritos aspx, funcionalidad informe                                    |
-| Enmanuel          | EN y CAD País, EN y CAD apuesta usuario, ListaEquipos aspx, Apuesta_Usuario aspx, Ubicaciones aspx, interfaz informe                                     |
+| Enmanuel          | EN y CAD País, EN y CAD apuesta usuario, ListaEquipos aspx, Apuesta_Usuario aspx, Ubicaciones aspx, interfaz informe. En el CADEquipos implementó el ReadAll filtrado por categorías|
 | Rubén             | Admin Equipos aspx, Admin Apuestas aspx, Admin Estadios aspx, CAD y EN Equipo, CAD y EN Estadio                                                          |
 
 (Todas las páginas del code-behind han sido hechas por la misma persona que hizo la interfaz aspx)
